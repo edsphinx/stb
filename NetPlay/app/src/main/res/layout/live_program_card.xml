@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="@android:color/transparent"
+        card_view:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background">
+
+            <TextView
+                android:id="@+id/nombre"
+                style="@style/GridSquareTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_default"
+                android:gravity="center_vertical"
+                android:lines="2"
+                android:padding="@dimen/padding_small"
+                android:textAlignment="gravity" />
+
+            <LinearLayout
+                android:id="@+id/horario_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nombre"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fecha_inicio"
+                    style="@style/GridSquareTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nombre"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:padding="@dimen/padding_small"
+                    android:textAlignment="gravity" />
+
+                <TextView
+                    android:id="@+id/fecha_fin"
+                    style="@style/GridSquareTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nombre"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:lines="1"
+                    android:padding="@dimen/padding_small"
+                    android:textAlignment="gravity" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/descripcion"
+                style="@style/GridSquareTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horario_wrapper"
+                android:gravity="center_vertical"
+                android:lines="5"
+                android:ellipsize="end"
+                android:padding="@dimen/padding_small"
+                android:textAlignment="gravity"
+                android:textSize="@dimen/text_small" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

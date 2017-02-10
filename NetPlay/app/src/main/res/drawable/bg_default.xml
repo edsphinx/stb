@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+            <gradient
+                android:type="linear"
+                android:centerX="5%"
+                android:startColor="@color/default_line"
+                android:centerColor="@color/default_card_background_center_selected"
+                android:endColor="@color/default_card_background_end_selected"
+                android:angle="90"/>
+        </shape>
+    </item>
+
+    <item >
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+            <gradient
+                android:type="linear"
+                android:centerX="4%"
+                android:startColor="@color/default_line"
+                android:centerColor="@color/default_card_background_center"
+                android:endColor="@color/default_card_background_end"
+                android:angle="90"/>
+
+        </shape>
+    </item>ca
+</selector>

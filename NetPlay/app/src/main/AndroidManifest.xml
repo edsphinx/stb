@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.flynetwifi.netplay">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REBOOT" />
+    <uses-permission android:name="android.permission.VOICE_RECOGNITION" />
+    <uses-permission android:name="android.permission.MIC" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Launcher">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:icon="@drawable/logo"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:logo="@drawable/logo"
+            android:screenOrientation="landscape"
+            android:stateNotNeeded="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/Theme.Browse" />
+        <activity
+            android:name=".LiveActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.Main" />
+
+        <!-- MOVIE Activities -->
+
+        <activity
+            android:name=".MovieActivity"
+            android:label="@string/title_activity_peliculas"
+            android:theme="@style/Theme.Browse" />
+        <activity
+            android:name=".MovieDetailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Details" />
+        <activity
+            android:name=".MovieSearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Search" />
+        <activity
+            android:name=".MoviePlayerActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.Main" />
+        <activity
+            android:name=".SeriesActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.Browse" />
+        <activity
+            android:name=".SeriesSeasonsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Browse" />
+        <activity
+            android:name=".SeriesSearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Search" />
+        <activity
+            android:name=".SeriesPlayerActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.Main" />
+        <activity
+            android:name=".VODSelectionActivity"
+            android:label="@string/title_activity_vodselection" />
+        <activity
+            android:name=".MusicActivity"
+            android:exported="true"
+            android:label="@string/title_activity_music"
+            android:theme="@style/Theme.Browse" />
+        <activity android:name=".MusicSearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Search"/>
+        <activity
+            android:name=".MusicPlayerActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.Main" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="true"
+            android:label="@string/title_activity_account"
+            android:theme="@style/Theme.Details" />
+        <activity
+            android:name=".AppsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_apps"
+            android:theme="@style/Theme.VerticalGrid" />
+        <activity
+            android:name=".MessagesActivity"
+            android:label="@string/title_activity_messages" />
+        <activity
+            android:name=".AccountProfilePasswordActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Settings" />
+
+    </application>
+
+</manifest>

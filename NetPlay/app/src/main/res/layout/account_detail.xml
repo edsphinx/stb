@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_cuenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_cuenta"
+            style="@style/Widget.Leanback.DetailsDescriptionTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="" />
+
+        <ImageView
+            android:layout_width="@dimen/icon_large_width"
+            android:layout_height="@dimen/icon_large_height"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_account_box"
+            android:tint="@color/md_white_1000" />
+
+        <TextView
+            android:id="@+id/nombre"
+            style="@style/Widget.Leanback.DetailsDescriptionTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/id_cuenta"
+            android:fontFamily="sans-serif-light"
+            android:text="" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_contacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_cuenta"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="@dimen/icon_large_width"
+                android:layout_height="@dimen/icon_large_height"
+                android:src="@drawable/ic_email"
+                android:tint="@color/md_white_1000" />
+
+            <TextView
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Correo"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/cuenta_correo"
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="@dimen/icon_large_width"
+                android:layout_height="@dimen/icon_large_height"
+                android:src="@drawable/ic_phone"
+                android:tint="@color/md_white_1000" />
+
+            <TextView
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nombre"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:layout_toRightOf="@+id/cuenta_correo"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Telefono"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/cuenta_telefono"
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nombre"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:layout_toRightOf="@+id/cuenta_correo"
+                android:fontFamily="sans-serif-condensed"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_direccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_contacto"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.75">
+
+            <ImageView
+                android:layout_width="@dimen/icon_large_width"
+                android:layout_height="@dimen/icon_large_height"
+                android:src="@drawable/ic_person_pin"
+                android:tint="@color/md_white_1000" />
+
+            <TextView
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="País"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/cuenta_nacionalidad"
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.25">
+
+            <ImageView
+                android:layout_width="@dimen/icon_large_width"
+                android:layout_height="@dimen/icon_large_height"
+                android:src="@drawable/ic_place"
+                android:tint="@color/md_white_1000" />
+
+            <TextView
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Dirección"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/cuenta_direccion"
+                style="@style/Widget.Leanback.DetailsDescriptionBodyStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif-regular"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_instalacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_direccion"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:layout_width="@dimen/icon_large_width"
+            android:layout_height="@dimen/icon_large_height"
+            android:src="@drawable/ic_home"
+            android:tint="@color/md_white_1000" />
+
+        <TextView
+            style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="16dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Fecha de Instalación"
+            android:textAlignment="gravity"
+            android:textColor="@color/md_white_1000"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/cuenta_fecha_instalacion"
+            style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="16dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text=""
+            android:textAlignment="gravity"
+            android:textSize="24dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_contrato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_instalacion"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="@dimen/icon_large_width"
+                android:layout_height="@dimen/icon_large_height"
+                android:src="@drawable/ic_folder_shared"
+                android:tint="@color/md_white_1000" />
+
+            <TextView
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Inicio Contrato"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/cuenta_inicio_contrato"
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="@dimen/icon_large_width"
+                android:layout_height="@dimen/icon_large_height"
+                android:src="@drawable/ic_timer"
+                android:tint="@color/md_white_1000" />
+
+            <TextView
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Duracion"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/cuenta_duracion"
+                style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

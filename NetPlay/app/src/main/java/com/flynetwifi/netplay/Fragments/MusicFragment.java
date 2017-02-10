@@ -1,0 +1,309 @@
+package com.flynetwifi.netplay.Fragments;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v17.leanback.app.BackgroundManager;
+import android.support.v17.leanback.app.BrowseFragment;
+import android.support.v17.leanback.widget.ArrayObjectAdapter;
+import android.support.v17.leanback.widget.HeaderItem;
+import android.support.v17.leanback.widget.ListRowPresenter;
+import android.support.v17.leanback.widget.OnItemViewClickedListener;
+import android.support.v17.leanback.widget.OnItemViewSelectedListener;
+import android.support.v17.leanback.widget.Presenter;
+import android.support.v17.leanback.widget.Row;
+import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v17.leanback.widget.SectionRow;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.view.View;
+
+import com.flynetwifi.netplay.Cards.MusicCard;
+import com.flynetwifi.netplay.Cards.MusicGendersCard;
+import com.flynetwifi.netplay.Cards.MusicPlaylistCard;
+import com.flynetwifi.netplay.Cards.MusicSingersCard;
+import com.flynetwifi.netplay.Constants;
+import com.flynetwifi.netplay.MusicPlayerActivity;
+import com.flynetwifi.netplay.MusicSearchActivity;
+import com.flynetwifi.netplay.Presenters.MusicGendersPresenter;
+import com.flynetwifi.netplay.Presenters.MusicPlaylistPresenter;
+import com.flynetwifi.netplay.Presenters.MusicSingersPresenter;
+import com.flynetwifi.netplay.R;
+import com.flynetwifi.netplay.Rows.MusicGendersListRow;
+import com.flynetwifi.netplay.Rows.MusicGendersRow;
+import com.flynetwifi.netplay.Rows.MusicPlaylistListRow;
+import com.flynetwifi.netplay.Rows.MusicPlaylistRow;
+import com.flynetwifi.netplay.Rows.MusicSingersListRow;
+import com.flynetwifi.netplay.Rows.MusicSingersRow;
+import com.flynetwifi.netplay.Utils.DownloadData;
+import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class MusicFragment extends BrowseFragment {
+    private ArrayObjectAdapter mRowsAdapter;
+    public BackgroundManager backgroundManager;
+    public PicassoBackgroundManagerTarget mBackgroundTarget;
+
+    public Map<String, MusicCard> data;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setupUi();
+        setupRowAdapter();
+    }
+
+    private void setupUi() {
+        setHeadersState(HEADERS_ENABLED);
+        setHeadersTransitionOnBackEnabled(true);
+        setBrandColor(getActivity().getResources().getColor(R.color.colorPrimary));
+        setTitle("Musica On Demand");
+        setOnSearchClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+
+        setOnItemViewClickedListener(new OnItemViewClickedListener() {
+            @Override
+            public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+                Intent intent = null;
+                intent = new Intent(getActivity().getBaseContext(),
+                        MusicPlayerActivity.class);
+                if(item instanceof MusicSingersCard){
+                    MusicSingersCard model = (MusicSingersCard) item;
+                    intent.putExtra("tipo", "2" );
+                    intent.putExtra("id", model.getmId() );
+                }
+                if(item instanceof MusicPlaylistCard){
+                    MusicPlaylistCard model = (MusicPlaylistCard) item;
+                    intent.putExtra("tipo", "0" );
+                    intent.putExtra("id", model.getmId() );
+                }
+                if(item instanceof MusicGendersCard){
+                    MusicGendersCard model = (MusicGendersCard) item;
+                    intent.putExtra("tipo", "1" );
+                    intent.putExtra("id", model.getmId() );
+                }
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                        .toBundle();
+                startActivity(intent, bundle);
+            }
+        });
+
+        setOnItemViewSelectedListener(new OnItemViewSelectedListener() {
+            @Override
+            public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+
+            }
+        });
+
+        setOnSearchClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = null;
+                intent = new Intent(getActivity().getBaseContext(),
+                        MusicSearchActivity.class);
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                        .toBundle();
+                startActivity(intent, bundle);
+            }
+        });
+
+        prepareEntranceTransition();
+    }
+
+    private void setupRowAdapter() {
+
+        ListRowPresenter listRowPresenter = new ListRowPresenter();
+        listRowPresenter.setNumRows(1);
+        listRowPresenter.setShadowEnabled(true);
+
+        mRowsAdapter = new ArrayObjectAdapter(listRowPresenter);
+        setAdapter(mRowsAdapter);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadRows();
+                startEntranceTransition();
+            }
+        }, 500);
+    }
+
+    private void loadRows() {
+        mRowsAdapter.clear();
+        final MusicPlaylistPresenter playlistPresenter = new MusicPlaylistPresenter();
+        final MusicSingersPresenter cantantesPresenter = new MusicSingersPresenter();
+        final MusicGendersPresenter generosPresenter = new MusicGendersPresenter();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DownloadData downloadData = new DownloadData();
+                    String response = downloadData.run(Constants.server + Constants.music);
+
+                    Gson gson = new Gson();
+                    Type musicaCardType;
+                    musicaCardType = new TypeToken<Map<String, MusicCard>>() {
+
+                    }.getType();
+                    data = gson.fromJson(response, musicaCardType);
+                    mRowsAdapter.add(new SectionRow(new HeaderItem("Musica")));
+
+                    for (HashMap.Entry<String, MusicCard> entry : data.entrySet()) {
+                        MusicCard model = (MusicCard) entry.getValue();
+
+                        ArrayObjectAdapter listRowAdapter = null;
+                        List<MusicPlaylistCard> listPlaylistModel = new ArrayList<>();
+                        List<MusicSingersCard> listCantantesModel = new ArrayList<>();
+                        List<MusicGendersCard> listGenerosModel = new ArrayList<>();
+
+
+                        if (model.getmTipo() == 0) {
+                            listRowAdapter = new ArrayObjectAdapter(playlistPresenter);
+                            MusicPlaylistRow row = new MusicPlaylistRow();
+
+                            for (int i = 0; i < model.getmData().length; i++) {
+
+                                String id = "";
+                                String nombre = "";
+                                String numero = "";
+                                for (Map.Entry<String, String> map : model.getmData()[i].entrySet()) {
+                                    if (map.getKey().contentEquals("id")) {
+                                        id = map.getValue();
+                                    }
+                                    if (map.getKey().contentEquals("nombre")) {
+                                        nombre = map.getValue();
+                                    }
+                                    if (map.getKey().contentEquals("numero")) {
+                                        numero = map.getValue();
+                                    }
+                                }
+                                MusicPlaylistCard dataModel = new MusicPlaylistCard();
+                                dataModel.setmId(id);
+                                dataModel.setmNombre(nombre);
+                                dataModel.setmNumero(numero);
+                                listRowAdapter.add(dataModel);
+                                listPlaylistModel.add(dataModel);
+
+                            }
+                            row.setPlaylists(listPlaylistModel);
+                            MusicPlaylistListRow playlistListRow = new MusicPlaylistListRow(
+                                    new HeaderItem(entry.getKey()),
+                                    listRowAdapter,
+                                    row);
+                            mRowsAdapter.add(playlistListRow);
+                        }
+
+                        if (model.getmTipo() == 1) {
+                            listRowAdapter = new ArrayObjectAdapter(generosPresenter);
+                            MusicGendersRow row = new MusicGendersRow();
+
+                            for (int i = 0; i < model.getmData().length; i++) {
+
+                                String id = "";
+                                String nombre = "";
+                                String imagen = "";
+                                for (Map.Entry<String, String> map : model.getmData()[i].entrySet()) {
+
+                                    if (map.getKey().contentEquals("nombre")) {
+                                        nombre = map.getValue();
+                                    }
+                                    if (map.getKey().contentEquals("id")) {
+                                        id = map.getValue();
+
+                                    }
+                                    if (map.getKey().contentEquals("imagen")) {
+                                        imagen = map.getValue();
+                                    }
+                                }
+                                MusicGendersCard generosModel = new MusicGendersCard();
+                                generosModel.setmId(id);
+                                generosModel.setmNombre(nombre);
+                                generosModel.setmImagen(imagen);
+                                listRowAdapter.add(generosModel);
+                                listGenerosModel.add(generosModel);
+
+                            }
+                            row.setGeneros(listGenerosModel);
+                            MusicGendersListRow generosListRow = new MusicGendersListRow(
+                                    new HeaderItem(entry.getKey()),
+                                    listRowAdapter,
+                                    row);
+                            mRowsAdapter.add(generosListRow);
+                        }
+
+
+                        if (model.getmTipo() == 2) {
+                            listRowAdapter = new ArrayObjectAdapter(cantantesPresenter);
+                            MusicSingersRow row = new MusicSingersRow();
+
+                            for (int i = 0; i < model.getmData().length; i++) {
+
+                                String id = "";
+                                String nombre = "";
+                                String imagen = "";
+                                for (Map.Entry<String, String> map : model.getmData()[i].entrySet()) {
+
+                                    if (map.getKey().contentEquals("nombre")) {
+                                        nombre = map.getValue();
+
+                                    }
+                                    if (map.getKey().contentEquals("id")) {
+                                        id = map.getValue();
+
+                                    }
+                                    if (map.getKey().contentEquals("imagen")) {
+                                        imagen = map.getValue();
+                                    }
+                                }
+                                MusicSingersCard cantantesModel = new MusicSingersCard();
+                                cantantesModel.setmId(id);
+                                cantantesModel.setmNombre(nombre);
+                                cantantesModel.setmImagen(imagen);
+                                listRowAdapter.add(cantantesModel);
+                                listCantantesModel.add(cantantesModel);
+
+                            }
+                            row.setCantantes(listCantantesModel);
+                            MusicSingersListRow cantantesListRow = new MusicSingersListRow(
+                                    new HeaderItem(entry.getKey()),
+                                    listRowAdapter,
+                                    row);
+                            mRowsAdapter.add(cantantesListRow);
+                        }
+
+
+                    }
+                }
+                catch (JsonParseException e1) {
+                    e1.printStackTrace();
+                } catch (IllegalStateException e2) {
+
+                }
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+}

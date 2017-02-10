@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:padding="@dimen/padding_small"
+        card_view:cardBackgroundColor="@android:color/transparent"
+        card_view:cardCornerRadius="0dp"
+        card_view:cardElevation="3dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_default">
+
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_queue_music"
+                android:tint="@color/md_white_1000" />
+
+
+            <TextView
+                android:id="@+id/nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/thumbnail"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:paddingBottom="5dp"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/numero"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/nombre"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:paddingBottom="5dp"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="18dp" />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

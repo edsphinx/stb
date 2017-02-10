@@ -1,0 +1,44 @@
+[
+  {
+    "title": "",
+    "cards": [
+      {
+        "id": 0,
+        "type": "DEFAULT",
+        "titulo": "Live TV",
+        "localImageResource": "ic_tv"
+      },
+      {
+        "id": 1,
+        "type": "DEFAULT",
+        "titulo": "Video On Demand",
+        "localImageResource": "ic_ondemand_video"
+      },
+      {
+        "id": 2,
+        "type": "DEFAULT",
+        "titulo": "Musica On Demand",
+        "localImageResource": "ic_music_video"
+      },
+      {
+        "id": 3,
+        "type": "DEFAULT",
+        "titulo": "Mi Cuenta",
+        "localImageResource": "ic_account_box"
+      },
+      {
+        "id": 4,
+        "type": "DEFAULT",
+        "titulo": "Apps",
+        "localImageResource": "ic_apps"
+      },
+      {
+        "id": 5,
+        "type": "DEFAULT",
+        "titulo": "Mensajes",
+        "localImageResource": "ic_message"
+      }
+
+    ]
+  }
+]

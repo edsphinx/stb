@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">NetPlay</string>
+
+
+    <string name="error_password">Clave incorrecto</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_vodselection">VODSelectionActivity</string>
+    <string name="title_activity_music">MusicActivity</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_apps">AppsActivity</string>
+    <string name="title_activity_messages">MessagesActivity</string>
+
+    <!-- LIVE -->
+    <string name="chanels">Canales</string>
+    <string name="programation">Programacion</string>
+    <string name="programation_title">Programacion</string>
+    <string name="title_activity_peliculas">PeliculasActivity</string>
+
+    <!-- MOVIES -->
+    <string name="movie_recommended">Películas Recomendadas</string>
+    <string name="header_recommended">Películas Recomendadas</string>
+
+</resources>
