@@ -22,7 +22,9 @@ import com.flynetwifi.netplay.Cards.MusicGendersCard;
 import com.flynetwifi.netplay.Cards.MusicPlaylistCard;
 import com.flynetwifi.netplay.Cards.MusicSingersCard;
 import com.flynetwifi.netplay.Constants;
+import com.flynetwifi.netplay.MainActivity;
 import com.flynetwifi.netplay.MusicPlayerActivity;
+import com.flynetwifi.netplay.MusicPlaylistActivity;
 import com.flynetwifi.netplay.MusicSearchActivity;
 import com.flynetwifi.netplay.Presenters.MusicGendersPresenter;
 import com.flynetwifi.netplay.Presenters.MusicPlaylistPresenter;
@@ -47,11 +49,13 @@ import java.util.List;
 import java.util.Map;
 
 public class MusicFragment extends BrowseFragment {
+    public static final String TAG = "MusicFragment";
     private ArrayObjectAdapter mRowsAdapter;
-    public BackgroundManager backgroundManager;
-    public PicassoBackgroundManagerTarget mBackgroundTarget;
+    private BackgroundManager backgroundManager;
+    private PicassoBackgroundManagerTarget mBackgroundTarget;
 
-    public Map<String, MusicCard> data;
+
+    private Map<String, MusicCard> data;
 
 
     @Override
@@ -90,8 +94,14 @@ public class MusicFragment extends BrowseFragment {
                 }
                 if(item instanceof MusicPlaylistCard){
                     MusicPlaylistCard model = (MusicPlaylistCard) item;
-                    intent.putExtra("tipo", "0" );
-                    intent.putExtra("id", model.getmId() );
+                    if(model.getmId().contentEquals("0")){
+                        intent = new Intent(getActivity().getBaseContext(),
+                                MusicPlaylistActivity.class);
+                        getActivity().finish();
+                    }else {
+                        intent.putExtra("tipo", "0");
+                        intent.putExtra("id", model.getmId());
+                    }
                 }
                 if(item instanceof MusicGendersCard){
                     MusicGendersCard model = (MusicGendersCard) item;
@@ -145,15 +155,22 @@ public class MusicFragment extends BrowseFragment {
 
     private void loadRows() {
         mRowsAdapter.clear();
+        mRowsAdapter.add(new SectionRow(new HeaderItem("Musica")));
+
+        loadPlaylists();
+        loadSingers();
+        loadGenders();
+
+    }
+
+    private void loadPlaylists(){
         final MusicPlaylistPresenter playlistPresenter = new MusicPlaylistPresenter();
-        final MusicSingersPresenter cantantesPresenter = new MusicSingersPresenter();
-        final MusicGendersPresenter generosPresenter = new MusicGendersPresenter();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.music);
+                    String response = downloadData.run(Constants.server + Constants.music_playlist + MainActivity.user_profile);
 
                     Gson gson = new Gson();
                     Type musicaCardType;
@@ -161,20 +178,28 @@ public class MusicFragment extends BrowseFragment {
 
                     }.getType();
                     data = gson.fromJson(response, musicaCardType);
-                    mRowsAdapter.add(new SectionRow(new HeaderItem("Musica")));
+
 
                     for (HashMap.Entry<String, MusicCard> entry : data.entrySet()) {
-                        MusicCard model = (MusicCard) entry.getValue();
+                        MusicCard model =  entry.getValue();
 
                         ArrayObjectAdapter listRowAdapter = null;
                         List<MusicPlaylistCard> listPlaylistModel = new ArrayList<>();
-                        List<MusicSingersCard> listCantantesModel = new ArrayList<>();
-                        List<MusicGendersCard> listGenerosModel = new ArrayList<>();
+                        //List<MusicSingersCard> listCantantesModel = new ArrayList<>();
+                        //List<MusicGendersCard> listGenerosModel = new ArrayList<>();
 
 
                         if (model.getmTipo() == 0) {
                             listRowAdapter = new ArrayObjectAdapter(playlistPresenter);
                             MusicPlaylistRow row = new MusicPlaylistRow();
+
+                            MusicPlaylistCard dataModel = new MusicPlaylistCard();
+                            dataModel.setmId("0");
+                            dataModel.setmNombre("Agregar Playlist");
+                            dataModel.setmNumero("");
+                            listRowAdapter.add(dataModel);
+                            listPlaylistModel.add(dataModel);
+
 
                             for (int i = 0; i < model.getmData().length; i++) {
 
@@ -192,7 +217,7 @@ public class MusicFragment extends BrowseFragment {
                                         numero = map.getValue();
                                     }
                                 }
-                                MusicPlaylistCard dataModel = new MusicPlaylistCard();
+                                dataModel = new MusicPlaylistCard();
                                 dataModel.setmId(id);
                                 dataModel.setmNombre(nombre);
                                 dataModel.setmNumero(numero);
@@ -207,44 +232,46 @@ public class MusicFragment extends BrowseFragment {
                                     row);
                             mRowsAdapter.add(playlistListRow);
                         }
+                    }
+                }
+                catch (JsonParseException e1) {
+                    e1.printStackTrace();
+                } catch (IllegalStateException e2) {
 
-                        if (model.getmTipo() == 1) {
-                            listRowAdapter = new ArrayObjectAdapter(generosPresenter);
-                            MusicGendersRow row = new MusicGendersRow();
+                }
+            }
+        });
+        thread.start();
 
-                            for (int i = 0; i < model.getmData().length; i++) {
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-                                String id = "";
-                                String nombre = "";
-                                String imagen = "";
-                                for (Map.Entry<String, String> map : model.getmData()[i].entrySet()) {
+    private void loadSingers(){
+        final MusicSingersPresenter cantantesPresenter = new MusicSingersPresenter();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DownloadData downloadData = new DownloadData();
+                    String response = downloadData.run(Constants.server + Constants.music_singers);
 
-                                    if (map.getKey().contentEquals("nombre")) {
-                                        nombre = map.getValue();
-                                    }
-                                    if (map.getKey().contentEquals("id")) {
-                                        id = map.getValue();
+                    Gson gson = new Gson();
+                    Type musicaCardType;
+                    musicaCardType = new TypeToken<Map<String, MusicCard>>() {
 
-                                    }
-                                    if (map.getKey().contentEquals("imagen")) {
-                                        imagen = map.getValue();
-                                    }
-                                }
-                                MusicGendersCard generosModel = new MusicGendersCard();
-                                generosModel.setmId(id);
-                                generosModel.setmNombre(nombre);
-                                generosModel.setmImagen(imagen);
-                                listRowAdapter.add(generosModel);
-                                listGenerosModel.add(generosModel);
+                    }.getType();
+                    data = gson.fromJson(response, musicaCardType);
 
-                            }
-                            row.setGeneros(listGenerosModel);
-                            MusicGendersListRow generosListRow = new MusicGendersListRow(
-                                    new HeaderItem(entry.getKey()),
-                                    listRowAdapter,
-                                    row);
-                            mRowsAdapter.add(generosListRow);
-                        }
+
+                    for (HashMap.Entry<String, MusicCard> entry : data.entrySet()) {
+                        MusicCard model = entry.getValue();
+
+                        ArrayObjectAdapter listRowAdapter = null;
+                        List<MusicSingersCard> listCantantesModel = new ArrayList<>();
 
 
                         if (model.getmTipo() == 2) {
@@ -285,8 +312,86 @@ public class MusicFragment extends BrowseFragment {
                                     row);
                             mRowsAdapter.add(cantantesListRow);
                         }
+                    }
+                }
+                catch (JsonParseException e1) {
+                    e1.printStackTrace();
+                } catch (IllegalStateException e2) {
+
+                }
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadGenders(){
+
+        final MusicGendersPresenter generosPresenter = new MusicGendersPresenter();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DownloadData downloadData = new DownloadData();
+                    String response = downloadData.run(Constants.server + Constants.music_genders);
+
+                    Gson gson = new Gson();
+                    Type musicaCardType;
+                    musicaCardType = new TypeToken<Map<String, MusicCard>>() {
+
+                    }.getType();
+                    data = gson.fromJson(response, musicaCardType);
 
 
+                    for (HashMap.Entry<String, MusicCard> entry : data.entrySet()) {
+                        MusicCard model = entry.getValue();
+
+                        ArrayObjectAdapter listRowAdapter = null;
+                        List<MusicGendersCard> listGenerosModel = new ArrayList<>();
+
+
+                        if (model.getmTipo() == 1) {
+                            listRowAdapter = new ArrayObjectAdapter(generosPresenter);
+                            MusicGendersRow row = new MusicGendersRow();
+
+                            for (int i = 0; i < model.getmData().length; i++) {
+
+                                String id = "";
+                                String nombre = "";
+                                String imagen = "";
+                                for (Map.Entry<String, String> map : model.getmData()[i].entrySet()) {
+
+                                    if (map.getKey().contentEquals("nombre")) {
+                                        nombre = map.getValue();
+                                    }
+                                    if (map.getKey().contentEquals("id")) {
+                                        id = map.getValue();
+
+                                    }
+                                    if (map.getKey().contentEquals("imagen")) {
+                                        imagen = map.getValue();
+                                    }
+                                }
+                                MusicGendersCard generosModel = new MusicGendersCard();
+                                generosModel.setmId(id);
+                                generosModel.setmNombre(nombre);
+                                generosModel.setmImagen(imagen);
+                                listRowAdapter.add(generosModel);
+                                listGenerosModel.add(generosModel);
+
+                            }
+                            row.setGeneros(listGenerosModel);
+                            MusicGendersListRow generosListRow = new MusicGendersListRow(
+                                    new HeaderItem(entry.getKey()),
+                                    listRowAdapter,
+                                    row);
+                            mRowsAdapter.add(generosListRow);
+                        }
                     }
                 }
                 catch (JsonParseException e1) {

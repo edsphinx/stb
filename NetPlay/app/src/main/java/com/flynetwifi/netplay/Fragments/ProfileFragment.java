@@ -31,18 +31,19 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends BrowseFragment {
 
+    public static final String TAG = "ProfileFragment";
+
     private ArrayObjectAdapter mRowsAdapter;
     private Context mContext;
     private MediaPlayer mediaPlayer;
     private AccountProfilesRow data = null;
-    public BackgroundManager backgroundManager;
-    public PicassoBackgroundManagerTarget mBackgroundTarget;
+    private BackgroundManager backgroundManager;
+    private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        mContext = getActivity();
+        mContext = getActivity().getBaseContext();
         //Set click sound
         //mediaPlayer = MediaPlayer.create(mContext, R.raw.menu_selection);
         setupUIElements();
@@ -65,35 +66,39 @@ public class ProfileFragment extends BrowseFragment {
 
     private void setupRowAdapter() {
         mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
-        mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         createRows();
+        mRowsAdapter.add(createCardRow(data));
         setAdapter(mRowsAdapter);
     }
 
-    public void createRows(){
+
+    private void createRows() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 DownloadData downloadData = new DownloadData();
 
                 String response = downloadData.run(Constants.server + Constants.profiles + MainActivity.access_token);
                 data = new Gson().fromJson(response, AccountProfilesRow.class);
-                mRowsAdapter.add(createCardRow(data));
 
 
             }
         });
-        thread.start();
+
 
         try {
+            thread.start();
             thread.join();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+
     }
 
-    private ListRow createCardRow(AccountProfilesRow cardRow) {
+    private static ListRow createCardRow(AccountProfilesRow cardRow) {
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new AccountProfilesPresenter());
         for (AccountProfileCard card : cardRow.getProfileCards()) {
@@ -124,7 +129,7 @@ public class ProfileFragment extends BrowseFragment {
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
             AccountProfileCard card = (AccountProfileCard) item;
-            if(card.getmParentalControl() == 2) {
+            if (card.getmParentalControl() == 2) {
 
                 SharedPreferences loginSettings = mContext.getSharedPreferences("loginSettings", 0);
                 SharedPreferences.Editor editor = loginSettings.edit();
@@ -134,8 +139,7 @@ public class ProfileFragment extends BrowseFragment {
 
                 MainActivity.user_profile = String.valueOf(card.getmId());
                 getActivity().finish();
-            }
-            else{
+            } else {
                 Intent intent = new Intent(mContext,
                         AccountProfilePasswordActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())

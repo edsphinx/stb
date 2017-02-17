@@ -18,8 +18,8 @@ public class AppsPresenter extends android.support.v17.leanback.widget.Presenter
 
     static class ViewHolder extends android.support.v17.leanback.widget.Presenter.ViewHolder {
 
-        public TextView nombre;
-        public ImageView logo;
+        public final TextView nombre;
+        public final ImageView logo;
 
         public ViewHolder(View view) {
             super(view);

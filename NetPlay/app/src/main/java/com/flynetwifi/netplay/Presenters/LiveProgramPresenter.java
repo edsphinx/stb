@@ -15,7 +15,6 @@
 
 package com.flynetwifi.netplay.Presenters;
 
-import android.content.Context;
 import android.support.v17.leanback.widget.Presenter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,13 +28,12 @@ import com.flynetwifi.netplay.R;
 public class LiveProgramPresenter extends Presenter {
 
 
-    public Context mContext;
-
     static class ViewHolder extends Presenter.ViewHolder {
 
-        public TextView nombre;
-        public TextView fecha_inicio, fecha_fin;
-        public TextView descripcion;
+        public final TextView nombre;
+        public final TextView fecha_inicio;
+        public final TextView fecha_fin;
+        public final TextView descripcion;
 
         public ViewHolder(View view) {
             super(view);
@@ -49,7 +47,6 @@ public class LiveProgramPresenter extends Presenter {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
-        mContext = parent.getContext();
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.live_program_card, parent, false);

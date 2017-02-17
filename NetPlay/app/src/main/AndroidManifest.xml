@@ -113,9 +113,10 @@
             android:exported="true"
             android:label="@string/title_activity_music"
             android:theme="@style/Theme.Browse" />
-        <activity android:name=".MusicSearchActivity"
+        <activity
+            android:name=".MusicSearchActivity"
             android:exported="true"
-            android:theme="@style/Theme.Search"/>
+            android:theme="@style/Theme.Search" />
         <activity
             android:name=".MusicPlayerActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
@@ -124,6 +125,9 @@
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.Main" />
+        <activity android:name=".MusicPlaylistActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Settings"/>
         <activity
             android:name=".AccountActivity"
             android:exported="true"
@@ -141,6 +145,7 @@
             android:name=".AccountProfilePasswordActivity"
             android:exported="true"
             android:theme="@style/Theme.Settings" />
+
 
     </application>
 

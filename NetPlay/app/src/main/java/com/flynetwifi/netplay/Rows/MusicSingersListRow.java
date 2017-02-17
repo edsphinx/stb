@@ -20,7 +20,7 @@ public class MusicSingersListRow extends ListRow {
         return mCardRow;
     }
 
-    public void setCantantesRow(MusicSingersRow cardRow) {
+    private void setCantantesRow(MusicSingersRow cardRow) {
         this.mCardRow = cardRow;
     }
 }

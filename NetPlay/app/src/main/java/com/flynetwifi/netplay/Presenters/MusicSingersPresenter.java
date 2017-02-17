@@ -42,7 +42,7 @@ public class MusicSingersPresenter extends Presenter {
             return logo;
         }
 
-        protected void updateCardViewImage(String uri) {
+        void updateCardViewImage(String uri) {
             Picasso.with(mContext)
                     .load(uri)
                     .resize(Utils.convertDpToPixel(mContext, CARD_WIDTH),

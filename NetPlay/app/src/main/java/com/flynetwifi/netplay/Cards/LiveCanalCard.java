@@ -9,8 +9,11 @@ public class LiveCanalCard {
     @SerializedName("titulo") private String mTitle = "";
     @SerializedName("descripcion") private String mDescription = "";
     @SerializedName("logo") private String mLogo = null;
+    @SerializedName("thumbnail") private String mThumbnail = null;
     @SerializedName("stream") private String mStream = "";
+    @SerializedName("record") private String mRecord = "";
     @SerializedName("posicion") private int mPosicion = 0;
+    private int mEstado = 0;
 
     public Integer getmId() {
         return mId;
@@ -22,10 +25,6 @@ public class LiveCanalCard {
 
     public Integer getmNumero() {
         return mNumero;
-    }
-
-    public void setmNumero(Integer mNumero) {
-        this.mNumero = mNumero;
     }
 
     public String getmTitle() {
@@ -40,24 +39,44 @@ public class LiveCanalCard {
         return mDescription;
     }
 
-    public void setmDescription(String mDescription) {
-        this.mDescription = mDescription;
-    }
-
     public String getmLogo() {
         return mLogo;
-    }
-
-    public void setmLogo(String mLogo) {
-        this.mLogo = mLogo;
     }
 
     public String getmStream() {
         return mStream;
     }
 
+    public String getmRecord(){
+        return  mRecord;
+    }
+
+    public void setmLogo(String mLogo) {
+        this.mLogo = mLogo;
+    }
+
+    public void setmNumero(Integer mNumero) {
+        this.mNumero = mNumero;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public String getmThumbnail() {
+        return mThumbnail;
+    }
+
+    public void setmThumbnail(String mThumbnail) {
+        this.mThumbnail = mThumbnail;
+    }
+
     public void setmStream(String mStream) {
         this.mStream = mStream;
+    }
+
+    public void setmRecord(String mRecord) {
+        this.mRecord = mRecord;
     }
 
     public int getmPosicion() {
@@ -66,5 +85,13 @@ public class LiveCanalCard {
 
     public void setmPosicion(int mPosicion) {
         this.mPosicion = mPosicion;
+    }
+
+    public int getmEstado() {
+        return mEstado;
+    }
+
+    public void setmEstado(int mEstado) {
+        this.mEstado = mEstado;
     }
 }

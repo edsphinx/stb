@@ -25,19 +25,8 @@ public class AccountProfileCard {
         this.mTitle = mTitle;
     }
 
-    public String getmService() {
-        return mService;
-    }
-
-    public void setmService(String mService) {
-        this.mService = mService;
-    }
-
     public int getmParentalControl() {
         return mParentalControl;
     }
 
-    public void setmParentalControl(int mParentalControl) {
-        this.mParentalControl = mParentalControl;
-    }
 }

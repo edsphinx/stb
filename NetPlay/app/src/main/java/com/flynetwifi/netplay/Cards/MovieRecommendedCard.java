@@ -49,7 +49,7 @@ public class MovieRecommendedCard {
         this.mExtraText = mExtraText;
     }
 
-    public String getmImageUrl() {
+    private String getmImageUrl() {
         return mImageUrl;
     }
 

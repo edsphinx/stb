@@ -32,7 +32,7 @@ public class MoviesListRow extends ListRow {
         return mCardRow;
     }
 
-    public void setPeliculaRow(MoviesRow cardRow) {
+    private void setPeliculaRow(MoviesRow cardRow) {
         this.mCardRow = cardRow;
     }
 }

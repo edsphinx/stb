@@ -6,17 +6,17 @@ import com.google.gson.annotations.SerializedName;
  * Created by mauro on 2/8/17.
  */
 public class AccountCard  {
-    @SerializedName("id") private String mId = "x";
-    @SerializedName("nombre") private String mNombre = "x";
-    @SerializedName("direccion") private String mDireccion = "x";
-    @SerializedName("fecha_instalacion") private String mFechaInstalacion = "x";
-    @SerializedName("telefono") private String mTelefono = "x";
-    @SerializedName("correo") private String mCorreo = "x";
-    @SerializedName("contrato_inicio") private String mContratoInicio = "x";
-    @SerializedName("contrato_duracion") private String mContratoDuracion = "x";
-    @SerializedName("internet") private String mInternet = "";
-    @SerializedName("iptv") private String mIptv = "";
-    @SerializedName("nacionalidad") private String mNacionalidad = "x";
+    @SerializedName("id") private String mId ;
+    @SerializedName("nombre") private String mNombre ;
+    @SerializedName("direccion") private String mDireccion ;
+    @SerializedName("fecha_instalacion") private String mFechaInstalacion ;
+    @SerializedName("telefono") private String mTelefono ;
+    @SerializedName("correo") private String mCorreo ;
+    @SerializedName("contrato_inicio") private String mContratoInicio ;
+    @SerializedName("contrato_duracion") private String mContratoDuracion ;
+    @SerializedName("internet") private String mInternet ;
+    @SerializedName("iptv") private String mIptv ;
+    @SerializedName("nacionalidad") private String mNacionalidad ;
 
     public String getmId() {
         return mId;
@@ -50,13 +50,6 @@ public class AccountCard  {
         return mContratoDuracion;
     }
 
-    public String getmInternet() {
-        return mInternet;
-    }
-
-    public String getmIptv() {
-        return mIptv;
-    }
 
     public String getmNacionalidad() {
         return mNacionalidad;

@@ -40,12 +40,14 @@ import java.util.Map;
 
 public class SeriesFragment extends BrowseFragment {
 
+    public static final String TAG = "SeriesFragment";
+
     private ArrayObjectAdapter mRowsAdapter;
-    public BackgroundManager backgroundManager;
-    public PicassoBackgroundManagerTarget mBackgroundTarget;
+    private BackgroundManager backgroundManager;
+    private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     public static String id = "0";
-    public Map<String, SeriesCard[]> data;
+    private Map<String, SeriesCard[]> data;
 
     @Override
     public void onCreate(Bundle savedInstaceState){

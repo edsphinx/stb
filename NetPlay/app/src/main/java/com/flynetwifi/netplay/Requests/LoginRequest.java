@@ -10,7 +10,7 @@ import okhttp3.Response;
 
 public class LoginRequest {
 
-    OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client = new OkHttpClient();
 
 
     public Response run(String url, String username, String password) throws IOException {

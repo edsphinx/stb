@@ -42,15 +42,16 @@ import java.io.IOException;
 
 public class MovieDetailFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
-    public static final String TRANSITION_NAME = "t_for_transition";
+    public static final String TAG = "MovieDetailFragment";
+    private static final String TRANSITION_NAME = "t_for_transition";
     public static final String EXTRA_CARD = "card";
 
-    public String id;
+    private String id;
     private ArrayObjectAdapter mRowsAdapter;
-    public MovieDetailCard data = null;
+    private MovieDetailCard data = null;
 
-    public BackgroundManager backgroundManager;
-    public PicassoBackgroundManagerTarget mBackgroundTarget;
+    private BackgroundManager backgroundManager;
+    private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
     }
 
 
-    public void setupUi() {
+    private void setupUi() {
         final FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
                 new MovieDetailPresenter(getActivity())) {
 

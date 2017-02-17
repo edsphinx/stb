@@ -37,7 +37,7 @@ public class MusicPlayerFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, MediaPlayerGlue.OnMediaStateChangeListener {
 
 
-    public static final String TAG = "LiveFragment";
+    public static final String TAG = "MusicPlayerFragment";
     private ArrayObjectAdapter mRowsAdapter;
     private MusicMediaPlayerGlue mGlue;
 
@@ -148,15 +148,12 @@ public class MusicPlayerFragment extends PlaybackOverlayFragment implements
     private void addPlaybackControlsRow() {
 
 
-        final PlaybackControlsRowPresenter controlsPresenter = mGlue
-                .createControlsRowAndPresenter();
-        mRowsAdapter = new ArrayObjectAdapter(controlsPresenter);
-        mRowsAdapter.add(mGlue.getControlsRow());
-
         ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
 
         PlaybackControlsRowPresenter playbackControlsRowPresenter = mGlue.createControlsRowAndPresenter();
         playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.background));
+
+
         rowPresenterSelector.addClassPresenter(PlaybackControlsRow.class, playbackControlsRowPresenter);
         rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
         mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
@@ -187,6 +184,11 @@ public class MusicPlayerFragment extends PlaybackOverlayFragment implements
                         mRowsAdapter.add(1, createCardRowCantantes(rows));
                     } else if (tipo.contentEquals("2")) {
                         response = downloadData.run(Constants.server + "/stb/musica/videos/cantantes/" + id);
+                        MusicSongsRow rows = new Gson().fromJson(response, MusicSongsRow.class);
+                        mRowsAdapter.add(1, createCardRowCantantes(rows));
+                    }
+                    else if (tipo.contentEquals("3")) {
+                        response = downloadData.run(Constants.server + "/stb/musica/videos/cancion/" + id);
                         MusicSongsRow rows = new Gson().fromJson(response, MusicSongsRow.class);
                         mRowsAdapter.add(1, createCardRowCantantes(rows));
                     }

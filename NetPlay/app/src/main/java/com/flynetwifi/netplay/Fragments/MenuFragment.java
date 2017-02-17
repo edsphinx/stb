@@ -2,7 +2,6 @@ package com.flynetwifi.netplay.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
@@ -35,14 +34,12 @@ public class MenuFragment extends BrowseFragment {
 
     private ArrayObjectAdapter mRowsAdapter;
     private Context mContext;
-    private MediaPlayer mp;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         mContext = getActivity();
-        mp = MediaPlayer.create(mContext, R.raw.menu_selection);
         setupUIElements();
         setupRowAdapter();
         setupEventListeners();
@@ -82,14 +79,6 @@ public class MenuFragment extends BrowseFragment {
         setOnItemViewSelectedListener(new ItemViewSelectedListener());
     }
 
-    private void playSound() {
-        /*Thread thread = new Thread() {
-            public void run() {
-                mp.start();
-            }
-        };
-        thread.start();*/
-    }
 
     private final class ItemViewClickedListener implements OnItemViewClickedListener {
 
@@ -140,6 +129,9 @@ public class MenuFragment extends BrowseFragment {
                         break;
                 }
                 if (intent != null) {
+                    intent.putExtra("user_profile", MainActivity.user_profile );
+                    intent.putExtra("user_type", MainActivity.user_type );
+                    intent.putExtra("access_token", MainActivity.access_token );
                     Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                             .toBundle();
                     startActivity(intent, bundle);
@@ -153,7 +145,7 @@ public class MenuFragment extends BrowseFragment {
         @Override
         public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
                                    RowPresenter.ViewHolder rowViewHolder, Row row) {
-            playSound();
+
         }
     }
 

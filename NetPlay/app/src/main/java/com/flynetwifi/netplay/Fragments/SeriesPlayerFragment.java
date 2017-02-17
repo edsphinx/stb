@@ -30,7 +30,7 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, MediaPlayerGlue.OnMediaStateChangeListener {
 
 
-    public static final String TAG = "LiveFragment";
+    public static final String TAG = "SeriesPlayerFragment";
     private ArrayObjectAdapter mRowsAdapter;
     private SeriesMediaPlayerGlue mGlue;
 
@@ -145,10 +145,7 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
     private void addPlaybackControlsRow() {
 
 
-        final PlaybackControlsRowPresenter controlsPresenter = mGlue
-                .createControlsRowAndPresenter();
-        mRowsAdapter = new ArrayObjectAdapter(controlsPresenter);
-        mRowsAdapter.add(mGlue.getControlsRow());
+
 
         ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
 

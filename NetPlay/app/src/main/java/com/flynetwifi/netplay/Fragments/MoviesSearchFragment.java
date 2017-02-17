@@ -43,8 +43,10 @@ public class MoviesSearchFragment extends android.support.v17.leanback.app.Searc
         implements android.support.v17.leanback.app.SearchFragment.SearchResultProvider,
         OnItemViewClickedListener {
 
+    public static final String TAG = "MovieSearchFragment";
+
     private ArrayObjectAdapter mRowsAdapter;
-    public Map<String, MovieCard[]> data;
+    private Map<String, MovieCard[]> data;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,7 +99,7 @@ public class MoviesSearchFragment extends android.support.v17.leanback.app.Searc
     }
 
 
-    public void loadRows(final String query) {
+    private void loadRows(final String query) {
         mRowsAdapter.clear();
         final MoviePresenter presenter = new MoviePresenter();
         Thread thread = new Thread(new Runnable() {

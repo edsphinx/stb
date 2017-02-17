@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppsFragment extends VerticalGridFragment {
+    public static final String TAG = "AppsFragment";
 
     private static final int COLUMNS = 5;
     private static final int ZOOM_FACTOR = FocusHighlight.ZOOM_FACTOR_MEDIUM;

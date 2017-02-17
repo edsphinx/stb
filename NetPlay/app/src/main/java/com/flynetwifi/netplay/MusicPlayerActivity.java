@@ -29,7 +29,7 @@ public class MusicPlayerActivity extends Activity {
         ft2.commit();
     }
 
-    public static MusicPlayerFragment newInstance(String tipo, String id) {
+    private static MusicPlayerFragment newInstance(String tipo, String id) {
         MusicPlayerFragment f = new MusicPlayerFragment();
         Bundle args = new Bundle();
         args.putString("tipo", tipo);

@@ -25,7 +25,7 @@ public class MenuCard {
         this.mTitulo = mTitulo;
     }
 
-    public String getmLocalImageResource() {
+    private String getmLocalImageResource() {
         return mLocalImageResource;
     }
 

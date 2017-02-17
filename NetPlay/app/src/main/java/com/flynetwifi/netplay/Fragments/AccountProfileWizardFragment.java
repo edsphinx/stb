@@ -17,8 +17,10 @@ package com.flynetwifi.netplay.Fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v17.leanback.app.GuidedStepFragment;
 import android.support.v17.leanback.widget.GuidanceStylist;
 import android.support.v17.leanback.widget.GuidedAction;
+import android.util.Log;
 
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.MainActivity;
@@ -38,11 +40,14 @@ import okhttp3.Response;
 
 
 
-public class AccountProfileWizardFragment extends AccountProfileWizardBaseFragment {
+public class AccountProfileWizardFragment extends GuidedStepFragment {
 
-    private static final int ACTION_ID_BUY_HD = 1;
-    private static final int ACTION_ID_BUY_SD = ACTION_ID_BUY_HD + 1;
     private GuidedAction passwordAction;
+
+    @Override
+    public int onProvideTheme() {
+        return R.style.Theme_Wizard;
+    }
 
     @NonNull
     @Override
@@ -97,6 +102,7 @@ public class AccountProfileWizardFragment extends AccountProfileWizardBaseFragme
                             Response response = client.newCall(request).execute()
                     ) {
                         result = response.body().string();
+                        Log.w("RESULT", result);
 
                         try {
                             JSONObject jsonObject = new JSONObject(result);

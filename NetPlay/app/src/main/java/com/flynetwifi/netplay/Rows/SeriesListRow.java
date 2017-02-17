@@ -32,7 +32,7 @@ public class SeriesListRow extends ListRow {
         return mCardRow;
     }
 
-    public void setSeriesRow(SeriesRow cardRow) {
+    private void setSeriesRow(SeriesRow cardRow) {
         this.mCardRow = cardRow;
     }
 }

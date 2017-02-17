@@ -40,15 +40,15 @@ import com.flynetwifi.netplay.R;
 public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
         OnItemViewSelectedListener {
 
-    public static final int FAST_FORWARD_REWIND_STEP = 10 * 1000; // in milliseconds
-    public static final int FAST_FORWARD_REWIND_REPEAT_DELAY = 200; // in milliseconds
+    private static final int FAST_FORWARD_REWIND_STEP = 10 * 1000; // in milliseconds
+    private static final int FAST_FORWARD_REWIND_REPEAT_DELAY = 200; // in milliseconds
     private static final String TAG = "MusicMediaPlayerGlue";
     private final Context mContext;
-    protected final PlaybackControlsRow.ThumbsDownAction mThumbsDownAction;
-    protected final PlaybackControlsRow.ThumbsUpAction mThumbsUpAction;
-    protected final PlaybackControlsRow.RepeatAction mRepeatAction;
-    protected final PlaybackControlsRow.ShuffleAction mShuffleAction;
-    protected final PlaybackControlsRow.SkipNextAction mSkipNextAction;
+    private final PlaybackControlsRow.ThumbsDownAction mThumbsDownAction;
+    private final PlaybackControlsRow.ThumbsUpAction mThumbsUpAction;
+    private final PlaybackControlsRow.RepeatAction mRepeatAction;
+    private final PlaybackControlsRow.ShuffleAction mShuffleAction;
+    private final PlaybackControlsRow.SkipNextAction mSkipNextAction;
     protected PlaybackControlsRow mControlsRow;
     private static final int REFRESH_PROGRESS = 1;
     private final Handler mHandler = new Handler() {
@@ -69,7 +69,7 @@ public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
 
     protected MediaMetaData mMediaMetaData = null;
 
-    public MediaPlayerGlue(Context context, PlaybackOverlayFragment fragment) {
+    protected MediaPlayerGlue(Context context, PlaybackOverlayFragment fragment) {
         super(context, fragment, new int[]{1});
         mContext = context;
         // Instantiate secondary actions
@@ -108,7 +108,7 @@ public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
     }
 
 
-    public void setupControlsRowPresenter(PlaybackControlsRowPresenter presenter) {
+    protected void setupControlsRowPresenter(PlaybackControlsRowPresenter presenter) {
         // TODO: hahnr@ move into resources
         presenter.setProgressColor(getContext().getResources().getColor(
                 R.color.colorPrimary));
@@ -294,9 +294,6 @@ public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
     }
 
 
-    /**
-     * A listener which will be called whenever a media item's playback status changes.
-     */
     public interface OnMediaStateChangeListener {
 
         void onMediaStateChanged(MediaMetaData currentMediaMetaData, int currentMediaState);;

@@ -36,15 +36,15 @@ import com.squareup.picasso.Picasso;
  */
 public class AccountFragment extends DetailsFragment implements OnItemViewSelectedListener,
         OnItemViewClickedListener {
+    public static final String TAG = "AccountFragment";
 
-    public static final String TRANSITION_NAME = "t_for_transition";
-    public static final String EXTRA_CARD = "card";
+    private static final String TRANSITION_NAME = "t_for_transition";
 
     private ArrayObjectAdapter mRowsAdapter;
-    public AccountCard data = null;
+    private AccountCard data = null;
 
-    public BackgroundManager backgroundManager;
-    public PicassoBackgroundManagerTarget mBackgroundTarget;
+    private BackgroundManager backgroundManager;
+    private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     @Override
     public void onCreate(Bundle savedInstaceState) {
@@ -55,7 +55,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
         setupEventListeners();
     }
 
-    public void setupUi() {
+    private void setupUi() {
         final FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
                 new AccountPresenter(getActivity())
         ) {
@@ -139,7 +139,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
         }, 500);
     }
 
-    public void setupEventListeners() {
+    private void setupEventListeners() {
         setOnItemViewSelectedListener(this);
         setOnItemViewClickedListener(this);
     }

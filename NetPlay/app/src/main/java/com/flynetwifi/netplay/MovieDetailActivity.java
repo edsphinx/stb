@@ -1,7 +1,10 @@
 package com.flynetwifi.netplay;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+
+import com.flynetwifi.netplay.Fragments.MovieDetailFragment;
 
 public class MovieDetailActivity extends Activity {
 
@@ -10,6 +13,18 @@ public class MovieDetailActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.activity_live);
+
+        FragmentTransaction ft1 = getFragmentManager().beginTransaction();
+        ft1.replace(R.id.video_fragment, newInstance(), MovieDetailFragment.TAG);
+        ft1.commit();
+
+    }
+
+    private static MovieDetailFragment newInstance() {
+        MovieDetailFragment f = new MovieDetailFragment();
+        Bundle args = new Bundle();
+        f.setArguments(args);
+        return f;
     }
 }

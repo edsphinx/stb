@@ -25,10 +25,10 @@ public class LoginTask extends AsyncTask<Void, Void, Boolean> {
     private TextInputEditText mUsernermaInput, mPasswordInput;
     private SharedPreferences mSettings;
 
-    public LoginTask(String username, String password, Context context, TextInputEditText usernameInput,
+    public LoginTask(Context context, TextInputEditText usernameInput,
                      TextInputEditText passwordInput, SharedPreferences settings) {
-        mUsername = username;
-        mPassword = password;
+        mUsername = usernameInput.getText().toString();
+        mPassword = passwordInput.getText().toString();
         mContext = context;
         mUsernermaInput = usernameInput;
         mPasswordInput = passwordInput;
@@ -69,7 +69,7 @@ public class LoginTask extends AsyncTask<Void, Void, Boolean> {
             Intent intent = new Intent(mContext, MainActivity.class);
             mContext.startActivity(intent);
         } else {
-            mPasswordInput.setError(mContext.getString(R.string.error_password));
+            mPasswordInput.setError(mContext.getString(R.string.password_error));
             mPasswordInput.requestFocus();
         }
     }

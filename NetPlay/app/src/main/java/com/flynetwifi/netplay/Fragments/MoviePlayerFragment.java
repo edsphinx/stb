@@ -24,7 +24,7 @@ import com.flynetwifi.netplay.media.MediaUtils;
 public class MoviePlayerFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, MediaPlayerGlue.OnMediaStateChangeListener {
 
-    public static final String TAG = "LiveFragment";
+    public static final String TAG = "MoviePlayerFragment";
     private ArrayObjectAdapter mRowsAdapter;
     private MovieMediaPlayerGlue mGlue;
     public String nombre;

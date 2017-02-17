@@ -14,7 +14,7 @@ import com.flynetwifi.netplay.Tasks.LoginTask;
 
 public class LoginActivity extends Activity {
 
-    SharedPreferences settings;
+    private SharedPreferences settings;
 
     private LoginTask mAuthTask = null;
 
@@ -33,8 +33,6 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
         mContext = this;
         mUsuarioView = (TextInputEditText) findViewById(R.id.usuario);
-
-
         mClaveView = (TextInputEditText) findViewById(R.id.password);
 
 
@@ -47,13 +45,11 @@ public class LoginActivity extends Activity {
         });
 
 
-
         settings = getSharedPreferences("settings", 0);
 
         String usuario = settings.getString("username", "null");
         String clave = settings.getString("password", "null");
         //mac = settings.getString("mac", "null");
-
 
         if (usuario.contentEquals("null")) {
             usuario = "";
@@ -79,18 +75,17 @@ public class LoginActivity extends Activity {
         String clave = mClaveView.getText().toString();
 
 
-
         boolean cancel = false;
         View focusView = null;
 
         if (TextUtils.isEmpty(clave)) {
-            mClaveView.setError("Clave invalida");
+            mClaveView.setError(getString(R.string.password_error));
             focusView = mClaveView;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(usuario)) {
-            mUsuarioView.setError("Usuario Requerido");
+            mUsuarioView.setError(getString(R.string.user_required));
             focusView = mUsuarioView;
             cancel = true;
         }
@@ -98,7 +93,7 @@ public class LoginActivity extends Activity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            mAuthTask = new LoginTask(usuario, clave, mContext,
+            mAuthTask = new LoginTask(mContext,
                     mUsuarioView, mClaveView, settings);
             mAuthTask.execute((Void) null);
             mAuthTask = null;

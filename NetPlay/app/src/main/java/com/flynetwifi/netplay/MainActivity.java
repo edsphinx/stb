@@ -24,7 +24,7 @@ public class MainActivity extends Activity{
     public static String refresh_token = "";
     public static String user_profile = "";
     public static String user_type = "";
-    public int code = 401;
+    private int code = 401;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -73,20 +73,24 @@ public class MainActivity extends Activity{
     }
 
     private void launch(){
+        Intent intent = null;
         if(access_token == ""){
-            Intent intent = new Intent(this.getBaseContext(),
+            intent = new Intent(this.getBaseContext(),
                     LoginActivity.class);
-            Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
-                    .toBundle();
-            startActivity(intent, bundle);
+
         }
         else if (user_profile == "") {
-            Intent intent = new Intent(this.getBaseContext(),
+            intent = new Intent(this.getBaseContext(),
                     ProfileActivity.class);
+
+        }
+
+        if(intent != null) {
             Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
                     .toBundle();
             startActivity(intent, bundle);
         }
+
     }
 
     private boolean login(){
@@ -102,13 +106,14 @@ public class MainActivity extends Activity{
         return false;
     }
 
-    public boolean attempLogin(final String username, final String password){
+    private boolean attempLogin(final String username, final String password){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 LoginRequest request = new LoginRequest();
                 try {
-                    Response session = request.run(Constants.server + "/oauth/token/", username, password);
+                    Response session = request.run(Constants.server + "/oauth/token/", username,
+                            password);
                     code = session.code();
                     if (session.isSuccessful() && session.code() == 200) {
                         JSONObject object = new JSONObject(session.body().string());

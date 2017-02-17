@@ -43,7 +43,7 @@ public class MediaMetaData implements Parcelable{
     public MediaMetaData() {
     }
 
-    public MediaMetaData(Parcel in) {
+    private MediaMetaData(Parcel in) {
         mMediaSourceUri = in.readParcelable(null);
         mMediaSourcePath = in.readString();
         mMediaTitle = in.readString();

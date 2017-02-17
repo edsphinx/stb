@@ -48,8 +48,8 @@ public class AccountProfilesPresenter extends Presenter {
 
     static class ViewHolder extends Presenter.ViewHolder {
 
-        public TextView name;
-        public ImageView logo;
+        public final TextView name;
+        public final ImageView logo;
 
         public ViewHolder(View view) {
             super(view);

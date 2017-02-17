@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- *
- */
-
 package com.flynetwifi.netplay.MediaPlayers;
 
 import android.annotation.TargetApi;
@@ -43,7 +28,6 @@ import com.flynetwifi.netplay.media.MediaUtils;
 
 import java.io.IOException;
 
-
 public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         AudioManager.OnAudioFocusChangeListener{
 
@@ -54,7 +38,7 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
     // The framework also needs it for displaying NowPlayingCard on the homescreen
     private MediaSession mVideoSession;
     private AudioManager mAudioManager;
-    int mAudioFocus = AudioManager.AUDIOFOCUS_LOSS;
+    private int mAudioFocus = AudioManager.AUDIOFOCUS_LOSS;
     private static final String TAG = "VideoMediaPlayerGlue";
 
     public MusicMediaPlayerGlue(Context context, PlaybackOverlayFragment fragment) {
@@ -87,14 +71,12 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         presenter.setBackgroundColor(getContext().getResources().getColor(R.color.background));
     }
 
-
-
-    public boolean requestAudioFocus() {
+    private boolean requestAudioFocus() {
         return mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
                 AudioManager.AUDIOFOCUS_GAIN) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
     }
 
-    public boolean abandonAudioFocus() {
+    private boolean abandonAudioFocus() {
         return mAudioManager.abandonAudioFocus(this) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
     }
 
@@ -106,11 +88,6 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
 
     }
 
-    /**
-     * Updates the playback state of the media session. This is used in both the NowPlayingCard and
-     * PIP control buttons.
-     * @param playbackState The current playback state for the media session
-     */
     private void updateVideoSessionPlayState(int playbackState) {
         if (mVideoSession == null) {
             // MediaSession has already been released, no need to update PlaybackState
@@ -128,7 +105,6 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-
     private void updateMediaSessionIntent() {
         if (mVideoSession == null) {
             return;
@@ -143,7 +119,6 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-
     private long getPlaybackStateActions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return PlaybackState.ACTION_PLAY | PlaybackState.ACTION_PAUSE |
@@ -154,9 +129,6 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         return 0;
     }
 
-    /**
-     * @see MediaPlayer#setDisplay(SurfaceHolder)
-     */
     public void setDisplay(SurfaceHolder surfaceHolder) {
         mPlayer.setDisplay(surfaceHolder);
     }
@@ -191,12 +163,6 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    /**
-     * Called whenever the user presses fast-forward/rewind or when the user keeps the corresponding
-     * action pressed.
-     *
-     * @param newPosition The new position of the media track in milliseconds.
-     */
     @Override
     protected void seekTo(int newPosition) {
         if (mInitialized) {
@@ -258,9 +224,6 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
 
     private void prepareNewMedia(final MediaMetaData mediaMetaData) {
         resetPlayer();
-        // mMediaMetaData must be set in the beginning before onStateChanged() call so that
-        // hasValidMedia returns true. Otherwise, updatePlaybackState is not called and the
-        // primary controls bar is not displayed at the start when media is prepared.
         mMediaMetaData = mediaMetaData;
         updateMediaSessionIntent();
         try {
@@ -309,9 +272,6 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         onStateChanged();
     }
 
-    /**
-     * Resets the {@link MediaPlayer} such that a new media file can be played.
-     */
     public void resetPlayer() {
         mInitialized = false;
         if (mPlayer != null) {
@@ -320,16 +280,12 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    public void createMediaPlayerIfNeeded() {
+    private void createMediaPlayerIfNeeded() {
         if (mPlayer == null) {
             mPlayer = new MediaPlayer();
         }
     }
 
-    /**
-     * Releases the {@link MediaPlayer}. The media player is released when the fragment exits
-     * (onDestroy() is called on the playback fragment).
-     */
     public void releaseMediaPlayer() {
         resetPlayer();
         if (mPlayer != null) {
@@ -357,13 +313,6 @@ public abstract class MusicMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    /**
-     * Releases the {@link MediaSession}. The media session is released when the playback fragment
-     * is no longer visible. This can happen in onStop() or surfaceDestroyed() (The ordering of these
-     * two is not deterministic, and that's why it's important to release the session in both callbacks).
-     * Since the media session can be released without the fragment being destroyed,
-     * {@link #createMediaSessionIfNeeded()} should be called when the playback becomes active again.
-     */
     public void releaseMediaSession() {
         Log.d(TAG, "Media session being released!");
         if (mVideoSession != null){

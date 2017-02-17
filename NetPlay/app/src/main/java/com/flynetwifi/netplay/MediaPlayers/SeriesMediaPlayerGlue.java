@@ -49,11 +49,9 @@ public abstract class SeriesMediaPlayerGlue extends MediaPlayerGlue implements
     private final PlaybackControlsRow.ClosedCaptioningAction mClosedCaptioningAction;
     private final PlaybackControlsRow.PictureInPictureAction mPipAction;
     private MediaPlayer mPlayer;
-    // MediaSession required for receiving input focus while in PIP mode or homescreen.
-    // The framework also needs it for displaying NowPlayingCard on the homescreen
     private MediaSession mVideoSession;
     private AudioManager mAudioManager;
-    int mAudioFocus = AudioManager.AUDIOFOCUS_LOSS;
+    private int mAudioFocus = AudioManager.AUDIOFOCUS_LOSS;
     private static final String TAG = "VideoMediaPlayerGlue";
 
     public SeriesMediaPlayerGlue(Context context, PlaybackOverlayFragment fragment) {
@@ -88,12 +86,12 @@ public abstract class SeriesMediaPlayerGlue extends MediaPlayerGlue implements
 
 
 
-    public boolean requestAudioFocus() {
+    private boolean requestAudioFocus() {
         return mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
                 AudioManager.AUDIOFOCUS_GAIN) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
     }
 
-    public boolean abandonAudioFocus() {
+    private boolean abandonAudioFocus() {
         return mAudioManager.abandonAudioFocus(this) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
     }
 
@@ -105,11 +103,6 @@ public abstract class SeriesMediaPlayerGlue extends MediaPlayerGlue implements
 
     }
 
-    /**
-     * Updates the playback state of the media session. This is used in both the NowPlayingCard and
-     * PIP control buttons.
-     * @param playbackState The current playback state for the media session
-     */
     private void updateVideoSessionPlayState(int playbackState) {
         if (mVideoSession == null) {
             // MediaSession has already been released, no need to update PlaybackState
@@ -153,9 +146,6 @@ public abstract class SeriesMediaPlayerGlue extends MediaPlayerGlue implements
         return 0;
     }
 
-    /**
-     * @see MediaPlayer#setDisplay(SurfaceHolder)
-     */
     public void setDisplay(SurfaceHolder surfaceHolder) {
         mPlayer.setDisplay(surfaceHolder);
     }
@@ -190,12 +180,6 @@ public abstract class SeriesMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    /**
-     * Called whenever the user presses fast-forward/rewind or when the user keeps the corresponding
-     * action pressed.
-     *
-     * @param newPosition The new position of the media track in milliseconds.
-     */
     @Override
     protected void seekTo(int newPosition) {
         if (mInitialized) {
@@ -308,9 +292,7 @@ public abstract class SeriesMediaPlayerGlue extends MediaPlayerGlue implements
         onStateChanged();
     }
 
-    /**
-     * Resets the {@link MediaPlayer} such that a new media file can be played.
-     */
+
     public void resetPlayer() {
         mInitialized = false;
         if (mPlayer != null) {
@@ -319,16 +301,12 @@ public abstract class SeriesMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    public void createMediaPlayerIfNeeded() {
+    private void createMediaPlayerIfNeeded() {
         if (mPlayer == null) {
             mPlayer = new MediaPlayer();
         }
     }
 
-    /**
-     * Releases the {@link MediaPlayer}. The media player is released when the fragment exits
-     * (onDestroy() is called on the playback fragment).
-     */
     public void releaseMediaPlayer() {
         resetPlayer();
         if (mPlayer != null) {
@@ -356,13 +334,6 @@ public abstract class SeriesMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    /**
-     * Releases the {@link MediaSession}. The media session is released when the playback fragment
-     * is no longer visible. This can happen in onStop() or surfaceDestroyed() (The ordering of these
-     * two is not deterministic, and that's why it's important to release the session in both callbacks).
-     * Since the media session can be released without the fragment being destroyed,
-     * {@link #createMediaSessionIfNeeded()} should be called when the playback becomes active again.
-     */
     public void releaseMediaSession() {
         Log.d(TAG, "Media session being released!");
         if (mVideoSession != null){

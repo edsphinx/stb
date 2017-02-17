@@ -5,7 +5,10 @@ import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.media.AudioManager;
+import android.media.MediaMetadata;
 import android.media.MediaPlayer;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
@@ -21,6 +24,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.flynetwifi.netplay.MoviePlayerActivity;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.media.MediaMetaData;
@@ -35,11 +41,9 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
     private final PlaybackControlsRow.ClosedCaptioningAction mClosedCaptioningAction;
     private final PlaybackControlsRow.PictureInPictureAction mPipAction;
     private MediaPlayer mPlayer;
-    // MediaSession required for receiving input focus while in PIP mode or homescreen.
-    // The framework also needs it for displaying NowPlayingCard on the homescreen
     private MediaSession mVideoSession;
     private AudioManager mAudioManager;
-    int mAudioFocus = AudioManager.AUDIOFOCUS_LOSS;
+    private int mAudioFocus = AudioManager.AUDIOFOCUS_LOSS;
     private static final String TAG = "VideoMediaPlayerGlue";
 
     public MovieMediaPlayerGlue(Context context, PlaybackOverlayFragment fragment) {
@@ -62,7 +66,6 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
         if (action == mClosedCaptioningAction) {
             mClosedCaptioningAction.nextIndex();
         } else if (action == mPipAction) {
-            //((Activity) getContext()).enterPictureInPictureMode();
         }
     }
 
@@ -72,21 +75,22 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
         presenter.setBackgroundColor(getContext().getResources().getColor(R.color.background));
     }
 
-    public boolean requestAudioFocus() {
+    private boolean requestAudioFocus() {
         return mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
                 AudioManager.AUDIOFOCUS_GAIN) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
     }
 
-    public boolean abandonAudioFocus() {
+    private boolean abandonAudioFocus() {
         return mAudioManager.abandonAudioFocus(this) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void updateVideoSessionMetaData() {
         if (mMediaMetaData == null) {
             throw new IllegalArgumentException(
                     "mCurrentMediaItem is null in updateMediaSessionMetaData!");
         }
-        /*final MediaMetadata.Builder metaDataBuilder = new MediaMetadata.Builder();
+        final MediaMetadata.Builder metaDataBuilder = new MediaMetadata.Builder();
         if (mMediaMetaData.getMediaTitle() != null) {
             metaDataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE,
                     mMediaMetaData.getMediaTitle());
@@ -117,14 +121,10 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
                               }
                           }
                     );
-        }*/
+        }
     }
 
-    /**
-     * Updates the playback state of the media session. This is used in both the NowPlayingCard and
-     * PIP control buttons.
-     * @param playbackState The current playback state for the media session
-     */
+
     private void updateVideoSessionPlayState(int playbackState) {
         if (mVideoSession == null) {
             // MediaSession has already been released, no need to update PlaybackState
@@ -142,11 +142,7 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    /**
-     * Sets the media session's activity launched when clicking on NowPlayingCard. This returns to
-     * the media screen that is playing or paused; the launched activity corresponds to the
-     * currently shown media session in the NowPlayingCard on TV launcher.
-     */
+
     private void updateMediaSessionIntent() {
         if (mVideoSession == null) {
             return;
@@ -161,11 +157,6 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    /**
-     * @return The available set of actions for the media session. These actions should be provided
-     * for the PlaybackState of the MediaSession in order for the play/pause control buttons to
-     * be displayed in the list of PIP controls.
-     */
     private long getPlaybackStateActions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return PlaybackState.ACTION_PLAY | PlaybackState.ACTION_PAUSE |
@@ -216,12 +207,6 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
 
     }
 
-    /**
-     * Called whenever the user presses fast-forward/rewind or when the user keeps the corresponding
-     * action pressed.
-     *
-     * @param newPosition The new position of the media track in milliseconds.
-     */
     @Override
     protected void seekTo(int newPosition) {
         if (mInitialized) {
@@ -334,9 +319,7 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
         onStateChanged();
     }
 
-    /**
-     * Resets the {@link MediaPlayer} such that a new media file can be played.
-     */
+
     public void resetPlayer() {
         mInitialized = false;
         if (mPlayer != null) {
@@ -345,16 +328,13 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    public void createMediaPlayerIfNeeded() {
+    private void createMediaPlayerIfNeeded() {
         if (mPlayer == null) {
             mPlayer = new MediaPlayer();
         }
     }
 
-    /**
-     * Releases the {@link MediaPlayer}. The media player is released when the fragment exits
-     * (onDestroy() is called on the playback fragment).
-     */
+
     public void releaseMediaPlayer() {
         resetPlayer();
         if (mPlayer != null) {
@@ -382,13 +362,7 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    /**
-     * Releases the {@link MediaSession}. The media session is released when the playback fragment
-     * is no longer visible. This can happen in onStop() or surfaceDestroyed() (The ordering of these
-     * two is not deterministic, and that's why it's important to release the session in both callbacks).
-     * Since the media session can be released without the fragment being destroyed,
-     * {@link #createMediaSessionIfNeeded()} should be called when the playback becomes active again.
-     */
+
     public void releaseMediaSession() {
         Log.d(TAG, "Media session being released!");
         if (mVideoSession != null){

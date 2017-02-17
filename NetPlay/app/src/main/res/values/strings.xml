@@ -2,7 +2,9 @@
     <string name="app_name">NetPlay</string>
 
 
-    <string name="error_password">Clave incorrecto</string>
+    <string name="password_error">Clave Incorrecta</string>
+    <string name="user_required">Usuario Requerido</string>
+
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_vodselection">VODSelectionActivity</string>
     <string name="title_activity_music">MusicActivity</string>
@@ -10,8 +12,11 @@
     <string name="title_activity_apps">AppsActivity</string>
     <string name="title_activity_messages">MessagesActivity</string>
 
+
+
     <!-- LIVE -->
     <string name="chanels">Canales</string>
+    <string name="favorite_chanels">Canales Favoritos</string>
     <string name="programation">Programacion</string>
     <string name="programation_title">Programacion</string>
     <string name="title_activity_peliculas">PeliculasActivity</string>

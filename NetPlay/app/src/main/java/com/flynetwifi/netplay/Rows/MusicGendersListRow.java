@@ -17,7 +17,7 @@ public class MusicGendersListRow extends ListRow {
         return mCardRow;
     }
 
-    public void setGenerosRow(MusicGendersRow cardRow) {
+    private void setGenerosRow(MusicGendersRow cardRow) {
         this.mCardRow = cardRow;
     }
 }

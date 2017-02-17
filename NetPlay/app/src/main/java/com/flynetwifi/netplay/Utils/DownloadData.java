@@ -10,7 +10,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class DownloadData {
-    OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client = new OkHttpClient();
 
     public String run(String url){
         String result = "";

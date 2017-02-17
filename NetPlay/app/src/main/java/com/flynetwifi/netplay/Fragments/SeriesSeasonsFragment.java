@@ -46,10 +46,10 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
     public static final String EXTRA_CARD = "card";
 
     private ArrayObjectAdapter mRowsAdapter;
-    public SeriesCard data = null;
+    private SeriesCard data = null;
 
-    public BackgroundManager backgroundManager;
-    public PicassoBackgroundManagerTarget mBackgroundTarget;
+    private BackgroundManager backgroundManager;
+    private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     public static String url = "";
     public static String nombre = "";
@@ -63,7 +63,7 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
     }
 
 
-    public void setupUi() {
+    private void setupUi() {
         final FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
                 new SeriesDetailsPresenter(getActivity())) {
 

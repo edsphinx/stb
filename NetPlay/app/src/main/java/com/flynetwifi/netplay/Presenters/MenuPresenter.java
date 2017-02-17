@@ -49,8 +49,8 @@ public class MenuPresenter extends Presenter {
 
     static class ViewHolder extends android.support.v17.leanback.widget.Presenter.ViewHolder {
 
-        public TextView name;
-        public ImageView logo;
+        public final TextView name;
+        public final ImageView logo;
 
         public ViewHolder(View view) {
             super(view);

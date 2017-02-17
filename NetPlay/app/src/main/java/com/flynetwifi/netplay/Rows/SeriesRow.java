@@ -21,7 +21,7 @@ import java.util.List;
 
 public class SeriesRow {
 
-    public static final int TYPE_DEFAULT = 0;
+    private static final int TYPE_DEFAULT = 0;
 
     private int mType = TYPE_DEFAULT;
     private boolean mShadow = true;

@@ -59,7 +59,7 @@ public class MoviePresenter extends android.support.v17.leanback.widget.Presente
             return logo;
         }
 
-        protected void updateCardViewImage(String uri) {
+        void updateCardViewImage(String uri) {
             Picasso.with(mContext)
                     .load(uri)
                     .resize(Utils.convertDpToPixel(mContext, CARD_WIDTH),

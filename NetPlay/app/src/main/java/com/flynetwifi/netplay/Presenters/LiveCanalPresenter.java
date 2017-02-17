@@ -32,22 +32,20 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 
-
-
 public class LiveCanalPresenter extends Presenter {
 
-    private static final String TAG = Presenter.class.getSimpleName();
 
     private static Context mContext;
-    private static int CARD_WIDTH = 150;
-    private static int CARD_HEIGHT = 150;
+    private static final int CARD_WIDTH = 150;
+    private static final int CARD_HEIGHT = 150;
 
     static class ViewHolder extends Presenter.ViewHolder {
 
-        public TextView name, number;
-        public ImageView logo;
+        public final TextView name;
+        public final TextView number;
+        public final ImageView logo;
 
-        public PicassoImageCardViewTarget mImageCardViewTarget;
+        public final PicassoImageCardViewTarget mImageCardViewTarget;
 
         public ViewHolder(View view) {
             super(view);
@@ -57,17 +55,18 @@ public class LiveCanalPresenter extends Presenter {
             mImageCardViewTarget = new PicassoImageCardViewTarget(logo);
         }
 
-        public ImageView getLogo(){
+        public ImageView getLogo() {
             return logo;
         }
 
-        protected void updateCardViewImage(String uri) {
+        void updateCardViewImage(String uri) {
             Picasso.with(mContext)
                     .load(uri)
                     .resize(Utils.convertDpToPixel(mContext, CARD_WIDTH),
                             Utils.convertDpToPixel(mContext, CARD_HEIGHT))
                     .placeholder(R.drawable.bg_poster)
                     .error(R.drawable.bg_poster)
+                    .skipMemoryCache()
                     .into(mImageCardViewTarget);
         }
 
@@ -93,8 +92,11 @@ public class LiveCanalPresenter extends Presenter {
 
         ((ViewHolder) viewHolder).name.setText(card.getmTitle());
         ((ViewHolder) viewHolder).number.setText(String.valueOf(card.getmNumero()));
-
-        ((ViewHolder) viewHolder).updateCardViewImage(card.getmLogo());
+        if (card.getmEstado() == 0) {
+            ((ViewHolder) viewHolder).updateCardViewImage(card.getmLogo());
+        } else {
+            ((ViewHolder) viewHolder).updateCardViewImage(card.getmThumbnail());
+        }
 
     }
 
@@ -109,9 +111,8 @@ public class LiveCanalPresenter extends Presenter {
     }
 
 
-
     public static class PicassoImageCardViewTarget implements Target {
-        private ImageView mImageCardView;
+        private final ImageView mImageCardView;
 
         public PicassoImageCardViewTarget(ImageView imageCardView) {
             mImageCardView = imageCardView;

@@ -40,13 +40,14 @@ import java.util.List;
 import java.util.Map;
 
 public class MoviesFragment extends BrowseFragment {
+    public static final String TAG = "MoviesFragment";
     private ArrayObjectAdapter mRowsAdapter;
 
-    public BackgroundManager backgroundManager;
-    public PicassoBackgroundManagerTarget mBackgroundTarget;
+    private BackgroundManager backgroundManager;
+    private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     public static String id = "0";
-    public Map<String, MovieCard[]> data;
+    private Map<String, MovieCard[]> data;
 
     @Override
     public void onCreate(Bundle savedInstaceState) {

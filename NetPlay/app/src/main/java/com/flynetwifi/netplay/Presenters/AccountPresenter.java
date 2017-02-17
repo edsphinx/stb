@@ -13,8 +13,8 @@ import com.flynetwifi.netplay.Utils.ResourceCache;
 
 public class AccountPresenter extends Presenter {
 
-    private ResourceCache mResourceCache = new ResourceCache();
-    private Context mContext;
+    private final ResourceCache mResourceCache = new ResourceCache();
+    private final Context mContext;
 
     public AccountPresenter(Context context) {
         mContext = context;

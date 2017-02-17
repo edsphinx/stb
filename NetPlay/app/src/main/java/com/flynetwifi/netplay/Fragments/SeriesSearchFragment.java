@@ -42,8 +42,10 @@ import java.util.Map;
 public class SeriesSearchFragment extends android.support.v17.leanback.app.SearchFragment
         implements SearchFragment.SearchResultProvider, OnItemViewClickedListener {
 
+    public static final String TAG = "SeriesSearchFragment";
+
     private ArrayObjectAdapter mRowsAdapter;
-    public Map<String, SeriesCard[]> data;
+    private Map<String, SeriesCard[]> data;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
