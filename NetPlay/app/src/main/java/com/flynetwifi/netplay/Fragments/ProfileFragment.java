@@ -44,8 +44,6 @@ public class ProfileFragment extends BrowseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mContext = getActivity().getBaseContext();
-        //Set click sound
-        //mediaPlayer = MediaPlayer.create(mContext, R.raw.menu_selection);
         setupUIElements();
         setupRowAdapter();
         setupEventListeners();

@@ -10,6 +10,7 @@ import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
 import android.support.v17.leanback.widget.DetailsOverviewRow;
+import android.support.v17.leanback.widget.DetailsOverviewRowPresenter;
 import android.support.v17.leanback.widget.FullWidthDetailsOverviewRowPresenter;
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
@@ -64,7 +65,8 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
 
 
     private void setupUi() {
-        final FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
+        final FullWidthDetailsOverviewRowPresenter rowPresenterBack =
+                new FullWidthDetailsOverviewRowPresenter(
                 new SeriesDetailsPresenter(getActivity())) {
 
             @Override
@@ -83,7 +85,29 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
                 return viewHolder;
             }
         };
+
+
         data = null;
+
+        final DetailsOverviewRowPresenter rowPresenter =
+                new DetailsOverviewRowPresenter(
+                        new SeriesDetailsPresenter(getActivity())) {
+                    @Override
+                    protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
+                        RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
+
+                        View actionsView = viewHolder.view.
+                                findViewById(R.id.details_overview_actions_background);
+
+                        View detailsView = viewHolder.view.findViewById(R.id.details_frame);
+                        detailsView.setBackgroundColor(
+                                getResources().getColor(R.color.background));
+
+
+                        return viewHolder;
+
+                    }
+                };
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -150,7 +174,7 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
         //actionAdapter.add(new Action(1, "Reproducir"));
         //actionAdapter.add(new Action(2, getString(R.string.action_wishlist)));
-        actionAdapter.add(new Action(2, "Temporadas"));
+        actionAdapter.add(new Action(2, getString(R.string.seasons)));
         detailsOverview.setActionsAdapter(actionAdapter);
         mRowsAdapter.add(detailsOverview);
 

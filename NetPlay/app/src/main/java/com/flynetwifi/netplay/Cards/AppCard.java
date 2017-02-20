@@ -4,9 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by mauro on 2/8/17.
- */
 public class AppCard {
 
     @SerializedName("titulo") private String mTitulo = "";

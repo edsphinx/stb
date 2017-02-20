@@ -10,6 +10,7 @@ import android.support.v17.leanback.widget.VerticalGridPresenter;
 import com.flynetwifi.netplay.Cards.MessagesCard;
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.Presenters.MessagesPresenter;
+import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Utils.DownloadData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,7 +33,7 @@ public class MessagesFragment extends VerticalGridFragment
 
     public void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
-        setTitle("Mensajes");
+        setTitle(getString(R.string.title_activity_messages));
         setupRowAdapter();
     }
 

@@ -12,6 +12,7 @@ import android.support.v17.leanback.widget.VerticalGridPresenter;
 
 import com.flynetwifi.netplay.Cards.AppCard;
 import com.flynetwifi.netplay.Presenters.AppsPresenter;
+import com.flynetwifi.netplay.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class AppsFragment extends VerticalGridFragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Apps");
+        setTitle(getString(R.string.title_activity_apps));
         setupRowAdapter();
     }
 

@@ -133,7 +133,7 @@ public class MoviesFragment extends BrowseFragment {
                     }.getType();
                     data = gson.fromJson(response, peliculasCardType);
 
-                    mRowsAdapter.add(new SectionRow(new HeaderItem("Peliculas")));
+                    mRowsAdapter.add(new SectionRow(new HeaderItem(getString(R.string.movies))));
                     for (HashMap.Entry<String, MovieCard[]> entry : data.entrySet()) {
 
                         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);

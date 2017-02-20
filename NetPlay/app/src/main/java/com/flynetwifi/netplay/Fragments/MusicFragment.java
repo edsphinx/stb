@@ -69,7 +69,7 @@ public class MusicFragment extends BrowseFragment {
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
         setBrandColor(getActivity().getResources().getColor(R.color.colorPrimary));
-        setTitle("Musica On Demand");
+        setTitle(getString(R.string.music_on_demand));
         setOnSearchClickedListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,7 +155,7 @@ public class MusicFragment extends BrowseFragment {
 
     private void loadRows() {
         mRowsAdapter.clear();
-        mRowsAdapter.add(new SectionRow(new HeaderItem("Musica")));
+        mRowsAdapter.add(new SectionRow(new HeaderItem(getString(R.string.music))));
 
         loadPlaylists();
         loadSingers();
@@ -195,7 +195,7 @@ public class MusicFragment extends BrowseFragment {
 
                             MusicPlaylistCard dataModel = new MusicPlaylistCard();
                             dataModel.setmId("0");
-                            dataModel.setmNombre("Agregar Playlist");
+                            dataModel.setmNombre(getString(R.string.add_playlist));
                             dataModel.setmNumero("");
                             listRowAdapter.add(dataModel);
                             listPlaylistModel.add(dataModel);

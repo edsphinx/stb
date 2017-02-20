@@ -45,14 +45,19 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Live fragment.
+ */
 public class LiveFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
         MediaPlayerGlue.OnMediaStateChangeListener {
 
 
-    public static final String TAG = "LiveFragment";
-
     private Context mContext;
+    /**
+     * The constant TAG.
+     */
+    public static String TAG;
 
     private Map<String, LiveCanalCard> data = null;
     private ArrayObjectAdapter infoRowsAdapter;
@@ -65,7 +70,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
 
     private LiveProgramRow programationData;
-    private LiveCanalCard selectedChannel;
+    private LiveCanalCard selectedChannel, currentChannel;
     private String channelNumber = "";
     private Thread thread;
 
@@ -73,8 +78,9 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     private String user_type;
     private String user_profile;
 
-
-    private static Context sContext;
+    /**
+     * The Current meta data.
+     */
     MediaMetaData currentMetaData;
 
 
@@ -110,13 +116,14 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        TAG = getString(R.string.TAG_LIVE);
+
         Bundle args = getArguments();
         access_token = args.getString("access_token", "");
         user_type = args.getString("user_type", "");
         user_profile = args.getString("user_profile", "");
 
 
-        sContext = getActivity();
         mContext = getActivity();
 
         mGlue = new LiveMediaPlayerGlue(getActivity(), this) {
@@ -245,12 +252,11 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             }
         });
 
+        //Player
+        rowPresenterSelector.addClassPresenter(PlaybackControlsRow.class,
+                playbackControlsRowPresenter);
         //Channel Rows
         rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-        //Channel Info
-        //rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-        //Player
-        rowPresenterSelector.addClassPresenter(PlaybackControlsRow.class, playbackControlsRowPresenter);
         //Channel Programation
         rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
         //Mi Favorite Channels
@@ -319,7 +325,8 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.live_favorites + user_profile);
+                    String response = downloadData.run(Constants.server + Constants.live_favorites
+                            + user_profile);
 
 
                     Type canalesCardType;
@@ -332,7 +339,6 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
                     int i = 0;
                     for (HashMap.Entry<String, LiveCanalCard> entry : data.entrySet()) {
-                        String key = entry.getKey();
                         LiveCanalCard card = entry.getValue();
                         card.setmPosicion(i);
                         entry.setValue(card);
@@ -405,16 +411,9 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
         if (row.getId() == ROW_CHANNELS) {
             if (item instanceof LiveCanalCard) {
-                if (selectedChannel != null) {
-                    selectedChannel.setmEstado(0);
-                    channelsRowAdapter.replace(selectedChannel.getmPosicion(), selectedChannel);
-                    channelsRowAdapter.notifyArrayItemRangeChanged(selectedChannel.getmPosicion(), 1);
-                }
-                LiveCanalCard card = (LiveCanalCard) item;
-                card.setmEstado(1);
-                channelsRowAdapter.replace(card.getmPosicion(), card);
-                channelsRowAdapter.notifyArrayItemRangeChanged(card.getmPosicion(), 1);
-                selectedChannel = card;
+                selectedChannel = (LiveCanalCard) item;
+
+                selectedHandler.postDelayed(selectedRunnable, 1500);
 
             }
         }
@@ -439,16 +438,20 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             @Override
             public void run() {
                 try {
-                    ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new LiveProgramPresenter());
+                    ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
+                            new LiveProgramPresenter());
                     programationData = null;
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.programation + String.valueOf(card.getmId()));
+                    String response = downloadData.run(Constants.server + Constants.programation
+                            + String.valueOf(card.getmId()));
+
                     programationData = new Gson().fromJson(response, LiveProgramRow.class);
                     for (LiveProgramCard card : programationData.getProgramaCards()) {
                         listRowAdapter.add(card);
                     }
 
-                    HeaderItem header = new HeaderItem(ROW_PROGRAMATION, getString(R.string.programation_title) + ": " + card.getmTitle());
+                    HeaderItem header = new HeaderItem(ROW_PROGRAMATION, getString(R.string.programation_title) + ": "
+                            + card.getmTitle());
                     infoRowsAdapter.replace(ROW_PROGRAMATION, new ListRow(header, listRowAdapter));
 
                 } catch (UnsupportedOperationException e1) {
@@ -474,7 +477,8 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.live_favorites + user_profile);
+                    String response = downloadData.run(Constants.server + Constants.live_favorites
+                            + user_profile);
 
                     Type canalesCardType;
                     canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
@@ -493,7 +497,8 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                     }
 
                     HeaderItem header = new HeaderItem(ROW_FAVORITE_CHANNELS, getString(R.string.favorite_chanels));
-                    infoRowsAdapter.replace(ROW_FAVORITE_CHANNELS, new ListRow(header, favoriteChannelsRowAdapter));
+                    infoRowsAdapter.replace(ROW_FAVORITE_CHANNELS, new ListRow(header,
+                            favoriteChannelsRowAdapter));
                 } catch (JsonParseException e) {
                     e.printStackTrace();
                 }
@@ -512,6 +517,11 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         }
     }
 
+    /**
+     * Keypress.
+     *
+     * @param e the e
+     */
     public void keypress(KeyEvent e) {
 
         if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
@@ -522,7 +532,10 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         }
     }
 
-    private void cambiarCanal() {
+    /**
+     * Cambiar canal.
+     */
+    public void cambiarCanal() {
 
         if (data.containsKey(channelNumber)) {
             selectedChannel.setmEstado(0);
@@ -552,6 +565,27 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         @Override
         public void run() {
             cambiarCanal();
+        }
+    };
+
+
+    private Handler selectedHandler = new Handler();
+    private Runnable selectedRunnable = new Runnable() {
+        @Override
+        public void run() {
+            selectedHandler.removeCallbacks(this);
+            if (currentChannel != null) {
+                currentChannel.setmEstado(0);
+                channelsRowAdapter.replace(currentChannel.getmPosicion(), currentChannel);
+                channelsRowAdapter.notifyArrayItemRangeChanged(currentChannel.getmPosicion(), 1);
+            }
+            LiveCanalCard card = selectedChannel;
+            card.setmEstado(1);
+            channelsRowAdapter.replace(card.getmPosicion(), card);
+            channelsRowAdapter.notifyArrayItemRangeChanged(card.getmPosicion(), 1);
+            selectedChannel = card;
+            currentChannel = card;
+
         }
     };
 }

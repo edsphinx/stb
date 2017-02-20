@@ -133,7 +133,7 @@ public class SeriesFragment extends BrowseFragment {
                     }.getType();
                     data = gson.fromJson(response, seriesCardType);
 
-                    mRowsAdapter.add(new SectionRow(new HeaderItem("Series")));
+                    mRowsAdapter.add(new SectionRow(new HeaderItem(getString(R.string.series))));
                     for(HashMap.Entry<String, SeriesCard[]> entry : data.entrySet()){
                         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
                         List<SeriesCard> listSeriesCard = new ArrayList<>();

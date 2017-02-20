@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.v17.leanback.app.GuidedStepFragment;
 import android.support.v17.leanback.widget.GuidanceStylist;
 import android.support.v17.leanback.widget.GuidedAction;
-import android.util.Log;
 
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.MainActivity;
@@ -52,7 +51,8 @@ public class AccountProfileWizardFragment extends GuidedStepFragment {
     @NonNull
     @Override
     public GuidanceStylist.Guidance onCreateGuidance(Bundle savedInstanceState) {
-        GuidanceStylist.Guidance guidance = new GuidanceStylist.Guidance("Ingresar PIN de Control Parental",
+        GuidanceStylist.Guidance guidance = new GuidanceStylist.Guidance(
+                getString(R.string.account_pin_request_long),
                 "",
                 "", null);
         return guidance;
@@ -64,14 +64,14 @@ public class AccountProfileWizardFragment extends GuidedStepFragment {
                 .id(0)
                 .title("")
                 .editable(true)
-                .description("Ingresar PIN")
+                .description(getString(R.string.account_pin_request))
                 .icon(getResources().getDrawable(R.drawable.ic_enhanced_encryption))
                 .build();
 
         actions.add(passwordAction);
         GuidedAction action = new GuidedAction.Builder(getActivity())
                 .id(1)
-                .title("Ingresar")
+                .title(getString(R.string.enter))
                 .editable(false)
                 .description("")
                 .build();
@@ -93,7 +93,8 @@ public class AccountProfileWizardFragment extends GuidedStepFragment {
                     RequestBody formBody = formBuilder.build();
 
                     Request request = new Request.Builder()
-                            .url(Constants.server + "/stb/cuenta/confirmacion/" + MainActivity.access_token)
+                            .url(Constants.server + Constants.cuenta_confirmacion
+                                    + MainActivity.access_token)
                             .addHeader("Accept", "application/json; q=0.5")
                             .addHeader("Authorization", "Bearer " + MainActivity.access_token)
                             .post(formBody)
@@ -102,12 +103,12 @@ public class AccountProfileWizardFragment extends GuidedStepFragment {
                             Response response = client.newCall(request).execute()
                     ) {
                         result = response.body().string();
-                        Log.w("RESULT", result);
 
                         try {
                             JSONObject jsonObject = new JSONObject(result);
                             if (jsonObject.getString("estado").contentEquals("1")) {
-                                SharedPreferences loginSettings = getActivity().getBaseContext().getSharedPreferences("loginSettings", 0);
+                                SharedPreferences loginSettings = getActivity().getBaseContext()
+                                        .getSharedPreferences("loginSettings", 0);
                                 SharedPreferences.Editor editor = loginSettings.edit();
                                 editor.putString("user_profile", String.valueOf(1));
                                 editor.putString("user_type", jsonObject.getString("estado"));

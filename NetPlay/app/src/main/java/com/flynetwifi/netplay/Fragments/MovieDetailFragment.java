@@ -11,8 +11,8 @@ import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
 import android.support.v17.leanback.widget.DetailsOverviewRow;
+import android.support.v17.leanback.widget.DetailsOverviewRowPresenter;
 import android.support.v17.leanback.widget.FullWidthDetailsOverviewRowPresenter;
-import android.support.v17.leanback.widget.FullWidthDetailsOverviewSharedElementHelper;
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
@@ -42,9 +42,9 @@ import java.io.IOException;
 
 public class MovieDetailFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
+
     public static final String TAG = "MovieDetailFragment";
     private static final String TRANSITION_NAME = "t_for_transition";
-    public static final String EXTRA_CARD = "card";
 
     private String id;
     private ArrayObjectAdapter mRowsAdapter;
@@ -65,33 +65,55 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
 
     private void setupUi() {
-        final FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
-                new MovieDetailPresenter(getActivity())) {
+        final FullWidthDetailsOverviewRowPresenter rowPresenterBAck =
+                new FullWidthDetailsOverviewRowPresenter(
+                        new MovieDetailPresenter(getActivity())) {
 
-            @Override
-            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
-                // Customize Actionbar and Content by using custom colors.
-                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
+                    @Override
+                    protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
+                        RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
 
-                View actionsView = viewHolder.view.
-                        findViewById(R.id.details_overview_actions_background);
-                actionsView.setBackgroundColor(getActivity().getResources().
-                        getColor(R.color.colorPrimary));
+                        View actionsView = viewHolder.view.
+                                findViewById(R.id.details_overview_actions_background);
+                        actionsView.setBackgroundColor(getActivity().getResources().
+                                getColor(R.color.colorPrimary));
 
-                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
-                detailsView.setBackgroundColor(
-                        getResources().getColor(R.color.background));
-                return viewHolder;
-            }
-        };
+                        View detailsView = viewHolder.view.findViewById(R.id.details_frame);
+                        detailsView.setBackgroundColor(
+                                getResources().getColor(R.color.background));
+                        return viewHolder;
+                    }
+                };
         data = null;
+
+
+        final DetailsOverviewRowPresenter rowPresenter =
+                new DetailsOverviewRowPresenter(
+                    new MovieDetailPresenter(getActivity())) {
+                    @Override
+                    protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
+                        RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
+
+                        View actionsView = viewHolder.view.
+                                findViewById(R.id.details_overview_actions_background);
+
+                        View detailsView = viewHolder.view.findViewById(R.id.details_frame);
+                        detailsView.setBackgroundColor(
+                                getResources().getColor(R.color.background));
+
+
+                        return viewHolder;
+
+                    }
+                };
 
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                    DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + "/stb/peliculas/detalles/" + id);
-                    data = new Gson().fromJson(response, MovieDetailCard.class);
+                DownloadData downloadData = new DownloadData();
+                String response = downloadData.run(Constants.server + Constants.movies_details
+                        + id);
+                data = new Gson().fromJson(response, MovieDetailCard.class);
 
             }
         });
@@ -103,12 +125,6 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
             e.printStackTrace();
         }
 
-
-        FullWidthDetailsOverviewSharedElementHelper mHelper = new FullWidthDetailsOverviewSharedElementHelper();
-        mHelper.setSharedElementEnterTransition(getActivity(), TRANSITION_NAME);
-        rowPresenter.setListener(mHelper);
-        rowPresenter.setParticipatingEntranceTransition(false);
-        prepareEntranceTransition();
 
         ListRowPresenter shadowDisabledRowPresenter = new ListRowPresenter();
         shadowDisabledRowPresenter.setShadowEnabled(false);
@@ -123,7 +139,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
         // Setup action and detail row.
         final DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
 
-       // detailsOverview.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_tv));
+        // detailsOverview.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_tv));
 
         //Logo de Pelicula
         thread = new Thread(new Runnable() {
@@ -134,7 +150,8 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
                             .load(data.getmLogo())
                             .resize(Utils.convertDpToPixel(getActivity().getApplicationContext(), 140),
                                     Utils.convertDpToPixel(getActivity().getApplicationContext(), 220))
-                            .centerCrop()
+                            //.centerCrop()
+                            .centerInside()
                             .get();
                     detailsOverview.setImageBitmap(getActivity(), poster);
                 } catch (IOException e) {
@@ -149,13 +166,15 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
         backgroundManager = BackgroundManager.getInstance(getActivity());
         backgroundManager.attach(getActivity().getWindow());
         mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity()).load(data.getmBackground()).skipMemoryCache().into(mBackgroundTarget);
+        Picasso.with(getActivity())
+                .load(data.getmBackground())
+                .skipMemoryCache()
+                .error(R.drawable.bg_poster)
+                .into(mBackgroundTarget);
 
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
-        actionAdapter.add(new Action(1, "Reproducir"));
-        //actionAdapter.add(new Action(2, getString(R.string.action_wishlist)));
-        //actionAdapter.add(new Action(2, "Peliculas Recomendadas"));
+        actionAdapter.add(new Action(1, getString(R.string.play)));
         detailsOverview.setActionsAdapter(actionAdapter);
         mRowsAdapter.add(detailsOverview);
 
@@ -177,6 +196,9 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
             }
         }, 500);
     }
+
+
+
 
 
     private void setupEventListeners() {

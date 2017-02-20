@@ -3,6 +3,7 @@ package com.flynetwifi.netplay.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ListRow;
@@ -18,22 +19,28 @@ import com.flynetwifi.netplay.AccountActivity;
 import com.flynetwifi.netplay.AppsActivity;
 import com.flynetwifi.netplay.Cards.MenuCard;
 import com.flynetwifi.netplay.LiveActivity;
+import com.flynetwifi.netplay.LiveCategoriesActivity;
 import com.flynetwifi.netplay.MainActivity;
 import com.flynetwifi.netplay.MessagesActivity;
+import com.flynetwifi.netplay.MovieActivity;
 import com.flynetwifi.netplay.MusicActivity;
 import com.flynetwifi.netplay.Presenters.MenuPresenter;
 import com.flynetwifi.netplay.ProfileActivity;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Rows.MenuRow;
+import com.flynetwifi.netplay.SeriesActivity;
 import com.flynetwifi.netplay.Utils.Utils;
 import com.flynetwifi.netplay.VODSelectionActivity;
 import com.google.gson.Gson;
 
 
-public class MenuFragment extends BrowseFragment {
+public class MenuFragment extends BrowseFragment implements OnItemViewSelectedListener {
 
     private ArrayObjectAdapter mRowsAdapter;
     private Context mContext;
+    private ListRow mainMenu;
+    private ListRow subMenu;
+    private int currentMenu = 0;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -60,10 +67,13 @@ public class MenuFragment extends BrowseFragment {
     }
 
     private void createRows() {
+        currentMenu = 0;
         String json = Utils.inputStreamToString(getResources().openRawResource(R.raw.menu_data));
         MenuRow[] rows = new Gson().fromJson(json, MenuRow[].class);
         for (MenuRow row : rows)
-            mRowsAdapter.add(createCardRow(row));
+            mRowsAdapter.add(0, createCardRow(row));
+        subMenu = new ListRow(new ArrayObjectAdapter(new MenuPresenter()));
+        mRowsAdapter.add(1, subMenu);
     }
 
     private ListRow createCardRow(MenuRow cardRow) {
@@ -71,12 +81,25 @@ public class MenuFragment extends BrowseFragment {
         for (MenuCard card : cardRow.getmCards()) {
             listRowAdapter.add(card);
         }
-        return new ListRow(listRowAdapter);
+        return mainMenu = new ListRow(listRowAdapter);
     }
 
     private void setupEventListeners() {
         setOnItemViewClickedListener(new ItemViewClickedListener());
-        setOnItemViewSelectedListener(new ItemViewSelectedListener());
+        setOnItemViewSelectedListener(this);
+    }
+
+    @Override
+    public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+
+            if (item instanceof MenuCard) {
+                MenuCard menuCard = (MenuCard) item;
+                if(menuCard.getmId() >= 0 && menuCard.getmId() < 6) {
+                    currentMenu = menuCard.getmId();
+                    mHandler.postDelayed(mRunnable, 500);
+                }
+            }
+
     }
 
 
@@ -101,10 +124,21 @@ public class MenuFragment extends BrowseFragment {
                                 LiveActivity.class);
                         break;
                     }
+                    case 11: {
+                        intent = new Intent(getActivity().getBaseContext(),
+                                LiveActivity.class);
+                        break;
+                    }
+                    case 12: {
+                        intent = new Intent(getActivity().getBaseContext(),
+                                LiveCategoriesActivity.class);
+                        break;
+                    }
                     case 1:
                         intent = new Intent(getActivity().getBaseContext(),
                                 VODSelectionActivity.class);
                         break;
+
                     case 2: {
                         intent = new Intent(getActivity().getBaseContext(),
                                 MusicActivity.class);
@@ -125,13 +159,26 @@ public class MenuFragment extends BrowseFragment {
                                 MessagesActivity.class);
                         break;
                     }
+
+                    case 21:{
+                        intent = new Intent(getActivity().getBaseContext(),
+                                MovieActivity.class);
+                        break;
+                    }
+
+                    case 22: {
+                        intent = new Intent(getActivity().getBaseContext(),
+                                SeriesActivity.class);
+                        break;
+                    }
+
                     default:
                         break;
                 }
                 if (intent != null) {
-                    intent.putExtra("user_profile", MainActivity.user_profile );
-                    intent.putExtra("user_type", MainActivity.user_type );
-                    intent.putExtra("access_token", MainActivity.access_token );
+                    intent.putExtra("user_profile", MainActivity.user_profile);
+                    intent.putExtra("user_type", MainActivity.user_type);
+                    intent.putExtra("access_token", MainActivity.access_token);
                     Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                             .toBundle();
                     startActivity(intent, bundle);
@@ -140,13 +187,31 @@ public class MenuFragment extends BrowseFragment {
         }
     }
 
-    private final class ItemViewSelectedListener implements OnItemViewSelectedListener {
-
+    private Handler mHandler = new Handler();
+    private Runnable mRunnable = new Runnable() {
         @Override
-        public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
-                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
+        public void run() {
+            String json = "";
+            switch (currentMenu) {
+                case 0:
+                    json = Utils.inputStreamToString(getResources().openRawResource(R.raw.menu_live));
+                    break;
+                case 1:
+                    json = Utils.inputStreamToString(getResources().openRawResource(R.raw.menu_vod));
+                    break;
+                default:
+                    json = "";
 
+            }
+
+            if (!json.contentEquals("")) {
+                MenuRow[] rows = new Gson().fromJson(json, MenuRow[].class);
+                for (MenuRow row : rows)
+                    mRowsAdapter.replace(1, createCardRow(row));
+            } else {
+                mRowsAdapter.replace(1, subMenu);
+            }
         }
-    }
+    };
 
 }

@@ -148,10 +148,10 @@ public class SeriesSearchFragment extends android.support.v17.leanback.app.Searc
     }
 
     @Override
-    public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+    public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
+                              RowPresenter.ViewHolder rowViewHolder, Row row) {
         SeriesCard model = (SeriesCard) item;
-        Intent intent = null;
-        intent = new Intent(getActivity().getBaseContext(),
+        Intent intent  = new Intent(getActivity().getBaseContext(),
                 SeriesSeasonsActivity.class);
         SeriesFragment.id = String.valueOf(model.getmId());
         Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())

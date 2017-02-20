@@ -51,7 +51,8 @@ public class MusicPlaylistWizardFragment extends GuidedStepFragment {
     @NonNull
     @Override
     public GuidanceStylist.Guidance onCreateGuidance(Bundle savedInstanceState) {
-        GuidanceStylist.Guidance guidance = new GuidanceStylist.Guidance("Nombre de Playlist",
+        GuidanceStylist.Guidance guidance = new GuidanceStylist
+                .Guidance(getString(R.string.add_playlist),
                 "",
                 "", null);
         return guidance;
@@ -63,14 +64,14 @@ public class MusicPlaylistWizardFragment extends GuidedStepFragment {
                 .id(0)
                 .title("")
                 .editable(true)
-                .description("Nombre Playlist")
+                .description(getString(R.string.name_playlist))
                 .icon(getResources().getDrawable(R.drawable.ic_music_video))
                 .build();
 
         actions.add(playlistName);
         GuidedAction action = new GuidedAction.Builder(getActivity())
                 .id(1)
-                .title("Guardar")
+                .title(getString(R.string.enter))
                 .editable(false)
                 .description("")
                 .build();

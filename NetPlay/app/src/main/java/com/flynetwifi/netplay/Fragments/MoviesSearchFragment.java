@@ -17,7 +17,6 @@ import android.support.v17.leanback.widget.SpeechRecognitionCallback;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 
 import com.flynetwifi.netplay.Cards.MovieCard;
@@ -119,7 +118,6 @@ public class MoviesSearchFragment extends android.support.v17.leanback.app.Searc
 
                     for (HashMap.Entry<String, MovieCard[]> entry : data.entrySet()) {
                         String key = entry.getKey();
-                        Log.w("KEY", key);
 
                         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
                         List<MovieCard> listPeliculasCard = new ArrayList<>();
@@ -176,8 +174,7 @@ public class MoviesSearchFragment extends android.support.v17.leanback.app.Searc
     @Override
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
         MovieCard model = (MovieCard) item;
-        Intent intent = null;
-        intent = new Intent(getActivity().getBaseContext(),
+        Intent intent = new Intent(getActivity().getBaseContext(),
                 MovieDetailActivity.class);
         MoviesFragment.id = String.valueOf(model.getmId());
         Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
