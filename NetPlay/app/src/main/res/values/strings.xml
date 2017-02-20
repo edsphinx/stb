@@ -4,6 +4,9 @@
 
     <string name="password_error">Clave Incorrecta</string>
     <string name="user_required">Usuario Requerido</string>
+    <string name="enter">OK</string>
+    <string name="password">Clave</string>
+    <string name="play">Reproducir</string>
 
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_vodselection">VODSelectionActivity</string>
@@ -22,7 +25,31 @@
     <string name="title_activity_peliculas">PeliculasActivity</string>
 
     <!-- MOVIES -->
+    <string name="movies">Películas</string>
     <string name="movie_recommended">Películas Recomendadas</string>
     <string name="header_recommended">Películas Recomendadas</string>
+
+    <!-- Series -->
+    <string name="series">Series</string>
+    <string name="seasons">Temporadas</string>
+
+    <!--MUSIC -->
+
+    <string name="music_on_demand">Music On Demand</string>
+    <string name="music">Música</string>
+    <string name="songs">Canciones</string>
+    <string name="playlists">Playlists</string>
+    <string name="add_playlist">Add to Playlist</string>
+    <string name="name_playlist">Nombre de Playlist</string>
+
+    <!-- ACCOUNT -->
+    <string name="accounts">Mis Cuentas</string>
+    <string name="account_bills">Facturas</string>
+    <string name="account_pin_request_long">Ingresar PIN de Control Parental</string>
+    <string name="account_pin_request">Ingresar PIN</string>
+
+
+    <!-- TAGS -->
+    <string name="TAG_LIVE">LiveFragment</string>
 
 </resources>

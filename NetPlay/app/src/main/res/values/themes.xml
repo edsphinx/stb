@@ -40,6 +40,7 @@
     <style name="Theme.Details" parent="Theme.Leanback.Details">
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:windowBackground">@drawable/bg_poster</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <!--Vertical Collection -->
