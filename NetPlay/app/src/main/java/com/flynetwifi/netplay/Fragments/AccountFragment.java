@@ -11,7 +11,7 @@ import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
 import android.support.v17.leanback.widget.DetailsOverviewRow;
 import android.support.v17.leanback.widget.FullWidthDetailsOverviewRowPresenter;
-import android.support.v17.leanback.widget.FullWidthDetailsOverviewSharedElementHelper;
+import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.OnItemViewClickedListener;
@@ -23,25 +23,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flynetwifi.netplay.Cards.AccountCard;
+import com.flynetwifi.netplay.Cards.BillsCard;
 import com.flynetwifi.netplay.Constants;
+import com.flynetwifi.netplay.MainActivity;
+import com.flynetwifi.netplay.Presenters.AccountBillPresenter;
 import com.flynetwifi.netplay.Presenters.AccountPresenter;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Utils.DownloadData;
 import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by mauro on 2/8/17.
- */
+
 public class AccountFragment extends DetailsFragment implements OnItemViewSelectedListener,
         OnItemViewClickedListener {
+
     public static final String TAG = "AccountFragment";
 
     private static final String TRANSITION_NAME = "t_for_transition";
 
     private ArrayObjectAdapter mRowsAdapter;
     private AccountCard data = null;
+    private BillsCard[] dataBills = null;
 
     private BackgroundManager backgroundManager;
     private PicassoBackgroundManagerTarget mBackgroundTarget;
@@ -55,32 +59,46 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
         setupEventListeners();
     }
 
+
+
     private void setupUi() {
-        final FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
-                new AccountPresenter(getActivity())
-        ) {
-            @Override
-            protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
-                RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
+        final FullWidthDetailsOverviewRowPresenter rowPresenter =
+                new FullWidthDetailsOverviewRowPresenter(
+                        new AccountPresenter(getActivity())
+                ) {
+                    @Override
+                    protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
+                        RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
 
-                View actionsView = viewHolder.view.findViewById(R.id.details_overview_actions_background);
-                actionsView.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_default));
+                        View actionsView = viewHolder.view
+                                .findViewById(R.id.details_overview_actions_background);
+                        actionsView.setBackground(getActivity().getResources()
+                                .getDrawable(R.drawable.bg_default));
 
 
-                View detailsView = viewHolder.view.findViewById(R.id.details_frame);
-                detailsView.setBackgroundColor(
-                        getResources().getColor(R.color.background));
-                return viewHolder;
-            }
-        };
+                        View detailsView = viewHolder.view.findViewById(R.id.details_frame);
+                        detailsView.setBackgroundColor(
+                                getResources().getColor(R.color.background));
+                        return viewHolder;
+                    }
+                };
+
+
+        // Setup PresenterSelector to distinguish between the different rows.
+        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
+        rowPresenterSelector.addClassPresenter(DetailsOverviewRow.class, rowPresenter);
+        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
+        mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
+
 
         data = null;
 
+        //Descargando informacion de Cuenta
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(Constants.server + Constants.account);
+                String response = downloadData.run(Constants.server + Constants.account + MainActivity.access_token);
                 data = new Gson().fromJson(response, AccountCard.class);
 
             }
@@ -93,22 +111,6 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
             e.printStackTrace();
         }
 
-        FullWidthDetailsOverviewSharedElementHelper mHelper = new FullWidthDetailsOverviewSharedElementHelper();
-        mHelper.setSharedElementEnterTransition(getActivity(), TRANSITION_NAME);
-        rowPresenter.setListener(mHelper);
-        rowPresenter.setParticipatingEntranceTransition(false);
-        prepareEntranceTransition();
-
-        ListRowPresenter shadowDisabledRowPresenter = new ListRowPresenter();
-        shadowDisabledRowPresenter.setShadowEnabled(false);
-
-
-        // Setup PresenterSelector to distinguish between the different rows.
-        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
-        rowPresenterSelector.addClassPresenter(DetailsOverviewRow.class, rowPresenter);
-        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-        mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
-
 
         final DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
         Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(),
@@ -118,15 +120,56 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
         backgroundManager = BackgroundManager.getInstance(getActivity());
         backgroundManager.attach(getActivity().getWindow());
         mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity()).load(R.drawable.bg_poster).skipMemoryCache().into(mBackgroundTarget);
+        Picasso.with(getActivity()).load(R.drawable.bg_poster).skipMemoryCache()
+                .into(mBackgroundTarget);
 
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
-        actionAdapter.add(new Action(1, "Facturas"));
-        //actionAdapter.add(new Action(2, getString(R.string.action_wishlist)));
-        actionAdapter.add(new Action(2, "Cuentas de Usuario"));
+        actionAdapter.add(new Action(1, getString(R.string.account_bills)));
+        actionAdapter.add(new Action(2, getString(R.string.accounts)));
         detailsOverview.setActionsAdapter(actionAdapter);
         mRowsAdapter.add(detailsOverview);
+        final ArrayObjectAdapter billsAdapter = new ArrayObjectAdapter(new AccountBillPresenter());
+
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Gson gson = new Gson();
+
+                try {
+                    DownloadData downloadData = new DownloadData();
+                    String response = downloadData.run(Constants.server + "/stb/cuenta/facturas/"
+                            + MainActivity.access_token);
+
+
+                    dataBills = gson.fromJson(response, BillsCard[].class);
+
+
+                    int i = 0;
+                    for(BillsCard card : dataBills){
+                        billsAdapter.add(card);
+                    }
+
+                    HeaderItem header = new HeaderItem(1, "Facturas");
+                    mRowsAdapter.add(new ListRow(header,
+                            billsAdapter));
+
+
+
+                } catch (JsonParseException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         setAdapter(mRowsAdapter);
 
@@ -145,12 +188,14 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
     }
 
     @Override
-    public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+    public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
+                              RowPresenter.ViewHolder rowViewHolder, Row row) {
 
     }
 
     @Override
-    public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+    public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
+                               RowPresenter.ViewHolder rowViewHolder, Row row) {
 
     }
 }
