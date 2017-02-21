@@ -1,0 +1,21 @@
+[
+  {
+    "title": "",
+    "cards": [
+      {
+        "id": 11,
+        "type": "DEFAULT",
+        "titulo": "Live TV",
+        "localImageResource": "ic_tv"
+      },
+      {
+        "id": 12,
+        "type": "DEFAULT",
+        "titulo": "Categoria",
+        "localImageResource": "ic_ondemand_video"
+      }
+
+
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "title": "",
+    "cards": [
+      {
+        "id": 21,
+        "type": "DEFAULT",
+        "titulo": "Peliculas",
+        "localImageResource": "ic_tv"
+      },
+      {
+        "id": 22,
+        "type": "DEFAULT",
+        "titulo": "Series",
+        "localImageResource": "ic_ondemand_video"
+      }
+
+    ]
+  }
+]

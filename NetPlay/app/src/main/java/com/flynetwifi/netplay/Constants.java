@@ -3,8 +3,8 @@ package com.flynetwifi.netplay;
 
 public interface Constants {
 
-    static String server = "http://10.115.0.3:8080";
-    //static String server = "http://190.92.91.218:8080";
+    //static String server = "http://10.115.0.3:8080";
+    static String server = "http://190.92.91.218:8080";
 
     static String authorization = "/oauth/token";
     static String profiles = "/stb/perfiles/";
@@ -24,8 +24,15 @@ public interface Constants {
     static String music_playlist = Constants.music + "playlist/user/";
     static String music_singers = Constants.music + "cantantes/";
     static String music_genders = Constants.music + "generos/";
+    static String songs_playlist = Constants.music + "/playlist/";
+    static String songs_genders = Constants.music + "/generos/";
+    static String songs_singers = Constants.music + "/cantantes/";
+    static String songs_songs = Constants.music + "/cancion/";
 
     static String music_song_query = Constants.music + "/search/";
+
+
+    static String cuenta_confirmacion = "/stb/cuenta/confirmacion/";
 
     static String messages = "/stb/mensajes/";
 
