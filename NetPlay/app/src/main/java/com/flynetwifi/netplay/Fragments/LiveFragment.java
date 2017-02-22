@@ -103,8 +103,8 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     };
 
     private LiveMediaPlayerGlue mGlue;
-    private final int ROw_PLAYER = 1;
-    private final int ROW_CHANNELS = 0;
+    private final int ROw_PLAYER = 0;
+    private final int ROW_CHANNELS = 1;
     private final int ROW_PROGRAMATION = 2;
     private final int ROW_FAVORITE_CHANNELS = 3;
 
@@ -155,14 +155,13 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
 
         setMainRowsAdapter();
-        addChannelsRow();
         infoRowsAdapter.add(ROw_PLAYER, mGlue.getControlsRow());
+        addChannelsRow();
 
         addProgramation();
         addFavoriteChannels();
 
         setAdapter(infoRowsAdapter);
-
 
 
         setOnItemViewClickedListener(this);
@@ -250,12 +249,11 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             }
         });
 
-
-        //Channel Rows
-        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
         //Player
         rowPresenterSelector.addClassPresenter(PlaybackControlsRow.class,
                 playbackControlsRowPresenter);
+        //Channel Rows
+        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
         //Channel Programation
         rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
         //Mi Favorite Channels
@@ -391,6 +389,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                 handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
 
+
             } else if (row.getId() == ROW_CHANNELS) {
 
                 final LiveCanalCard card = (LiveCanalCard) item;
@@ -400,7 +399,9 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 currentMetaData.setMediaArtistName(card.getmDescription());
                 currentMetaData.setMediaSourcePath(card.getmStream());
 
+                mGlue.prepareIfNeededAndPlay(currentMetaData);
                 selectedChannel = card;
+
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                 handlerLoadPrograms.postDelayed(runnableLoadPrograms, 500);
             }
@@ -418,7 +419,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
                 selectedHandler.postDelayed(selectedRunnable, 500);
 
-                if(playOnSelect == true) {
+               /* if(playOnSelect == true) {
                     final LiveCanalCard card = (LiveCanalCard) selectedChannel;
                     MediaMetaData currentMetaData = new MediaMetaData();
 
@@ -427,13 +428,13 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                     currentMetaData.setMediaSourcePath(card.getmStream());
 
                     mGlue.prepareIfNeededAndPlay(currentMetaData);
-/*
+
                     selectedChannel = card;
                     handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                    handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);*/
+                    handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
                     playOnSelect = false;
 
-                }
+                }*/
 
             }
         }
@@ -528,8 +529,6 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         thread.start();
 
     }
-
-
 
 
     @Override
