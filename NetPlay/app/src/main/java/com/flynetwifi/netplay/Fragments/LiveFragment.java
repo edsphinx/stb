@@ -40,9 +40,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * The type Live fragment.
@@ -87,7 +94,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     private final Runnable runnableLoadPrograms = new Runnable() {
         @Override
         public void run() {
-            mGlue.prepareIfNeededAndPlay(currentMetaData);
+
             loadChannelPrograms();
             handlerLoadPrograms.removeCallbacks(this);
         }
@@ -103,8 +110,9 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     };
 
     private LiveMediaPlayerGlue mGlue;
-    private final int ROw_PLAYER = 0;
+
     private final int ROW_CHANNELS = 1;
+    private final int ROw_PLAYER = 0;
     private final int ROW_PROGRAMATION = 2;
     private final int ROW_FAVORITE_CHANNELS = 3;
 
@@ -155,9 +163,11 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
 
         setMainRowsAdapter();
+
+
+        //AddPlayer
         infoRowsAdapter.add(ROw_PLAYER, mGlue.getControlsRow());
         addChannelsRow();
-
         addProgramation();
         addFavoriteChannels();
 
@@ -230,25 +240,26 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimary));
         playbackControlsRowPresenter.setSecondaryActionsHidden(false);
 
-
         playbackControlsRowPresenter.setOnActionClickedListener(new OnActionClickedListener() {
             @Override
             public void onActionClicked(Action action) {
-                if (action.getId() == 0) { //Like Action
 
-                }
-                if (action.getId() == 2) {  //Repeat Action
-                    final LiveCanalCard card = selectedChannel;
-                    MediaMetaData currentMetaData = new MediaMetaData();
-                    currentMetaData.setMediaTitle(card.getmTitle());
-                    currentMetaData.setMediaSourcePath(card.getmRecord());
-                    mGlue.prepareIfNeededAndPlay(currentMetaData);
+                if(selectedChannel != null) {
+                    if (action.getId() == 0) { //Like Action
+                        addFavoriteChannel();
+                    }
+                    if (action.getId() == 2) {  //Repeat Action
+                        final LiveCanalCard card = selectedChannel;
+                        MediaMetaData currentMetaData = new MediaMetaData();
+                        currentMetaData.setMediaTitle(card.getmTitle());
+                        currentMetaData.setMediaSourcePath(card.getmRecord());
+                        mGlue.prepareIfNeededAndPlay(currentMetaData);
+                    }
                 }
 
 
             }
         });
-
         //Player
         rowPresenterSelector.addClassPresenter(PlaybackControlsRow.class,
                 playbackControlsRowPresenter);
@@ -362,6 +373,40 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         HeaderItem header = new HeaderItem(ROW_FAVORITE_CHANNELS, getString(R.string.favorite_chanels));
         infoRowsAdapter.add(ROW_FAVORITE_CHANNELS, new ListRow(header, favoriteChannelsRowAdapter));
 
+    }
+
+    private void addFavoriteChannel() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String result = "";
+                OkHttpClient client = new OkHttpClient();
+                FormBody.Builder formBuilder = new FormBody.Builder()
+                        .add("id_canal", selectedChannel.getmId().toString());
+                RequestBody formBody = formBuilder.build();
+
+                Request request = new Request.Builder()
+                        .url(Constants.server + "/stb/live/favoritos/guardar/" + user_profile)
+                        .addHeader("Accept", "application/json; q=0.5")
+                        .addHeader("Authorization", "Bearer " + access_token)
+                        .post(formBody)
+                        .build();
+                try (
+                        Response response = client.newCall(request).execute()
+                ) {
+                    result = response.body().string();
+                    loadFavoriteChannels();
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+        thread.start();
+
 
     }
 
@@ -374,7 +419,6 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
 
             if (row.getId() == ROW_FAVORITE_CHANNELS) {
-
 
                 final LiveCanalCard card = (LiveCanalCard) item;
                 MediaMetaData currentMetaData = new MediaMetaData();
@@ -402,8 +446,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 mGlue.prepareIfNeededAndPlay(currentMetaData);
                 selectedChannel = card;
 
-                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                handlerLoadPrograms.postDelayed(runnableLoadPrograms, 500);
+
             }
         }
     }
@@ -416,12 +459,15 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         if (row.getId() == ROW_CHANNELS) {
             if (item instanceof LiveCanalCard) {
                 selectedChannel = (LiveCanalCard) item;
-
                 selectedHandler.postDelayed(selectedRunnable, 500);
+                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
 
-               /* if(playOnSelect == true) {
+                if (playOnSelect == true) {
+
                     final LiveCanalCard card = (LiveCanalCard) selectedChannel;
-                    MediaMetaData currentMetaData = new MediaMetaData();
+                    currentChannel = card;
+                    currentMetaData = new MediaMetaData();
 
                     currentMetaData.setMediaTitle(card.getmTitle());
                     currentMetaData.setMediaArtistName(card.getmDescription());
@@ -430,11 +476,10 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                     mGlue.prepareIfNeededAndPlay(currentMetaData);
 
                     selectedChannel = card;
-                    handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                    handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
+
                     playOnSelect = false;
 
-                }*/
+                }
 
             }
         }
