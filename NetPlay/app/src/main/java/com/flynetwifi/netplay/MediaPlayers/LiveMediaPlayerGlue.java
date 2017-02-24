@@ -82,7 +82,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
         mMoreActions = new PlaybackControlsRow.MoreActions(getContext());
 
 
-        mThumbsDownAction.setId(0);
+        mThumbsUpAction.setId(0);
         secondaryActionsAdapter.add(mThumbsUpAction);
         //secondaryActionsAdapter.add(mThumbsDownAction);
         mRepeatAction.setId(2);
@@ -161,7 +161,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
             return;
         }
         PlaybackState.Builder playbackStateBuilder = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             playbackStateBuilder = new PlaybackState.Builder();
 
             long currentPosition = getCurrentPosition();
@@ -169,7 +169,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
                     getPlaybackStateActions()
             );
             mVideoSession.setPlaybackState(playbackStateBuilder.build());
-        }
+        }*/
     }
 
     private void updateMediaSessionIntent() {
@@ -197,6 +197,16 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
     }
 
     public void setDisplay(SurfaceHolder surfaceHolder) {
+        /*int width = 1920;
+        int height = 1280;
+        Resources resources = getContext().getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float dpWidth = width / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        float dpHeight = height / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+
+        surfaceHolder.setFixedSize(Math.round(dpWidth), Math.round(dpHeight));*/
+        //surfaceHolder.setFormat(PixelFormat.RGBA_8888);
+
         mPlayer.setDisplay(surfaceHolder);
     }
 

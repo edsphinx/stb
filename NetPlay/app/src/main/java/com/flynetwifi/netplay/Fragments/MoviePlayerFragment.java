@@ -147,5 +147,6 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
         if (currentMediaState == MediaUtils.MEDIA_STATE_COMPLETED) {
             mGlue.startPlayback();
         }
+
     }
 }
