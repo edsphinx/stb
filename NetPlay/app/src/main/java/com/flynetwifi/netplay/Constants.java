@@ -3,8 +3,8 @@ package com.flynetwifi.netplay;
 
 public interface Constants {
 
-    //static String server = "http://10.115.0.3:8080";
-    static String server = "http://190.92.91.218:8080";
+    static String server = "http://10.115.0.3:8080";
+    //static String server = "http://190.92.91.218:8080";
 
     static String authorization = "/oauth/token";
     static String profiles = "/stb/perfiles/";

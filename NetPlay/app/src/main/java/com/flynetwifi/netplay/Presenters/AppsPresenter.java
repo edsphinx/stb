@@ -25,6 +25,7 @@ public class AppsPresenter extends android.support.v17.leanback.widget.Presenter
             super(view);
             nombre = (TextView) view.findViewById(R.id.nombre);
             logo = (ImageView) view.findViewById(R.id.logo);
+            //imagen = (RelativeLayout) view.findViewById(R.id.imagen_menu);
         }
 
     }
@@ -47,8 +48,18 @@ public class AppsPresenter extends android.support.v17.leanback.widget.Presenter
     public void onBindViewHolder(android.support.v17.leanback.widget.Presenter.ViewHolder viewHolder, Object item) {
         final AppCard appsCard = (AppCard) item;
 
-        ((ViewHolder) viewHolder).nombre.setText(appsCard.getmTitulo());
-        ((ViewHolder) viewHolder).logo.setImageDrawable(appsCard.getmImagen());
+
+
+        if(appsCard.getmTitulo().equalsIgnoreCase("netflix")) {
+            ((ViewHolder) viewHolder).nombre.setText("");
+            ((ViewHolder) viewHolder).logo.getLayoutParams().width = 190;
+            ((ViewHolder) viewHolder).logo.getLayoutParams().height = 100;
+            ((ViewHolder) viewHolder).logo.setImageResource(R.drawable.netflix);
+            //((ViewHolder) viewHolder).imagen.setBackgroundResource(R.drawable.live_tv);
+        }else{
+            ((ViewHolder) viewHolder).nombre.setText(appsCard.getmTitulo());
+            ((ViewHolder) viewHolder).logo.setImageDrawable(appsCard.getmImagen());
+        }
 
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override

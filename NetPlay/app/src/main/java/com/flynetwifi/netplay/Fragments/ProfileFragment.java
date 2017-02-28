@@ -50,14 +50,14 @@ public class ProfileFragment extends BrowseFragment {
     }
 
     private void setupUIElements() {
-        setTitle(getString(R.string.app_name));
+        //setTitle(getString(R.string.app_name));
         setHeadersState(HEADERS_DISABLED);
         setHeadersTransitionOnBackEnabled(false);
-        setBrandColor(getResources().getColor(R.color.colorPrimary));
+        //setBrandColor(getResources().getColor(R.color.colorPrimary));
         backgroundManager = BackgroundManager.getInstance(getActivity());
         backgroundManager.attach(getActivity().getWindow());
         mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity()).load(R.drawable.bg_poster).skipMemoryCache()
+        Picasso.with(getActivity()).load(R.drawable.fondo02_top).skipMemoryCache()
                 .into(mBackgroundTarget);
 
     }

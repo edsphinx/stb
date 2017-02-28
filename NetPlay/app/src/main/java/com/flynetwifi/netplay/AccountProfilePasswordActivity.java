@@ -11,7 +11,7 @@ public class AccountProfilePasswordActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawableResource(R.drawable.bg_poster);
+        getWindow().setBackgroundDrawableResource(R.drawable.fondo02_top);
 
         GuidedStepFragment fragment = new AccountProfileWizardFragment();
         fragment.setArguments(getIntent().getExtras());

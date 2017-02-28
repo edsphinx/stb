@@ -23,6 +23,7 @@ import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.content.SharedPreferences;
 
 import com.flynetwifi.netplay.Cards.LiveCanalCard;
 import com.flynetwifi.netplay.Cards.LiveProgramCard;
@@ -111,10 +112,10 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
     private LiveMediaPlayerGlue mGlue;
 
-    private final int ROW_CHANNELS = 1;
-    private final int ROw_PLAYER = 0;
-    private final int ROW_PROGRAMATION = 2;
-    private final int ROW_FAVORITE_CHANNELS = 3;
+    private final int ROW_CHANNELS = 0;
+    private final int ROw_PLAYER = 3;
+    private final int ROW_PROGRAMATION = 1;
+    private final int ROW_FAVORITE_CHANNELS = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -165,19 +166,26 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         setMainRowsAdapter();
 
 
-        //AddPlayer
-        infoRowsAdapter.add(ROw_PLAYER, mGlue.getControlsRow());
         addChannelsRow();
         addProgramation();
         addFavoriteChannels();
 
+
         setAdapter(infoRowsAdapter);
 
+        selectedChannel = loadPreferences();
 
         setOnItemViewClickedListener(this);
         setOnItemViewSelectedListener(this);
 
 
+    }
+
+    private LiveCanalCard loadPreferences(){
+        SharedPreferences mPrefs = getActivity().getPreferences(0);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("selectedChannel", "");
+        return gson.fromJson(json, LiveCanalCard.class);
     }
 
     @Override
@@ -446,6 +454,12 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 mGlue.prepareIfNeededAndPlay(currentMetaData);
                 selectedChannel = card;
 
+                SharedPreferences mPrefs = getActivity().getPreferences(0);
+                SharedPreferences.Editor editor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(selectedChannel);
+                editor.putString("selectedChannel", json);
+                editor.commit();
 
             }
         }

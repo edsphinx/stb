@@ -120,7 +120,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
         backgroundManager = BackgroundManager.getInstance(getActivity());
         backgroundManager.attach(getActivity().getWindow());
         mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity()).load(R.drawable.bg_poster).skipMemoryCache()
+        Picasso.with(getActivity()).load(R.drawable.fondo01_top).skipMemoryCache()
                 .into(mBackgroundTarget);
 
 

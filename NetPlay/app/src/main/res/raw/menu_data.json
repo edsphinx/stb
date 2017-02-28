@@ -6,31 +6,31 @@
         "id": 0,
         "type": "DEFAULT",
         "titulo": "Live TV",
-        "localImageResource": "ic_tv"
+        "localImageResource": "live_tv"
       },
       {
         "id": 1,
         "type": "DEFAULT",
         "titulo": "Video On Demand",
-        "localImageResource": "ic_ondemand_video"
+        "localImageResource": "online_video"
       },
-      {
-        "id": 2,
-        "type": "DEFAULT",
-        "titulo": "Musica On Demand",
-        "localImageResource": "ic_music_video"
-      },
+//      {
+//        "id": 2,
+//        "type": "DEFAULT",
+//        "titulo": "Musica On Demand",
+//        "localImageResource": "ic_music_video"
+//      },
       {
         "id": 3,
         "type": "DEFAULT",
         "titulo": "Mi Cuenta",
-        "localImageResource": "ic_account_box"
+        "localImageResource": "user"
       },
       {
         "id": 4,
         "type": "DEFAULT",
         "titulo": "Apps",
-        "localImageResource": "ic_apps"
+        "localImageResource": "settings"
       },
       {
         "id": 5,
