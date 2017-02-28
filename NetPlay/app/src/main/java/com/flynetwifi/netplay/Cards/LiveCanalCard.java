@@ -12,6 +12,7 @@ public class LiveCanalCard {
     @SerializedName("thumbnail") private String mThumbnail = null;
     @SerializedName("stream") private String mStream = "";
     @SerializedName("record") private String mRecord = "";
+    @SerializedName("row") private int mRow = 0;
     @SerializedName("posicion") private int mPosicion = 0;
     private int mEstado = 0;
 
@@ -93,5 +94,13 @@ public class LiveCanalCard {
 
     public void setmEstado(int mEstado) {
         this.mEstado = mEstado;
+    }
+
+    public int getmRow() {
+        return mRow;
+    }
+
+    public void setmRow(int mRow) {
+        this.mRow = mRow;
     }
 }
