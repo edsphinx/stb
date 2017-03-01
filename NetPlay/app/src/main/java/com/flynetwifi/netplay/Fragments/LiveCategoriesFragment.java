@@ -124,9 +124,6 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
 
         addChannelsRow();
 
-        /*addProgramation();
-        */
-
         setAdapter(mainRowsAdapter);
         setOnItemViewClickedListener(this);
         setOnItemViewSelectedListener(this);
@@ -199,15 +196,10 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
                     mGlue.prepareIfNeededAndPlay(currentMetaData);
                 }
 
-
             }
         });
 
-
     }
-
-
-
 
     @Override
     public void onStart() {

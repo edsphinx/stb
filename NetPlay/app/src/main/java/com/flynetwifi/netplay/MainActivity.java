@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import okhttp3.Response;
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity {
 
     //Token's Variable
     public static String access_token = "";
@@ -57,20 +57,35 @@ public class MainActivity extends Activity{
             // /multimedia/stb
 
 
-            if(mReboot == true){
+            if (mReboot == true) {
                 reboot();
             }
 
         }
     };
 
+    private Handler mHandlerLogin = new Handler();
+    private Runnable mRunnableLogin = new Runnable() {
+        @Override
+        public void run() {
+            mHandler.removeCallbacks(this);
+            if (!login()) {
+                Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                startActivity(i);
+            } else {
+                launch();
+            }
+        }
+    };
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             SharedPreferences loginSettings = getSharedPreferences("loginSettings", 0);
             SharedPreferences.Editor editor = loginSettings.edit();
             editor.putString("access_token", "");
@@ -79,9 +94,7 @@ public class MainActivity extends Activity{
             editor.putString("user_type", "");
             editor.commit();
 
-            Fragment fragment = new MenuFragment();
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
-                    .commit();
+
         }
 
         mHandler.postDelayed(mRunnable, 10000);
@@ -90,12 +103,12 @@ public class MainActivity extends Activity{
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         SharedPreferences loginSettings = getSharedPreferences("loginSettings", 0);
@@ -104,42 +117,41 @@ public class MainActivity extends Activity{
         user_type = loginSettings.getString("user_type", "");
         if (access_token != "") {
             launch();
-        } else if (!login()) {
-            Intent i = new Intent(this, LoginActivity.class);
-            startActivity(i);
         }
         else{
-            launch();
+            mHandlerLogin.postDelayed(mRunnableLogin, 3500);
         }
     }
 
-    private void launch(){
+    private void launch() {
         Intent intent = null;
-        if(access_token == ""){
+        if (access_token == "") {
             intent = new Intent(this.getBaseContext(),
                     LoginActivity.class);
 
-        }
-        else if (user_profile == "") {
+        } else if (user_profile == "") {
             intent = new Intent(this.getBaseContext(),
                     ProfileActivity.class);
-
         }
 
-        if(intent != null) {
+        if (intent != null) {
+
             Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
                     .toBundle();
             startActivity(intent, bundle);
+        }else{
+            Fragment fragment = new MenuFragment();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
+                    .commit();
         }
 
     }
 
-    private boolean login(){
+    private boolean login() {
         SharedPreferences settings = getSharedPreferences("settings", 0);
 
         String username = settings.getString("username", "null");
         String password = settings.getString("password", "null");
-
 
         if (!username.contentEquals("null") && !password.contentEquals("null")) {
             return attempLogin(username, password);
@@ -147,7 +159,7 @@ public class MainActivity extends Activity{
         return false;
     }
 
-    private boolean attempLogin(final String username, final String password){
+    private boolean attempLogin(final String username, final String password) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -166,7 +178,6 @@ public class MainActivity extends Activity{
                         editor.putString("access_token", access_token);
                         editor.putString("refresh_token", refresh_token);
                         editor.commit();
-                        ;
 
                     }
                 } catch (IOException e) {
@@ -188,12 +199,12 @@ public class MainActivity extends Activity{
         return false;
     }
 
-    public void reboot(){
+    public void reboot() {
         PowerManager pm = (PowerManager) getSystemService(this.POWER_SERVICE);
         pm.reboot(null);
     }
 
-    public String getMacAddress(){
+    public String getMacAddress() {
         try {
             return loadFileAsString("/sys/class/net/eth0/address")
                     .toUpperCase().substring(0, 17);
@@ -203,12 +214,12 @@ public class MainActivity extends Activity{
         }
     }
 
-    public static String loadFileAsString(String filePath) throws java.io.IOException{
+    public static String loadFileAsString(String filePath) throws java.io.IOException {
         StringBuffer fileData = new StringBuffer(1000);
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         char[] buf = new char[1024];
-        int numRead=0;
-        while((numRead=reader.read(buf)) != -1){
+        int numRead = 0;
+        while ((numRead = reader.read(buf)) != -1) {
             String readData = String.valueOf(buf, 0, numRead);
             fileData.append(readData);
         }
