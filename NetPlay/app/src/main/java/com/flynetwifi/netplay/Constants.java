@@ -31,7 +31,6 @@ public interface Constants {
 
     static String music_song_query = Constants.music + "/search/";
 
-
     static String cuenta_confirmacion = "/stb/cuenta/confirmacion/";
 
     static String messages = "/stb/mensajes/";
