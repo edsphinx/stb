@@ -36,7 +36,7 @@
         "id": 5,
         "type": "DEFAULT",
         "titulo": "Mensajes",
-        "localImageResource": "ic_message"
+        "localImageResource": "messages"
       }
 
     ]
