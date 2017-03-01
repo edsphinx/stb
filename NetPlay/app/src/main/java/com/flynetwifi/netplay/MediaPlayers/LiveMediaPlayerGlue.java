@@ -69,7 +69,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
     }
 
     @Override protected void addSecondaryActions(ArrayObjectAdapter secondaryActionsAdapter) {
-        mPlayPauseAction = new PlaybackControlsRow.PlayPauseAction(getContext());
+        /*mPlayPauseAction = new PlaybackControlsRow.PlayPauseAction(getContext());
         mRepeatAction = new PlaybackControlsRow.RepeatAction(getContext());
         mThumbsUpAction = new PlaybackControlsRow.ThumbsUpAction(getContext());
         mThumbsDownAction = new PlaybackControlsRow.ThumbsDownAction(getContext());
@@ -89,15 +89,15 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
         secondaryActionsAdapter.add(mRepeatAction);
         //secondaryActionsAdapter.add(mShuffleAction);
         //secondaryActionsAdapter.add(mHighQualityAction);
-        //secondaryActionsAdapter.add(mMoreActions);
+        //secondaryActionsAdapter.add(mMoreActions);*/
     }
 
     @Override public void onActionClicked(Action action) {
-        super.onActionClicked(action);
+        /*super.onActionClicked(action);
         if (action == mClosedCaptioningAction) {
             mClosedCaptioningAction.nextIndex();
         } else if (action == mPipAction) {
-        }
+        }*/
     }
 
     public void setupControlsRowPresenter(PlaybackControlsRowPresenter presenter) {
@@ -161,7 +161,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
             return;
         }
         PlaybackState.Builder playbackStateBuilder = null;
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             playbackStateBuilder = new PlaybackState.Builder();
 
             long currentPosition = getCurrentPosition();
@@ -169,7 +169,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
                     getPlaybackStateActions()
             );
             mVideoSession.setPlaybackState(playbackStateBuilder.build());
-        }*/
+        }
     }
 
     private void updateMediaSessionIntent() {
@@ -316,7 +316,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
                 mPlayer.start();
                 updateVideoSessionPlayState(PlaybackState.STATE_PLAYING);
                 updateVideoSessionMetaData();
-                onMetadataChanged();
+                //onMetadataChanged();
                 onStateChanged();
                 updateProgress();
             }

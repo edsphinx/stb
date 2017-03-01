@@ -61,6 +61,7 @@ public class LoginActivity extends Activity {
             clave = "";
         }
         mClaveView.setText(clave);
+
     }
 
     private void attemptLogin() {
