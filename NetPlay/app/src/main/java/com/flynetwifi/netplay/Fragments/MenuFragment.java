@@ -56,7 +56,7 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
         //setTitle(getString(R.string.app_name));
         setHeadersState(HEADERS_DISABLED);
         setHeadersTransitionOnBackEnabled(false);
-        //setBrandColor(getResources().getColor(R.color.colorPrimary));
+        setBrandColor(getResources().getColor(R.color.colorPrimary));
 
     }
 
