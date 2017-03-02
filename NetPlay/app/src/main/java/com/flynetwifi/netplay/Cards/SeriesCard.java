@@ -11,6 +11,7 @@ public class SeriesCard {
     private String mNombre = "";
     @SerializedName("descripcion")
     private String mDescripcion = "";
+
     @SerializedName("clasificacion")
     private String mClasificacion = "";
     @SerializedName("idioma")
@@ -30,7 +31,6 @@ public class SeriesCard {
     @SerializedName("height")
     private int mHeight;
     @SerializedName("titulo") private String mTitle = "";
-    @SerializedName("descripcion") private String mDescription = "";
     @SerializedName("logo") private String mLogo = "";
     @SerializedName("portada") private String mPortada = "";
     @SerializedName("numero_temporadas") private int mNumeroTemporadas = 0;
@@ -140,13 +140,6 @@ public class SeriesCard {
         this.mTitle = mTitle;
     }
 
-    public String getmDescription() {
-        return mDescription;
-    }
-
-    public void setmDescription(String mDescription) {
-        this.mDescription = mDescription;
-    }
 
     public String getmLogo() {
         return mLogo;

@@ -3,7 +3,6 @@ package com.flynetwifi.netplay.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
@@ -122,18 +121,6 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
 
         }
 
-        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
-        MenuRow row = new MenuRow();
-
-
-         subMenu = new MenuListRow(
-                new HeaderItem(""),
-                listRowAdapter,
-                row
-        );
-
-        mRowsAdapter.add(1, subMenu);
-
 
 
     }
@@ -155,11 +142,8 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
     public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
 
             if (item instanceof MenuCard) {
-                MenuCard menuCard = (MenuCard) item;
-                if(menuCard.getmId() >= 0 && menuCard.getmId() < 6) {
-                    currentMenu = menuCard.getmId();
-                    mHandler.postDelayed(mRunnable, 500);
-                }
+                //Evento Select
+
             }
 
     }
@@ -249,53 +233,6 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
         }
     }
 
-    private Handler mHandler = new Handler();
-    private Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            String json = "";
-            switch (currentMenu) {
-                case 0:
-                    json = Utils.inputStreamToString(getResources().openRawResource(R.raw.menu_live));
-                    break;
-                case 1:
-                    json = Utils.inputStreamToString(getResources().openRawResource(R.raw.menu_vod));
-                    break;
-                default:
-                    json = "";
 
-            }
-
-            if (!json.contentEquals("")) {
-                MenuRow[] rows = new Gson().fromJson(json, MenuRow[].class);
-                MenuPresenter presenter = new MenuPresenter();
-
-                for(MenuRow row : rows){
-                    ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
-                    List<MenuCard> listMenuCard = new ArrayList<>();
-
-                    for(MenuCard card : row.getmCards()){
-                        listRowAdapter.add(card);
-                        listMenuCard.add(card);
-                    }
-
-                    MenuRow menuRow = new MenuRow();
-                    menuRow.setmCards(listMenuCard);
-
-                    subMenu = new MenuListRow(
-                            new HeaderItem(""),
-                            listRowAdapter,
-                            row
-                    );
-
-                    mRowsAdapter.replace(1, subMenu);
-
-                }
-
-            } else {
-                mRowsAdapter.replace(1, subMenu);
-            }
-        }
-    };
 
 }
