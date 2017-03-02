@@ -20,7 +20,6 @@ import android.support.v17.leanback.widget.PlaybackControlsRowPresenter;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -53,84 +52,142 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/**
- * The type Live fragment.
- */
 public class LiveFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
         MediaPlayerGlue.OnMediaStateChangeListener {
 
-    public static String TAG;
+    public static String TAG = "LiveFragment";
 
+    /**
+     * Data de Canales y Canales Favoritos
+     */
     private Map<String, LiveCanalCard> data = null;
     private Map<String, LiveCanalCard> dataFavorite = null;
+
+    /**
+     * Adaptador Principal
+     */
+
     private ArrayObjectAdapter infoRowsAdapter;
+
+    /**
+     * Adaptador de Canales, Canales Favoritos y Programas
+     */
     private ArrayObjectAdapter channelsRowAdapter;
     private ArrayObjectAdapter favoriteChannelsRowAdapter;
     private ArrayObjectAdapter programsRowAdapter;
-    private ArrayObjectAdapter myProgramsRowAdapter;
 
+    /**
+     * MediaPlayer
+     * Presentador de MediaPlayer
+     */
+    private LiveMediaPlayerGlue mGlue;
     private PlaybackControlsRowPresenter playbackControlsRowPresenter;
 
-
+    /**
+     * ROW de Programacion
+     */
     private LiveProgramRow programationData;
+
+    /**
+     * Card para Canal Seleccionado y Canal en Reproduccion
+     */
     private LiveCanalCard selectedChannel, currentChannel;
+
+    /**
+     * String de Numero de Canal
+     */
     private String channelNumber = "";
+
+
     private Thread thread;
 
+    /**
+     * Variables de Session
+     */
     private String access_token;
     private String user_type;
     private String user_profile;
 
+    /**
+     * CONSTANTES
+     */
+    private int LOAD_PROGRAMS_DELAY = 500;
+
+
+    /**
+     * Primera Reproduccion on Select
+     */
     private boolean playOnSelect = true;
 
     /**
-     * The Current meta data.
+     * MetaData de Canal Actual
      */
     MediaMetaData currentMetaData;
 
+    /**
+     * Indices de Cada ROW
+     * Deben ser secuenciales e iniciar por <cero>
+     */
+    private final int ROW_CHANNELS = 0;
+    private final int ROW_PROGRAMATION = 1;
+    // private final int ROw_PLAYER = 2;
+    private final int ROW_FAVORITE_CHANNELS = 2;
+
 
     private final Handler handlerLoadPrograms = new Handler();
-    private final Handler handlerUpdateMediaPlayer = new Handler();
     private final Handler handlerLoadFavoriteChannels = new Handler();
+    private final Handler cambiarCanalHandler = new Handler();
+    private Handler selectedHandler = new Handler();
+
 
     private final Runnable runnableLoadPrograms = new Runnable() {
         @Override
         public void run() {
-
             loadChannelPrograms();
             handlerLoadPrograms.removeCallbacks(this);
         }
     };
 
-
-    private final Runnable runnableFavoriteChannels = new Runnable() {
+    private final Runnable cambiarCanalRunnable = new Runnable() {
         @Override
         public void run() {
-            loadFavoriteChannels();
-            handlerLoadFavoriteChannels.removeCallbacks(this);
+            cambiarCanal();
         }
     };
 
-    private LiveMediaPlayerGlue mGlue;
+    private Runnable selectedRunnable = new Runnable() {
+        @Override
+        public void run() {
+            selectedHandler.removeCallbacks(this);
+            if (currentChannel != null) {
+                currentChannel.setmEstado(0);
+                channelsRowAdapter.replace(currentChannel.getmPosicion(), currentChannel);
+                channelsRowAdapter.notifyArrayItemRangeChanged(currentChannel.getmPosicion(), 1);
+            }
+            LiveCanalCard card = selectedChannel;
+            card.setmEstado(1);
+            channelsRowAdapter.replace(card.getmPosicion(), card);
+            channelsRowAdapter.notifyArrayItemRangeChanged(card.getmPosicion(), 1);
+            selectedChannel = card;
+            currentChannel = card;
 
-    private final int ROW_CHANNELS = 0;
-    private final int ROW_PROGRAMATION = 1;
-   // private final int ROw_PLAYER = 2;
-    private final int ROW_FAVORITE_CHANNELS = 2;
+        }
+    };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TAG = getString(R.string.TAG_LIVE);
-
+        /** Obteniendo data de Session */
         Bundle args = getArguments();
         access_token = args.getString("access_token", "");
         user_type = args.getString("user_type", "");
         user_profile = args.getString("user_profile", "");
 
 
+        /** Inicializando MediaPlayer */
         mGlue = new LiveMediaPlayerGlue(getActivity(), this) {
             @Override
             protected void onRowChanged(PlaybackControlsRow row) {
@@ -139,6 +196,37 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             }
         };
 
+        /** Setup VideoSurfaceFragment */
+        setupUI();
+
+        /** Inicializando Objeto Principal */
+        setMainRowsAdapter();
+
+        /** Agregar Fila de Canales */
+        addChannelsRow();
+
+        /** Agregar Fila de Programacion */
+        addProgramation();
+
+        /** Agregar Fil de Controles */
+        //infoRowsAdapter.add(ROw_PLAYER, mGlue.getControlsRow());
+
+        /** Agregar Canales Favoritos */
+        addFavoriteChannels(true);
+
+        /** Set Objeto Principal */
+        setAdapter(infoRowsAdapter);
+
+        /** Eventos Click y Selected de los Rows */
+        setOnItemViewClickedListener(this);
+        setOnItemViewSelectedListener(this);
+
+    }
+
+    /**
+     * Setup VideoSurfaceFragment
+     */
+    private void setupUI() {
         Fragment videoSurfaceFragment = getFragmentManager()
                 .findFragmentByTag(VideoSurfaceFragment.TAG);
 
@@ -155,6 +243,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
+                //Reset MediaPlayer
                 mGlue.resetPlayer();
                 mGlue.releaseMediaSession();
                 mGlue.setDisplay(null);
@@ -162,28 +251,453 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 ;
             }
         });
-        setBackgroundType(PlaybackOverlayFragment.BG_NONE);
 
+        /**
+         * Set Background Color del Objeto Principal de las Filas
+         * @Option PlaybackOverlayFragment.BG_NONE
+         * @Option PlaybackOverlayFragment.BG_LIGHT
+         * @Option PlaybackOverlayFragment.BG_DARK
+         *
+         */
+        setBackgroundType(PlaybackOverlayFragment.BG_LIGHT);
+    }
 
-        setMainRowsAdapter();
+    /**
+     * Description: Inicializando Objeto Principal
+     */
+    private void setMainRowsAdapter() {
+        /** Inicializando PlayBackControlPresenter */
+        playbackControlsRowPresenter = mGlue.createControlsRowAndPresenter();
+        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.background));
+        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimary));
+        playbackControlsRowPresenter.setSecondaryActionsHidden(false);
+        /**
+         * Evento Click de Acciones Secundarias
+         * Los Controles se definen en @LiveMediaPlayerGlue
+         */
+        playbackControlsRowPresenter.setOnActionClickedListener(new OnActionClickedListener() {
+            @Override
+            public void onActionClicked(Action action) {
+                if (selectedChannel != null) {
+                    if (action.getId() == 0) { //Like Action
+                        addFavoriteChannel();
+                    }
+                    if (action.getId() == 2) {  //Repeat Action
+                        final LiveCanalCard card = selectedChannel;
+                        MediaMetaData currentMetaData = new MediaMetaData();
+                        currentMetaData.setMediaTitle(card.getmTitle());
+                        currentMetaData.setMediaSourcePath(card.getmRecord());
+                        mGlue.prepareIfNeededAndPlay(currentMetaData);
+                    }
+                }
+            }
+        });
 
+        /** Presenter Selector de Multiples Filas */
+        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
+        /**
+         * Mantener el mismo orden de los indices de filas
+         * Channel Rows
+         */
+        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
+        /** Channel Programation */
+        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
+        /** Player */
+        //rowPresenterSelector.addClassPresenter(PlaybackControlsRow.class,
+        //        playbackControlsRowPresenter);
+        /** Canales Favoritos */
+        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
 
-        addChannelsRow();
-        addProgramation();
-
-//        infoRowsAdapter.add(ROw_PLAYER, mGlue.getControlsRow());
-
-        addFavoriteChannels();
-
-
-        setAdapter(infoRowsAdapter);
-
-
-        setOnItemViewClickedListener(this);
-        setOnItemViewSelectedListener(this);
-
+        /** Main ObjectAdapter de Rows */
+        infoRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
 
     }
+
+    /**
+     * Description: Agregar Fila de Canales
+     */
+    private void addChannelsRow() {
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DownloadData downloadData = new DownloadData();
+                /** Obtener JSON de Canales En Vivo **/
+                String response = downloadData.run(Constants.server + Constants.live + "/"
+                        + access_token + "/" + user_type);
+                Gson gson = new Gson();
+                /**
+                 * Map<String, LiveCanalCard>, el String es el numero del canal
+                 * Se utiliza para buscar el numero del Canal con el PAD del Control
+                 */
+                Type canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
+                }.getType();
+                /** Se inicializa el Adaptador de los canales */
+                channelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
+                try {
+                    /** Parseo del RESPONSE -> Map<String, LiveCanalCard> */
+                    data = gson.fromJson(response, canalesCardType);
+                    int i = 0;
+                    /** Recorriendo cada entrada */
+                    for (HashMap.Entry<String, LiveCanalCard> entry : data.entrySet()) {
+                        LiveCanalCard card = entry.getValue();
+                        /** Set la posicion de cada Canal en el ROW */
+                        card.setmPosicion(i);
+                        entry.setValue(card);
+                        /** Se agrega la Card al Adaptador de Canales */
+                        channelsRowAdapter.add(entry.getValue());
+                        i++;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        /** Creando el header para ROW de Canales */
+        HeaderItem header = new HeaderItem(ROW_CHANNELS, getString(R.string.chanels));
+        /** Agregando ROW de Canales en su indice **/
+        infoRowsAdapter.add(ROW_CHANNELS, new ListRow(header, channelsRowAdapter));
+
+    }
+
+    /**
+     * Description: Agregar Fila de Programas Vacia
+     */
+    private void addProgramation() {
+        /** Se inicializa el Adaptador de los programas */
+        programsRowAdapter = new ArrayObjectAdapter(new LiveProgramPresenter());
+        /** Creando el header para ROW de Programas */
+        HeaderItem header = new HeaderItem(ROW_PROGRAMATION, getString(R.string.programation));
+        /** Agregando ROW de Programas en su indice **/
+        infoRowsAdapter.add(ROW_PROGRAMATION, new ListRow(header, programsRowAdapter));
+    }
+
+    /**
+     * Descripcion: Agregar Fila de Canales Favoritos
+     */
+    private void addFavoriteChannels(boolean option) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Gson gson = new Gson();
+                /** Adaptador de Canales Favoritos */
+                favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
+                try {
+                    DownloadData downloadData = new DownloadData();
+                    /** Obtener JSON de Canales Favoritos **/
+                    String response = downloadData.run(Constants.server + Constants.live_favorites
+                            + user_profile);
+                    /**
+                     * Map<String, LiveCanalCard>, el String es el numero del canal
+                     */
+                    Type canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
+                    }.getType();
+                    /** Parseo del RESPONSE -> Map<String, LiveCanalCard> */
+                    dataFavorite = gson.fromJson(response, canalesCardType);
+                    int i = 0;
+                    /** Recorriendo cada entrada */
+                    for (HashMap.Entry<String, LiveCanalCard> entry : dataFavorite.entrySet()) {
+                        LiveCanalCard card = entry.getValue();
+                        /** Set la posicion de cada Canal en el ROW */
+                        card.setmPosicion(i);
+                        entry.setValue(card);
+                        /** Se agrega la Card al Adaptador de Canales Favoritos */
+                        favoriteChannelsRowAdapter.add(entry.getValue());
+                        i++;
+                    }
+                } catch (JsonParseException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        /** Creando el header para ROW de Canales Favoritos */
+        HeaderItem header = new HeaderItem(ROW_FAVORITE_CHANNELS,
+                getString(R.string.favorite_chanels));
+        /** Agregando ROW de Canales Favoritos en su indice **/
+        if(option == true) {
+            infoRowsAdapter.add(ROW_FAVORITE_CHANNELS,
+                    new ListRow(header, favoriteChannelsRowAdapter));
+        }else {
+            infoRowsAdapter.replace(ROW_FAVORITE_CHANNELS,
+                    new ListRow(header, favoriteChannelsRowAdapter));
+        }
+
+    }
+
+    /**
+     * Descripcion: Evento Click de los Cards en los ROWS
+     *
+     * @param itemViewHolder
+     * @param item
+     * @param rowViewHolder
+     * @param row
+     */
+    @Override
+    public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
+                              RowPresenter.ViewHolder rowViewHolder, Row row) {
+
+        /** Si el item es del tipo: LiveCanalCard */
+        if (item instanceof LiveCanalCard) {
+            /** Parsear el item */
+            final LiveCanalCard card = (LiveCanalCard) item;
+            /** SetUp MetaData */
+            currentMetaData = new MediaMetaData();
+            currentMetaData.setMediaTitle(card.getmTitle());
+            currentMetaData.setMediaArtistName(card.getmDescription());
+            currentMetaData.setMediaSourcePath(card.getmStream());
+            /** Preprar MetaData y Reproducir */
+            mGlue.prepareIfNeededAndPlay(currentMetaData);
+            /** Asignar nuevo canal Seleccionado */
+            selectedChannel = card;
+            /** Cargar Programas de Canal */
+            handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+            handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
+
+            /** Si el ID de la ROW es de Canales Favoritos */
+            if (row.getId() == ROW_CHANNELS) {
+                /** Guardar el numero del Canal Seleccionado en SharedPreferences */
+                SharedPreferences mPrefs = getActivity().getPreferences(0);
+                SharedPreferences.Editor editor = mPrefs.edit();
+                editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
+                editor.commit();
+            }
+        }
+    }
+
+    /**
+     * Descripcion: Evento Selected de los Cards en los ROWS
+     *
+     * @param itemViewHolder
+     * @param item
+     * @param rowViewHolder
+     * @param row
+     */
+    @Override
+    public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
+                               RowPresenter.ViewHolder rowViewHolder, Row row) {
+        /** Si el item es del tipo: LiveCanalCard */
+        if (item instanceof LiveCanalCard) {
+            /** Si el ROW Seleccionado es Canales */
+            if (row.getId() == ROW_CHANNELS) {
+                /** Asignar nuevo canal Seleccionado */
+                selectedChannel = (LiveCanalCard) item;
+                /** Cargar thumbnail de Canal */
+                selectedHandler.postDelayed(selectedRunnable, 500);
+                /** Cargar Programas de Canal **/
+                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
+
+                /** Reproduccion del Primer Canal */
+                if (playOnSelect == true) {
+                    /** Obtener ultimo canal reproducido */
+                    LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
+                    /** Verificar que el card no sea nulo */
+                    if (card != null) {
+                        /** Actualizar MetaData */
+                        currentMetaData = new MediaMetaData();
+                        currentMetaData.setMediaTitle(card.getmTitle());
+                        currentMetaData.setMediaArtistName(card.getmDescription());
+                        currentMetaData.setMediaSourcePath(card.getmStream());
+                        /** Preprar MetaData y Reproducir */
+                        mGlue.prepareIfNeededAndPlay(currentMetaData);
+                        /** Seleccionar el ultimo canal Reproducido */
+                        getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
+                        getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                                new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
+                        /** Cargar Programas */
+                        handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                        handlerLoadPrograms.postDelayed(runnableLoadPrograms, 500);
+                    }
+                    /** Los proximos select no reproduciran */
+                    playOnSelect = false;
+                }
+
+            }
+        }
+
+    }
+
+    /**
+     * Descripcion: Obtener selectedChannel
+     * @return Numero de Canal String
+     */
+    private String loadPreferences() {
+        SharedPreferences mPrefs = getActivity().getPreferences(0);
+        String channel = mPrefs.getString("selectedChannel", "711");
+        return channel;
+    }
+
+    /**
+     * Descripcion: Cargar Programas segun el Canal
+     */
+    private void loadChannelPrograms() {
+
+        /** Verificar que el thread no está activo */
+        final LiveCanalCard card = selectedChannel;
+        if (thread != null) {
+            if (thread.isAlive()) {
+                try {
+                    thread.destroy();
+                } catch (UnsupportedOperationException e) {
+
+                }
+            }
+        }
+
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    /** Adaptador de Programas */
+                    ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
+                            new LiveProgramPresenter());
+                    /** Se limpia la DATA de Programacion */
+                    programationData = null;
+                    DownloadData downloadData = new DownloadData();
+                    /** Obtener JSON de Programas del Canal **/
+                    String response = downloadData.run(Constants.server + Constants.programation
+                            + String.valueOf(card.getmId()));
+                    /** Parse del RESPONE -> LiveProgramRow */
+                    programationData = new Gson().fromJson(response, LiveProgramRow.class);
+                    /**
+                     * Por cada Programa en ProgramationData, se agrega al Adaptador
+                     */
+                    for (LiveProgramCard card : programationData.getProgramaCards()) {
+                        listRowAdapter.add(card);
+                    }
+                    /** Creando el header para ROW de Programacion */
+                    HeaderItem header = new HeaderItem(ROW_PROGRAMATION,
+                            getString(R.string.programation_title) + ": " + card.getmTitle());
+                    /** Agregando ROW de Programacion en su indice **/
+                    infoRowsAdapter.replace(ROW_PROGRAMATION, new ListRow(header, listRowAdapter));
+
+                } catch (UnsupportedOperationException e1) {
+                    e1.printStackTrace();
+                } catch (IllegalStateException e2) {
+                    e2.printStackTrace();
+                } catch (JsonParseException e3) {
+                    e3.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+    }
+
+    /**
+     * Descripcion: Agregar Canal a Canales Favoritos y Recargar el ROW
+     */
+    private void addFavoriteChannel() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                /** Request para guardar canal como Canal Favorito */
+                OkHttpClient client = new OkHttpClient();
+                FormBody.Builder formBuilder = new FormBody.Builder()
+                        .add("id_canal", selectedChannel.getmId().toString());
+                RequestBody formBody = formBuilder.build();
+
+                Request request = new Request.Builder()
+                        .url(Constants.server + "/stb/live/favoritos/guardar/" + user_profile)
+                        .addHeader("Accept", "application/json; q=0.5")
+                        .addHeader("Authorization", "Bearer " + access_token)
+                        .post(formBody)
+                        .build();
+                try (
+                        Response response = client.newCall(request).execute()
+                ) {
+                    /** Recargar el ROW de Canales Favoritos */
+                    addFavoriteChannels(false);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+    }
+
+    /**
+     * Descripcion: Cambiar canal con PAD de Control.
+     */
+    public void cambiarCanal() {
+        /** Verificar que el Canal del Numero este en las KEY de DATA */
+
+        if (data.containsKey(channelNumber)) {
+            /** Reset Thumbnail to Logo en Canal */
+            selectedChannel.setmEstado(0);
+            channelsRowAdapter.replace(selectedChannel.getmPosicion(), selectedChannel);
+            channelsRowAdapter.notifyArrayItemRangeChanged(selectedChannel.getmPosicion(), 1);
+
+            /** Mover el Foco al Canal Seleccionado */
+            LiveCanalCard card = data.get(channelNumber);
+            card.setmEstado(1);
+            getRowsFragment().setSelectedPosition(ROW_CHANNELS, true,
+                    new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
+
+            /** Actualizar MetaData */
+            currentMetaData = new MediaMetaData();
+            currentMetaData.setMediaTitle(card.getmTitle());
+            currentMetaData.setMediaArtistName(card.getmDescription());
+            currentMetaData.setMediaSourcePath(card.getmStream());
+
+            /** Actualizar Canal Seleccionado **/
+            selectedChannel = card;
+            /** Actualizar MetaData en el Player y Reproducir */
+            mGlue.prepareIfNeededAndPlay(currentMetaData);
+
+            /** Cargar Programas de Canal **/
+            handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+            handlerLoadPrograms.postDelayed(runnableLoadPrograms, 500);
+
+
+        }
+        /** RESET al Numero del Canal */
+        channelNumber = "";
+
+    }
+
+    /**
+     * Keypress.
+     *
+     * @param e
+     */
+    public void keypress(KeyEvent e) {
+
+        /** Si el KeyCode es un digito entre 0 y 9 */
+        if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
+            /** Obtengo el digito **/
+            int numero = e.getKeyCode() - 7;
+            /** Se concatena el numero al guardado */
+            channelNumber = channelNumber + String.valueOf(numero);
+            /** Cambiar el Canal */
+            cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
+            cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
+        }
+    }
+
+
+
 
     @Override
     public void onStart() {
@@ -237,379 +751,6 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         mGlue.releaseMediaPlayer();
     }
 
-    private void setMainRowsAdapter() {
-        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
-
-        playbackControlsRowPresenter = mGlue.createControlsRowAndPresenter();
-        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.background));
-        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimary));
-        playbackControlsRowPresenter.setSecondaryActionsHidden(false);
-
-        playbackControlsRowPresenter.setOnActionClickedListener(new OnActionClickedListener() {
-            @Override
-            public void onActionClicked(Action action) {
-
-                if (selectedChannel != null) {
-                    if (action.getId() == 0) { //Like Action
-                        addFavoriteChannel();
-                    }
-                    if (action.getId() == 2) {  //Repeat Action
-                        final LiveCanalCard card = selectedChannel;
-                        MediaMetaData currentMetaData = new MediaMetaData();
-                        currentMetaData.setMediaTitle(card.getmTitle());
-                        currentMetaData.setMediaSourcePath(card.getmRecord());
-                        mGlue.prepareIfNeededAndPlay(currentMetaData);
-                    }
-                }
-
-
-            }
-        });
-
-        //Channel Rows
-        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-        //Channel Programation
-        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-        //Player
-        //rowPresenterSelector.addClassPresenter(PlaybackControlsRow.class,
-        //        playbackControlsRowPresenter);
-        //Mi Favorite Channels
-        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-
-        //Main Object
-        infoRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
-
-
-    }
-
-    private void addChannelsRow() {
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(Constants.server + Constants.live + "/"
-                        + access_token + "/" + user_type);
-                Gson gson = new Gson();
-                Type canalesCardType;
-                canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
-                }.getType();
-                channelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
-                try {
-                    data = gson.fromJson(response, canalesCardType);
-                    int i = 0;
-                    for (HashMap.Entry<String, LiveCanalCard> entry : data.entrySet()) {
-                        String key = entry.getKey();
-                        LiveCanalCard card = entry.getValue();
-                        card.setmPosicion(i);
-                        entry.setValue(card);
-                        channelsRowAdapter.add(entry.getValue());
-
-                        i++;
-                    }
-                } catch (Exception e) {
-
-                }
-
-
-            }
-        });
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        HeaderItem header = new HeaderItem(ROW_CHANNELS, getString(R.string.chanels));
-        infoRowsAdapter.add(ROW_CHANNELS, new ListRow(header, channelsRowAdapter));
-
-
-    }
-
-
-    private void addProgramation() {
-        programsRowAdapter = new ArrayObjectAdapter(new LiveProgramPresenter());
-        HeaderItem header = new HeaderItem(ROW_PROGRAMATION, getString(R.string.programation));
-        infoRowsAdapter.add(ROW_PROGRAMATION, new ListRow(header, programsRowAdapter));
-    }
-
-    private void addFavoriteChannels() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Gson gson = new Gson();
-                favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
-                try {
-                    DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.live_favorites
-                            + user_profile);
-
-
-                    Type canalesCardType;
-                    canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
-                    }.getType();
-
-
-                    dataFavorite = gson.fromJson(response, canalesCardType);
-
-
-                    int i = 0;
-                    for (HashMap.Entry<String, LiveCanalCard> entry : dataFavorite.entrySet()) {
-                        LiveCanalCard card = entry.getValue();
-                        card.setmPosicion(i);
-                        entry.setValue(card);
-                        favoriteChannelsRowAdapter.add(entry.getValue());
-                        i++;
-                    }
-                } catch (JsonParseException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        HeaderItem header = new HeaderItem(ROW_FAVORITE_CHANNELS, getString(R.string.favorite_chanels));
-        infoRowsAdapter.add(ROW_FAVORITE_CHANNELS, new ListRow(header, favoriteChannelsRowAdapter));
-
-    }
-
-    private void addFavoriteChannel() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String result = "";
-                OkHttpClient client = new OkHttpClient();
-                FormBody.Builder formBuilder = new FormBody.Builder()
-                        .add("id_canal", selectedChannel.getmId().toString());
-                RequestBody formBody = formBuilder.build();
-
-                Request request = new Request.Builder()
-                        .url(Constants.server + "/stb/live/favoritos/guardar/" + user_profile)
-                        .addHeader("Accept", "application/json; q=0.5")
-                        .addHeader("Authorization", "Bearer " + access_token)
-                        .post(formBody)
-                        .build();
-                try (
-                        Response response = client.newCall(request).execute()
-                ) {
-                    result = response.body().string();
-                    loadFavoriteChannels();
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
-        thread.start();
-
-
-    }
-
-
-    @Override
-    public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
-                              RowPresenter.ViewHolder rowViewHolder, Row row) {
-
-        if (item instanceof LiveCanalCard) {
-
-
-            if (row.getId() == ROW_FAVORITE_CHANNELS) {
-
-                final LiveCanalCard card = (LiveCanalCard) item;
-                MediaMetaData currentMetaData = new MediaMetaData();
-
-                currentMetaData.setMediaTitle(card.getmTitle());
-                currentMetaData.setMediaArtistName(card.getmDescription());
-                currentMetaData.setMediaSourcePath(card.getmStream());
-
-                mGlue.prepareIfNeededAndPlay(currentMetaData);
-
-                selectedChannel = card;
-                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
-
-
-            } else if (row.getId() == ROW_CHANNELS) {
-
-                final LiveCanalCard card = (LiveCanalCard) item;
-                currentMetaData = new MediaMetaData();
-
-                currentMetaData.setMediaTitle(card.getmTitle());
-                currentMetaData.setMediaArtistName(card.getmDescription());
-                currentMetaData.setMediaSourcePath(card.getmStream());
-
-                mGlue.prepareIfNeededAndPlay(currentMetaData);
-
-
-                selectedChannel = card;
-
-                SharedPreferences mPrefs = getActivity().getPreferences(0);
-                SharedPreferences.Editor editor = mPrefs.edit();
-                editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
-                editor.commit();
-
-
-            }
-        }
-    }
-
-    @Override
-    public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
-                               RowPresenter.ViewHolder rowViewHolder, Row row) {
-
-
-        if (row.getId() == ROW_CHANNELS) {
-            if (item instanceof LiveCanalCard) {
-                selectedChannel = (LiveCanalCard) item;
-                selectedHandler.postDelayed(selectedRunnable, 500);
-                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
-
-                if (playOnSelect == true) {
-
-                    /**
-                     * Playing saved Channel
-                     */
-
-                    LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
-                    if (card != null) {
-                        currentMetaData = new MediaMetaData();
-                        currentMetaData.setMediaTitle(card.getmTitle());
-                        currentMetaData.setMediaArtistName(card.getmDescription());
-                        currentMetaData.setMediaSourcePath(card.getmStream());
-
-
-
-                        mGlue.prepareIfNeededAndPlay(currentMetaData);
-
-                        getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
-                        getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
-                                new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-
-
-                        handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                        handlerLoadPrograms.postDelayed(runnableLoadPrograms, 500);
-                    }
-
-
-                    playOnSelect = false;
-
-                }
-
-            }
-        }
-
-    }
-
-    private String loadPreferences() {
-        SharedPreferences mPrefs = getActivity().getPreferences(0);
-        String channel = mPrefs.getString("selectedChannel", "711");
-        return channel;
-    }
-
-
-    private void loadChannelPrograms() {
-
-        final LiveCanalCard card = selectedChannel;
-        if (thread != null) {
-            if (thread.isAlive()) {
-                try {
-                    thread.destroy();
-                } catch (UnsupportedOperationException e) {
-
-                }
-            }
-        }
-
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
-                            new LiveProgramPresenter());
-                    programationData = null;
-                    DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.programation
-                            + String.valueOf(card.getmId()));
-
-                    programationData = new Gson().fromJson(response, LiveProgramRow.class);
-                    for (LiveProgramCard card : programationData.getProgramaCards()) {
-                        listRowAdapter.add(card);
-                    }
-
-                    HeaderItem header = new HeaderItem(ROW_PROGRAMATION, getString(R.string.programation_title) + ": "
-                            + card.getmTitle());
-                    infoRowsAdapter.replace(ROW_PROGRAMATION, new ListRow(header, listRowAdapter));
-
-                } catch (UnsupportedOperationException e1) {
-                    e1.printStackTrace();
-                } catch (IllegalStateException e2) {
-                    e2.printStackTrace();
-                } catch (JsonParseException e3) {
-                    e3.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-    }
-
-
-    private void loadFavoriteChannels() {
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Gson gson = new Gson();
-                favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
-                try {
-                    DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.live_favorites
-                            + user_profile);
-
-                    Type canalesCardType;
-                    canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
-                    }.getType();
-
-
-                    data = gson.fromJson(response, canalesCardType);
-                    int i = 0;
-                    for (HashMap.Entry<String, LiveCanalCard> entry : data.entrySet()) {
-                        String key = entry.getKey();
-                        LiveCanalCard card = entry.getValue();
-                        card.setmPosicion(i);
-                        entry.setValue(card);
-                        favoriteChannelsRowAdapter.add(entry.getValue());
-                        i++;
-                    }
-
-                    HeaderItem header = new HeaderItem(ROW_FAVORITE_CHANNELS, getString(R.string.favorite_chanels));
-                    infoRowsAdapter.replace(ROW_FAVORITE_CHANNELS, new ListRow(header,
-                            favoriteChannelsRowAdapter));
-                } catch (JsonParseException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-        thread.start();
-
-    }
-
-
     @Override
     public void onMediaStateChanged(MediaMetaData currentMediaMetaData, int currentMediaState) {
         if (currentMediaState == MediaUtils.MEDIA_STATE_COMPLETED) {
@@ -617,83 +758,9 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         }
     }
 
-    /**
-     * Keypress.
-     *
-     * @param e the e
-     */
-    public void keypress(KeyEvent e) {
-        Log.w("PREV", channelNumber);
-        if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
-            int numero = e.getKeyCode() - 7;
-            channelNumber = channelNumber + String.valueOf(numero);
-            Log.w("TESt", channelNumber);
-            cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
-            cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
-        }
-    }
-
-    /**
-     * Cambiar canal.
-     */
-    public void cambiarCanal() {
-        Log.w("NUMERO", channelNumber);
-        if (data.containsKey(channelNumber)) {
-            /*selectedChannel.setmEstado(0);
-            channelsRowAdapter.replace(selectedChannel.getmPosicion(), selectedChannel);
-            channelsRowAdapter.notifyArrayItemRangeChanged(selectedChannel.getmPosicion(), 1);
-*/
-            Log.w("TEST", "TEST");
-            LiveCanalCard card = data.get(channelNumber);
-            card.setmEstado(1);
-            getRowsFragment().setSelectedPosition(ROW_CHANNELS, true,
-                    new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-
-            currentMetaData = new MediaMetaData();
-
-            currentMetaData.setMediaTitle(card.getmTitle());
-            currentMetaData.setMediaArtistName(card.getmDescription());
-            currentMetaData.setMediaSourcePath(card.getmStream());
-
-            Log.w("CANAL", card.getmTitle());
-            selectedChannel = card;
-
-            mGlue.prepareIfNeededAndPlay(currentMetaData);
-
-            handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-            handlerLoadPrograms.postDelayed(runnableLoadPrograms, 500);
-
-        }
-        channelNumber = "";
-
-    }
-
-    private final Handler cambiarCanalHandler = new Handler();
-    private final Runnable cambiarCanalRunnable = new Runnable() {
-        @Override
-        public void run() {
-            cambiarCanal();
-        }
-    };
 
 
-    private Handler selectedHandler = new Handler();
-    private Runnable selectedRunnable = new Runnable() {
-        @Override
-        public void run() {
-            selectedHandler.removeCallbacks(this);
-            if (currentChannel != null) {
-                currentChannel.setmEstado(0);
-                channelsRowAdapter.replace(currentChannel.getmPosicion(), currentChannel);
-                channelsRowAdapter.notifyArrayItemRangeChanged(currentChannel.getmPosicion(), 1);
-            }
-            LiveCanalCard card = selectedChannel;
-            card.setmEstado(1);
-            channelsRowAdapter.replace(card.getmPosicion(), card);
-            channelsRowAdapter.notifyArrayItemRangeChanged(card.getmPosicion(), 1);
-            selectedChannel = card;
-            currentChannel = card;
 
-        }
-    };
+
+
 }
