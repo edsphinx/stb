@@ -4,15 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
+import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
-import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.OnItemViewSelectedListener;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v17.leanback.widget.SectionRow;
 import android.support.v4.app.ActivityOptionsCompat;
 
 import com.flynetwifi.netplay.AccountActivity;
@@ -25,13 +27,20 @@ import com.flynetwifi.netplay.MessagesActivity;
 import com.flynetwifi.netplay.MovieActivity;
 import com.flynetwifi.netplay.MusicActivity;
 import com.flynetwifi.netplay.Presenters.MenuPresenter;
+import com.flynetwifi.netplay.Presenters.MenuPresenterSelector;
 import com.flynetwifi.netplay.ProfileActivity;
 import com.flynetwifi.netplay.R;
+import com.flynetwifi.netplay.Rows.MenuListRow;
 import com.flynetwifi.netplay.Rows.MenuRow;
 import com.flynetwifi.netplay.SeriesActivity;
+import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
 import com.flynetwifi.netplay.Utils.Utils;
 import com.flynetwifi.netplay.VODSelectionActivity;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MenuFragment extends BrowseFragment implements OnItemViewSelectedListener {
@@ -39,8 +48,11 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
     private ArrayObjectAdapter mRowsAdapter;
     private Context mContext;
     private ListRow mainMenu;
-    private ListRow subMenu;
+    private MenuListRow subMenu;
     private int currentMenu = 0;
+
+    private BackgroundManager backgroundManager;
+    private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -58,22 +70,72 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
         setHeadersTransitionOnBackEnabled(false);
         setBrandColor(getResources().getColor(R.color.colorPrimary));
 
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+        Picasso.with(getActivity()).load(R.drawable.bg_default).skipMemoryCache()
+                .into(mBackgroundTarget);
+
     }
 
     private void setupRowAdapter() {
-        mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
+        mRowsAdapter = new ArrayObjectAdapter(new MenuPresenterSelector());
+
         createRows();
+        startEntranceTransition();
         setAdapter(mRowsAdapter);
     }
 
     private void createRows() {
         currentMenu = 0;
+        mRowsAdapter.clear();
+
+        final MenuPresenter presenter = new MenuPresenter();
+
         String json = Utils.inputStreamToString(getResources().openRawResource(R.raw.menu_data));
         MenuRow[] rows = new Gson().fromJson(json, MenuRow[].class);
-        for (MenuRow row : rows)
-            mRowsAdapter.add(0, createCardRow(row));
-        subMenu = new ListRow(new ArrayObjectAdapter(new MenuPresenter()));
+
+        mRowsAdapter.add(new SectionRow(new HeaderItem("Menu")));
+
+        for(MenuRow row : rows){
+            ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
+            List<MenuCard> listMenuCard = new ArrayList<>();
+
+            for(MenuCard card : row.getmCards()){
+                listRowAdapter.add(card);
+                listMenuCard.add(card);
+            }
+
+            MenuRow menuRow = new MenuRow();
+            menuRow.setmCards(listMenuCard);
+
+
+
+            MenuListRow listRow = new MenuListRow(
+                    new HeaderItem(""),
+                    listRowAdapter,
+                    row
+            );
+
+
+            mRowsAdapter.add(0, listRow);
+
+        }
+
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
+        MenuRow row = new MenuRow();
+
+
+         subMenu = new MenuListRow(
+                new HeaderItem(""),
+                listRowAdapter,
+                row
+        );
+
         mRowsAdapter.add(1, subMenu);
+
+
+
     }
 
     private ListRow createCardRow(MenuRow cardRow) {
@@ -206,8 +268,30 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
 
             if (!json.contentEquals("")) {
                 MenuRow[] rows = new Gson().fromJson(json, MenuRow[].class);
-                for (MenuRow row : rows)
-                    mRowsAdapter.replace(1, createCardRow(row));
+                MenuPresenter presenter = new MenuPresenter();
+
+                for(MenuRow row : rows){
+                    ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
+                    List<MenuCard> listMenuCard = new ArrayList<>();
+
+                    for(MenuCard card : row.getmCards()){
+                        listRowAdapter.add(card);
+                        listMenuCard.add(card);
+                    }
+
+                    MenuRow menuRow = new MenuRow();
+                    menuRow.setmCards(listMenuCard);
+
+                    subMenu = new MenuListRow(
+                            new HeaderItem(""),
+                            listRowAdapter,
+                            row
+                    );
+
+                    mRowsAdapter.replace(1, subMenu);
+
+                }
+
             } else {
                 mRowsAdapter.replace(1, subMenu);
             }

@@ -24,6 +24,7 @@ public class MenuPresenter extends Presenter {
         itemView.setFocusableInTouchMode(true);
         itemView.setFocusable(true);
         itemView.setClickable(true);
+        
         return new ViewHolder(itemView);
     }
 
@@ -34,6 +35,7 @@ public class MenuPresenter extends Presenter {
         //((ViewHolder) viewHolder).name.setText(menuCard.getmTitulo());
         //((ViewHolder) viewHolder).logo.setImageDrawable(mContext.getResources().getDrawable(menuCard.getLocalImageResourceId(mContext)));
         ((ViewHolder) viewHolder).logo.setImageDrawable(mContext.getResources().getDrawable(menuCard.getLocalImageResourceId(mContext)));
+
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            ((ViewHolder) viewHolder).logo.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.md_white_1000)));
 //        }

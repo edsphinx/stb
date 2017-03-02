@@ -3,20 +3,20 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="200dp"
     android:layout_height="200dp"
-    android:background="@android:color/transparent"
+    android:background="@null"
     android:layout_margin="0dp" >
 
-    <android.support.v7.widget.CardView
+  <!--  <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="1dp"
+        android:layout_margin="0dp"
         android:clickable="true"
         android:clipToPadding="false"
         android:foreground="?android:attr/selectableItemBackground"
         card_view:cardUseCompatPadding="false"
         card_view:cardBackgroundColor="@android:color/transparent"
         card_view:cardCornerRadius="0dp"
-        card_view:cardElevation="10dp">
+        card_view:cardElevation="10dp">-->
 
         <!--<RelativeLayout-->
             <!--android:id="@+id/imagen_menu"-->
@@ -30,8 +30,8 @@
 
                 <ImageView
                     android:id="@+id/logo"
-                    android:layout_width="198dp"
-                    android:layout_height="198dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside" />
             <!--</RelativeLayout>-->
 
@@ -51,6 +51,6 @@
                 <!--android:visibility="visible" />-->
         <!--</RelativeLayout>-->
 
-    </android.support.v7.widget.CardView>
+    <!--</android.support.v7.widget.CardView>-->
 
 </RelativeLayout>
