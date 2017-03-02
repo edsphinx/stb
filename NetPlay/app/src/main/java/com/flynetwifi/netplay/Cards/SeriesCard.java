@@ -22,8 +22,6 @@ public class SeriesCard {
     private String mCategoria = "";
     @SerializedName("img")
     private String mThumbnail = "";
-    @SerializedName("portada")
-    private String mBackground = "";
     @SerializedName("stream")
     private String mStream = "";
     @SerializedName("width")
@@ -100,13 +98,6 @@ public class SeriesCard {
         this.mThumbnail = mThumbnail;
     }
 
-    public String getmBackground() {
-        return mBackground;
-    }
-
-    public void setmBackground(String mBackground) {
-        this.mBackground = mBackground;
-    }
 
     public String getmStream() {
         return mStream;

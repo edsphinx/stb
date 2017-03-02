@@ -14,6 +14,7 @@ import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.SectionRow;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.util.Log;
 import android.view.View;
 
 import com.flynetwifi.netplay.Cards.SeriesCard;
@@ -50,7 +51,7 @@ public class SeriesFragment extends BrowseFragment {
     private Map<String, SeriesCard[]> data;
 
     @Override
-    public void onCreate(Bundle savedInstaceState){
+    public void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
         setupUi();
         setupRowAdapter();
@@ -119,6 +120,8 @@ public class SeriesFragment extends BrowseFragment {
     private void createRows() {
         mRowsAdapter.clear();
         final SeriesPresenter presenter = new SeriesPresenter();
+        mRowsAdapter.add(new SectionRow(new HeaderItem(getString(R.string.series))));
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -128,16 +131,15 @@ public class SeriesFragment extends BrowseFragment {
 
                     Gson gson = new Gson();
                     Type seriesCardType;
-                    seriesCardType = new TypeToken<Map<String, SeriesCard[]>>(){
+                    seriesCardType = new TypeToken<Map<String, SeriesCard[]>>() {
 
                     }.getType();
                     data = gson.fromJson(response, seriesCardType);
-
-                    mRowsAdapter.add(new SectionRow(new HeaderItem(getString(R.string.series))));
-                    for(HashMap.Entry<String, SeriesCard[]> entry : data.entrySet()){
+                    for (HashMap.Entry<String, SeriesCard[]> entry : data.entrySet()) {
+                        Log.w("SERIE", entry.getKey());
                         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
                         List<SeriesCard> listSeriesCard = new ArrayList<>();
-                        for(SeriesCard card: entry.getValue()){
+                        for (SeriesCard card : entry.getValue()) {
                             listRowAdapter.add(card);
                             listSeriesCard.add(card);
                         }
@@ -151,8 +153,7 @@ public class SeriesFragment extends BrowseFragment {
                         mRowsAdapter.add(listRow);
 
                     }
-                }
-                catch (JsonParseException e1) {
+                } catch (JsonParseException e1) {
                     e1.printStackTrace();
                 } catch (IllegalStateException e2) {
 
@@ -161,9 +162,9 @@ public class SeriesFragment extends BrowseFragment {
         });
         thread.start();
 
-        try{
+        try {
             thread.join();
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
