@@ -566,7 +566,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 /** Asignar nuevo canal Seleccionado */
                 selectedChannel = (LiveCanalCard) item;
                 /** Cargar thumbnail de Canal */
-                selectedHandler.postDelayed(selectedRunnable, 500);
+                ///selectedHandler.postDelayed(selectedRunnable, 500);
                 /** Cargar Programas de Canal **/
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                 handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);

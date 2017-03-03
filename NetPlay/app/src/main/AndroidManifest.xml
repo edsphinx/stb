@@ -36,7 +36,6 @@
             android:stateNotNeeded="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
@@ -133,9 +132,10 @@
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.Main" />
-        <activity android:name=".MusicPlaylistActivity"
+        <activity
+            android:name=".MusicPlaylistActivity"
             android:exported="true"
-            android:theme="@style/Theme.Settings"/>
+            android:theme="@style/Theme.Settings" />
         <activity
             android:name=".AccountActivity"
             android:exported="true"

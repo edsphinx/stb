@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.KeyEvent;
 
 import com.flynetwifi.netplay.Fragments.LiveFragment;
@@ -49,12 +50,21 @@ public class LiveActivity extends Activity {
     }
 
     @Override
-    public boolean dispatchKeyEvent(KeyEvent e){
-
-        if((e.getKeyCode() >= 7 && e.getKeyCode() <= 16) && e.getAction() == KeyEvent.ACTION_UP){
-            LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
-            if(fragment != null){
-                fragment.keypress(e);
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        if (e.getAction() == KeyEvent.ACTION_UP) {
+            if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
+                LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
+                if (fragment != null) {
+                    fragment.keypress(e);
+                }
+            } else if (e.getKeyCode() == 82) {
+                Intent intent = new Intent();
+                intent = new Intent(this.getBaseContext(),
+                        MainActivity.class);
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
+                        .toBundle();
+                startActivity(intent, bundle);
+                this.finish();
             }
         }
         return super.dispatchKeyEvent(e);

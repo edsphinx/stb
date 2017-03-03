@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.flynetwifi.netplay"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -41,5 +41,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
     compile 'com.google.code.gson:gson:2.7'
+
+    compile 'com.google.android.libraries.tv:companionlibrary:0.1'
 
 }

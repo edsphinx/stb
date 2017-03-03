@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.media.MediaMetadata;
 import android.media.MediaPlayer;
@@ -19,6 +20,7 @@ import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.PlaybackControlsRow;
 import android.support.v17.leanback.widget.PlaybackControlsRowPresenter;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
@@ -205,7 +207,6 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
         float dpHeight = height / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
 
         surfaceHolder.setFixedSize(Math.round(dpWidth), Math.round(dpHeight));*/
-        //surfaceHolder.setFormat(PixelFormat.RGBA_8888);
 
         mPlayer.setDisplay(surfaceHolder);
     }
