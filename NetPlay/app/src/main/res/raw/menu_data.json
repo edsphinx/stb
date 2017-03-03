@@ -6,7 +6,8 @@
         "id": 0,
         "type": "DEFAULT",
         "titulo": "Live TV",
-        "localImageResource": "live_tv"
+        "localImageResource": "live_tv
+        "
       },
       {
         "id": 1,
