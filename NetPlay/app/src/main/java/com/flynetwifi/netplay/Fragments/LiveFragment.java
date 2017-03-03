@@ -674,6 +674,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         }
         /** RESET al Numero del Canal */
         channelNumber = "";
+        setTitle("");
 
     }
 
@@ -690,6 +691,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             int numero = e.getKeyCode() - 7;
             /** Se concatena el numero al guardado */
             channelNumber = channelNumber + String.valueOf(numero);
+            setTitle(channelNumber);
             /** Cambiar el Canal */
             cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
             cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
