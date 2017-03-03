@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 
 import com.flynetwifi.netplay.Tasks.LoginTask;
 
@@ -36,14 +36,13 @@ public class LoginActivity extends Activity {
         mClaveView = (TextInputEditText) findViewById(R.id.password);
 
 
-        Button mSignInButton = (Button) findViewById(R.id.sign_in_button);
+        AppCompatButton mSignInButton = (AppCompatButton) findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
-
 
         settings = getSharedPreferences("settings", 0);
 
@@ -61,6 +60,16 @@ public class LoginActivity extends Activity {
             clave = "";
         }
         mClaveView.setText(clave);
+
+        if(!usuario.contentEquals("") && !clave.contentEquals("")){
+            mSignInButton.requestFocus();
+            mSignInButton.requestFocusFromTouch();
+        }
+
+        /** Obtener Usuario y Clave de Usuario por MAC */
+        if(usuario.contentEquals("") && clave.contentEquals("")){
+
+        }
 
     }
 
