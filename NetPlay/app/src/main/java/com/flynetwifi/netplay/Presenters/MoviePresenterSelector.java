@@ -40,7 +40,7 @@ public class MoviePresenterSelector extends PresenterSelector {
         MoviesListRow listRow = (MoviesListRow) item;
         MoviesRow row = listRow.getCardRow();
 
-        if (row.useShadow()) return mShadowEnabledRowPresenter;
+        //if (row.useShadow()) return mShadowEnabledRowPresenter;
         return mShadowDisabledRowPresenter;
     }
 
