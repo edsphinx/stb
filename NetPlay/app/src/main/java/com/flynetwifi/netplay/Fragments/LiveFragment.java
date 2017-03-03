@@ -25,15 +25,20 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import com.flynetwifi.netplay.Cards.LiveActionCard;
 import com.flynetwifi.netplay.Cards.LiveCanalCard;
 import com.flynetwifi.netplay.Cards.LiveProgramCard;
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.MediaPlayers.LiveMediaPlayerGlue;
+import com.flynetwifi.netplay.Presenters.LiveActionPresenter;
 import com.flynetwifi.netplay.Presenters.LiveCanalPresenter;
 import com.flynetwifi.netplay.Presenters.LiveProgramPresenter;
 import com.flynetwifi.netplay.R;
+import com.flynetwifi.netplay.Rows.LiveActionsListRow;
+import com.flynetwifi.netplay.Rows.LiveActionsRow;
 import com.flynetwifi.netplay.Rows.LiveProgramRow;
 import com.flynetwifi.netplay.Utils.DownloadData;
+import com.flynetwifi.netplay.Utils.Utils;
 import com.flynetwifi.netplay.media.MediaMetaData;
 import com.flynetwifi.netplay.media.MediaPlayerGlue;
 import com.flynetwifi.netplay.media.MediaUtils;
@@ -43,7 +48,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.FormBody;
@@ -71,9 +78,10 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     private ArrayObjectAdapter infoRowsAdapter;
 
     /**
-     * Adaptador de Canales, Canales Favoritos y Programas
+     * Adaptador de Canales, Acciones, Canales Favoritos y Programas
      */
     private ArrayObjectAdapter channelsRowAdapter;
+    private ArrayObjectAdapter actionsRowAdapter;
     private ArrayObjectAdapter favoriteChannelsRowAdapter;
     private ArrayObjectAdapter programsRowAdapter;
 
@@ -112,7 +120,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     /**
      * CONSTANTES
      */
-    private int LOAD_PROGRAMS_DELAY = 500;
+    private int LOAD_PROGRAMS_DELAY = 700;
 
 
     /**
@@ -130,9 +138,10 @@ public class LiveFragment extends PlaybackOverlayFragment implements
      * Deben ser secuenciales e iniciar por <cero>
      */
     private final int ROW_CHANNELS = 0;
-    private final int ROW_PROGRAMATION = 1;
-    // private final int ROw_PLAYER = 2;
-    private final int ROW_FAVORITE_CHANNELS = 2;
+    private final int ROW_ACTIONS = 1;
+    private final int ROW_PROGRAMATION = 2;
+    // private final int ROw_PLAYER = 3;
+    private final int ROW_FAVORITE_CHANNELS = 3;
 
 
     private final Handler handlerLoadPrograms = new Handler();
@@ -205,6 +214,9 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         /** Agregar Fila de Canales */
         addChannelsRow();
 
+        /** Agregar Fila de Acciones */
+        addActionsRow();
+
         /** Agregar Fila de Programacion */
         addProgramation();
 
@@ -259,7 +271,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
          * @Option PlaybackOverlayFragment.BG_DARK
          *
          */
-        setBackgroundType(PlaybackOverlayFragment.BG_LIGHT);
+        setBackgroundType(PlaybackOverlayFragment.BG_DARK);
     }
 
     /**
@@ -371,6 +383,44 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     }
 
     /**
+     * Descripcion: Agregar Fila de Acciones
+     */
+    private void addActionsRow(){
+        final LiveActionPresenter presenter = new LiveActionPresenter();
+        /** Inicializar el Adaptador */
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
+        List<LiveActionCard> listRowCard = new ArrayList<>();
+
+        /** Obtener  JSON DATA */
+        String json = Utils.inputStreamToString(getResources().openRawResource(R.raw.menu_actions));
+        /** Parsear DATA a un array de LiveActionsRow[] */
+        LiveActionsRow[] rows = new Gson().fromJson(json, LiveActionsRow[].class);
+
+        /** Leer Cada ROW */
+        for(LiveActionsRow row : rows){
+            /** Cada LiveActionCard se agrega al Adaptador y Lista Princial */
+            for(LiveActionCard card : row.getmCards()){
+                listRowAdapter.add(card);
+                listRowCard.add(card);
+            }
+            /** Setup de la Fila de Acciones */
+            LiveActionsRow liveActionsRow = new LiveActionsRow();
+            liveActionsRow.setmCards(listRowCard);
+            /** Setup de Lista de Filas */
+            LiveActionsListRow listRow = new LiveActionsListRow(
+                    new HeaderItem(""),
+                    listRowAdapter,
+                    row
+            );
+            /** Se agrega la lista de ROWS al Adaptador Principal en su indice */
+            infoRowsAdapter.add(ROW_ACTIONS, listRow);
+
+        }
+
+
+    }
+
+    /**
      * Description: Agregar Fila de Programas Vacia
      */
     private void addProgramation() {
@@ -470,7 +520,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             selectedChannel = card;
             /** Cargar Programas de Canal */
             handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-            handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
+            handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
 
             /** Si el ID de la ROW es de Canales Favoritos */
             if (row.getId() == ROW_CHANNELS) {
@@ -480,6 +530,21 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
                 editor.commit();
             }
+        }
+        else if(item instanceof LiveActionCard){
+            final LiveActionCard card = (LiveActionCard) item;
+            /** Add Channel To Favorites */
+            if(card.getmId() == 0){
+                addFavoriteChannel();
+            }
+            /** Live Replay */
+            else if(card.getmId() == 1){
+                MediaMetaData currentMetaData = new MediaMetaData();
+                currentMetaData.setMediaTitle(currentChannel.getmTitle());
+                currentMetaData.setMediaSourcePath(currentChannel.getmRecord());
+                mGlue.prepareIfNeededAndPlay(currentMetaData);
+            }
+
         }
     }
 
@@ -504,7 +569,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 selectedHandler.postDelayed(selectedRunnable, 500);
                 /** Cargar Programas de Canal **/
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                handlerLoadPrograms.postDelayed(runnableLoadPrograms, 700);
+                handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
 
                 /** Reproduccion del Primer Canal */
                 if (playOnSelect == true) {
@@ -525,7 +590,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                                 new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
                         /** Cargar Programas */
                         handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                        handlerLoadPrograms.postDelayed(runnableLoadPrograms, 500);
+                        handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
                     }
                     /** Los proximos select no reproduciran */
                     playOnSelect = false;
@@ -652,7 +717,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             /** Mover el Foco al Canal Seleccionado */
             LiveCanalCard card = data.get(channelNumber);
             card.setmEstado(1);
-            getRowsFragment().setSelectedPosition(ROW_CHANNELS, true,
+            getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
                     new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
 
             /** Actualizar MetaData */
@@ -668,7 +733,13 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
             /** Cargar Programas de Canal **/
             handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-            handlerLoadPrograms.postDelayed(runnableLoadPrograms, 500);
+            handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+
+            /** Guardar el numero del Canal Seleccionado en SharedPreferences */
+            SharedPreferences mPrefs = getActivity().getPreferences(0);
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
+            editor.commit();
 
 
         }
