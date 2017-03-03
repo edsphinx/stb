@@ -119,7 +119,8 @@ public class MainActivity extends Activity {
             launch();
         }
         else{
-            mHandlerLogin.postDelayed(mRunnableLogin, 3500);
+
+            mHandlerLogin.postDelayed(mRunnableLogin, 2500);
         }
     }
 
