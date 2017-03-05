@@ -12,7 +12,6 @@ import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
 import android.support.v17.leanback.widget.DetailsOverviewRow;
 import android.support.v17.leanback.widget.DetailsOverviewRowPresenter;
-import android.support.v17.leanback.widget.FullWidthDetailsOverviewRowPresenter;
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
@@ -46,26 +45,64 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
     public static final String TAG = "MovieDetailFragment";
     private static final String TRANSITION_NAME = "t_for_transition";
 
-    private String id;
-    private ArrayObjectAdapter mRowsAdapter;
-    private MovieDetailCard data = null;
 
+    public String response = null;
+    public MovieDetailCard data = null;
+    public ArrayObjectAdapter mRowsAdapter;
     private BackgroundManager backgroundManager;
     private PicassoBackgroundManagerTarget mBackgroundTarget;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getActivity().getIntent().getExtras();
 
-        id = MoviesFragment.id;
-        setupUi();
+        String id = MoviesFragment.id;
+        setupUI(id);
         setupEventListeners();
     }
 
+    private void setupUI(String id) {
+        final DetailsOverviewRowPresenter rowPresenter = setupRowPresenter();
+         mRowsAdapter = setupRowAdapter(rowPresenter);
 
-    private void setupUi() {
-        final FullWidthDetailsOverviewRowPresenter rowPresenterBAck =
+        data = setupData(id);
+
+        // Setup action and detail row.
+        final DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
+
+
+        if (data != null) {
+            setupLogo(detailsOverview);
+            setupBackground();
+        }
+
+        ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
+        actionAdapter.add(new Action(1, getString(R.string.play)));
+        detailsOverview.setActionsAdapter(actionAdapter);
+        mRowsAdapter.add(detailsOverview);
+
+
+        // Setup recommended row.
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
+        for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
+        HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
+        mRowsAdapter.add(new ListRow(header, listRowAdapter));
+
+
+        setAdapter(mRowsAdapter);
+
+        startTransition();
+
+
+    }
+
+    /**
+     * Create ROW Presenter
+     */
+    private DetailsOverviewRowPresenter setupRowPresenter() {
+        /*final FullWidthDetailsOverviewRowPresenter rowPresenterBAck =
                 new FullWidthDetailsOverviewRowPresenter(
                         new MovieDetailPresenter(getActivity())) {
 
@@ -84,12 +121,11 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
                         return viewHolder;
                     }
                 };
-        data = null;
+                */
 
-
-        final DetailsOverviewRowPresenter rowPresenter =
+        DetailsOverviewRowPresenter rowPresenter =
                 new DetailsOverviewRowPresenter(
-                    new MovieDetailPresenter(getActivity())) {
+                        new MovieDetailPresenter(getActivity())) {
                     @Override
                     protected RowPresenter.ViewHolder createRowViewHolder(ViewGroup parent) {
                         RowPresenter.ViewHolder viewHolder = super.createRowViewHolder(parent);
@@ -107,13 +143,32 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
                     }
                 };
 
+        return rowPresenter;
+    }
+
+    private ArrayObjectAdapter setupRowAdapter(DetailsOverviewRowPresenter rowPresenter) {
+        // Setup PresenterSelector to distinguish between the different rows.
+        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
+        rowPresenterSelector.addClassPresenter(DetailsOverviewRow.class, rowPresenter);
+        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
+        return new ArrayObjectAdapter(rowPresenterSelector);
+    }
+
+    /**
+     * Descripcion: Download Data de Pelicula?
+     *
+     * @param idMovie
+     * @return
+     */
+    private MovieDetailCard setupData(final String idMovie) {
+        response = null;
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(Constants.server + Constants.movies_details
-                        + id);
-                data = new Gson().fromJson(response, MovieDetailCard.class);
+                response = downloadData.run(Constants.server + Constants.movies_details
+                        + idMovie);
 
             }
         });
@@ -121,28 +176,36 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
         try {
             thread.join();
+            if (response != null) {
+                return new Gson().fromJson(response, MovieDetailCard.class);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-
-        ListRowPresenter shadowDisabledRowPresenter = new ListRowPresenter();
-        shadowDisabledRowPresenter.setShadowEnabled(false);
+        return null;
 
 
-        // Setup PresenterSelector to distinguish between the different rows.
-        ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
-        rowPresenterSelector.addClassPresenter(DetailsOverviewRow.class, rowPresenter);
-        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
-        mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
+    }
 
-        // Setup action and detail row.
-        final DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
+    /**
+     * Descripcion: Setup el Background
+     */
+    private void setupBackground() {
+        //Imagen de Fondo
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+        Picasso.with(getActivity())
+                .load(data.getmBackground())
+                .skipMemoryCache()
+                .error(R.drawable.bg_poster)
+                .into(mBackgroundTarget);
+    }
 
-        // detailsOverview.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.ic_tv));
-
+    private void setupLogo(final DetailsOverviewRow detailsOverview) {
         //Logo de Pelicula
-        thread = new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -160,34 +223,9 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
         });
 
         thread.start();
+    }
 
-
-//Imagen de Fondo
-        backgroundManager = BackgroundManager.getInstance(getActivity());
-        backgroundManager.attach(getActivity().getWindow());
-        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity())
-                .load(data.getmBackground())
-                .skipMemoryCache()
-                .error(R.drawable.bg_poster)
-                .into(mBackgroundTarget);
-
-
-        ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
-        actionAdapter.add(new Action(1, getString(R.string.play)));
-        detailsOverview.setActionsAdapter(actionAdapter);
-        mRowsAdapter.add(detailsOverview);
-
-
-        // Setup recommended row.
-        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
-        for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
-        HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
-        mRowsAdapter.add(new ListRow(header, listRowAdapter));
-
-
-        setAdapter(mRowsAdapter);
-
+    private void startTransition() {
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -197,44 +235,74 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
         }, 500);
     }
 
-
-
-
-
     private void setupEventListeners() {
         setOnItemViewSelectedListener(this);
         setOnItemViewClickedListener(this);
     }
 
+
     @Override
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                               RowPresenter.ViewHolder rowViewHolder, Row row) {
-        if (!(item instanceof Action)) return;
-        Action action = (Action) item;
-        if (action.getId() == 1) {
-            Intent intent = null;
-            intent = new Intent(getActivity().getBaseContext(),
-                    MoviePlayerActivity.class);
-            intent.putExtra("nombre", data.getmTitle());
-            intent.putExtra("url", data.getmStream());
-            Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
-                    .toBundle();
-            startActivity(intent, bundle);
-        } else if (action.getId() == 2) {
-            setSelectedPosition(1);
-        } else {
-
+        if (item instanceof MovieRecommendedCard) {
+            MovieRecommendedCard card = (MovieRecommendedCard) item;
+            reloadMovie(String.valueOf(card.getmId()));
+        }
+        if (item instanceof Action) {
+            Action action = (Action) item;
+            if (action.getId() == 1) {
+                Intent intent = null;
+                intent = new Intent(getActivity().getBaseContext(),
+                        MoviePlayerActivity.class);
+                intent.putExtra("nombre", data.getmTitle());
+                intent.putExtra("url", data.getmStream());
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                        .toBundle();
+                startActivity(intent, bundle);
+            } else if (action.getId() == 2) {
+                setSelectedPosition(1);
+            }
         }
     }
 
     @Override
     public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
                                RowPresenter.ViewHolder rowViewHolder, Row row) {
-        if (mRowsAdapter.indexOf(row) > 0) {
 
-        } else {
 
-        }
     }
+
+    private void reloadMovie(String id) {
+        //mRowsAdapter.clear();
+
+        data = setupData(id);
+
+        // Setup action and detail row.
+        final DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
+
+
+        if (data != null) {
+            setupLogo(detailsOverview);
+            setupBackground();
+        }
+
+        ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
+        actionAdapter.add(new Action(1, getString(R.string.play)));
+        detailsOverview.setActionsAdapter(actionAdapter);
+        mRowsAdapter.replace(0, detailsOverview);
+
+
+        // Setup recommended row.
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
+        for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
+        HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
+        mRowsAdapter.replace(1, new ListRow(header, listRowAdapter));
+
+
+        //mRowsAdapter.notifyArrayItemRangeChanged(0, 2);
+
+    }
+
+
 }
 
