@@ -77,6 +77,7 @@ public class LoginActivity extends Activity {
         if (!usuario.contentEquals("") && !clave.contentEquals("")) {
             mSignInButton.requestFocus();
             mSignInButton.requestFocusFromTouch();
+            attemptLogin();
         }
 
         /** Obtener Usuario y Clave de Usuario por MAC */
