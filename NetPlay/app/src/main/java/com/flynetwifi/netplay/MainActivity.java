@@ -2,8 +2,11 @@ package com.flynetwifi.netplay;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -117,10 +120,12 @@ public class MainActivity extends Activity {
         user_type = loginSettings.getString("user_type", "");
         if (access_token != "") {
             launch();
-        }
-        else{
+        } else {
+            while (!isNetworkAvailable()) {
 
-            mHandlerLogin.postDelayed(mRunnableLogin, 2500);
+            }
+            mHandlerLogin.post(mRunnableLogin);
+
         }
     }
 
@@ -140,7 +145,7 @@ public class MainActivity extends Activity {
             Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
                     .toBundle();
             startActivity(intent, bundle);
-        }else{
+        } else {
             Fragment fragment = new MenuFragment();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
                     .commit();
@@ -198,6 +203,13 @@ public class MainActivity extends Activity {
         } catch (InterruptedException e) {
         }
         return false;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     public void reboot() {
