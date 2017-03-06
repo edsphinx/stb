@@ -169,6 +169,7 @@ public class LoginActivity extends Activity {
             thread.join();
             mUsuarioView.setText(usuario);
             mClaveView.setText(clave);
+            attemptLogin();
         }catch (Exception e){
             e.printStackTrace();
         }
