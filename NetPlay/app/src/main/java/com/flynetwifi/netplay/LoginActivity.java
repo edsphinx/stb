@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -61,8 +60,8 @@ public class LoginActivity extends Activity {
 
         settings = getSharedPreferences("settings", 0);
 
-        String usuario = settings.getString("username", "null");
-        String clave = settings.getString("password", "null");
+        String usuario = "";settings.getString("username", "null");
+        String clave = ""; settings.getString("password", "null");
         //mac = settings.getString("mac", "null");
 
         if (usuario.contentEquals("null")) {
@@ -127,6 +126,8 @@ public class LoginActivity extends Activity {
     }
 
     private void getUsuarioClave() {
+        usuario = "";
+        clave = "";
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -144,18 +145,18 @@ public class LoginActivity extends Activity {
                         .build();
                 try (Response response = client.newCall(request).execute()) {
                     result = response.body().string();
+                    if(result != "[]") {
 
-                    Gson gson = new Gson();
-                    Type listType = new TypeToken<HashMap<String, String>>() {
-                    }.getType();
-                    HashMap<String, String> posts = (HashMap<String, String>) gson.fromJson(result, listType);
-                    for (HashMap.Entry<String, String> entry : posts.entrySet()) {
-                        Log.w("TEST", entry.getKey());
-
-                        if (entry.getKey().contentEquals("username")) {
-                            usuario = entry.getValue();
-                        } else if (entry.getKey().contentEquals("password")) {
-                            clave = entry.getValue();
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<HashMap<String, String>>() {
+                        }.getType();
+                        HashMap<String, String> posts = (HashMap<String, String>) gson.fromJson(result, listType);
+                        for (HashMap.Entry<String, String> entry : posts.entrySet()) {
+                            if (entry.getKey().contentEquals("username")) {
+                                usuario = entry.getValue();
+                            } else if (entry.getKey().contentEquals("password")) {
+                                clave = entry.getValue();
+                            }
                         }
                     }
 
@@ -164,8 +165,6 @@ public class LoginActivity extends Activity {
                 }
             }
         });
-        usuario = "";
-        clave = "";
 
         thread.start();
 
@@ -177,10 +176,6 @@ public class LoginActivity extends Activity {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
 
     }
 
