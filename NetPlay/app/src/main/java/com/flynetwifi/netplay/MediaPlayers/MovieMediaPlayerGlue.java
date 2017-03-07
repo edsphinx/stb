@@ -286,6 +286,7 @@ public class MovieMediaPlayerGlue extends MediaPlayerGlue implements
             @Override public void onPrepared(MediaPlayer mp) {
                 mInitialized = true;
                 mPlayer.start();
+                mPlayer.seekTo(mediaMetaData.getmPosition());
                 updateVideoSessionPlayState(PlaybackState.STATE_PLAYING);
                 updateVideoSessionMetaData();
                 onMetadataChanged();

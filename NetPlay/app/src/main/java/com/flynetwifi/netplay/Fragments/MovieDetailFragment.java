@@ -254,6 +254,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
                 Intent intent = null;
                 intent = new Intent(getActivity().getBaseContext(),
                         MoviePlayerActivity.class);
+                intent.putExtra("id", data.getmId());
                 intent.putExtra("nombre", data.getmTitle());
                 intent.putExtra("url", data.getmStream());
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())

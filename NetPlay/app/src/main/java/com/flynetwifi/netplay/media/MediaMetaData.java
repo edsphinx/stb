@@ -27,10 +27,11 @@ public class MediaMetaData implements Parcelable{
     private String mMediaAlbumName;
     private int mMediaAlbumArtResId;
     private String mMediaAlbumArtUrl;
+    private int mPosition;
 
     MediaMetaData(Uri mediaSourceUri, String mediaSourcePath, String mediaTitle,
                   String mediaArtistName, String mediaAlbumName, int mediaAlbumArtResId,
-                  String mediaAlbumArtUrl) {
+                  String mediaAlbumArtUrl, int mPosition) {
         mMediaSourceUri = mediaSourceUri;
         mMediaSourcePath = mediaSourcePath;
         mMediaTitle = mediaTitle;
@@ -38,6 +39,7 @@ public class MediaMetaData implements Parcelable{
         mMediaAlbumName = mediaAlbumName;
         mMediaAlbumArtResId = mediaAlbumArtResId;
         mMediaAlbumArtUrl = mediaAlbumArtUrl;
+        mPosition = mPosition;
     }
 
     public MediaMetaData() {
@@ -51,6 +53,7 @@ public class MediaMetaData implements Parcelable{
         mMediaAlbumName = in.readString();
         mMediaAlbumArtResId = in.readInt();
         mMediaAlbumArtUrl = in.readString();
+        mPosition = in.readInt();
     }
 
 
@@ -111,6 +114,14 @@ public class MediaMetaData implements Parcelable{
         mMediaAlbumArtUrl = mediaAlbumArtUrl;
     }
 
+    public int getmPosition() {
+        return mPosition;
+    }
+
+    public void setmPosition(int mPosition) {
+        this.mPosition = mPosition;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -125,6 +136,7 @@ public class MediaMetaData implements Parcelable{
         dest.writeString(mMediaAlbumName);
         dest.writeInt(mMediaAlbumArtResId);
         dest.writeString(mMediaAlbumArtUrl);
+        dest.writeInt(mPosition);
     }
 
     public static final Creator<MediaMetaData> CREATOR = new Creator<MediaMetaData>() {
