@@ -95,7 +95,8 @@ public class LiveCanalPresenter extends Presenter {
         if (card.getmEstado() == 0) {
             ((ViewHolder) viewHolder).updateCardViewImage(card.getmLogo());
         } else {
-            ((ViewHolder) viewHolder).updateCardViewImage(card.getmThumbnail());
+            //((ViewHolder) viewHolder).updateCardViewImage(card.getmThumbnail());
+            ((ViewHolder) viewHolder).updateCardViewImage(card.getmLogo());
         }
 
     }

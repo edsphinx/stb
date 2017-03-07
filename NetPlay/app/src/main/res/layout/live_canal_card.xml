@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@+id/thumbnail"
-                android:background="@drawable/bg_default"
+                android:background="@drawable/bg_transparent"
                 android:orientation="horizontal">
 
                 <TextView
