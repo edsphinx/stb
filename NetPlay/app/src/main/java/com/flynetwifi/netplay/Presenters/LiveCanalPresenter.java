@@ -60,7 +60,7 @@ public class LiveCanalPresenter extends Presenter {
 
         void updateCardViewImage(String uri) {
             int resourceId = mContext.getResources()
-                    .getIdentifier("live_tv",
+                    .getIdentifier("live_placeholder",
                             "drawable", mContext.getPackageName());
             Picasso.with(mContext)
                     .load(resourceId)
