@@ -31,14 +31,22 @@ import com.flynetwifi.netplay.media.MediaMetaData;
 import com.flynetwifi.netplay.media.MediaPlayerGlue;
 import com.flynetwifi.netplay.media.MediaUtils;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, MediaPlayerGlue.OnMediaStateChangeListener {
 
 
     public static final String TAG = "SeriesPlayerFragment";
     public int TIME = 0;
-    public String id;
+    public String id, nombre, url, row, posicion;
+
     private ArrayObjectAdapter mRowsAdapter;
+    private List<SeriesChapterCard> listPosiciones;
+    private HashMap<Integer, List<SeriesChapterCard>> dataChapters;
+    private int currentPosition = 0;
+
     private SeriesMediaPlayerGlue mGlue;
     private Handler mSeekHandler = new Handler();
     private Runnable mSeekRunnable = new Runnable() {
@@ -60,6 +68,8 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
             }
 
 
+
+
         }
     };
 
@@ -68,7 +78,13 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        id = SeriesSeasonsFragment.id;
+        Bundle args = getArguments();
+        id = args.getString("id", "");
+        nombre = args.getString("nombre", "");
+        url = args.getString("url", "");
+        row = args.getString("row", "");
+        posicion = args.getString("posicion", "");
+
         mGlue = new SeriesMediaPlayerGlue(getActivity(), this) {
 
             @Override
@@ -104,6 +120,11 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
         });
         setBackgroundType(PlaybackOverlayFragment.BG_NONE);
         addPlaybackControlsRow();
+
+
+        dataChapters = SeriesSeasonsFragment.dataChapters;
+        listPosiciones = dataChapters.get(Integer.parseInt(row));
+
     }
 
     @Override
@@ -125,15 +146,11 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
             currentMetaData.setMediaSourcePath(intentMetaData.getMediaSourcePath());
             currentMetaData.setMediaAlbumArtUrl(intentMetaData.getMediaAlbumArtUrl());
         } else {
-            currentMetaData.setMediaTitle(SeriesSeasonsFragment.nombre);
+            currentMetaData.setMediaTitle(nombre);
             currentMetaData.setMediaArtistName("");
-            /*if(SeriesSeasonsFragment.url == "") {
-                currentMetaData.setMediaSourcePath(Constants.server + "/multimedia/peliculas/Deadpool.m3u8");
-            }
-            else{*/
-            currentMetaData.setMediaSourcePath(SeriesSeasonsFragment.url);
+            currentMetaData.setMediaSourcePath(url);
             currentMetaData.setmPosition(getTime());
-            //}
+            //currentMetaData.setmPosition(2785000);
         }
         mGlue.setOnMediaFileFinishedPlayingListener(this);
         mGlue.prepareIfNeededAndPlay(currentMetaData);
@@ -167,6 +184,7 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
         mGlue.releaseMediaSession();
         mGlue.saveUIState();
     }
+
 
     @Override
     public void onDestroy() {
@@ -220,7 +238,23 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
     @Override
     public void onMediaStateChanged(MediaMetaData currentMediaMetaData, int currentMediaState) {
         if (currentMediaState == MediaUtils.MEDIA_STATE_COMPLETED) {
-            mGlue.startPlayback();
+            //mGlue.startPlayback();
+            for(SeriesChapterCard card : listPosiciones ){
+                if(card.getmPosicion() == Integer.parseInt(posicion)){
+
+                    SeriesChapterCard capitulo = (SeriesChapterCard) card;
+                    capitulo = listPosiciones.get(capitulo.getmPosicion() + 1);
+                    id = capitulo.getmId();
+                    MediaMetaData currentMetaData = new MediaMetaData();
+
+                    currentMetaData.setMediaTitle(capitulo.getmNombre());
+                    currentMetaData.setMediaArtistName("");
+                    currentMetaData.setMediaSourcePath(capitulo.getmStream());
+                    currentMetaData.setmPosition(getTime());
+
+                    mGlue.prepareIfNeededAndPlay(currentMetaData);
+                }
+            }
         }
     }
 

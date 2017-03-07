@@ -8,6 +8,7 @@ public class SeriesChapterCard {
     @SerializedName("nombre") private String mNombre = "";
     @SerializedName("logo") private String mLogo = "";
     @SerializedName("stream") private String mStream = "";
+    private int mPosicion;
 
     public String getmId() {
         return mId;
@@ -39,5 +40,13 @@ public class SeriesChapterCard {
 
     public void setmStream(String mStream) {
         this.mStream = mStream;
+    }
+
+    public int getmPosicion() {
+        return mPosicion;
+    }
+
+    public void setmPosicion(int mPosicion) {
+        this.mPosicion = mPosicion;
     }
 }
