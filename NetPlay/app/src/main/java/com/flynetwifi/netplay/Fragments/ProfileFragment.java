@@ -3,7 +3,6 @@ package com.flynetwifi.netplay.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v17.leanback.app.BrowseFragment;
@@ -35,7 +34,6 @@ public class ProfileFragment extends BrowseFragment {
 
     private ArrayObjectAdapter mRowsAdapter;
     private Context mContext;
-    private MediaPlayer mediaPlayer;
     private AccountProfilesRow data = null;
     private BackgroundManager backgroundManager;
     private PicassoBackgroundManagerTarget mBackgroundTarget;
