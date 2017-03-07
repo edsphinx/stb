@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 import com.flynetwifi.netplay.Cards.LiveCanalCard;
 import com.flynetwifi.netplay.R;
-import com.flynetwifi.netplay.Utils.Utils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -60,12 +59,16 @@ public class LiveCanalPresenter extends Presenter {
         }
 
         void updateCardViewImage(String uri) {
+            int resourceId = mContext.getResources()
+                    .getIdentifier("live_placeholder",
+                            "drawable", mContext.getPackageName());
+            Picasso.with(mContext)
+                    .load(resourceId)
+                    .into(mImageCardViewTarget);
+
             Picasso.with(mContext)
                     .load(uri)
-                    .resize(Utils.convertDpToPixel(mContext, CARD_WIDTH),
-                            Utils.convertDpToPixel(mContext, CARD_HEIGHT))
-                    .placeholder(R.drawable.bg_poster)
-                    .error(R.drawable.bg_poster)
+                    .placeholder(R.drawable.live_tv)
                     .skipMemoryCache()
                     .into(mImageCardViewTarget);
         }
@@ -92,6 +95,7 @@ public class LiveCanalPresenter extends Presenter {
 
         ((ViewHolder) viewHolder).name.setText(card.getmTitle());
         ((ViewHolder) viewHolder).number.setText(String.valueOf(card.getmNumero()));
+
         if (card.getmEstado() == 0) {
             ((ViewHolder) viewHolder).updateCardViewImage(card.getmLogo());
         } else {

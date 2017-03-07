@@ -23,17 +23,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flynetwifi.netplay.Cards.AccountCard;
+import com.flynetwifi.netplay.Cards.AccountProfileCard;
 import com.flynetwifi.netplay.Cards.BillsCard;
+import com.flynetwifi.netplay.Cards.MessagesCard;
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.MainActivity;
 import com.flynetwifi.netplay.Presenters.AccountBillPresenter;
 import com.flynetwifi.netplay.Presenters.AccountPresenter;
+import com.flynetwifi.netplay.Presenters.AccountProfilesPresenter;
+import com.flynetwifi.netplay.Presenters.MessagesPresenter;
 import com.flynetwifi.netplay.R;
+import com.flynetwifi.netplay.Rows.AccountProfilesRow;
 import com.flynetwifi.netplay.Utils.DownloadData;
 import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AccountFragment extends DetailsFragment implements OnItemViewSelectedListener,
@@ -46,19 +56,23 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
     private ArrayObjectAdapter mRowsAdapter;
     private AccountCard data = null;
     private BillsCard[] dataBills = null;
+    private AccountProfilesRow dataProfiles = null;
+    private Map<String, MessagesCard> dataMessages = new HashMap<>();
 
     private BackgroundManager backgroundManager;
     private PicassoBackgroundManagerTarget mBackgroundTarget;
 
+    private final int DATA_ROW = 0;
+    private final int FACTURAS_ROW = 1;
+    private final int PROFILES_ROW = 2;
+    private final int MESSAGEs_ROW = 3;
+
     @Override
     public void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
-
-
         setupUi();
         setupEventListeners();
     }
-
 
 
     private void setupUi() {
@@ -83,10 +97,11 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
                     }
                 };
 
-
         // Setup PresenterSelector to distinguish between the different rows.
         ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
         rowPresenterSelector.addClassPresenter(DetailsOverviewRow.class, rowPresenter);
+        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
+        rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
         rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
         mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);
 
@@ -125,10 +140,15 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
 
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
-        actionAdapter.add(new Action(1, getString(R.string.account_bills)));
-        actionAdapter.add(new Action(2, getString(R.string.accounts)));
+        actionAdapter.add(new Action(FACTURAS_ROW, getString(R.string.account_bills)));
+        actionAdapter.add(new Action(PROFILES_ROW, getString(R.string.accounts)));
+        actionAdapter.add(new Action(MESSAGEs_ROW, "Mensajes"));
         detailsOverview.setActionsAdapter(actionAdapter);
-        mRowsAdapter.add(detailsOverview);
+        mRowsAdapter.add(DATA_ROW, detailsOverview);
+
+        /**
+         * Agregando Facturas de Cliente
+         */
         final ArrayObjectAdapter billsAdapter = new ArrayObjectAdapter(new AccountBillPresenter());
 
         thread = new Thread(new Runnable() {
@@ -146,14 +166,13 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
 
 
                     int i = 0;
-                    for(BillsCard card : dataBills){
+                    for (BillsCard card : dataBills) {
                         billsAdapter.add(card);
                     }
 
-                    HeaderItem header = new HeaderItem(1, "Facturas");
-                    mRowsAdapter.add(new ListRow(header,
+                    HeaderItem header = new HeaderItem(FACTURAS_ROW, "Facturas");
+                    mRowsAdapter.add(FACTURAS_ROW, new ListRow(header,
                             billsAdapter));
-
 
 
                 } catch (JsonParseException e) {
@@ -170,6 +189,81 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
             e.printStackTrace();
         }
 
+
+        /**
+         * Agregando Perfiles de Cliente
+         */
+        final ArrayObjectAdapter profilesAdapter = new ArrayObjectAdapter(new AccountProfilesPresenter());
+
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    DownloadData downloadData = new DownloadData();
+
+                    String response = downloadData.run(Constants.server + Constants.profiles + MainActivity.access_token);
+                    dataProfiles = new Gson().fromJson(response, AccountProfilesRow.class);
+
+                    int i = 0;
+                    for (AccountProfileCard card : dataProfiles.getProfileCards()) {
+                        profilesAdapter.add(card);
+                    }
+
+                    HeaderItem header = new HeaderItem(PROFILES_ROW, "Perfiles de Cuenta");
+                    mRowsAdapter.add(PROFILES_ROW, new ListRow(header,
+                            profilesAdapter));
+
+
+                } catch (JsonParseException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        /** Agregando ROW de Mensajes */
+        dataMessages = null;
+        final ArrayObjectAdapter messagesAdapter = new ArrayObjectAdapter(new MessagesPresenter());
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DownloadData downloadData = new DownloadData();
+                String response = downloadData.run(Constants.server + Constants.messages);
+
+                Gson gson = new Gson();
+                Type mensajesCardType;
+                mensajesCardType = new TypeToken<HashMap<String, MessagesCard>>() {
+                }
+                        .getType();
+                dataMessages = gson.fromJson(response, mensajesCardType);
+                for (HashMap.Entry<String, MessagesCard> entry : dataMessages.entrySet()) {
+                    MessagesCard card =  entry.getValue();
+                    messagesAdapter.add(card);
+                }
+
+                HeaderItem header = new HeaderItem(MESSAGEs_ROW, "Perfiles de Cuenta");
+                mRowsAdapter.add(MESSAGEs_ROW, new ListRow(header,
+                        messagesAdapter));
+
+            }
+        });
+
+
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         setAdapter(mRowsAdapter);
 
@@ -190,6 +284,23 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
     @Override
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                               RowPresenter.ViewHolder rowViewHolder, Row row) {
+
+        if (item instanceof Action) {
+            if (item instanceof Action) {
+                Action action = (Action) item;
+
+                if (action.getId() == FACTURAS_ROW) {
+                    setSelectedPosition(FACTURAS_ROW);
+                }
+                else if(action.getId() == PROFILES_ROW){
+                    setSelectedPosition(PROFILES_ROW);
+                }
+                else if(action.getId() == MESSAGEs_ROW){
+                    setSelectedPosition(MESSAGEs_ROW);
+                }
+
+            }
+        }
 
     }
 

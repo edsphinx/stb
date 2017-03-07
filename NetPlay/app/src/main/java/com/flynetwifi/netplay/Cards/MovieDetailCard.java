@@ -3,6 +3,7 @@ package com.flynetwifi.netplay.Cards;
 import com.google.gson.annotations.SerializedName;
 
 public class MovieDetailCard {
+    @SerializedName("id") private String mId = "";
     @SerializedName("title") private String mTitle = "";
     @SerializedName("description") private String mDescription = "";
     @SerializedName("text") private String mText = "";
@@ -11,6 +12,14 @@ public class MovieDetailCard {
     @SerializedName("stream") private String mStream = "";
     @SerializedName("recommended") private MovieRecommendedCard[] mRecommended = null;
     @SerializedName("year") private int mYear = 0;
+
+    public String getmId() {
+        return mId;
+    }
+
+    public void setmId(String mId) {
+        this.mId = mId;
+    }
 
     public String getmTitle() {
         return mTitle;

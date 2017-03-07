@@ -3,6 +3,7 @@ package com.flynetwifi.netplay.Fragments;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v17.leanback.app.PlaybackOverlayFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
@@ -15,9 +16,11 @@ import android.support.v17.leanback.widget.RowPresenter;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-
+import com.flynetwifi.netplay.Constants;
+import com.flynetwifi.netplay.MainActivity;
 import com.flynetwifi.netplay.MediaPlayers.MovieMediaPlayerGlue;
 import com.flynetwifi.netplay.MoviePlayerActivity;
+import com.flynetwifi.netplay.Utils.DownloadData;
 import com.flynetwifi.netplay.media.MediaMetaData;
 import com.flynetwifi.netplay.media.MediaPlayerGlue;
 import com.flynetwifi.netplay.media.MediaUtils;
@@ -29,6 +32,30 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
     private ArrayObjectAdapter mRowsAdapter;
     private MovieMediaPlayerGlue mGlue;
     public String nombre;
+    public int TIME = 0;
+    private Handler mSeekHandler = new Handler();
+    private Runnable mSeekRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mSeekHandler.removeCallbacks(this);
+            try{
+                if (mGlue.isMediaPlaying()) {
+                    TIME = mGlue.getCurrentPosition();
+                    int tracking = TIME / 1000;
+                    if (tracking % 60 == 0) {
+                        updateProgress();
+                    }
+                }
+                mSeekHandler.postDelayed(this, 1000);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+
+
+        }
+    };
 
 
     @Override
@@ -52,7 +79,9 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
         surface.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+
                 mGlue.setDisplay(holder);
+
             }
 
             @Override
@@ -77,6 +106,8 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
         super.onStart();
         mGlue.enableProgressUpdating(mGlue.hasValidMedia() && mGlue.isMediaPlaying());
         mGlue.createMediaSessionIfNeeded();
+        mSeekHandler.postDelayed(mSeekRunnable, 5000);
+
     }
 
     @Override
@@ -93,11 +124,13 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
             currentMetaData.setMediaTitle(MoviePlayerActivity.nombre);
             currentMetaData.setMediaArtistName("");
             currentMetaData.setMediaSourcePath(MoviePlayerActivity.url);
+            currentMetaData.setmPosition(getTime());
         }
+
         mGlue.setOnMediaFileFinishedPlayingListener(this);
         mGlue.prepareIfNeededAndPlay(currentMetaData);
-    }
 
+    }
 
     @Override
     public void onPause() {
@@ -120,10 +153,12 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
     @Override
     public void onStop() {
         super.onStop();
+        updateProgress();
         mGlue.enableProgressUpdating(false);
         mGlue.resetPlayer();
         mGlue.releaseMediaSession();
         mGlue.saveUIState();
+
     }
 
     private void addPlaybackControlsRow() {
@@ -145,9 +180,74 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
 
     @Override
     public void onMediaStateChanged(MediaMetaData currentMediaMetaData, int currentMediaState) {
+
         if (currentMediaState == MediaUtils.MEDIA_STATE_COMPLETED) {
             mGlue.startPlayback();
         }
 
+    }
+
+
+    public void updateProgress(){
+
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DownloadData downloadData = new DownloadData();
+                    String user_profile = MainActivity.user_profile;
+                    String response = downloadData.run(Constants.server
+                            + "/stb/tracking/"
+                            + MoviePlayerActivity.id + "/"
+                            + user_profile + "/"
+                            + String.valueOf(TIME) + "/"
+                            + "0"
+                    );
+
+                } catch (IllegalStateException e2) {
+
+                }
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public int getTime(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DownloadData downloadData = new DownloadData();
+                    String user_profile = MainActivity.user_profile;
+                    String response = downloadData.run(Constants.server
+                            + "/stb/tracking/listado/"
+                            + MoviePlayerActivity.id + "/"
+                            + user_profile + "/"
+                            + "0"
+                    );
+
+                    TIME = Integer.parseInt(response);
+
+                } catch (IllegalStateException e2) {
+
+                }
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return TIME;
     }
 }

@@ -3,6 +3,7 @@ package com.flynetwifi.netplay.Fragments;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v17.leanback.app.PlaybackOverlayFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
@@ -15,29 +16,74 @@ import android.support.v17.leanback.widget.PlaybackControlsRowPresenter;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.flynetwifi.netplay.Cards.SeriesChapterCard;
+import com.flynetwifi.netplay.Constants;
+import com.flynetwifi.netplay.MainActivity;
 import com.flynetwifi.netplay.MediaPlayers.SeriesMediaPlayerGlue;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.SeriesPlayerActivity;
+import com.flynetwifi.netplay.Utils.DownloadData;
 import com.flynetwifi.netplay.media.MediaMetaData;
 import com.flynetwifi.netplay.media.MediaPlayerGlue;
 import com.flynetwifi.netplay.media.MediaUtils;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, MediaPlayerGlue.OnMediaStateChangeListener {
 
 
     public static final String TAG = "SeriesPlayerFragment";
+    public int TIME = 0;
+    public String id, nombre, url, row, posicion;
+
     private ArrayObjectAdapter mRowsAdapter;
+    private List<SeriesChapterCard> listPosiciones;
+    private HashMap<Integer, List<SeriesChapterCard>> dataChapters;
+    private int currentPosition = 0;
+
     private SeriesMediaPlayerGlue mGlue;
+    private Handler mSeekHandler = new Handler();
+    private Runnable mSeekRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mSeekHandler.removeCallbacks(this);
+            try {
+                if (mGlue.isMediaPlaying()) {
+                    TIME = mGlue.getCurrentPosition();
+                    int tracking = TIME / 1000;
+                    if (tracking % 60 == 0) {
+                        updateProgress();
+                    }
+
+                }
+                mSeekHandler.postDelayed(this, 1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
+
+        }
+    };
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        id = args.getString("id", "");
+        nombre = args.getString("nombre", "");
+        url = args.getString("url", "");
+        row = args.getString("row", "");
+        posicion = args.getString("posicion", "");
 
         mGlue = new SeriesMediaPlayerGlue(getActivity(), this) {
 
@@ -70,11 +116,15 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
                 mGlue.releaseMediaSession();
                 mGlue.setDisplay(null);
                 mGlue.enableProgressUpdating(false);
-                ;
             }
         });
         setBackgroundType(PlaybackOverlayFragment.BG_NONE);
         addPlaybackControlsRow();
+
+
+        dataChapters = SeriesSeasonsFragment.dataChapters;
+        listPosiciones = dataChapters.get(Integer.parseInt(row));
+
     }
 
     @Override
@@ -82,6 +132,7 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
         super.onStart();
         mGlue.enableProgressUpdating(mGlue.hasValidMedia() && mGlue.isMediaPlaying());
         mGlue.createMediaSessionIfNeeded();
+        mSeekHandler.postDelayed(mSeekRunnable, 5000);
     }
 
     @Override
@@ -95,14 +146,11 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
             currentMetaData.setMediaSourcePath(intentMetaData.getMediaSourcePath());
             currentMetaData.setMediaAlbumArtUrl(intentMetaData.getMediaAlbumArtUrl());
         } else {
-            currentMetaData.setMediaTitle(SeriesSeasonsFragment.nombre);
+            currentMetaData.setMediaTitle(nombre);
             currentMetaData.setMediaArtistName("");
-            /*if(SeriesSeasonsFragment.url == "") {
-                currentMetaData.setMediaSourcePath(Constants.server + "/multimedia/peliculas/Deadpool.m3u8");
-            }
-            else{*/
-                currentMetaData.setMediaSourcePath(SeriesSeasonsFragment.url);
-            //}
+            currentMetaData.setMediaSourcePath(url);
+            currentMetaData.setmPosition(getTime());
+            //currentMetaData.setmPosition(2785000);
         }
         mGlue.setOnMediaFileFinishedPlayingListener(this);
         mGlue.prepareIfNeededAndPlay(currentMetaData);
@@ -130,11 +178,13 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
     @Override
     public void onStop() {
         super.onStop();
+        updateProgress();
         mGlue.enableProgressUpdating(false);
         mGlue.resetPlayer();
         mGlue.releaseMediaSession();
         mGlue.saveUIState();
     }
+
 
     @Override
     public void onDestroy() {
@@ -143,9 +193,6 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
     }
 
     private void addPlaybackControlsRow() {
-
-
-
 
         ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
 
@@ -167,19 +214,21 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
     @Override
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                               RowPresenter.ViewHolder rowViewHolder, Row row) {
-        if(row.getId() == 0){
-            if(item instanceof SeriesChapterCard){
+        if (row.getId() == 0) {
+            if (item instanceof SeriesChapterCard) {
+                updateProgress();
                 SeriesChapterCard capitulo = (SeriesChapterCard) item;
+                id = capitulo.getmId();
                 MediaMetaData currentMetaData = new MediaMetaData();
 
                 currentMetaData.setMediaTitle(capitulo.getmNombre());
                 currentMetaData.setMediaArtistName("");
                 currentMetaData.setMediaSourcePath(capitulo.getmStream());
+                currentMetaData.setmPosition(getTime());
 
                 mGlue.prepareIfNeededAndPlay(currentMetaData);
             }
-        }
-        else if(row.getId() == -1) {
+        } else if (row.getId() == -1) {
             if (!(item instanceof Action)) return;
             mGlue.onActionClicked((Action) item);
         }
@@ -189,7 +238,92 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
     @Override
     public void onMediaStateChanged(MediaMetaData currentMediaMetaData, int currentMediaState) {
         if (currentMediaState == MediaUtils.MEDIA_STATE_COMPLETED) {
-            mGlue.startPlayback();
+            //mGlue.startPlayback();
+            for(SeriesChapterCard card : listPosiciones ){
+                if(card.getmPosicion() == Integer.parseInt(posicion)){
+
+                    SeriesChapterCard capitulo = (SeriesChapterCard) card;
+                    capitulo = listPosiciones.get(capitulo.getmPosicion() + 1);
+                    id = capitulo.getmId();
+                    MediaMetaData currentMetaData = new MediaMetaData();
+
+                    currentMetaData.setMediaTitle(capitulo.getmNombre());
+                    currentMetaData.setMediaArtistName("");
+                    currentMetaData.setMediaSourcePath(capitulo.getmStream());
+                    currentMetaData.setmPosition(getTime());
+
+                    mGlue.prepareIfNeededAndPlay(currentMetaData);
+                }
+            }
         }
+    }
+
+    public void updateProgress() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String user_profile = MainActivity.user_profile;
+                    Log.w("REQUEST", Constants.server
+                            + "/stb/tracking/"
+                            + id + "/"
+                            + user_profile + "/"
+                            + String.valueOf(TIME) + "/"
+                            + "1");
+                    DownloadData downloadData = new DownloadData();
+
+                    String response = downloadData.run(Constants.server
+                            + "/stb/tracking/"
+                            + id + "/"
+                            + user_profile + "/"
+                            + String.valueOf(TIME) + "/"
+                            + "1"
+                    );
+                    Log.w("RESPONSE", response);
+
+                } catch (IllegalStateException e2) {
+
+                }
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public int getTime() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DownloadData downloadData = new DownloadData();
+                    String user_profile = MainActivity.user_profile;
+                    String response = downloadData.run(Constants.server
+                            + "/stb/tracking/listado/"
+                            + id + "/"
+                            + user_profile + "/"
+                            + "1"
+                    );
+
+                    TIME = Integer.parseInt(response);
+
+                } catch (IllegalStateException e2) {
+
+                }
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return TIME;
     }
 }

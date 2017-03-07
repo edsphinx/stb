@@ -13,6 +13,7 @@ import com.flynetwifi.netplay.Fragments.VideoSurfaceFragment;
 public class MoviePlayerActivity extends Activity {
     public static final String TAG = "VideoExampleActivity";
 
+    public static String id = "";
     public static String nombre = "";
     public static String url = "";
 
@@ -23,6 +24,7 @@ public class MoviePlayerActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
 
+        id = extras.getString("id");
         nombre = extras.getString("nombre");
         url = extras.getString("url");
 

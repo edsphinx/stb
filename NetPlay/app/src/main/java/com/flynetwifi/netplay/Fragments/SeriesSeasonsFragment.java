@@ -39,6 +39,9 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class SeriesSeasonsFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
@@ -52,9 +55,8 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
     private BackgroundManager backgroundManager;
     private PicassoBackgroundManagerTarget mBackgroundTarget;
 
-    public static String url = "";
-    public static String nombre = "";
     public static Row rowAdapter = null;
+    public static HashMap<Integer, List<SeriesChapterCard>> dataChapters;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -181,12 +183,22 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
 
         // Setup recommended row.
         ArrayObjectAdapter listRowAdapter;
+        dataChapters = new HashMap<>();
         int i = 0;
         for (SeriesSeasonCard temporadaCard : data.getmTemporadas()) {
             listRowAdapter = new ArrayObjectAdapter(new SeriesSeasonPresenter());
+
+            List<SeriesChapterCard> seriesChapterCardList = new ArrayList<>();
+
+            int posicion = 0;
             for(SeriesChapterCard capituloCard :  temporadaCard.getmCapitulos()){
+                capituloCard.setmPosicion(posicion);
                 listRowAdapter.add(capituloCard);
+                seriesChapterCardList.add(capituloCard);
+                posicion++;
             }
+
+            dataChapters.put(i, seriesChapterCardList);
             HeaderItem header = new HeaderItem(i, temporadaCard.getmNombre());
             mRowsAdapter.add(new ListRow(header, listRowAdapter));
             i++;
@@ -219,7 +231,8 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
 
                 Intent intent = null;
                 intent = new Intent(getActivity().getBaseContext(),
-                        SeriesPlayerActivity.class);;
+                        SeriesPlayerActivity.class);
+
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                         .toBundle();
                 startActivity(intent, bundle);
@@ -232,13 +245,16 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
         else if(item instanceof SeriesChapterCard){
             SeriesChapterCard capitulo = (SeriesChapterCard) item;
 
-            url = capitulo.getmStream();
             rowAdapter = row;
-            nombre = capitulo.getmNombre();
 
             Intent intent = null;
             intent = new Intent(getActivity().getBaseContext(),
-                    SeriesPlayerActivity.class);;
+                    SeriesPlayerActivity.class);
+            intent.putExtra("id", capitulo.getmId());
+            intent.putExtra("url", capitulo.getmStream());
+            intent.putExtra("nombre", capitulo.getmNombre());
+            intent.putExtra("row", String.valueOf(row.getId()));
+            intent.putExtra("posicion", String.valueOf(capitulo.getmPosicion()));
             Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                     .toBundle();
             startActivity(intent, bundle);

@@ -14,7 +14,6 @@ import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.SectionRow;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.util.Log;
 import android.view.View;
 
 import com.flynetwifi.netplay.Cards.SeriesCard;
@@ -55,6 +54,12 @@ public class SeriesFragment extends BrowseFragment {
         super.onCreate(savedInstaceState);
         setupUi();
         setupRowAdapter();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
     }
 
     private void setupUi() {
@@ -136,7 +141,6 @@ public class SeriesFragment extends BrowseFragment {
                     }.getType();
                     data = gson.fromJson(response, seriesCardType);
                     for (HashMap.Entry<String, SeriesCard[]> entry : data.entrySet()) {
-                        Log.w("SERIE", entry.getKey());
                         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
                         List<SeriesCard> listSeriesCard = new ArrayList<>();
                         for (SeriesCard card : entry.getValue()) {
