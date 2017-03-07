@@ -37,15 +37,22 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
     private Runnable mSeekRunnable = new Runnable() {
         @Override
         public void run() {
-            if(mGlue.isMediaPlaying()){
-                TIME = mGlue.getCurrentPosition();
-                int tracking = TIME/1000;
-                if(tracking % 60 == 0){
-                    updateProgress();
-                }
-            }
             mSeekHandler.removeCallbacks(this);
-            mSeekHandler.postDelayed(this, 1000);
+            try{
+                if (mGlue.isMediaPlaying()) {
+                    TIME = mGlue.getCurrentPosition();
+                    int tracking = TIME / 1000;
+                    if (tracking % 60 == 0) {
+                        updateProgress();
+                    }
+                }
+                mSeekHandler.postDelayed(this, 1000);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+
 
         }
     };

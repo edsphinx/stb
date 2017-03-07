@@ -53,6 +53,7 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
     private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     public static String url = "";
+    public static String id = "";
     public static String nombre = "";
     public static Row rowAdapter = null;
 
@@ -219,7 +220,8 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
 
                 Intent intent = null;
                 intent = new Intent(getActivity().getBaseContext(),
-                        SeriesPlayerActivity.class);;
+                        SeriesPlayerActivity.class);
+
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                         .toBundle();
                 startActivity(intent, bundle);
@@ -235,10 +237,12 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
             url = capitulo.getmStream();
             rowAdapter = row;
             nombre = capitulo.getmNombre();
+            id = capitulo.getmId();
 
             Intent intent = null;
             intent = new Intent(getActivity().getBaseContext(),
-                    SeriesPlayerActivity.class);;
+                    SeriesPlayerActivity.class);
+            intent.putExtra("id", capitulo.getmId());
             Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                     .toBundle();
             startActivity(intent, bundle);

@@ -13,6 +13,7 @@ import com.flynetwifi.netplay.Fragments.VideoSurfaceFragment;
 public class SeriesPlayerActivity extends Activity {
 
     public static final String TAG = "SeriesReproductorActivity";
+    public static String id;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -20,6 +21,9 @@ public class SeriesPlayerActivity extends Activity {
 
         setContentView(R.layout.activity_live);
 
+        Bundle extras = getIntent().getExtras();
+
+        id = extras.getString("id");
 
         FragmentTransaction ft1 = getFragmentManager().beginTransaction();
         ft1.replace(R.id.video_fragment, new VideoSurfaceFragment(), VideoSurfaceFragment.TAG);
