@@ -829,6 +829,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         if (currentMediaState == MediaUtils.MEDIA_STATE_COMPLETED) {
             mGlue.startPlayback();
         }
+
     }
 
 

@@ -327,6 +327,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
                 if (mInitialized && mMediaFileStateChangeListener != null)
                     mMediaFileStateChangeListener.onMediaStateChanged(mediaMetaData,
                             MediaUtils.MEDIA_STATE_COMPLETED);
+                mPlayer.start();
             }
         });
         mPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
@@ -340,9 +341,12 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
             @Override
             public boolean onError(MediaPlayer mediaPlayer, int what, int extra) {
                 Log.e(TAG, "MediaPlayer had error " + what  + " extra " + extra);
+                mPlayer.pause();
+                mPlayer.start();;
                 return true;
             }
         });
+
         mPlayer.prepareAsync();
         updateVideoSessionPlayState(PlaybackState.STATE_BUFFERING);
         onStateChanged();
