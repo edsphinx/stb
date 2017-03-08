@@ -249,7 +249,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
                     messagesAdapter.add(card);
                 }
 
-                HeaderItem header = new HeaderItem(MESSAGEs_ROW, "Perfiles de Cuenta");
+                HeaderItem header = new HeaderItem(MESSAGEs_ROW, "Mensajes");
                 mRowsAdapter.add(MESSAGEs_ROW, new ListRow(header,
                         messagesAdapter));
 

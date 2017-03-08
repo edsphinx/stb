@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="250dp "
+    android:layout_width="500dp "
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:background="@color/transparent">
@@ -23,10 +23,227 @@
             <TextView
                 android:id="@+id/bill_id"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/logo_wrapper"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="3"
+                android:paddingLeft="10px"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <!-- Fecha de Emision -->
+            <TextView
+                android:id="@+id/bill_label_fecha_emision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_id"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:text="Fecha de Emision"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/bill_fecha_emision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_id"
+                android:layout_toRightOf="@+id/bill_label_fecha_emision"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+
+            <!-- Inicio de Periodo -->
+            <TextView
+                android:id="@+id/bill_label_fecha_inicio_periodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_fecha_emision"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:text="Fecha de Inicio de Periodo: "
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/bill_inicio_periodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_fecha_emision"
+                android:layout_toRightOf="@+id/bill_label_fecha_inicio_periodo"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <!-- Fin de Periodo -->
+            <TextView
+                android:id="@+id/bill_label_fecha_fin_periodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_fecha_inicio_periodo"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:text="Fecha de Fin de Periodo: "
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/bill_fin_periodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_fecha_inicio_periodo"
+                android:layout_toRightOf="@+id/bill_label_fecha_fin_periodo"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <!-- Fecha de Vencimiento -->
+            <TextView
+                android:id="@+id/bill_label_fecha_vencimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_fecha_fin_periodo"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:text="Fecha de Vencimiento: "
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/bill_fecha_vencimiento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_fecha_fin_periodo"
+                android:layout_toRightOf="@+id/bill_label_fecha_vencimiento"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+
+            <!-- Subtotal -->
+            <TextView
+                android:id="@+id/bill_label_subtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_fecha_vencimiento"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:text="Subtotal: "
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/bill_subtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_fecha_vencimiento"
+                android:layout_toRightOf="@+id/bill_label_subtotal"
                 android:background="@color/background"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <!-- Impuesto -->
+            <TextView
+                android:id="@+id/bill_label_impuesto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_subtotal"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:text="Impuesto: "
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/bill_impuesto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_subtotal"
+                android:layout_toRightOf="@+id/bill_label_impuesto"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <!-- Total -->
+            <TextView
+                android:id="@+id/bill_label_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_impuesto"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:text="Total: "
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+            <!-- Estado -->
+            <TextView
+                android:id="@+id/bill_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_label_impuesto"
+                android:layout_toRightOf="@+id/bill_label_total"
+                android:gravity="center_vertical|center_horizontal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:textAlignment="gravity"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/bill_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bill_total"
                 android:gravity="center_vertical|center_horizontal"
                 android:lines="1"
                 android:paddingLeft="10px"
