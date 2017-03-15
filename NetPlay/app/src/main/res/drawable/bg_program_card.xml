@@ -4,7 +4,7 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
             <gradient
                 android:type="linear"
-                android:centerX="5%"
+                android:centerX="8%"
                 android:startColor="@color/default_line"
                 android:centerColor="@color/program_background"
                 android:endColor="@color/program_background"
@@ -16,7 +16,7 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
             <gradient
                 android:type="linear"
-                android:centerX="5%"
+                android:centerX="8%"
                 android:startColor="@color/default_line"
                 android:centerColor="@color/program_background"
                 android:endColor="@color/program_background"
@@ -28,7 +28,7 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
             <gradient
                 android:type="linear"
-                android:centerX="4%"
+                android:centerX="8%"
                 android:startColor="@color/default_line"
                 android:centerColor="@color/program_background"
                 android:endColor="@color/program_background"

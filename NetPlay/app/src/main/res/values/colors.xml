@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#19314F</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#03A9F4</color>
+    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorPrimaryLight">#B3E5FC</color>
+    <color name="colorAccent">#536DFE</color>
 
-    <color name="background">#37474F</color>
+    <color name="background">#0288D1</color>
     <color name="colorPrimaryBackground">@color/md_white_1000</color>
-    <color name="default_line">#FFA000</color>
+    <color name="default_line">#ea5b0c </color>
     <color name="text_hint">#6A1B9A</color>
-    <color name="text">#1565C0</color>
+    <color name="text">#212121</color>
 
+    <color name="app_guided_step_background">#212121</color>
+    <color name="guide_background">#212121</color>
 
+    <color name="orange">#ea5b0c</color>
+    <color name="program_background">#66000000</color>
+    <color name="transparent_background">#66000000</color>
 
 
     <color name="md_white_1000">#ffffff</color>
@@ -23,14 +29,18 @@
     <color name="search_bright_color">#FFEB3B</color>
 
     <color name="default_card_background_center">#000</color>
-    <color name="default_card_background_end">#37474F</color>
+    <color name="default_card_background_end">@color/background</color>
     <color name="default_card_background_center_selected">#19314F</color>
-    <color name="default_card_background_end_selected">#19314F</color>
+    <color name="default_card_background_end_selected">@color/colorAccent</color>
 
     <color name="default_card_background_color">@color/background</color>
-    <color name="default_card_footer_background_color">#37474F</color>
+    <color name="default_card_footer_background_color">@color/search_bright_color</color>
 
-    <color name="app_guidedstep_actions_background">@color/colorPrimary</color>
-    <color name="app_guidedstep_subactions_background">#732200</color>
+    <color name="app_guidedstep_actions_background">@color/colorPrimaryDark</color>
+    <color name="app_guidedstep_subactions_background">@color/colorAccent</color>
+
+    <color name="test1">#FF33CC</color>
+    <color name="test2">#B88A00</color>
+    <color name="test3">#CCFF33</color>
 
 </resources>

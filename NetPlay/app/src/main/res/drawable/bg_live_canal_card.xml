@@ -5,9 +5,9 @@
             <gradient
                 android:type="linear"
                 android:centerX="5%"
-                android:startColor="@color/default_line"
-                android:centerColor="@color/program_background"
-                android:endColor="@color/program_background"
+                android:startColor="@color/transparent"
+                android:centerColor="@color/transparent"
+                android:endColor="@color/transparent"
                 android:angle="90"/>
         </shape>
     </item>
@@ -17,9 +17,9 @@
             <gradient
                 android:type="linear"
                 android:centerX="5%"
-                android:startColor="@color/default_line"
-                android:centerColor="@color/program_background"
-                android:endColor="@color/program_background"
+                android:startColor="@color/transparent"
+                android:centerColor="@color/transparent"
+                android:endColor="@color/transparent"
                 android:angle="90"/>
         </shape>
     </item>
@@ -29,9 +29,9 @@
             <gradient
                 android:type="linear"
                 android:centerX="4%"
-                android:startColor="@color/default_line"
-                android:centerColor="@color/program_background"
-                android:endColor="@color/program_background"
+                android:startColor="@color/transparent"
+                android:centerColor="@color/transparent"
+                android:endColor="@color/transparent"
                 android:angle="90"/>
 
         </shape>

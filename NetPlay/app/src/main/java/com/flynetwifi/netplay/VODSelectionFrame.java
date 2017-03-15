@@ -14,11 +14,16 @@ public class VODSelectionFrame extends GuidedStepFragment {
     private static final int ACTION_PELICULAS = 1;
     private static final int ACTION_SERIES = ACTION_PELICULAS + 1;
 
+    @Override
+    public int onProvideTheme() {
+        return R.style.Theme_Wizard;
+    }
+
     @NonNull
     @Override
     public GuidanceStylist.Guidance onCreateGuidance(Bundle savedInstanceState) {
-        GuidanceStylist.Guidance guidance = new GuidanceStylist.Guidance("Video On Demand",
-                "Disfruta del Mejor Contenido",
+        GuidanceStylist.Guidance guidance = new GuidanceStylist.Guidance("Video Online",
+                "Disfruta del Mejor Contenido Online",
                 "", null);
         return guidance;
     }

@@ -49,4 +49,5 @@
 
     <!-- References -->
     <dimen name="padding_small">5dp</dimen>
+    <dimen name="padding_medium">15dp</dimen>
 </resources>

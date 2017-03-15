@@ -61,6 +61,28 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
         setupUIElements();
         setupRowAdapter();
         setupEventListeners();
+
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        //startLiveTV();
+    }
+
+    private void startLiveTV(){
+        Intent intent = new Intent(getActivity().getBaseContext(),
+                LiveActivity.class);
+
+        if (intent != null) {
+            intent.putExtra("user_profile", MainActivity.user_profile);
+            intent.putExtra("user_type", MainActivity.user_type);
+            intent.putExtra("access_token", MainActivity.access_token);
+            Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                    .toBundle();
+            startActivity(intent, bundle);
+        }
     }
 
     private void setupUIElements() {

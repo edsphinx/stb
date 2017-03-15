@@ -280,8 +280,8 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     private void setMainRowsAdapter() {
         /** Inicializando PlayBackControlPresenter */
         playbackControlsRowPresenter = mGlue.createControlsRowAndPresenter();
-        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.background));
-        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimary));
+        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.program_background));
+        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.program_background));
         playbackControlsRowPresenter.setSecondaryActionsHidden(false);
         /**
          * Evento Click de Acciones Secundarias

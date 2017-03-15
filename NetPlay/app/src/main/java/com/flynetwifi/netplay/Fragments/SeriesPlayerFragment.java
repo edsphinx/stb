@@ -197,7 +197,7 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
         ClassPresenterSelector rowPresenterSelector = new ClassPresenterSelector();
 
         PlaybackControlsRowPresenter playbackControlsRowPresenter = mGlue.createControlsRowAndPresenter();
-        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.background));
+        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.transparent_background));
         rowPresenterSelector.addClassPresenter(PlaybackControlsRow.class, playbackControlsRowPresenter);
         rowPresenterSelector.addClassPresenter(ListRow.class, new ListRowPresenter());
         mRowsAdapter = new ArrayObjectAdapter(rowPresenterSelector);

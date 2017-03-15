@@ -59,7 +59,8 @@
     </style>
 
     <style name="Theme.Wizard" parent="Theme.Leanback.GuidedStep">
-        <item name="guidedActionsBackground">@color/app_guidedstep_actions_background</item>
+        <item name="guidedStepBackground">@color/guide_background</item>
+        <item name="guidedActionsBackground">@color/app_guided_step_background</item>
         <item name="guidedActionsBackgroundDark">@color/app_guidedstep_subactions_background</item>
     </style>
 

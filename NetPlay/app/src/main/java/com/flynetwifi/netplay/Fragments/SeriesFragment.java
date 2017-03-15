@@ -65,7 +65,7 @@ public class SeriesFragment extends BrowseFragment {
     private void setupUi() {
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
-        setBrandColor(getActivity().getResources().getColor(R.color.colorPrimary));
+        setBrandColor(getActivity().getResources().getColor(R.color.transparent_background));
 
         backgroundManager = BackgroundManager.getInstance(getActivity());
         backgroundManager.attach(getActivity().getWindow());

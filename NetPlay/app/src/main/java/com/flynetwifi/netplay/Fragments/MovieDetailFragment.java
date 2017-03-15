@@ -135,7 +135,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
                         View detailsView = viewHolder.view.findViewById(R.id.details_frame);
                         detailsView.setBackgroundColor(
-                                getResources().getColor(R.color.background));
+                                getResources().getColor(R.color.transparent_background));
 
 
                         return viewHolder;

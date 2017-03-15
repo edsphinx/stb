@@ -28,13 +28,13 @@ public class MovieDetailPresenter extends Presenter {
     @Override public void onBindViewHolder(ViewHolder viewHolder, Object item) {
         TextView primaryText = mResourceCache.getViewById(viewHolder.view, R.id.primary_text);
         TextView sndText1 = mResourceCache.getViewById(viewHolder.view, R.id.secondary_text_first);
-        TextView sndText2 = mResourceCache.getViewById(viewHolder.view, R.id.secondary_text_second);
+        //TextView sndText2 = mResourceCache.getViewById(viewHolder.view, R.id.secondary_text_second);
         TextView extraText = mResourceCache.getViewById(viewHolder.view, R.id.extra_text);
 
         MovieDetailCard card = (MovieDetailCard) item;
         primaryText.setText(card.getmTitle());
-        sndText1.setText(card.getmDescription());
-        sndText2.setText(card.getmYear() + "");
+        //sndText1.setText(card.getmDescription());
+        sndText1.setText(card.getmYear() + "");
         extraText.setText(card.getmText());
     }
 
