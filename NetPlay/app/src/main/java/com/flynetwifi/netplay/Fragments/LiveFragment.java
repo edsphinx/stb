@@ -518,6 +518,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             mGlue.prepareIfNeededAndPlay(currentMetaData);
             /** Asignar nuevo canal Seleccionado */
             selectedChannel = card;
+            currentChannel = selectedChannel;
             /** Cargar Programas de Canal */
             handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
             handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
@@ -577,6 +578,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                     LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
                     /** Verificar que el card no sea nulo */
                     if (card != null) {
+                        currentChannel = card;
                         /** Actualizar MetaData */
                         currentMetaData = new MediaMetaData();
                         currentMetaData.setMediaTitle(card.getmTitle());
