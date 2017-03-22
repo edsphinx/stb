@@ -19,11 +19,14 @@
     <style name="Theme.Browse" parent="Theme.Leanback.Browse">
         <item name="android:windowBackground">@color/background</item>
         <item name="defaultBrandColor">@color/colorPrimary</item>
-        <item name="defaultSearchColor">@color/search_color</item>
-        <item name="defaultSearchIconColor">@color/search_icon_color</item>
-        <item name="defaultSearchBrightColor">@color/search_bright_color</item>
 
+        <item name="defaultSearchColor">@color/background</item>
+        <!--Colores para el Search Icon -->
+        <item name="defaultSearchIconColor">@color/search_icon_color</item>
+        <item name="defaultSearchBrightColor">#4f3044</item>
+        <item name="defaultSectionHeaderColor">@color/search_bright_color</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="sectionHeaderStyle">@style/SectionHeaderStyle</item>
     </style>
 
     <!-- Main Theme -->
@@ -31,6 +34,10 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+
+
+
 
     <!--Search Theme -->
     <style name="Theme.Search" parent="Theme.Leanback">
@@ -41,6 +48,7 @@
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:windowBackground">@drawable/bg_poster</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="detailsActionButtonStyle">@style/ActionButtonStyle</item>
     </style>
 
     <!--Vertical Collection -->
@@ -59,9 +67,26 @@
     </style>
 
     <style name="Theme.Wizard" parent="Theme.Leanback.GuidedStep">
-        <item name="guidedStepBackground">@color/guide_background</item>
-        <item name="guidedActionsBackground">@color/app_guided_step_background</item>
+        <item name="guidedStepBackground">@drawable/blackwall</item>
+        <item name="guidedActionsBackground">@color/md_black_1000</item>
         <item name="guidedActionsBackgroundDark">@color/app_guidedstep_subactions_background</item>
+        <item name="guidanceTitleStyle">@style/Theme.Wizard.Title</item>
+
+
+    </style>
+
+    <style name="Theme.Wizard.Title" parent="Widget.Leanback.GuidanceTitleStyle">
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_below">@id/guidance_breadcrumb</item>
+        <item name="android:layout_centerVertical">false</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:gravity">start</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+        <item name="android:lineSpacingMultiplier">1.13778</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">34sp</item>
     </style>
 
 </resources>

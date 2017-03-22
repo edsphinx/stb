@@ -7,6 +7,16 @@
 
     <color name="background">#212121</color>
     <color name="colorPrimaryBackground">@color/md_white_1000</color>
+    <!-- Color for Background Playback Controls -->
+    <!--<color name="lb_control_button_color">@color/colorAccent</color>-->
+    <color name="lb_playback_icon_highlight_no_theme">#ff00ff</color>
+    <color name="lb_control_button_color">#00ff00</color>
+    <color name="lb_control_button_text">#ff00ff</color>
+    <color name="lb_playback_background_progress_color">@color/md_black_1000</color>
+    <color name="lb_playback_controls_time_text_color">@color/md_white_1000</color>
+    <!-- END Color for Background Playback Controls -->
+
+
     <color name="default_line">#ea5b0c </color>
     <color name="text_hint">#6A1B9A</color>
     <color name="text">#212121</color>
@@ -21,6 +31,7 @@
 
     <color name="md_white_1000">#ffffff</color>
     <color name="md_black_1000">#000</color>
+    <color name="md_blue_1000">#0000ff</color>
 
     <color name="transparent">#00000000</color>
 

@@ -25,6 +25,18 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
+    <style name="SectionHeaderStyle" parent="TextAppearance.Leanback.Header.Section">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="ActionButtonStyle" parent="TextAppearance.Leanback.DetailsActionButton">
+        <item name="android:textSize">@dimen/lb_action_text_size</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <style name="MyCustomRowHeaderStyle" parent="Widget.Leanback.Title">
         <item name="android:textColor">@color/colorAccent</item>
     </style>
