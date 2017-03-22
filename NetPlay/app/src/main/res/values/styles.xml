@@ -25,6 +25,12 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
+    <style name="MyCustomRowHeaderStyle" parent="Widget.Leanback.Title">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
 
+    <style name="MyCustomBrowseStyle" parent="Theme.Leanback.Browse">
+        <item name="rowHeaderStyle">@style/MyCustomRowHeaderStyle</item>
+    </style>
 
 </resources>

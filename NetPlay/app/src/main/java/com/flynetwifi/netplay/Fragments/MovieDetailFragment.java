@@ -79,8 +79,10 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
         }
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
+
         actionAdapter.add(new Action(1, getString(R.string.play)));
         detailsOverview.setActionsAdapter(actionAdapter);
+        //detailsOverview.setImageDrawable(R.drawable.bg_default);
         mRowsAdapter.add(detailsOverview);
 
 

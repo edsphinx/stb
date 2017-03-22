@@ -48,7 +48,8 @@ public class MoviePresenterSelector extends PresenterSelector {
     public Presenter[] getPresenters() {
         return new Presenter[] {
                 mShadowDisabledRowPresenter,
-                mShadowEnabledRowPresenter
+                mShadowEnabledRowPresenter,
+                new CustomHeaderPresenter()
         };
     }
 }

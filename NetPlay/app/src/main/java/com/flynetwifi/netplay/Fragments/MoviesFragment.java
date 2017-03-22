@@ -19,8 +19,10 @@ import android.view.View;
 
 import com.flynetwifi.netplay.Cards.MovieCard;
 import com.flynetwifi.netplay.Constants;
+import com.flynetwifi.netplay.Models.CustomHeaderItemModel;
 import com.flynetwifi.netplay.MovieDetailActivity;
 import com.flynetwifi.netplay.MovieSearchActivity;
+import com.flynetwifi.netplay.Presenters.CustomHeaderPresenter;
 import com.flynetwifi.netplay.Presenters.MoviePresenter;
 import com.flynetwifi.netplay.Presenters.MoviePresenterSelector;
 import com.flynetwifi.netplay.R;
@@ -59,7 +61,7 @@ public class MoviesFragment extends BrowseFragment {
     private void setupUi() {
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
-        setBrandColor(getActivity().getResources().getColor(R.color.colorPrimary));
+        setBrandColor(getActivity().getResources().getColor(R.color.colorPrimaryDark));
 
         backgroundManager = BackgroundManager.getInstance(getActivity());
         backgroundManager.attach(getActivity().getWindow());
@@ -119,6 +121,8 @@ public class MoviesFragment extends BrowseFragment {
     private void createRows() {
         mRowsAdapter.clear();
         final MoviePresenter presenter = new MoviePresenter();
+        final CustomHeaderItemModel HeaderTitle = new CustomHeaderItemModel("Peliculas");
+        final CustomHeaderPresenter customHeaderPresenter = new CustomHeaderPresenter();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -133,7 +137,9 @@ public class MoviesFragment extends BrowseFragment {
                     }.getType();
                     data = gson.fromJson(response, peliculasCardType);
 
-                    mRowsAdapter.add(new SectionRow(new HeaderItem(getString(R.string.movies))));
+                    //mRowsAdapter.add(new SectionRow(new HeaderItem(getString(R.string.movies))));
+                    mRowsAdapter.add(new SectionRow(HeaderTitle));
+                    //mRowsAdapter.add(new SectionRow(HeaderTitle));
                     for (HashMap.Entry<String, MovieCard[]> entry : data.entrySet()) {
 
                         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenter);
