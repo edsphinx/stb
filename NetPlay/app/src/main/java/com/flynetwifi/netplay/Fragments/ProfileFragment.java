@@ -75,8 +75,14 @@ public class ProfileFragment extends BrowseFragment {
 
                 DownloadData downloadData = new DownloadData();
 
-                String response = downloadData.run(Constants.server + Constants.profiles + MainActivity.access_token);
-                data = new Gson().fromJson(response, AccountProfilesRow.class);
+                try{
+                    String response = downloadData.run(Constants.server + Constants.profiles + MainActivity.access_token);
+                    data = new Gson().fromJson(response, AccountProfilesRow.class);
+                }
+                catch (com.google.gson.JsonSyntaxException e){
+                    data = null;
+                }
+
 
             }
         });
@@ -90,25 +96,27 @@ public class ProfileFragment extends BrowseFragment {
             e.printStackTrace();
         }
 
-        if (data.getProfileCards().length<=1){
-            AccountProfileCard card = data.getProfileCards()[0];
-            if (card.getmParentalControl() == 2) {
+        if(data != null) {
+            if (data.getProfileCards().length <= 1) {
+                AccountProfileCard card = data.getProfileCards()[0];
+                if (card.getmParentalControl() == 2) {
 
-                SharedPreferences loginSettings = mContext.getSharedPreferences("loginSettings", 0);
-                SharedPreferences.Editor editor = loginSettings.edit();
-                editor.putString("user_profile", String.valueOf(card.getmId()));
-                editor.putString("user_type", "0");
-                editor.commit();
+                    SharedPreferences loginSettings = mContext.getSharedPreferences("loginSettings", 0);
+                    SharedPreferences.Editor editor = loginSettings.edit();
+                    editor.putString("user_profile", String.valueOf(card.getmId()));
+                    editor.putString("user_type", "0");
+                    editor.commit();
 
-                MainActivity.user_profile = String.valueOf(card.getmId());
-                getActivity().finish();
-            } else {
-                Intent intent = new Intent(mContext,
-                        AccountProfilePasswordActivity.class);
-                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
-                        .toBundle();
-                startActivity(intent, bundle);
-                getActivity().finish();
+                    MainActivity.user_profile = String.valueOf(card.getmId());
+                    getActivity().finish();
+                } else {
+                    Intent intent = new Intent(mContext,
+                            AccountProfilePasswordActivity.class);
+                    Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                            .toBundle();
+                    startActivity(intent, bundle);
+                    getActivity().finish();
+                }
             }
         }
 
@@ -117,8 +125,10 @@ public class ProfileFragment extends BrowseFragment {
     private static ListRow createCardRow(AccountProfilesRow cardRow) {
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new AccountProfilesPresenter());
-        for (AccountProfileCard card : cardRow.getProfileCards()) {
-            listRowAdapter.add(card);
+        if(cardRow != null) {
+            for (AccountProfileCard card : cardRow.getProfileCards()) {
+                listRowAdapter.add(card);
+            }
         }
         return new ListRow(listRowAdapter);
     }
