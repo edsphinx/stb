@@ -4,7 +4,13 @@ package com.flynetwifi.netplay;
 public interface Constants {
 
     static String server = "http://10.115.0.3:8080";
+    static String stream_server = "http://10.115.0.3:1935";
     //static String server = "http://190.92.91.218:8080";
+
+
+    static String version = "1";
+    static String version_url = server + "/stb/version";
+    static String apk = stream_server + "/apps/app.apk";
 
     static String authorization = "/oauth/token";
     static String profiles = "/stb/perfiles/";
