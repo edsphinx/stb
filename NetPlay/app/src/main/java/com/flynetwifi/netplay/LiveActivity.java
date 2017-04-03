@@ -65,6 +65,11 @@ public class LiveActivity extends Activity {
                         .toBundle();
                 startActivity(intent, bundle);
                 this.finish();
+            } else if (e.getKeyCode() == 19 || e.getKeyCode() ==  20 || e.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP || e.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN) {
+                LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
+                if (fragment != null) {
+                    fragment.keypress(e);
+                }
             }
         }
         return super.dispatchKeyEvent(e);

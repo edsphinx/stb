@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flynetwifi.netplay.Cards.LiveCanalCard;
 import com.flynetwifi.netplay.R;
 import com.squareup.picasso.Picasso;
@@ -44,14 +45,14 @@ public class LiveCanalPresenter extends Presenter {
         public final TextView number;
         public final ImageView logo;
 
-        public final PicassoImageCardViewTarget mImageCardViewTarget;
+        //public final PicassoImageCardViewTarget mImageCardViewTarget;
 
         public ViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.nombre);
             number = (TextView) view.findViewById(R.id.numero);
             logo = (ImageView) view.findViewById(R.id.thumbnail);
-            mImageCardViewTarget = new PicassoImageCardViewTarget(logo);
+            //mImageCardViewTarget = new PicassoImageCardViewTarget(logo);
         }
 
         public ImageView getLogo() {
@@ -62,15 +63,19 @@ public class LiveCanalPresenter extends Presenter {
             int resourceId = mContext.getResources()
                     .getIdentifier("live_placeholder",
                             "drawable", mContext.getPackageName());
-            Picasso.with(mContext)
-                    .load(resourceId)
-                    .into(mImageCardViewTarget);
 
-            Picasso.with(mContext)
+            Glide.with(mContext)
+                    .load(resourceId)
+                    .into(logo);
+//            Picasso.with(mContext)
+//                    .load(resourceId)
+//                    .into(mImageCardViewTarget);
+
+            Glide.with(mContext)
                     .load(uri)
-                    .placeholder(R.drawable.live_tv)
-                    .skipMemoryCache()
-                    .into(mImageCardViewTarget);
+                    .placeholder(R.drawable.placeholder)
+                    .skipMemoryCache(true)
+                    .into(logo);
         }
 
     }
