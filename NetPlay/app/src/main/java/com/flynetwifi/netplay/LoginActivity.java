@@ -26,10 +26,13 @@ import okhttp3.Response;
 
 public class LoginActivity extends Activity {
 
+
     private SharedPreferences settings;
 
+    //AsyncTask for Login
     private LoginTask mAuthTask = null;
 
+    //TextInputs for Username & Password
     private TextInputEditText mUsuarioView;
     private TextInputEditText mClaveView;
 
@@ -41,6 +44,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Make activity fullscreen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -51,6 +55,7 @@ public class LoginActivity extends Activity {
 
 
         AppCompatButton mSignInButton = (AppCompatButton) findViewById(R.id.sign_in_button);
+        //Make an attemptLogin onClickEvent of mSignInButton
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,12 +63,17 @@ public class LoginActivity extends Activity {
             }
         });
 
+        //Get SharedPreferences
         settings = getSharedPreferences("settings", 0);
 
         String usuario = "";settings.getString("username", "null");
         String clave = ""; settings.getString("password", "null");
         //mac = settings.getString("mac", "null");
 
+
+        /**
+         * IF the "user" preferences is setted we update the Username/Password View
+         */
         if (usuario.contentEquals("null")) {
             usuario = "";
         }
@@ -75,13 +85,17 @@ public class LoginActivity extends Activity {
         }
         mClaveView.setText(clave);
 
+        /**
+         * If the username/password input is setted we request the focus to the signing button &
+         * try and attemptLogin
+         */
         if (!usuario.contentEquals("") && !clave.contentEquals("")) {
             mSignInButton.requestFocus();
             mSignInButton.requestFocusFromTouch();
             attemptLogin();
         }
 
-        /** Obtener Usuario y Clave de Usuario por MAC */
+        /** If the user/password is empty we request to ISP the password with the mac of STB */
         if (usuario.contentEquals("") && clave.contentEquals("")) {
             getUsuarioClave();
         }
@@ -89,20 +103,26 @@ public class LoginActivity extends Activity {
     }
 
     private void attemptLogin() {
+        //This prevent create multiples threads
         if (mAuthTask != null) {
             return;
         }
 
+        //Reset errors of Username/Password
         mUsuarioView.setError(null);
         mClaveView.setError(null);
 
+        //Get the username/password
         String usuario = mUsuarioView.getText().toString();
         String clave = mClaveView.getText().toString();
+
 
 
         boolean cancel = false;
         View focusView = null;
 
+        // Basic Validations
+        // Username/Password can't be empty
         if (TextUtils.isEmpty(clave)) {
             mClaveView.setError(getString(R.string.password_error));
             focusView = mClaveView;
@@ -115,9 +135,11 @@ public class LoginActivity extends Activity {
             cancel = true;
         }
 
+
         if (cancel) {
             focusView.requestFocus();
         } else {
+            //Run Login Task
             mAuthTask = new LoginTask(mContext,
                     mUsuarioView, mClaveView, settings);
             mAuthTask.execute((Void) null);
@@ -125,26 +147,32 @@ public class LoginActivity extends Activity {
         }
     }
 
+    /**
+     * Description: Request Username/Password with Mac Address
+     */
     private void getUsuarioClave() {
+        //Reset Username/Password
         usuario = "";
         clave = "";
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                //Get the mac Address of Eth0
                 String mac = getMacAddress();
-                String url = "http://10.115.0.3:8080/stb/cuenta/login/" + mac;
-                String bearer = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRhYzdjYjc1MzU5NjAwNTk3ZTg5NzQzZjFlNzFkZjc3NmEzZjNmZTM4NGMxODllNWE5NWFlMWZiZDg5ZTY5MjYyNzRmYzAxYTU1MzEwOTVkIn0.eyJhdWQiOiI3IiwianRpIjoiNGFjN2NiNzUzNTk2MDA1OTdlODk3NDNmMWU3MWRmNzc2YTNmM2ZlMzg0YzE4OWU1YTk1YWUxZmJkODllNjkyNjI3NGZjMDFhNTUzMTA5NWQiLCJpYXQiOjE0ODg1ODA2MzQsIm5iZiI6MTQ4ODU4MDYzNCwiZXhwIjoxNTIwMTE2NjM0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.b5JNXeJD1UgV42ygq6WyjsAwKckbpsQDq1U2o5ckeT4QguRvo0yXNJ5DGwXPUvxyhGMHrIs1zxVm2k8tvOzYKhL8l4ahHAMS_c4G1rAemPdOA-z_tlZc37LwGKRb6mJj0_XI0K-GCNWibeLmjmxKXvRIzhgOj0Im6mde4HUGTkMeGJb50IQIQlzZnRDGmOlFghQL62OqDCFyR6BxsU1E1xUyuxnh0rxK5jiOw56JACJ3ylcB0vO0Hs0g56gq0as_Ic_VetdaqWynGJMX5TZz-stHxl_r4b4McWcAg4Uj2klsjSrF86qb4GjoXRDaOmBGCpDHhArKKvu9QzNkr-s95SuG8JGwwOrFPkSuhM6JHZ6RRt-iEPqhH-OiTWTsB5Pn06ce7FURVJ_scJVgjwVGxXJ4k69qSBuLXQEj-AFHRKWyR_ept2kPiyb1lQ2jJEygn_y5n2mHeNFVMEad_V0QeZ1eqrm-Gs33iIKmgS8TlIKlPLExhs_-6IZrtH2-DWfXhpuqSXwOBwkpxAYNipJXDVwTOfNafSgqLxqNPpd5Mv6tmGuOZwzCiP1YRIOifjgnc0eW6LSHW3s312IgOyovIWiXdHix6lc_j3A3ttKiAT5KRhnWB1wWT20ldUe1QQ5RvY3w-CI-fJPZA31PO7RRCgvGedEFNqwCLcSnsV1QJVs";
-
                 final OkHttpClient client = new OkHttpClient();
 
+                //Request to Credentials add mac in the URL
+                String url = Constants.credentials + mac;
                 String result = "";
+
                 Request request = new Request.Builder()
                         .url(url)
                         .addHeader("Accept", "application/json; q=0.5")
-                        .addHeader("Authorization", "Bearer " + bearer)
+                        .addHeader("Authorization", "Bearer " + Constants.bearer)
                         .build();
                 try (Response response = client.newCall(request).execute()) {
                     result = response.body().string();
+                    // If the result != and empty array
                     if(result != "[]") {
 
                         Gson gson = new Gson();
@@ -152,6 +180,7 @@ public class LoginActivity extends Activity {
                         }.getType();
                         HashMap<String, String> posts = (HashMap<String, String>) gson.fromJson(result, listType);
                         for (HashMap.Entry<String, String> entry : posts.entrySet()) {
+                            //Set Username/password
                             if (entry.getKey().contentEquals("username")) {
                                 usuario = entry.getValue();
                             } else if (entry.getKey().contentEquals("password")) {
@@ -170,6 +199,7 @@ public class LoginActivity extends Activity {
 
         try{
             thread.join();
+            //Set Username/Password on the view
             mUsuarioView.setText(usuario);
             mClaveView.setText(clave);
             attemptLogin();
@@ -180,6 +210,7 @@ public class LoginActivity extends Activity {
     }
 
 
+    // Get the MAC address of Eth0
     public String getMacAddress() {
         try {
             return loadFileAsString("/sys/class/net/eth0/address")
@@ -190,6 +221,12 @@ public class LoginActivity extends Activity {
         }
     }
 
+    /**
+     * Description: Return a String from a FilePath
+     * @param filePath
+     * @return
+     * @throws java.io.IOException
+     */
     public static String loadFileAsString(String filePath) throws java.io.IOException {
         StringBuffer fileData = new StringBuffer(1000);
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
