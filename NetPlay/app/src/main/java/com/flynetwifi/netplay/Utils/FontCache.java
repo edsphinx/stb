@@ -1,13 +1,17 @@
 package com.flynetwifi.netplay.Utils;
 
-import android.graphics.Typeface;
-import java.util.HashMap;
 import android.content.Context;
+import android.graphics.Typeface;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by fonseca on 3/28/17.
  */
 
 public class FontCache {
+
     private static HashMap<String, Typeface> fontCache = new HashMap<>();
 
     public static Typeface getTypeface(String fontname, Context context) {
