@@ -795,6 +795,10 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 if (card != null) {
 
                     currentChannel = card;
+                    /** Mover el Foco al Canal Seleccionado */
+                    card.setmEstado(1);
+                    getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                            new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
                     /** Actualizar MetaData */
                     currentMetaData = new MediaMetaData();
                     currentMetaData.setMediaTitle(card.getmTitle());
@@ -817,6 +821,10 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 LiveCanalCard card = (LiveCanalCard)channelsRowAdapter.get(position);
                 if (card != null) {
                     currentChannel = card;
+                    /** Mover el Foco al Canal Seleccionado */
+                    card.setmEstado(1);
+                    getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                            new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
                     /** Actualizar MetaData */
                     currentMetaData = new MediaMetaData();
                     currentMetaData.setMediaTitle(card.getmTitle());
