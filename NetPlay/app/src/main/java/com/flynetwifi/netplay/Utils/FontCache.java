@@ -1,10 +1,8 @@
 package com.flynetwifi.netplay.Utils;
 
-import android.content.Context;
 import android.graphics.Typeface;
-
 import java.util.HashMap;
-
+import android.content.Context;
 /**
  * Created by fonseca on 3/28/17.
  */
