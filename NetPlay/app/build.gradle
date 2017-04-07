@@ -45,4 +45,6 @@ dependencies {
 
     compile 'com.google.android.libraries.tv:companionlibrary:0.1'
 
+    compile 'com.google.android.exoplayer:exoplayer:r2.3.1'
+
 }
