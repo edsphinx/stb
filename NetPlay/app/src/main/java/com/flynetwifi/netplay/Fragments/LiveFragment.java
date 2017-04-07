@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v17.leanback.app.PlaybackOverlayFragment;
+import android.support.v17.leanback.app.PlaybackFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
@@ -61,7 +61,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LiveFragment extends PlaybackOverlayFragment implements
+public class LiveFragment extends PlaybackFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
         MediaPlayerGlue.OnMediaStateChangeListener {
 
@@ -200,7 +200,6 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
         /** Inicializando MediaPlayer */
         mGlue = new LiveMediaPlayerGlue(getActivity(), this) {
-            @Override
             protected void onRowChanged(PlaybackControlsRow row) {
                 if (infoRowsAdapter == null) return;
                 infoRowsAdapter.notifyArrayItemRangeChanged(0, 1);
@@ -273,7 +272,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
          * @Option PlaybackOverlayFragment.BG_DARK
          *
          */
-        setBackgroundType(PlaybackOverlayFragment.BG_NONE
+        setBackgroundType(PlaybackFragment.BG_DARK
         );
     }
 
@@ -302,7 +301,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                         MediaMetaData currentMetaData = new MediaMetaData();
                         currentMetaData.setMediaTitle(card.getmTitle());
                         currentMetaData.setMediaSourcePath(card.getmRecord());
-                        mGlue.prepareIfNeededAndPlay(currentMetaData);
+                        mGlue.prepareIfNeededAndPlay(currentMetaData,(LiveFragment) getParentFragment());
                     }
                 }
             }
@@ -527,7 +526,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             currentMetaData.setMediaArtistName(card.getmDescription());
             currentMetaData.setMediaSourcePath(card.getmStream());
             /** Preprar MetaData y Reproducir */
-            mGlue.prepareIfNeededAndPlay(currentMetaData);
+            mGlue.prepareIfNeededAndPlay(currentMetaData, this);
             /** Asignar nuevo canal Seleccionado */
             selectedChannel = card;
             currentChannel = selectedChannel;
@@ -555,7 +554,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 MediaMetaData currentMetaData = new MediaMetaData();
                 currentMetaData.setMediaTitle(currentChannel.getmTitle());
                 currentMetaData.setMediaSourcePath(currentChannel.getmRecord());
-                mGlue.prepareIfNeededAndPlay(currentMetaData);
+                mGlue.prepareIfNeededAndPlay(currentMetaData, this);
             }
 
         }
@@ -597,7 +596,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                         currentMetaData.setMediaArtistName(card.getmDescription());
                         currentMetaData.setMediaSourcePath(card.getmStream());
                         /** Preprar MetaData y Reproducir */
-                        mGlue.prepareIfNeededAndPlay(currentMetaData);
+                        mGlue.prepareIfNeededAndPlay(currentMetaData,this);
                         /** Seleccionar el ultimo canal Reproducido */
                         getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
                         getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
@@ -743,7 +742,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             /** Actualizar Canal Seleccionado **/
             selectedChannel = card;
             /** Actualizar MetaData en el Player y Reproducir */
-            mGlue.prepareIfNeededAndPlay(currentMetaData);
+            mGlue.prepareIfNeededAndPlay(currentMetaData, this);
 
             /** Cargar Programas de Canal **/
             handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
@@ -759,7 +758,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         }
         /** RESET al Numero del Canal */
         channelNumber = "";
-        setTitle("");
+        //setTitle("");
 
     }
 
@@ -770,18 +769,18 @@ public class LiveFragment extends PlaybackOverlayFragment implements
      */
     public void keypress(KeyEvent e) {
 
-        if(e.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT || e.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT){
-            //setAdapter(infoRowsAdapter);
-            setTitle("");
-            Log.w("PRESSED_KEY_LIVEFRAG",e.toString());
-        }
+//        if(e.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT || e.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT){
+//            //setAdapter(infoRowsAdapter);
+//            setTitle("");
+//            Log.w("PRESSED_KEY_LIVEFRAG",e.toString());
+//        }
         /** Si el KeyCode es un digito entre 0 y 9 */
         if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
             /** Obtengo el digito **/
             int numero = e.getKeyCode() - 7;
             /** Se concatena el numero al guardado */
             channelNumber = channelNumber + String.valueOf(numero);
-            setTitle(channelNumber);
+            //setTitle(channelNumber);
             /** Cambiar el Canal */
             cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
             cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
@@ -790,56 +789,77 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             int position = currentChannel.getmPosicion();
             //setTitle(e.toString());
             if (e.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP) {
-                position++;
-                LiveCanalCard card = (LiveCanalCard)channelsRowAdapter.get(position);
-                if (card != null) {
+                if(position<154) {//jalar del json de anales
+                    position++;
+                    LiveCanalCard card = (LiveCanalCard) channelsRowAdapter.get(position);
+                    if (card != null) {
 
-                    currentChannel = card;
-                    /** Mover el Foco al Canal Seleccionado */
-                    card.setmEstado(1);
-                    getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
-                            new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-                    /** Actualizar MetaData */
-                    currentMetaData = new MediaMetaData();
-                    currentMetaData.setMediaTitle(card.getmTitle());
-                    currentMetaData.setMediaArtistName(card.getmDescription());
-                    currentMetaData.setMediaSourcePath(card.getmStream());
-                    /** Preprar MetaData y Reproducir */
-                    mGlue.prepareIfNeededAndPlay(currentMetaData);
-                    /** Seleccionar el ultimo canal Reproducido */
-                    //getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
+                        currentChannel = card;
+                        /** Mover el Foco al Canal Seleccionado */
+                        card.setmEstado(1);
+                        getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                                new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
+                        /** Actualizar MetaData */
+                        currentMetaData = new MediaMetaData();
+                        currentMetaData.setMediaTitle(card.getmTitle());
+                        currentMetaData.setMediaArtistName(card.getmDescription());
+                        currentMetaData.setMediaSourcePath(card.getmStream());
+                        /** Actualizar Canal Seleccionado **/
+                        selectedChannel = card;
+                        /** Preprar MetaData y Reproducir */
+                        mGlue.prepareIfNeededAndPlay(currentMetaData, this);
+                        /** Seleccionar el ultimo canal Reproducido */
+                        //getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
 //                    getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
 //                            new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-                    /** Cargar Programas */
-                    handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                    handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
-                    setTitle(String.valueOf(card.getmNumero()));
+                        /** Cargar Programas */
+                        handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                        handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+                        //setTitle(String.valueOf(card.getmNumero()));
+
+                        /** Guardar el numero del Canal Seleccionado en SharedPreferences */
+                        SharedPreferences mPrefs = getActivity().getPreferences(0);
+                        SharedPreferences.Editor editor = mPrefs.edit();
+                        editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
+                        editor.commit();
+                    }
                 }
             }else if (e.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN){
                 //fadeOut();
-                position--;
-                LiveCanalCard card = (LiveCanalCard)channelsRowAdapter.get(position);
-                if (card != null) {
-                    currentChannel = card;
-                    /** Mover el Foco al Canal Seleccionado */
-                    card.setmEstado(1);
-                    getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
-                            new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-                    /** Actualizar MetaData */
-                    currentMetaData = new MediaMetaData();
-                    currentMetaData.setMediaTitle(card.getmTitle());
-                    currentMetaData.setMediaArtistName(card.getmDescription());
-                    currentMetaData.setMediaSourcePath(card.getmStream());
-                    /** Preprar MetaData y Reproducir */
-                    mGlue.prepareIfNeededAndPlay(currentMetaData);//mGlue.justPlay(currentMetaData);
-                    /** Seleccionar el ultimo canal Reproducido */
-                    //getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
+                if(position>0) {
+                    position--;
+                    LiveCanalCard card = (LiveCanalCard) channelsRowAdapter.get(position);
+                    if (card != null) {
+                        currentChannel = card;
+
+                        /** Mover el Foco al Canal Seleccionado */
+                        card.setmEstado(1);
+                        getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                                new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
+                        /** Actualizar MetaData */
+                        currentMetaData = new MediaMetaData();
+                        currentMetaData.setMediaTitle(card.getmTitle());
+                        currentMetaData.setMediaArtistName(card.getmDescription());
+                        currentMetaData.setMediaSourcePath(card.getmStream());
+                        /** Actualizar Canal Seleccionado **/
+                        selectedChannel = card;
+                        /** Actualizar MetaData en el Player y Reproducir */
+                        mGlue.prepareIfNeededAndPlay(currentMetaData, this);
+                        /** Seleccionar el ultimo canal Reproducido */
+                        //getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
 //                    getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
 //                            new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-                    /** Cargar Programas */
-                    handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                    handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
-                    setTitle(String.valueOf(card.getmNumero()));
+                        /** Cargar Programas */
+                        handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                        handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+                        //setTitle(String.valueOf(card.getmNumero()));
+
+                        /** Guardar el numero del Canal Seleccionado en SharedPreferences */
+                        SharedPreferences mPrefs = getActivity().getPreferences(0);
+                        SharedPreferences.Editor editor = mPrefs.edit();
+                        editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
+                        editor.commit();
+                    }
                 }
                 //infoRowsAdapter.notifyArrayItemRangeChanged(currentChannel.getmPosicion(),1);
                 //getRowsFragment().setSelectedPosition(ROW_CHANNELS);
@@ -849,6 +869,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
         }
         //tickle();
         setFadingEnabled(true);
+        //setTitle("");
     }
 
 
@@ -858,7 +879,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
     public void onStart() {
         super.onStart();
         mGlue.enableProgressUpdating(mGlue.hasValidMedia() && mGlue.isMediaPlaying());
-        mGlue.createMediaSessionIfNeeded();
+        mGlue.createMediaSessionIfNeeded(this);
     }
 
     @Override

@@ -20,10 +20,10 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="defaultBrandColor">@color/colorPrimary</item>
 
-        <item name="defaultSearchColor">@color/background</item>
+        <item name="defaultSearchColor">@color/search_button</item>
         <!--Colores para el Search Icon -->
-        <item name="defaultSearchIconColor">@color/search_icon_color</item>
-        <item name="defaultSearchBrightColor">#4f3044</item>
+        <item name="defaultSearchIconColor">@color/colorPrimary</item>
+        <item name="defaultSearchBrightColor">@color/md_white_1000</item>
         <item name="defaultSectionHeaderColor">@color/search_bright_color</item>
         <item name="android:windowFullscreen">true</item>
         <item name="sectionHeaderStyle">@style/SectionHeaderStyle</item>

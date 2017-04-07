@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/lb_grey">
+            android:background="@null">
 
             <ImageView
                 android:id="@+id/thumbnail"
@@ -29,10 +29,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@+id/thumbnail"
-                android:background="@color/lb_tv_white"
+                android:background="@null"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.flynetwifi.netplay.Utils.NHRegularTextView
                     android:id="@+id/numero"
                     style="@style/GridSquareTextStyle"
                     android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                     android:text="999"
                     android:textAlignment="gravity" />
 
-                <TextView
+                <com.flynetwifi.netplay.Utils.NHRegularTextView
                     android:id="@+id/nombre"
                     style="@style/GridSquareTextStyle"
                     android:layout_width="match_parent"

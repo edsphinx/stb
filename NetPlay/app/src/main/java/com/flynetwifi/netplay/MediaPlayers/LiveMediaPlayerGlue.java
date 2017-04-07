@@ -15,6 +15,7 @@ import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v17.leanback.app.PlaybackFragment;
 import android.support.v17.leanback.app.PlaybackOverlayFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
@@ -28,6 +29,7 @@ import android.view.SurfaceHolder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.flynetwifi.netplay.Fragments.LiveFragment;
 import com.flynetwifi.netplay.LiveActivity;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.media.MediaMetaData;
@@ -59,7 +61,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
     private PlaybackControlsRow.HighQualityAction mHighQualityAction;
     private PlaybackControlsRow.MoreActions mMoreActions;
 
-    public LiveMediaPlayerGlue(Context context, PlaybackOverlayFragment fragment) {
+    public LiveMediaPlayerGlue(Context context, PlaybackFragment fragment) {
         super(context, fragment);
 
         createMediaPlayerIfNeeded();
@@ -168,7 +170,9 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
 
             long currentPosition = getCurrentPosition();
             playbackStateBuilder.setState(playbackState, currentPosition, (float) 1.0).setActions(
-                    getPlaybackStateActions()
+                    PlaybackState.ACTION_PLAY | PlaybackState.ACTION_PAUSE |
+                            PlaybackState.ACTION_FAST_FORWARD | PlaybackState.ACTION_REWIND |
+                            PlaybackState.ACTION_SKIP_TO_NEXT | PlaybackState.ACTION_SKIP_TO_PREVIOUS
             );
             mVideoSession.setPlaybackState(playbackStateBuilder.build());
         }
@@ -189,13 +193,13 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
     }
 
     private long getPlaybackStateActions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return PlaybackState.ACTION_PLAY | PlaybackState.ACTION_PAUSE |
                     PlaybackState.ACTION_FAST_FORWARD | PlaybackState.ACTION_REWIND |
                     PlaybackState.ACTION_SKIP_TO_NEXT | PlaybackState.ACTION_SKIP_TO_PREVIOUS;
-        }
-
-        return 0;
+//        }
+//
+//        return 0;
     }
 
     public void setDisplay(SurfaceHolder surfaceHolder) {
@@ -223,17 +227,16 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
         return mInitialized ? mPlayer.getCurrentPosition() : 0;
     }
 
-    @Override protected void startPlayback(int speed) throws IllegalStateException {
-        if (requestAudioFocus()) {
-            mAudioFocus = AudioManager.AUDIOFOCUS_GAIN;
-        } else {
-            Log.e(TAG, "Video player could not obtain audio focus in startPlayback");
-            return;
-        }
-        prepareIfNeededAndPlay(mMediaMetaData);
-    }
+//    protected void startPlayback(int speed) throws IllegalStateException {
+//        if (requestAudioFocus()) {
+//            mAudioFocus = AudioManager.AUDIOFOCUS_GAIN;
+//        } else {
+//            Log.e(TAG, "Video player could not obtain audio focus in startPlayback");
+//            return;
+//        }
+//        prepareIfNeededAndPlay(mMediaMetaData);
+//    }
 
-    @Override
     public void pausePlayback() {
         if (isMediaPlaying()) {
             mPlayer.pause();
@@ -248,7 +251,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    public void prepareIfNeededAndPlay(MediaMetaData mediaMetaData) {
+    public void prepareIfNeededAndPlay(MediaMetaData mediaMetaData, LiveFragment view) {
         if (mediaMetaData == null) {
             throw new RuntimeException("Provided metadata is null!");
         }
@@ -259,7 +262,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
             return;
         }
         createMediaPlayerIfNeeded();
-        createMediaSessionIfNeeded();
+        createMediaSessionIfNeeded(view);
         if (mInitialized && isMediaItemsTheSame(mMediaMetaData, mediaMetaData)) {
             if (!isMediaPlaying()) {
                 Log.d(TAG, "mPlayer is started (meta data is the same)");
@@ -379,7 +382,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
         }
     }
 
-    public void createMediaSessionIfNeeded() {
+    public void createMediaSessionIfNeeded(LiveFragment view) {
         if (mVideoSession == null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 mVideoSession = new MediaSession(this.getContext(), "VideoPlayer Session");
@@ -388,7 +391,8 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
                 mVideoSession.setCallback(new VideoSessionCallback());
                 mVideoSession.setActive(true);
                 updateVideoSessionPlayState(PlaybackState.STATE_NONE);
-                getFragment().getActivity().setMediaController(
+
+                view.getActivity().setMediaController(
                         new MediaController(getContext(), mVideoSession.getSessionToken()));
             }
 

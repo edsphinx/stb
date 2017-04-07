@@ -20,8 +20,9 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v17.leanback.app.PlaybackControlGlue;
-import android.support.v17.leanback.app.PlaybackOverlayFragment;
+import android.support.v17.leanback.app.PlaybackFragment;
+import android.support.v17.leanback.media.PlaybackControlGlue;
+//import android.support.v17.leanback.app.PlaybackOverlayFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ControlButtonPresenterSelector;
@@ -69,8 +70,8 @@ public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
 
     protected MediaMetaData mMediaMetaData = null;
 
-    protected MediaPlayerGlue(Context context, PlaybackOverlayFragment fragment) {
-        super(context, fragment, new int[]{1});
+    protected MediaPlayerGlue(Context context, PlaybackFragment fragment) {
+        super(context, new int[]{1}, new int[]{1});
         mContext = context;
         // Instantiate secondary actions
         mShuffleAction = new PlaybackControlsRow.ShuffleAction(mContext);
@@ -116,8 +117,8 @@ public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
                 R.color.colorAccent));
     }
 
-    @Override public PlaybackControlsRowPresenter createControlsRowAndPresenter() {
-        PlaybackControlsRowPresenter presenter = super.createControlsRowAndPresenter();
+    public PlaybackControlsRowPresenter createControlsRowAndPresenter() {
+        PlaybackControlsRowPresenter presenter = super.getControlsRowPresenter();
         mControlsRow = getControlsRow();
 
         // Add secondary actions and change the control row color.
@@ -229,11 +230,11 @@ public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
         return isMediaPlaying() ? 1 : 0;
     }
 
-    @Override protected void skipToNext() {
+    protected void skipToNext() {
         // Not supported.
     }
 
-    @Override protected void skipToPrevious() {
+    protected void skipToPrevious() {
         // Not supported.
     }
 
@@ -247,7 +248,7 @@ public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
      * different states when setting a data source and preparing it to be played.
      */
     public void startPlayback() throws IllegalStateException {
-        startPlayback(1);
+        startPlayback();
     }
 
 
