@@ -135,7 +135,7 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
      */
     private void setUpMediaPlayer(){
         //Inicializar Media PLayer
-        mGlue = new LiveMediaPlayerGlue(getActivity(), this) {
+        mGlue = new LiveMediaPlayerGlue(getActivity(),this) {
             @Override
             protected void onRowChanged(PlaybackControlsRow row) {
 

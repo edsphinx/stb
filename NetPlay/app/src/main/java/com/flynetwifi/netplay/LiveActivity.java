@@ -68,7 +68,11 @@ public class LiveActivity extends Activity {
             }else if (e.getKeyCode() == 19 || e.getKeyCode() ==  20 || e.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP || e.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN) {
                 LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
                 if (fragment != null) {
-                    fragment.keypress(e);
+                    if(fragment.getIsChannelRowActive()) {
+                        fragment.keypress(e);
+                    }else{
+                        fragment.keypressupodwn(e);
+                    }
                 }
             }
         }
