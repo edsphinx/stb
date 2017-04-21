@@ -3,6 +3,8 @@ package com.flynetwifi.netplay.Fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.BackgroundManager;
@@ -21,9 +23,14 @@ import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.flynetwifi.netplay.Cards.MovieDetailCard;
 import com.flynetwifi.netplay.Cards.MovieRecommendedCard;
 import com.flynetwifi.netplay.Constants;
@@ -32,12 +39,14 @@ import com.flynetwifi.netplay.Presenters.MovieDetailPresenter;
 import com.flynetwifi.netplay.Presenters.MovieRecommendedPresenter;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Utils.DownloadData;
-import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+//import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+import com.flynetwifi.netplay.Utils.GlideBackgroundManagerTarget;
 import com.flynetwifi.netplay.Utils.Utils;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class MovieDetailFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
@@ -45,12 +54,18 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
     public static final String TAG = "MovieDetailFragment";
     private static final String TRANSITION_NAME = "t_for_transition";
 
+    private DisplayMetrics mMetrics;
+    private Drawable mDefaultBackground;
+
+    private static int CARD_WIDTH = 140;
+    private static int CARD_HEIGHT = 220;
 
     public String response = null;
     public MovieDetailCard data = null;
     public ArrayObjectAdapter mRowsAdapter;
     private BackgroundManager backgroundManager;
-    private PicassoBackgroundManagerTarget mBackgroundTarget;
+    //private PicassoBackgroundManagerTarget mBackgroundTarget;
+    private GlideBackgroundManagerTarget mBackgroundTarget;
 
 
     @Override
@@ -59,11 +74,22 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
         Bundle extras = getActivity().getIntent().getExtras();
 
         String id = MoviesFragment.id;
-        setupUI(id);
+        prepareBackgroundManager();
+        setupUIElements(id);
         setupEventListeners();
     }
 
-    private void setupUI(String id) {
+    private void prepareBackgroundManager() {
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mDefaultBackground =
+                new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.background));
+        backgroundManager.setColor(ContextCompat.getColor(getActivity(), R.color.background));
+        mMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+    }
+
+    private void setupUIElements(String id) {
         final DetailsOverviewRowPresenter rowPresenter = setupRowPresenter();
          mRowsAdapter = setupRowAdapter(rowPresenter);
 
@@ -75,7 +101,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
         if (data != null) {
             setupLogo(detailsOverview);
-            setupBackground();
+            setBackground();
         }
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
@@ -193,16 +219,32 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
     /**
      * Descripcion: Setup el Background
      */
-    private void setupBackground() {
+    private void setBackground() {
         //Imagen de Fondo
-        backgroundManager = BackgroundManager.getInstance(getActivity());
-        backgroundManager.attach(getActivity().getWindow());
-        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity())
+        //backgroundManager = BackgroundManager.getInstance(getActivity());
+        //backgroundManager.attach(getActivity().getWindow());
+        //mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+        //mBackgroundTarget = new GlideBackgroundManagerTarget(backgroundManager);
+        int width = mMetrics.widthPixels;
+        int height = mMetrics.heightPixels;
+        Glide.with(getActivity())
                 .load(data.getmBackground())
-                .skipMemoryCache()
+                .asBitmap()
+                .centerCrop()
                 .error(R.drawable.bg_poster)
-                .into(mBackgroundTarget);
+                .into(new SimpleTarget<Bitmap>(width, height) {
+                    @Override
+                    public void onResourceReady(Bitmap resource,
+                                                GlideAnimation<? super Bitmap>
+                                                        glideAnimation) {
+                        backgroundManager.setBitmap(resource);
+                    }
+                });
+//        Picasso.with(getActivity())
+//                .load(data.getmBackground())
+//                .skipMemoryCache()
+//                .error(R.drawable.bg_poster)
+//                .into(mBackgroundTarget);
     }
 
     private void setupLogo(final DetailsOverviewRow detailsOverview) {
@@ -211,16 +253,28 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
             @Override
             public void run() {
                 try {
-                    Bitmap poster = Picasso.with(getActivity())
+                    Bitmap poster = Glide.with(getActivity())
                             .load(data.getmLogo())
-                            .resize(Utils.convertDpToPixel(getActivity().getApplicationContext(), 140),
-                                    Utils.convertDpToPixel(getActivity().getApplicationContext(), 220))
-                            //.centerCrop()
-                            .centerInside()
+                            .asBitmap()
+                            .centerCrop()
+                            .skipMemoryCache(true)
+                            .into(Utils.convertDpToPixel(getActivity().getApplicationContext(), CARD_WIDTH),
+                                    Utils.convertDpToPixel(getActivity().getApplicationContext(), CARD_HEIGHT))
                             .get();
                     detailsOverview.setImageBitmap(getActivity(), poster);
-                } catch (IOException e) {
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
                 }
+//                    Bitmap poster = Picasso.with(getActivity())
+//                            .load(data.getmLogo())
+//                            .resize(Utils.convertDpToPixel(getActivity().getApplicationContext(), 140),
+//                                    Utils.convertDpToPixel(getActivity().getApplicationContext(), 220))
+//                            //.centerCrop()
+//                            .centerInside()
+//                            .get();
+                    //detailsOverview.setImageBitmap(getActivity(), poster);
             }
         });
 
@@ -286,7 +340,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
         if (data != null) {
             setupLogo(detailsOverview);
-            setupBackground();
+            setBackground();
         }
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();

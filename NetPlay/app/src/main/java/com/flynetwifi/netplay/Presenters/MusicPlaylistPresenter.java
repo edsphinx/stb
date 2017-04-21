@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.flynetwifi.netplay.Cards.MusicPlaylistCard;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Utils.Utils;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+//import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Target;
 
 /**
  * Created by mauro on 2/8/17.
@@ -31,23 +32,31 @@ public class MusicPlaylistPresenter  extends Presenter {
 
         public TextView nombre, numero;
         public ImageView logo;
-        public PicassoImageCardViewTarget mImageCardViewTarget;
+        //public PicassoImageCardViewTarget mImageCardViewTarget;
 
         public ViewHolder(View view) {
             super(view);
             nombre = (TextView) view.findViewById(R.id.nombre);
             numero = (TextView) view.findViewById(R.id.numero);
-            mImageCardViewTarget = new PicassoImageCardViewTarget(logo);
+           // mImageCardViewTarget = new PicassoImageCardViewTarget(logo);
         }
 
         protected void updateCardViewImage(String uri) {
-            Picasso.with(mContext)
+            Glide
+                    .with(mContext)
                     .load(uri)
-                    .resize(Utils.convertDpToPixel(mContext, CARD_WIDTH),
+                    .override(Utils.convertDpToPixel(mContext, CARD_WIDTH),
                             Utils.convertDpToPixel(mContext, CARD_HEIGHT))
                     .placeholder(R.drawable.bg_poster)
                     .error(R.drawable.bg_poster)
-                    .into(mImageCardViewTarget);
+                    .into(logo);
+//            Picasso.with(mContext)
+//                    .load(uri)
+//                    .resize(Utils.convertDpToPixel(mContext, CARD_WIDTH),
+//                            Utils.convertDpToPixel(mContext, CARD_HEIGHT))
+//                    .placeholder(R.drawable.bg_poster)
+//                    .error(R.drawable.bg_poster)
+//                    .into(mImageCardViewTarget);
         }
 
 
@@ -83,27 +92,27 @@ public class MusicPlaylistPresenter  extends Presenter {
 
     }
 
-    public static class PicassoImageCardViewTarget implements Target {
-        private ImageView mImageCardView;
-
-        public PicassoImageCardViewTarget(ImageView imageCardView) {
-            mImageCardView = imageCardView;
-        }
-
-        @Override
-        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
-            mImageCardView.setImageBitmap(bitmap);
-        }
-
-        @Override
-        public void onBitmapFailed(Drawable drawable) {
-            mImageCardView.setImageDrawable(null);
-        }
-
-        @Override
-        public void onPrepareLoad(Drawable drawable) {
-            // Do nothing, default_background manager has its own transitions
-        }
-    }
+//    public static class PicassoImageCardViewTarget implements Target {
+//        private ImageView mImageCardView;
+//
+//        public PicassoImageCardViewTarget(ImageView imageCardView) {
+//            mImageCardView = imageCardView;
+//        }
+//
+//        @Override
+//        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
+//            mImageCardView.setImageBitmap(bitmap);
+//        }
+//
+//        @Override
+//        public void onBitmapFailed(Drawable drawable) {
+//            mImageCardView.setImageDrawable(null);
+//        }
+//
+//        @Override
+//        public void onPrepareLoad(Drawable drawable) {
+//            // Do nothing, default_background manager has its own transitions
+//        }
+//    }
 
 }

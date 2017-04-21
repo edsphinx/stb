@@ -14,10 +14,15 @@
 
 package com.flynetwifi.netplay.Utils;
 
+
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v17.leanback.app.BackgroundManager;
 
+public class PicassoBackgroundManagerTarget {
+}
+
+/*
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -55,4 +60,7 @@ public class PicassoBackgroundManagerTarget implements Target {
     @Override public int hashCode() {
         return mBackgroundManager.hashCode();
     }
+
 }
+*/
+

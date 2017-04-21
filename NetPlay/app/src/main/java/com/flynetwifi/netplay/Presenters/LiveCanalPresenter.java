@@ -28,8 +28,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.flynetwifi.netplay.Cards.LiveCanalCard;
 import com.flynetwifi.netplay.R;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+//import com.squareup.picasso.Picasso;
+//Picassoimport com.squareup.picasso.Target;
 
 
 public class LiveCanalPresenter extends Presenter {
@@ -60,13 +60,13 @@ public class LiveCanalPresenter extends Presenter {
         }
 
         void updateCardViewImage(String uri) {
-            int resourceId = mContext.getResources()
-                    .getIdentifier("live_placeholder",
-                            "drawable", mContext.getPackageName());
+//            int resourceId = mContext.getResources()
+//                    .getIdentifier("live_placeholder",
+//                            "drawable", mContext.getPackageName());
 
-            Glide.with(mContext)
-                    .load(resourceId)
-                    .into(logo);
+//            Glide.with(mContext)
+//                    .load(resourceId)
+//                    .into(logo);
 //            Picasso.with(mContext)
 //                    .load(resourceId)
 //                    .into(mImageCardViewTarget);
@@ -121,28 +121,28 @@ public class LiveCanalPresenter extends Presenter {
     }
 
 
-    public static class PicassoImageCardViewTarget implements Target {
-        private final ImageView mImageCardView;
-
-        public PicassoImageCardViewTarget(ImageView imageCardView) {
-            mImageCardView = imageCardView;
-        }
-
-        @Override
-        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
-            mImageCardView.setImageBitmap(bitmap);
-        }
-
-        @Override
-        public void onBitmapFailed(Drawable drawable) {
-            mImageCardView.setImageDrawable(null);
-        }
-
-        @Override
-        public void onPrepareLoad(Drawable drawable) {
-            // Do nothing, default_background manager has its own transitions
-        }
-    }
+//    public static class PicassoImageCardViewTarget implements Target {
+//        private final ImageView mImageCardView;
+//
+//        public PicassoImageCardViewTarget(ImageView imageCardView) {
+//            mImageCardView = imageCardView;
+//        }
+//
+//        @Override
+//        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
+//            mImageCardView.setImageBitmap(bitmap);
+//        }
+//
+//        @Override
+//        public void onBitmapFailed(Drawable drawable) {
+//            mImageCardView.setImageDrawable(null);
+//        }
+//
+//        @Override
+//        public void onPrepareLoad(Drawable drawable) {
+//            // Do nothing, default_background manager has its own transitions
+//        }
+//    }
 
 
 }

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v17.leanback.app.PlaybackOverlayFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
@@ -31,6 +30,7 @@ import com.flynetwifi.netplay.Cards.LiveCanalCard;
 import com.flynetwifi.netplay.Cards.LiveProgramCard;
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.MediaPlayers.LiveMediaPlayerGlue;
+import com.flynetwifi.netplay.MediaPlayers.NHLiveMediaPlayerGlue;
 import com.flynetwifi.netplay.Presenters.LiveActionPresenter;
 import com.flynetwifi.netplay.Presenters.LiveCanalPresenter;
 import com.flynetwifi.netplay.Presenters.LiveProgramPresenter;
@@ -60,7 +60,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LiveFragment extends PlaybackOverlayFragment implements
+public class LiveFragment extends NHPlaybackOverlayFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
         MediaPlayerGlue.OnMediaStateChangeListener {
 
@@ -90,7 +90,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
      * MediaPlayer
      * Presentador de MediaPlayer
      */
-    private LiveMediaPlayerGlue mGlue;
+    private NHLiveMediaPlayerGlue mGlue;
     private PlaybackControlsRowPresenter playbackControlsRowPresenter;
 
     /**
@@ -255,7 +255,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
 
 
         /** Inicializando MediaPlayer */
-        mGlue = new LiveMediaPlayerGlue(getActivity(), this) {
+        mGlue = new NHLiveMediaPlayerGlue(getActivity(), this) {
             @Override
             protected void onRowChanged(PlaybackControlsRow row) {
                 if (infoRowsAdapter == null) return;
@@ -332,7 +332,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
          * @Option PlaybackOverlayFragment.BG_DARK
          *
          */
-        setBackgroundType(PlaybackOverlayFragment.BG_DARK);
+        setBackgroundType(NHPlaybackOverlayFragment.BG_DARK);
     }
 
     /**
@@ -710,14 +710,16 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                     /**
                      * Por cada Programa en ProgramationData, se agrega al Adaptador
                      */
-                    for (LiveProgramCard card : programationData.getProgramaCards()) {
-                        listRowAdapter.add(card);
+                    if(programationData != null) {
+                        for (LiveProgramCard card : programationData.getProgramaCards()) {
+                            listRowAdapter.add(card);
+                        }
+                        /** Creando el header para ROW de Programacion */
+                        HeaderItem header = new HeaderItem(ROW_PROGRAMATION,
+                                getString(R.string.programation_title) + ": " + card.getmTitle());
+                        /** Agregando ROW de Programacion en su indice **/
+                        infoRowsAdapter.replace(ROW_PROGRAMATION, new ListRow(header, listRowAdapter));
                     }
-                    /** Creando el header para ROW de Programacion */
-                    HeaderItem header = new HeaderItem(ROW_PROGRAMATION,
-                            getString(R.string.programation_title) + ": " + card.getmTitle());
-                    /** Agregando ROW de Programacion en su indice **/
-                    infoRowsAdapter.replace(ROW_PROGRAMATION, new ListRow(header, listRowAdapter));
 
                 } catch (UnsupportedOperationException e1) {
                     e1.printStackTrace();
@@ -851,15 +853,15 @@ public class LiveFragment extends PlaybackOverlayFragment implements
             cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
             cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
         } else if (e.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP || e.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN){
-            fadeOut();
+            //fadeOut();
             int position = currentChannel.getmPosicion();
-            setTitle(e.toString());
+            //setTitle(e.toString());
             if (e.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP) {
+                //fadeOut();
                 if(position<154) {//jalar del json de canales
                     position++;
                     LiveCanalCard card = (LiveCanalCard) channelsRowAdapter.get(position);
                     if (card != null) {
-
                         currentChannel = card;
                         /** Mover el Foco al Canal Seleccionado */
                         card.setmEstado(1);
@@ -881,7 +883,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                         /** Cargar Programas */
                         handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                         handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
-                        setTitle(String.valueOf(card.getmNumero()));
+                        setTitle(String.valueOf(selectedChannel.getmNumero()));
 
                         /** Guardar el numero del Canal Seleccionado en SharedPreferences */
                         SharedPreferences mPrefs = getActivity().getPreferences(0);
@@ -897,7 +899,6 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                     LiveCanalCard card = (LiveCanalCard) channelsRowAdapter.get(position);
                     if (card != null) {
                         currentChannel = card;
-
                         /** Mover el Foco al Canal Seleccionado */
                         card.setmEstado(1);
                         getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
@@ -918,7 +919,7 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                         /** Cargar Programas */
                         handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                         handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
-                        setTitle(String.valueOf(card.getmNumero()));
+                        setTitle(String.valueOf(selectedChannel.getmNumero()));
 
                         /** Guardar el numero del Canal Seleccionado en SharedPreferences */
                         SharedPreferences mPrefs = getActivity().getPreferences(0);
@@ -931,10 +932,14 @@ public class LiveFragment extends PlaybackOverlayFragment implements
                 //getRowsFragment().setSelectedPosition(ROW_CHANNELS);
                 //Log.w("PRESSED_KEY_LIVEFRAG",e.toString());
                 //setTitle(currentChannel.getmNumero().toString());
+            }else if (e.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT){
+                setTitle(String.valueOf(currentChannel.getmNumero()));
+            }else if (e.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT){
+                setTitle(String.valueOf(currentChannel.getmNumero()));
             }
         }
         //tickle();
-        setFadingEnabled(true);
+        //setFadingEnabled(true);
         setTitle("");
     }
 

@@ -2,6 +2,9 @@ package com.flynetwifi.netplay.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v17.leanback.app.BrowseFragment;
@@ -15,7 +18,12 @@ import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.SectionRow;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.flynetwifi.netplay.AccountActivity;
 import com.flynetwifi.netplay.AppsActivity;
 import com.flynetwifi.netplay.Cards.MenuCard;
@@ -32,11 +40,12 @@ import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Rows.MenuListRow;
 import com.flynetwifi.netplay.Rows.MenuRow;
 import com.flynetwifi.netplay.SeriesActivity;
-import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+//import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+import com.flynetwifi.netplay.Utils.GlideBackgroundManagerTarget;
 import com.flynetwifi.netplay.Utils.Utils;
 import com.flynetwifi.netplay.VODSelectionActivity;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,14 +59,19 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
     private MenuListRow subMenu;
     private int currentMenu = 0;
 
+    private DisplayMetrics mMetrics;
+    private Drawable mDefaultBackground;
+
     private BackgroundManager backgroundManager;
-    private PicassoBackgroundManagerTarget mBackgroundTarget;
+    //private PicassoBackgroundManagerTarget mBackgroundTarget;
+    private GlideBackgroundManagerTarget mBackgroundTarget;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         mContext = getActivity();
+        prepareBackgroundManager();
         setupUIElements();
         setupRowAdapter();
         setupEventListeners();
@@ -85,17 +99,47 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
         }
     }
 
+    private void prepareBackgroundManager() {
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mDefaultBackground =
+                new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.background));
+        backgroundManager.setColor(ContextCompat.getColor(getActivity(), R.color.background));
+        mMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+    }
+
     private void setupUIElements() {
         //setTitle(getString(R.string.app_name));
         setHeadersState(HEADERS_DISABLED);
         setHeadersTransitionOnBackEnabled(false);
         setBrandColor(getResources().getColor(R.color.colorPrimary));
 
-        backgroundManager = BackgroundManager.getInstance(getActivity());
-        backgroundManager.attach(getActivity().getWindow());
-        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity()).load(R.drawable.bg_default).skipMemoryCache()
-                .into(mBackgroundTarget);
+        //backgroundManager = BackgroundManager.getInstance(getActivity());
+        //backgroundManager.attach(getActivity().getWindow());
+        //mBackgroundTarget = new GlideBackgroundManagerTarget(backgroundManager);
+        int width = mMetrics.widthPixels;
+        int height = mMetrics.heightPixels;
+        Glide.with(getActivity())
+                .load(R.drawable.bg_default)
+                .asBitmap()
+                .centerCrop()
+                .error(R.drawable.bg_poster)
+                .into(new SimpleTarget<Bitmap>(width, height) {
+                    @Override
+                    public void onResourceReady(Bitmap resource,
+                                                GlideAnimation<? super Bitmap>
+                                                        glideAnimation) {
+                        backgroundManager.setBitmap(resource);
+                    }
+                });
+//        Glide.with(getActivity())
+//                .load(R.drawable.bg_default)
+//                .skipMemoryCache(true)
+//                .into(mBackgroundTarget);
+//        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+//        Picasso.with(getActivity()).load(R.drawable.bg_default).skipMemoryCache()
+//                .into(mBackgroundTarget);
 
     }
 

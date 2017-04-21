@@ -1,6 +1,9 @@
 package com.flynetwifi.netplay.Fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.BackgroundManager;
@@ -14,8 +17,13 @@ import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.SectionRow;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.flynetwifi.netplay.Cards.SeriesCard;
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.Presenters.SeriesPresenter;
@@ -26,11 +34,11 @@ import com.flynetwifi.netplay.Rows.SeriesRow;
 import com.flynetwifi.netplay.SeriesSearchActivity;
 import com.flynetwifi.netplay.SeriesSeasonsActivity;
 import com.flynetwifi.netplay.Utils.DownloadData;
-import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+//import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -42,9 +50,12 @@ public class SeriesFragment extends BrowseFragment {
 
     public static final String TAG = "SeriesFragment";
 
+    private DisplayMetrics mMetrics;
+    private Drawable mDefaultBackground;
+
     private ArrayObjectAdapter mRowsAdapter;
     private BackgroundManager backgroundManager;
-    private PicassoBackgroundManagerTarget mBackgroundTarget;
+    //private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     public static String id = "0";
     private Map<String, SeriesCard[]> data;
@@ -52,7 +63,8 @@ public class SeriesFragment extends BrowseFragment {
     @Override
     public void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
-        setupUi();
+        prepareBackgroundManager();
+        setupUIElements();
         setupRowAdapter();
     }
 
@@ -62,14 +74,24 @@ public class SeriesFragment extends BrowseFragment {
 
     }
 
-    private void setupUi() {
+    private void prepareBackgroundManager() {
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mDefaultBackground =
+                new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.background));
+        backgroundManager.setColor(ContextCompat.getColor(getActivity(), R.color.background));
+        mMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+    }
+
+    private void setupUIElements() {
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
         setBrandColor(getActivity().getResources().getColor(R.color.transparent_background));
 
-        backgroundManager = BackgroundManager.getInstance(getActivity());
-        backgroundManager.attach(getActivity().getWindow());
-        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+//        backgroundManager = BackgroundManager.getInstance(getActivity());
+//        backgroundManager.attach(getActivity().getWindow());
+//        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
 
         setOnItemViewClickedListener(new OnItemViewClickedListener() {
             @Override
@@ -90,8 +112,23 @@ public class SeriesFragment extends BrowseFragment {
             public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
                 if (item instanceof SeriesCard) {
                     SeriesCard model = (SeriesCard) item;
-                    Picasso.with(getActivity()).load(model.getmPortada()).skipMemoryCache()
-                            .into(mBackgroundTarget);
+                    int width = mMetrics.widthPixels;
+                    int height = mMetrics.heightPixels;
+                    Glide.with(getActivity())
+                            .load(model.getmPortada())
+                            .asBitmap()
+                            .centerCrop()
+                            .error(R.drawable.bg_poster)
+                            .into(new SimpleTarget<Bitmap>(width, height) {
+                                @Override
+                                public void onResourceReady(Bitmap resource,
+                                                            GlideAnimation<? super Bitmap>
+                                                                    glideAnimation) {
+                                    backgroundManager.setBitmap(resource);
+                                }
+                            });
+//                    Picasso.with(getActivity()).load(model.getmPortada()).skipMemoryCache()
+//                            .into(mBackgroundTarget);
                 }
             }
         });

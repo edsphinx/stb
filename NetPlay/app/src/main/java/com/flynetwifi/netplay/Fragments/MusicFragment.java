@@ -37,7 +37,8 @@ import com.flynetwifi.netplay.Rows.MusicPlaylistRow;
 import com.flynetwifi.netplay.Rows.MusicSingersListRow;
 import com.flynetwifi.netplay.Rows.MusicSingersRow;
 import com.flynetwifi.netplay.Utils.DownloadData;
-import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+//import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+import com.flynetwifi.netplay.Utils.GlideBackgroundManagerTarget;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
@@ -52,8 +53,8 @@ public class MusicFragment extends BrowseFragment {
     public static final String TAG = "MusicFragment";
     private ArrayObjectAdapter mRowsAdapter;
     private BackgroundManager backgroundManager;
-    private PicassoBackgroundManagerTarget mBackgroundTarget;
-
+//    private PicassoBackgroundManagerTarget mBackgroundTarget;
+    private GlideBackgroundManagerTarget mBackgroundTarget;
 
     private Map<String, MusicCard> data;
 
@@ -79,7 +80,8 @@ public class MusicFragment extends BrowseFragment {
 
         backgroundManager = BackgroundManager.getInstance(getActivity());
         backgroundManager.attach(getActivity().getWindow());
-        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+//        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+        mBackgroundTarget = new GlideBackgroundManagerTarget(backgroundManager);
 
         setOnItemViewClickedListener(new OnItemViewClickedListener() {
             @Override

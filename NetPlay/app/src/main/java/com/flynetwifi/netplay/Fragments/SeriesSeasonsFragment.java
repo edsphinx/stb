@@ -2,6 +2,8 @@ package com.flynetwifi.netplay.Fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.BackgroundManager;
@@ -21,9 +23,14 @@ import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.flynetwifi.netplay.Cards.SeriesCard;
 import com.flynetwifi.netplay.Cards.SeriesChapterCard;
 import com.flynetwifi.netplay.Cards.SeriesSeasonCard;
@@ -33,15 +40,16 @@ import com.flynetwifi.netplay.Presenters.SeriesSeasonPresenter;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.SeriesPlayerActivity;
 import com.flynetwifi.netplay.Utils.DownloadData;
-import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+//import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
 import com.flynetwifi.netplay.Utils.Utils;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class SeriesSeasonsFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
@@ -52,8 +60,11 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
     private ArrayObjectAdapter mRowsAdapter;
     private SeriesCard data = null;
 
+    private DisplayMetrics mMetrics;
+    private Drawable mDefaultBackground;
+
     private BackgroundManager backgroundManager;
-    private PicassoBackgroundManagerTarget mBackgroundTarget;
+    //private PicassoBackgroundManagerTarget mBackgroundTarget;
 
     public static Row rowAdapter = null;
     public static HashMap<Integer, List<SeriesChapterCard>> dataChapters;
@@ -61,12 +72,22 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupUi();
+        prepareBackgroundManager();
+        setupUIElements();
         setupEventListeners();
     }
 
+    private void prepareBackgroundManager() {
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mDefaultBackground =
+                new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.background));
+        backgroundManager.setColor(ContextCompat.getColor(getActivity(), R.color.background));
+        mMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+    }
 
-    private void setupUi() {
+    private void setupUIElements() {
         final FullWidthDetailsOverviewRowPresenter rowPresenterBack =
                 new FullWidthDetailsOverviewRowPresenter(
                 new SeriesDetailsPresenter(getActivity())) {
@@ -150,16 +171,28 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
+//                    Bitmap poster = Picasso.with(getActivity())
+//                            .load(data.getmLogo())
+//                            .resize(Utils.convertDpToPixel(getActivity().getApplicationContext(), 140),
+//                                    Utils.convertDpToPixel(getActivity().getApplicationContext(), 220))
+//                            .centerCrop()
+//                            .get();
                 try {
-                    Bitmap poster = Picasso.with(getActivity())
+                    Bitmap poster = Glide.with(getActivity())
                             .load(data.getmLogo())
-                            .resize(Utils.convertDpToPixel(getActivity().getApplicationContext(), 140),
-                                    Utils.convertDpToPixel(getActivity().getApplicationContext(), 220))
+                            .asBitmap()
                             .centerCrop()
+                            .into(Utils.convertDpToPixel(getActivity().getApplicationContext(), 140),
+                                    Utils.convertDpToPixel(getActivity().getApplicationContext(), 220))
                             .get();
                     detailsOverview.setImageBitmap(getActivity(), poster);
-                } catch (IOException e) {
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
                 }
+
+
             }
         });
 
@@ -167,10 +200,25 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
 
 
 //Imagen de Fondo
-        backgroundManager = BackgroundManager.getInstance(getActivity());
-        backgroundManager.attach(getActivity().getWindow());
-        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity()).load(data.getmPortada()).skipMemoryCache().into(mBackgroundTarget);
+        //backgroundManager = BackgroundManager.getInstance(getActivity());
+        //backgroundManager.attach(getActivity().getWindow());
+        //mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+        int width = mMetrics.widthPixels;
+        int height = mMetrics.heightPixels;
+        Glide.with(getActivity())
+                .load(data.getmPortada())
+                .asBitmap()
+                .centerCrop()
+                .error(R.drawable.bg_poster)
+                .into(new SimpleTarget<Bitmap>(width, height) {
+                    @Override
+                    public void onResourceReady(Bitmap resource,
+                                                GlideAnimation<? super Bitmap>
+                                                        glideAnimation) {
+                        backgroundManager.setBitmap(resource);
+                    }
+                });
+        //Picasso.with(getActivity()).load(data.getmPortada()).skipMemoryCache().into(mBackgroundTarget);
 
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();

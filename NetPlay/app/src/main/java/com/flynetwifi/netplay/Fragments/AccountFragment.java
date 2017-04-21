@@ -2,6 +2,8 @@ package com.flynetwifi.netplay.Fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.BackgroundManager;
@@ -19,9 +21,13 @@ import android.support.v17.leanback.widget.OnItemViewSelectedListener;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.flynetwifi.netplay.Cards.AccountCard;
 import com.flynetwifi.netplay.Cards.AccountProfileCard;
 import com.flynetwifi.netplay.Cards.BillsCard;
@@ -35,11 +41,13 @@ import com.flynetwifi.netplay.Presenters.MessagesPresenter;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Rows.AccountProfilesRow;
 import com.flynetwifi.netplay.Utils.DownloadData;
-import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+import com.flynetwifi.netplay.Utils.GlideBackgroundManagerTarget;
+//import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+//import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -59,8 +67,12 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
     private AccountProfilesRow dataProfiles = null;
     private Map<String, MessagesCard> dataMessages = new HashMap<>();
 
+    private DisplayMetrics mMetrics;
+    private Drawable mDefaultBackground;
+
     private BackgroundManager backgroundManager;
-    private PicassoBackgroundManagerTarget mBackgroundTarget;
+    //private PicassoBackgroundManagerTarget mBackgroundTarget;
+    private GlideBackgroundManagerTarget mBackgroundTarget;
 
     private final int DATA_ROW = 0;
     private final int FACTURAS_ROW = 1;
@@ -70,12 +82,22 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
     @Override
     public void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
-        setupUi();
+        prepareBackgroundManager();
+        setupUIElements();
         setupEventListeners();
     }
 
+    private void prepareBackgroundManager() {
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mDefaultBackground =
+                new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.background));
+        backgroundManager.setColor(ContextCompat.getColor(getActivity(), R.color.background));
+        mMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+    }
 
-    private void setupUi() {
+    private void setupUIElements() {
         final FullWidthDetailsOverviewRowPresenter rowPresenter =
                 new FullWidthDetailsOverviewRowPresenter(
                         new AccountPresenter(getActivity())
@@ -132,11 +154,28 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
                 R.drawable.ic_account_box);
         detailsOverview.setImageBitmap(getActivity().getBaseContext(), icon);
 
-        backgroundManager = BackgroundManager.getInstance(getActivity());
-        backgroundManager.attach(getActivity().getWindow());
-        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        Picasso.with(getActivity()).load(R.drawable.blackwall).skipMemoryCache()
-                .into(mBackgroundTarget);
+        //backgroundManager = BackgroundManager.getInstance(getActivity());
+        //backgroundManager.attach(getActivity().getWindow());
+        //mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+        //mBackgroundTarget = new GlideBackgroundManagerTarget(backgroundManager);
+
+        int width = mMetrics.widthPixels;
+        int height = mMetrics.heightPixels;
+        Glide.with(getActivity())
+                .load(R.drawable.blackwall)
+                .asBitmap()
+                .centerCrop()
+                .error(R.drawable.bg_poster)
+                .into(new SimpleTarget<Bitmap>(width, height) {
+                    @Override
+                    public void onResourceReady(Bitmap resource,
+                                                GlideAnimation<? super Bitmap>
+                                                        glideAnimation) {
+                        backgroundManager.setBitmap(resource);
+                    }
+                });
+//        Picasso.with(getActivity()).load(R.drawable.blackwall).skipMemoryCache()
+//                .into(mBackgroundTarget);
 
 
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();

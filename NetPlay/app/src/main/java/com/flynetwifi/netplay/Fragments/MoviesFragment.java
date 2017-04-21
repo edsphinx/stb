@@ -2,6 +2,8 @@ package com.flynetwifi.netplay.Fragments;
 
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.BackgroundManager;
@@ -15,8 +17,13 @@ import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.SectionRow;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.flynetwifi.netplay.Cards.MovieCard;
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.Models.CustomHeaderItemModel;
@@ -29,24 +36,35 @@ import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Rows.MoviesListRow;
 import com.flynetwifi.netplay.Rows.MoviesRow;
 import com.flynetwifi.netplay.Utils.DownloadData;
-import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+//import com.flynetwifi.netplay.Utils.PicassoBackgroundManagerTarget;
+import com.flynetwifi.netplay.Utils.GlideBackgroundManagerTarget;
+import com.flynetwifi.netplay.Utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
+import android.graphics.Bitmap;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class MoviesFragment extends BrowseFragment {
     public static final String TAG = "MoviesFragment";
     private ArrayObjectAdapter mRowsAdapter;
 
+    private DisplayMetrics mMetrics;
+    private Drawable mDefaultBackground;
+
+    private static int CARD_WIDTH = 140;
+    private static int CARD_HEIGHT = 220;
+
     private BackgroundManager backgroundManager;
-    private PicassoBackgroundManagerTarget mBackgroundTarget;
+//    private PicassoBackgroundManagerTarget mBackgroundTarget;
+    //private GlideBackgroundManagerTarget mBackgroundTarget;
 
     public static String id = "0";
     private Map<String, MovieCard[]> data;
@@ -54,18 +72,31 @@ public class MoviesFragment extends BrowseFragment {
     @Override
     public void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
-        setupUi();
+        prepareBackgroundManager();
+        setupUIElements();
         setupRowAdapter();
     }
 
-    private void setupUi() {
+    private void prepareBackgroundManager() {
+        backgroundManager = BackgroundManager.getInstance(getActivity());
+        backgroundManager.attach(getActivity().getWindow());
+        mDefaultBackground =
+                new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.background));
+        backgroundManager.setColor(ContextCompat.getColor(getActivity(), R.color.background));
+        mMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+    }
+
+    private void setupUIElements() {
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
         setBrandColor(getActivity().getResources().getColor(R.color.colorPrimaryDark));
 
-        backgroundManager = BackgroundManager.getInstance(getActivity());
-        backgroundManager.attach(getActivity().getWindow());
-        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+        //backgroundManager = BackgroundManager.getInstance(getActivity());
+        //backgroundManager.attach(getActivity().getWindow());
+        //mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
+        //mBackgroundTarget = new GlideBackgroundManagerTarget(backgroundManager);
+
 
         setOnItemViewClickedListener(new OnItemViewClickedListener() {
             @Override
@@ -86,8 +117,24 @@ public class MoviesFragment extends BrowseFragment {
             public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
                 if (item instanceof MovieCard) {
                     MovieCard model = (MovieCard) item;
-                    Picasso.with(getActivity()).load(model.getmBackground()).skipMemoryCache()
-                            .into(mBackgroundTarget);
+                    int width = mMetrics.widthPixels;
+                    int height = mMetrics.heightPixels;
+                    Glide.with(getActivity())
+                            .load(model.getmBackground())
+                            .asBitmap()
+                            .centerCrop()
+                            //.error(R.drawable.bg_poster)
+                            .into(new SimpleTarget<Bitmap>(width, height) {
+                                @Override
+                                public void onResourceReady(Bitmap resource,
+                                                            GlideAnimation<? super Bitmap>
+                                                                    glideAnimation) {
+                                    backgroundManager.setBitmap(resource);
+                                }
+                            });
+
+//                    Picasso.with(getActivity()).load(model.getmBackground()).skipMemoryCache()
+//                            .into(mBackgroundTarget);
                 }
             }
         });
