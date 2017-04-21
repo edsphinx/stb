@@ -25,11 +25,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.flynetwifi.netplay.Cards.MovieCard;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Utils.Utils;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+//import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Target;
+import com.bumptech.glide.request.target.Target;
 
 
 
@@ -40,19 +45,23 @@ public class MoviePresenter extends android.support.v17.leanback.widget.Presente
     private static Context mContext;
     private static int CARD_WIDTH = 313;
     private static int CARD_HEIGHT = 176;
+//    private static int CARD_WIDTH = 140;
+//    private static int CARD_HEIGHT = 220;
 
     static class ViewHolder extends android.support.v17.leanback.widget.Presenter.ViewHolder {
 
         public TextView nombre;
         public ImageView logo;
 
-        public PicassoImageCardViewTarget mImageCardViewTarget;
+//        public PicassoImageCardViewTarget mImageCardViewTarget;
+        public GlideImageCardViewTarget mImageCardViewTarget;
 
         public ViewHolder(View view) {
             super(view);
             nombre = (TextView) view.findViewById(R.id.nombre);
             logo = (ImageView) view.findViewById(R.id.thumbnail);
-            mImageCardViewTarget = new PicassoImageCardViewTarget(logo);
+//            mImageCardViewTarget = new PicassoImageCardViewTarget(logo);
+            //mImageCardViewTarget = new GlideImageCardViewTarget(logo);
         }
 
         public ImageView getLogo(){
@@ -60,13 +69,22 @@ public class MoviePresenter extends android.support.v17.leanback.widget.Presente
         }
 
         void updateCardViewImage(String uri) {
-            Picasso.with(mContext)
+            Glide
+                    .with(mContext)
                     .load(uri)
-                    .resize(Utils.convertDpToPixel(mContext, CARD_WIDTH),
+                    .override(Utils.convertDpToPixel(mContext, CARD_WIDTH),
                             Utils.convertDpToPixel(mContext, CARD_HEIGHT))
-                    .placeholder(R.drawable.bg_poster)
+                    //.placeholder(R.drawable.bg_poster)
                     .error(R.drawable.bg_poster)
-                    .into(mImageCardViewTarget);
+                    .skipMemoryCache(false)
+                    .into(logo);
+//            Picasso.with(mContext)
+//                    .load(uri)
+//                    .resize(Utils.convertDpToPixel(mContext, CARD_WIDTH),
+//                            Utils.convertDpToPixel(mContext, CARD_HEIGHT))
+//                    .placeholder(R.drawable.bg_poster)
+//                    .error(R.drawable.bg_poster)
+//                    .into(mImageCardViewTarget);
         }
 
     }
@@ -105,28 +123,98 @@ public class MoviePresenter extends android.support.v17.leanback.widget.Presente
         // TO DO
     }
 
-    public static class PicassoImageCardViewTarget implements Target {
+    public static class GlideImageCardViewTarget implements Target {
         private ImageView mImageCardView;
 
-        public PicassoImageCardViewTarget(ImageView imageCardView) {
+        public GlideImageCardViewTarget(ImageView imageCardView) {
             mImageCardView = imageCardView;
         }
 
-        @Override
-        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
+        public void onBitmapLoaded(Bitmap bitmap, Glide loadedFrom) {
             mImageCardView.setImageBitmap(bitmap);
         }
 
-        @Override
         public void onBitmapFailed(Drawable drawable) {
             mImageCardView.setImageDrawable(null);
         }
 
-        @Override
         public void onPrepareLoad(Drawable drawable) {
             // Do nothing, default_background manager has its own transitions
         }
+
+        @Override
+        public void onLoadStarted(Drawable placeholder) {
+
+        }
+
+        @Override
+        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+
+        }
+
+        @Override
+        public void onResourceReady(Object resource, GlideAnimation glideAnimation) {
+
+        }
+
+        @Override
+        public void onLoadCleared(Drawable placeholder) {
+
+        }
+
+        @Override
+        public void getSize(SizeReadyCallback cb) {
+
+        }
+
+        @Override
+        public void setRequest(Request request) {
+
+        }
+
+        @Override
+        public Request getRequest() {
+            return null;
+        }
+
+        @Override
+        public void onStart() {
+
+        }
+
+        @Override
+        public void onStop() {
+
+        }
+
+        @Override
+        public void onDestroy() {
+
+        }
     }
+
+//    public static class PicassoImageCardViewTarget implements Target {
+//        private ImageView mImageCardView;
+//
+//        public PicassoImageCardViewTarget(ImageView imageCardView) {
+//            mImageCardView = imageCardView;
+//        }
+//
+//        @Override
+//        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
+//            mImageCardView.setImageBitmap(bitmap);
+//        }
+//
+//        @Override
+//        public void onBitmapFailed(Drawable drawable) {
+//            mImageCardView.setImageDrawable(null);
+//        }
+//
+//        @Override
+//        public void onPrepareLoad(Drawable drawable) {
+//            // Do nothing, default_background manager has its own transitions
+//        }
+//    }
 
 
 }
