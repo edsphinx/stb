@@ -93,6 +93,14 @@
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.Main" />
         <activity
+            android:name=".MediaPlayers.MovieExoPlayer"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.Main" />
+        <activity
             android:name=".SeriesActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:exported="true"

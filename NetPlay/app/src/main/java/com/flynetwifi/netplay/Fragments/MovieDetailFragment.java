@@ -1,10 +1,12 @@
 package com.flynetwifi.netplay.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.BackgroundManager;
@@ -25,6 +27,7 @@ import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,6 +37,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.flynetwifi.netplay.Cards.MovieDetailCard;
 import com.flynetwifi.netplay.Cards.MovieRecommendedCard;
 import com.flynetwifi.netplay.Constants;
+import com.flynetwifi.netplay.MediaPlayers.MovieExoPlayer;
 import com.flynetwifi.netplay.MoviePlayerActivity;
 import com.flynetwifi.netplay.Presenters.MovieDetailPresenter;
 import com.flynetwifi.netplay.Presenters.MovieRecommendedPresenter;
@@ -46,6 +50,7 @@ import com.google.gson.Gson;
 //import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class MovieDetailFragment extends DetailsFragment implements OnItemViewClickedListener,
@@ -300,33 +305,117 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
     @Override
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                               RowPresenter.ViewHolder rowViewHolder, Row row) {
-        if (item instanceof MovieRecommendedCard) {
-            MovieRecommendedCard card = (MovieRecommendedCard) item;
-            reloadMovie(String.valueOf(card.getmId()));
-        }
-        if (item instanceof Action) {
-            Action action = (Action) item;
-            if (action.getId() == 1) {
-                Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
-                        MoviePlayerActivity.class);
-                intent.putExtra("id", data.getmId());
-                intent.putExtra("nombre", data.getmTitle());
-                intent.putExtra("url", data.getmStream());
-                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
-                        .toBundle();
-                startActivity(intent, bundle);
-            } else if (action.getId() == 2) {
-                setSelectedPosition(1);
+        try {
+            if (item instanceof MovieRecommendedCard) {
+                MovieRecommendedCard card = (MovieRecommendedCard) item;
+                reloadMovie(String.valueOf(card.getmId()));
             }
+            if (item instanceof Action) {
+                Action action = (Action) item;
+                if (action.getId() == 1) {
+
+//                Intent intent = null;
+//                intent = new Intent(getActivity().getBaseContext(),
+//                        MoviePlayerActivity.class);
+//                intent.putExtra("id", data.getmId());
+//                intent.putExtra("nombre", data.getmTitle());
+//                intent.putExtra("url", data.getmStream());
+//                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+//                        .toBundle();
+//                startActivity(intent, bundle);
+
+                    if (data != null) {
+                        UriExoMedia sample = new UriExoMedia(data.getmTitle(), null, null, null,
+                                false, data.getmStream(), null);
+
+                        onExoMediaSelected(sample);
+                    }
+
+                } else if (action.getId() == 2) {
+                    setSelectedPosition(1);
+                }
+            }
+        }catch (Exception e){
+            Log.d(TAG, e.toString());
         }
+    }
+
+    private abstract static class ExoMedia {
+
+        public final String name;
+        public final boolean preferExtensionDecoders;
+        public final UUID drmSchemeUuid;
+        public final String drmLicenseUrl;
+        public final String[] drmKeyRequestProperties;
+
+        public ExoMedia(String name, UUID drmSchemeUuid, String drmLicenseUrl,
+                      String[] drmKeyRequestProperties, boolean preferExtensionDecoders) {
+            this.name = name;
+            this.drmSchemeUuid = drmSchemeUuid;
+            this.drmLicenseUrl = drmLicenseUrl;
+            this.drmKeyRequestProperties = drmKeyRequestProperties;
+            this.preferExtensionDecoders = preferExtensionDecoders;
+        }
+
+        public Intent buildIntent(Context context) {
+            Intent intent = new Intent(context, MovieExoPlayer.class);
+            intent.putExtra(MovieExoPlayer.PREFER_EXTENSION_DECODERS, preferExtensionDecoders);
+            if (drmSchemeUuid != null) {
+                intent.putExtra(MovieExoPlayer.DRM_SCHEME_UUID_EXTRA, drmSchemeUuid.toString());
+                intent.putExtra(MovieExoPlayer.DRM_LICENSE_URL, drmLicenseUrl);
+                intent.putExtra(MovieExoPlayer.DRM_KEY_REQUEST_PROPERTIES, drmKeyRequestProperties);
+            }
+            return intent;
+        }
+
+    }
+
+    private static final class UriExoMedia extends ExoMedia {
+
+        public final String uri;
+//        public final String uri_subs;
+        public final String extension;
+
+    public UriExoMedia(String name, UUID drmSchemeUuid, String drmLicenseUrl,
+        String[] drmKeyRequestProperties, boolean preferExtensionDecoders, String uri,
+        String extension) {
+      super(name, drmSchemeUuid, drmLicenseUrl, drmKeyRequestProperties, preferExtensionDecoders);
+      this.uri = uri;
+      this.extension = extension;
+    }
+
+//        public UriExoMedia(String name, String drmSchemeUuidExtra, String drmLicenseUrl, String drmKeyRequestProperties, String preferExtensionDecoders, String uri, String extensionExtra) {
+//            super();
+//        }
+
+//        public UriExoMedia(String name, UUID drmSchemeUuid, String drmLicenseUrl,
+//                         String[] drmKeyRequestProperties, boolean preferExtensionDecoders, String uri,
+//                         String uri_subs, String extension) {
+//            super(name, drmSchemeUuid, drmLicenseUrl, drmKeyRequestProperties, preferExtensionDecoders);
+//            this.uri = uri;
+//            this.uri_subs = uri_subs;
+//            this.extension = extension;
+//        }
+
+        @Override
+        public Intent buildIntent(Context context) {
+            return super.buildIntent(context)
+                    .setData(Uri.parse(uri))
+                    .putExtra(MovieExoPlayer.EXTENSION_EXTRA, extension)
+                    .setAction(MovieExoPlayer.ACTION_VIEW);
+        }
+
+    }
+
+    private void onExoMediaSelected(ExoMedia sample) {
+//        try {
+            startActivity(sample.buildIntent(getActivity()));
+
     }
 
     @Override
     public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
-                               RowPresenter.ViewHolder rowViewHolder, Row row) {
-
-
+                               RowPresenter.ViewHolder rowViewHolder, Row row){
     }
 
     private void reloadMovie(String id) {
