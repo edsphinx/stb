@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flynetwifi.netplay.MainActivity;
 import com.flynetwifi.netplay.NetplayAplication;
 import com.flynetwifi.netplay.R;
 import com.google.android.exoplayer2.C;
@@ -49,7 +51,6 @@ import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.DebugTextViewHelper;
 import com.google.android.exoplayer2.ui.PlaybackControlView;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
@@ -115,7 +116,8 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
 
     private Handler mainHandler;
     private EventLogger eventLogger;
-    private SimpleExoPlayerView simpleExoPlayerView;
+    //private SimpleExoPlayerView simpleExoPlayerView;
+    private NHExoPlayerView simpleExoPlayerView;
     private LinearLayout debugRootView;
     private TextView debugTextView;
     private Button retryButton;
@@ -144,7 +146,7 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
             CookieHandler.setDefault(DEFAULT_COOKIE_MANAGER);
         }
 
-        setContentView(R.layout.player_activity);
+        setContentView(R.layout.nh_player_activity);
         View rootView = findViewById(R.id.root);
         rootView.setOnClickListener(this);
         debugRootView = (LinearLayout) findViewById(R.id.controls_root);
@@ -152,7 +154,7 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
         retryButton = (Button) findViewById(R.id.retry_button);
         retryButton.setOnClickListener(this);
 
-        simpleExoPlayerView = (SimpleExoPlayerView) findViewById(R.id.player_view);
+        simpleExoPlayerView = (NHExoPlayerView) findViewById(R.id.nh_player_view);
         simpleExoPlayerView.setControllerVisibilityListener(this);
         simpleExoPlayerView.requestFocus();
     }
@@ -212,6 +214,16 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_UP) {
+            if (event.getKeyCode() == 82) {
+                Intent intent = new Intent(this.getBaseContext(),
+                        MainActivity.class);
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
+                        .toBundle();
+                startActivity(intent, bundle);
+                this.finish();
+            }
+        }
         // Show the controls on any key event.
         simpleExoPlayerView.showController();
         // If the event was not handled then see if the player view can handle it as a media key event.
@@ -286,8 +298,8 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
 
             simpleExoPlayerView.setPlayer(player);
             player.setPlayWhenReady(shouldAutoPlay);
-            debugViewHelper = new DebugTextViewHelper(player, debugTextView);
-            debugViewHelper.start();
+            //debugViewHelper = new DebugTextViewHelper(player, debugTextView);
+            //debugViewHelper.start();
         }
         if (needNewPlayer || needRetrySource) {
             String action = intent.getAction();

@@ -8,7 +8,7 @@ public interface Constants {
     //static String server = "http://190.92.91.218:8080";
 
 
-    static String version = "1";
+    static String version = "3";
     static String version_url = server + "/stb/version";
     static String apk = stream_server + "/apps/app.apk";
 

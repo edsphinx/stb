@@ -3,7 +3,7 @@
 
     <!-- Base Theme -->
     <style name="Theme.Base" parent="Theme.Leanback">
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 
@@ -34,10 +34,6 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14</item>
         <item name="android:windowFullscreen">true</item>
     </style>
-
-
-
-
 
     <!--Search Theme -->
     <style name="Theme.Search" parent="Theme.Leanback">
@@ -87,6 +83,20 @@
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">34sp</item>
+    </style>
+
+    <!-- ExoPlayer -->
+    <!--<style name="PlayerTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:windowBackground">@android:color/black</item>-->
+    <!--</style>-->
+    <style name="PlayerTheme" parent="Theme.Leanback">
+        <!--<item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>-->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowActionBarOverlay">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
 
 </resources>

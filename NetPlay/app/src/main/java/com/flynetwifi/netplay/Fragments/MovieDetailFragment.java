@@ -373,29 +373,15 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
     private static final class UriExoMedia extends ExoMedia {
 
         public final String uri;
-//        public final String uri_subs;
         public final String extension;
 
     public UriExoMedia(String name, UUID drmSchemeUuid, String drmLicenseUrl,
         String[] drmKeyRequestProperties, boolean preferExtensionDecoders, String uri,
         String extension) {
-      super(name, drmSchemeUuid, drmLicenseUrl, drmKeyRequestProperties, preferExtensionDecoders);
-      this.uri = uri;
-      this.extension = extension;
+        super(name, drmSchemeUuid, drmLicenseUrl, drmKeyRequestProperties, preferExtensionDecoders);
+        this.uri = uri;
+        this.extension = extension;
     }
-
-//        public UriExoMedia(String name, String drmSchemeUuidExtra, String drmLicenseUrl, String drmKeyRequestProperties, String preferExtensionDecoders, String uri, String extensionExtra) {
-//            super();
-//        }
-
-//        public UriExoMedia(String name, UUID drmSchemeUuid, String drmLicenseUrl,
-//                         String[] drmKeyRequestProperties, boolean preferExtensionDecoders, String uri,
-//                         String uri_subs, String extension) {
-//            super(name, drmSchemeUuid, drmLicenseUrl, drmKeyRequestProperties, preferExtensionDecoders);
-//            this.uri = uri;
-//            this.uri_subs = uri_subs;
-//            this.extension = extension;
-//        }
 
         @Override
         public Intent buildIntent(Context context) {
@@ -408,9 +394,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
     }
 
     private void onExoMediaSelected(ExoMedia sample) {
-//        try {
             startActivity(sample.buildIntent(getActivity()));
-
     }
 
     @Override

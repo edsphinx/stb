@@ -46,4 +46,8 @@
         <item name="rowHeaderStyle">@style/MyCustomRowHeaderStyle</item>
     </style>
 
+    <!--<style name="NHProgressBar">-->
+        <!--<item name="progressBarStyleHorizontal">@drawable/progess_drawable_custom</item>-->
+    <!--</style>-->
+
 </resources>
