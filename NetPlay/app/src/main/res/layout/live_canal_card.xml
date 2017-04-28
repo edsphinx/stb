@@ -12,6 +12,10 @@
         <!--android:layout_gravity="center"-->
         <!--card_view:cardBackgroundColor="@color/transparent"-->
         <!--card_view:cardElevation="0dp">-->
+    <RelativeLayout
+        android:id="@+id/imagen_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,6 +60,8 @@
 
 
         </RelativeLayout>
+
+    </RelativeLayout>
 
     <!--</android.support.v7.widget.CardView>-->
 

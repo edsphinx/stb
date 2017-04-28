@@ -82,10 +82,9 @@ public class ProfileFragment extends BrowseFragment {
         int width = mMetrics.widthPixels;
         int height = mMetrics.heightPixels;
         Glide.with(getActivity())
-                .load(R.drawable.blackwall)
+                .load(R.drawable.bg_poster)
                 .asBitmap()
                 .centerCrop()
-                .error(R.drawable.bg_poster)
                 .into(new SimpleTarget<Bitmap>(width, height) {
                     @Override
                     public void onResourceReady(Bitmap resource,

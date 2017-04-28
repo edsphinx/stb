@@ -537,12 +537,12 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
                 Button button = new Button(this);
                 int label;
                 switch (player.getRendererType(i)) {
-                    case C.TRACK_TYPE_AUDIO:
-                        label = R.string.audio;
-                        break;
-                    case C.TRACK_TYPE_VIDEO:
-                        label = R.string.video;
-                        break;
+//                    case C.TRACK_TYPE_AUDIO:
+//                        label = R.string.audio;
+//                        break;
+//                    case C.TRACK_TYPE_VIDEO:
+//                        label = R.string.video;
+//                        break;
                     case C.TRACK_TYPE_TEXT:
                         label = R.string.text;
                         break;

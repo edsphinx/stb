@@ -109,4 +109,6 @@
 
     <string name="sample_list_load_error">One or more sample lists failed to load</string>
 
+    <string name="title_activity_update">UpdateActivity</string>
+
 </resources>

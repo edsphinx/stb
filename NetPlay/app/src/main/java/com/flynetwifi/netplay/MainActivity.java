@@ -197,6 +197,7 @@ public class MainActivity extends Activity {
         try {
             thread.join();
             if (code == 200) {
+                startService(new Intent(MainActivity.this, UpdateService.class));
                 return true;
             }
 

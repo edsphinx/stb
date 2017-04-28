@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.v17.leanback.app.GuidedStepFragment;
 import android.support.v17.leanback.widget.GuidanceStylist;
 import android.support.v17.leanback.widget.GuidedAction;
+import android.text.InputType;
 
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.MainActivity;
@@ -65,6 +66,8 @@ public class AccountProfileWizardFragment extends GuidedStepFragment {
                 .title("")
                 .editable(true)
                 .description(getString(R.string.account_pin_request))
+                .editInputType(InputType.TYPE_CLASS_NUMBER)
+                .inputType(InputType.TYPE_CLASS_NUMBER)
                 .icon(getResources().getDrawable(R.drawable.ic_enhanced_encryption))
                 .build();
 

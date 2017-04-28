@@ -121,10 +121,9 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
         int width = mMetrics.widthPixels;
         int height = mMetrics.heightPixels;
         Glide.with(getActivity())
-                .load(R.drawable.bg_default)
+                .load(R.drawable.bg_poster)
                 .asBitmap()
                 .centerCrop()
-                .error(R.drawable.bg_poster)
                 .into(new SimpleTarget<Bitmap>(width, height) {
                     @Override
                     public void onResourceReady(Bitmap resource,

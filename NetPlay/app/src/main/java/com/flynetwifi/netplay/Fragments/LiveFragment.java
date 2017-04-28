@@ -151,6 +151,12 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     // private final int ROw_PLAYER = 3;
     private final int ROW_FAVORITE_CHANNELS = 3;
 
+    /**
+     * Contador de digitos presionados en numpad
+     */
+
+    private int TOTAL_DIGIT = 0;
+    private String TOTAL_PRESSED = "";
 
     private final Handler handlerLoadPrograms = new Handler();
     private final Handler handlerLoadFavoriteChannels = new Handler();
@@ -812,6 +818,8 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         /** RESET al Numero del Canal */
         channelNumber = "";
         setTitle("");
+        TOTAL_DIGIT = 0;
+        TOTAL_PRESSED = "";
 
     }
 
@@ -822,17 +830,43 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
      */
     public void keypress(KeyEvent e) {
 
-        /** Si el KeyCode es un digito entre 0 y 9 */
-        if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
-            /** Obtengo el digito **/
-            int numero = e.getKeyCode() - 7;
-            /** Se concatena el numero al guardado */
-            channelNumber = channelNumber + String.valueOf(numero);
-            setTitle(channelNumber + " " + currentChannel.getmPosicion());
-            /** Cambiar el Canal */
-            cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
-            cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
+        if (TOTAL_DIGIT < 4) {
+            /** Si el KeyCode es un digito entre 0 y 9 */
+            if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
+                /** Obtengo el digito **/
+                int numero = e.getKeyCode() - 7;
+                TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
+                /** Se concatena el numero al guardado */
+                channelNumber = TOTAL_PRESSED;
+                setTitle(channelNumber);// + " " + currentChannel.getmPosicion());
+                /** Cambiar el Canal */
+                cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
+                cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
+            }
+            TOTAL_DIGIT++;
+        }else{
+            //setTitle("TOTAL DIGITS: " + TOTAL_DIGIT + " NUMBER: " + TOTAL_PRESSED);
+            //TOTAL_DIGIT = 0;
+            TOTAL_PRESSED = TOTAL_PRESSED.substring(TOTAL_PRESSED.length() - 3);
+
+            if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
+                // Obtengo el digito
+                int numero = e.getKeyCode() - 7;
+                TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
+                // Se concatena el numero al guardado
+                channelNumber = TOTAL_PRESSED;
+                setTitle(channelNumber);// + " " + currentChannel.getmPosicion());
+                // Cambiar el Canal
+                cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
+                cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
+            }
+
         }
+    }
+
+    private int getLastFour(int number){
+        int result = 0;
+        return result;
     }
 
     /**
