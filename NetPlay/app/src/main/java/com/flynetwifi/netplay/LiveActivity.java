@@ -51,7 +51,7 @@ public class LiveActivity extends Activity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
-        if (e.getAction() == KeyEvent.ACTION_UP) {
+        if (e.getAction() == KeyEvent.ACTION_UP ) {
             if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
                 LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
                 if (fragment != null) {
@@ -73,6 +73,26 @@ public class LiveActivity extends Activity {
                     }else{
                         fragment.keypressupodwn(e);
                     }
+                }
+            }
+        }else if (e.getAction() == KeyEvent.ACTION_DOWN ){
+            if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
+                LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
+                if (fragment != null) {
+                    fragment.keypress(e);
+                }
+            } else if (e.getKeyCode() == 82) {
+                Intent intent = new Intent();
+                intent = new Intent(this.getBaseContext(),
+                        MainActivity.class);
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
+                        .toBundle();
+                startActivity(intent, bundle);
+                this.finish();
+            }else if (e.getKeyCode() == 19 || e.getKeyCode() ==  20 ) {
+                LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
+                if (fragment != null) {
+                    fragment.keypress(e);
                 }
             }
         }

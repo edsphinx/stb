@@ -267,6 +267,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
                 if(mPadPos<2) {
                     mHandler.removeMessages(START_FADE_OUT);
                     fade(true);
+                    //startFadeTimer();
                 }
             }
         }
@@ -282,7 +283,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
     /**
      * Sets the listener to be called when fade in or out has completed.
      */
-    public void setFadeCompleteListener(NHPlaybackOverlayFragment.OnFadeCompleteListener listener) {
+    public void setFadeCompleteListener(OnFadeCompleteListener listener) {
         mFadeCompleteListener = listener;
         mPadPos = 0;
     }
@@ -290,21 +291,21 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
     /**
      * Returns the listener to be called when fade in or out has completed.
      */
-    public NHPlaybackOverlayFragment.OnFadeCompleteListener getFadeCompleteListener() {
+    public OnFadeCompleteListener getFadeCompleteListener() {
         return mFadeCompleteListener;
     }
 
     /**
      * Sets the input event handler.
      */
-    public final void setInputEventHandler(NHPlaybackOverlayFragment.InputEventHandler handler) {
+    public final void setInputEventHandler(InputEventHandler handler) {
         mInputEventHandler = handler;
     }
 
     /**
      * Returns the input event handler.
      */
-    public final NHPlaybackOverlayFragment.InputEventHandler getInputEventHandler() {
+    public final InputEventHandler getInputEventHandler() {
         return mInputEventHandler;
     }
 
@@ -373,6 +374,12 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
                 if (mFadingEnabled && !controlsHidden) {
                     consumeEvent = true;
                     mHandler.removeMessages(START_FADE_OUT);
+                    if(mFadingStatus == OUT){
+                        mFadingStatus = IDLE;
+                    }
+                    if (mBgAlpha == 0){
+                        mBgAlpha = 255;
+                    }
                     fade(false);
                 } else if (consumeEvent) {
                     tickle();
@@ -386,8 +393,10 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
                     consumeEvent = true;
                 }else {
                       if (consumeEvent) {
-                        tickle();
-                    }
+                          fadeOut();
+                      }else{
+                          tickle();
+                      }
                 }
 //                if (controlsHidden) {
 //                    consumeEvent = true;
@@ -620,7 +629,9 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
             }
         }else{
             mFadingStatus = IDLE;
-            mBgAlpha = 0;
+            fadeIn = true;
+            mBgAlpha = 255;
+            startFadeTimer();
         }
 
         // If fading in while control row is focused, set initial translationY so
@@ -632,7 +643,11 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
             }
         }
 
-        mFadingStatus = fadeIn ? IN : OUT;
+        if(mPadPos < 2) {
+            mFadingStatus = fadeIn ? IN : OUT;
+        }else{
+            mPadPos = 0;
+        }
     }
 
     /**

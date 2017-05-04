@@ -28,6 +28,7 @@ import okhttp3.Response;
 public class MainActivity extends Activity {
 
     //Token's Variable
+    public static String access_token_epg = "oM5WUKHFSrfBkauSP_";
     public static String access_token = "";
     public static String refresh_token = "";
     public static String user_profile = "";

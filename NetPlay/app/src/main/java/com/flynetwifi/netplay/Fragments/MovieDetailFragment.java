@@ -359,6 +359,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
         public Intent buildIntent(Context context) {
             Intent intent = new Intent(context, MovieExoPlayer.class);
+            intent.putExtra("movie_name",name);
             intent.putExtra(MovieExoPlayer.PREFER_EXTENSION_DECODERS, preferExtensionDecoders);
             if (drmSchemeUuid != null) {
                 intent.putExtra(MovieExoPlayer.DRM_SCHEME_UUID_EXTRA, drmSchemeUuid.toString());

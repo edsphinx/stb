@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.flynetwifi.netplay.MainActivity;
 import com.flynetwifi.netplay.NetplayAplication;
 import com.flynetwifi.netplay.R;
+import com.flynetwifi.netplay.Utils.NHRegularTextView;
+import com.flynetwifi.netplay.Views.NHPlaybackControlView;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -50,7 +52,7 @@ import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.DebugTextViewHelper;
-import com.google.android.exoplayer2.ui.PlaybackControlView;
+//import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
@@ -90,7 +92,7 @@ import com.flynetwifi.netplay.Utils.TrackSelectionHelper;
  * An activity that plays media using {@link SimpleExoPlayer}.
  */
 public class MovieExoPlayer extends Activity implements View.OnClickListener, ExoPlayer.EventListener,
-        PlaybackControlView.VisibilityListener {
+        NHPlaybackControlView.VisibilityListener {
 
     public static final String DRM_SCHEME_UUID_EXTRA = "drm_scheme_uuid";
     public static final String DRM_LICENSE_URL = "drm_license_url";
@@ -120,6 +122,10 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
     private NHExoPlayerView simpleExoPlayerView;
     private LinearLayout debugRootView;
     private TextView debugTextView;
+
+    private NHRegularTextView movie_name;
+    private NHRegularTextView TimeTotal;
+    private NHRegularTextView TimeElapsed;
     private Button retryButton;
 
     private DataSource.Factory mediaDataSourceFactory;
@@ -149,6 +155,7 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
         setContentView(R.layout.nh_player_activity);
         View rootView = findViewById(R.id.root);
         rootView.setOnClickListener(this);
+        //movie_name = (NHRegularTextView) R.id.movie_name;
         debugRootView = (LinearLayout) findViewById(R.id.controls_root);
         debugTextView = (TextView) findViewById(R.id.debug_text_view);
         retryButton = (Button) findViewById(R.id.retry_button);

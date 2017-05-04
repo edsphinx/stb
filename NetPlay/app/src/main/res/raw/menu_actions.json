@@ -7,13 +7,13 @@
         "type": "DEFAULT",
         "titulo": "Agregar a Favoritos",
         "localImageResource": "live_tv"
-      },
-      {
-        "id": 1,
-        "type": "DEFAULT",
-        "titulo": "Live Replay",
-        "localImageResource": "online_video"
       }
+//      {
+//        "id": 1,
+//        "type": "DEFAULT",
+//        "titulo": "Live Replay",
+//        "localImageResource": "online_video"
+//      }
 
     ]
   }

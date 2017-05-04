@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.flynetwifi.netplay.R;
+import com.flynetwifi.netplay.Views.NHPlaybackControlView;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -31,7 +33,7 @@ import com.google.android.exoplayer2.text.TextRenderer;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
-import com.google.android.exoplayer2.ui.PlaybackControlView;
+//import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.ui.SubtitleView;
 import com.google.android.exoplayer2.util.Assertions;
 
@@ -93,7 +95,7 @@ import java.util.List;
 
 /**
  * A high level view for {@link SimpleExoPlayer} media playbacks. It displays video, subtitles and
- * album art during playback, and displays playback controls using a {@link PlaybackControlView}.
+ * album art during playback, and displays playback controls using a {@link NHPlaybackControlView}.
  * <p>
  * A NHExoPlayerView can be customized by setting attributes (or calling corresponding methods),
  * overriding the view's layout file or by specifying a custom view layout file, as outlined below.
@@ -144,13 +146,13 @@ import java.util.List;
  *         <li>Default: {@code R.id.exo_simple_player_view}</li>
  *       </ul>
  *   <li><b>{@code controller_layout_id}</b> - Specifies the id of the layout resource to be
- *       inflated by the child {@link PlaybackControlView}. See below for more details.
+ *       inflated by the child {@link NHPlaybackControlView}. See below for more details.
  *       <ul>
  *         <li>Corresponding method: None</li>
  *         <li>Default: {@code R.id.exo_playback_control_view}</li>
  *       </ul>
- *   <li>All attributes that can be set on a {@link PlaybackControlView} can also be set on a
- *       NHExoPlayerView, and will be propagated to the inflated {@link PlaybackControlView}.
+ *   <li>All attributes that can be set on a {@link NHPlaybackControlView} can also be set on a
+ *       NHExoPlayerView, and will be propagated to the inflated {@link NHPlaybackControlView}.
  *   </li>
  * </ul>
  *
@@ -187,7 +189,7 @@ import java.util.List;
  *       </ul>
  *   </li>
  *   <li><b>{@code exo_controller_placeholder}</b> - A placeholder that's replaced with the inflated
- *       {@link PlaybackControlView}.
+ *       {@link NHPlaybackControlView}.
  *       <ul>
  *        <li>Type: {@link View}</li>
  *       </ul>
@@ -222,7 +224,7 @@ public final class NHExoPlayerView extends FrameLayout {
     private final View surfaceView;
     private final ImageView artworkView;
     private final SubtitleView subtitleView;
-    private final PlaybackControlView controller;
+    private final NHPlaybackControlView controller;
     private final ComponentListener componentListener;
     private final FrameLayout overlayFrameLayout;
 
@@ -243,13 +245,13 @@ public final class NHExoPlayerView extends FrameLayout {
     public NHExoPlayerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        int playerLayoutId = com.google.android.exoplayer2.R.layout.exo_simple_player_view;
+        int playerLayoutId = R.layout.exo_simple_player_view;
         boolean useArtwork = true;
         int defaultArtworkId = 0;
         boolean useController = true;
         int surfaceType = SURFACE_TYPE_SURFACE_VIEW;
         int resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT;
-        int controllerShowTimeoutMs = PlaybackControlView.DEFAULT_SHOW_TIMEOUT_MS;
+        int controllerShowTimeoutMs = NHPlaybackControlView.DEFAULT_SHOW_TIMEOUT_MS;
         if (attrs != null) {
             TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                     com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView, 0, 0);
@@ -274,7 +276,7 @@ public final class NHExoPlayerView extends FrameLayout {
         setDescendantFocusability(FOCUS_AFTER_DESCENDANTS);
 
         // Content frame.
-        contentFrame = (AspectRatioFrameLayout) findViewById(com.google.android.exoplayer2.R.id.exo_content_frame);
+        contentFrame = (AspectRatioFrameLayout) findViewById(R.id.exo_content_frame);
         if (contentFrame != null) {
             setResizeModeRaw(contentFrame, resizeMode);
         }
@@ -295,17 +297,17 @@ public final class NHExoPlayerView extends FrameLayout {
         }
 
         // Overlay frame layout.
-        overlayFrameLayout = (FrameLayout) findViewById(com.google.android.exoplayer2.R.id.exo_overlay);
+        overlayFrameLayout = (FrameLayout) findViewById(R.id.exo_overlay);
 
         // Artwork view.
-        artworkView = (ImageView) findViewById(com.google.android.exoplayer2.R.id.exo_artwork);
+        artworkView = (ImageView) findViewById(R.id.exo_artwork);
         this.useArtwork = useArtwork && artworkView != null;
         if (defaultArtworkId != 0) {
             defaultArtwork = BitmapFactory.decodeResource(context.getResources(), defaultArtworkId);
         }
 
         // Subtitle view.
-        subtitleView = (SubtitleView) findViewById(com.google.android.exoplayer2.R.id.exo_subtitles);
+        subtitleView = (SubtitleView) findViewById(R.id.exo_subtitles);
         if (subtitleView != null) {
             CaptionStyleCompat subStyle = new CaptionStyleCompat(Color.WHITE, Color.TRANSPARENT, Color.TRANSPARENT, CaptionStyleCompat.EDGE_TYPE_NONE, Color.WHITE, null);
             subtitleView.setStyle(subStyle);//.setUserDefaultStyle();
@@ -313,11 +315,11 @@ public final class NHExoPlayerView extends FrameLayout {
         }
 
         // Playback control view.
-        View controllerPlaceholder = findViewById(com.google.android.exoplayer2.R.id.exo_controller_placeholder);
+        View controllerPlaceholder = findViewById(R.id.exo_controller_placeholder);
         if (controllerPlaceholder != null) {
             // Note: rewindMs and fastForwardMs are passed via attrs, so we don't need to make explicit
             // calls to set them.
-            this.controller = new PlaybackControlView(context, attrs);
+            this.controller = new NHPlaybackControlView(context, attrs);
             controller.setLayoutParams(controllerPlaceholder.getLayoutParams());
             ViewGroup parent = ((ViewGroup) controllerPlaceholder.getParent());
             int controllerIndex = parent.indexOfChild(controllerPlaceholder);
@@ -510,22 +512,22 @@ public final class NHExoPlayerView extends FrameLayout {
     }
 
     /**
-     * Set the {@link PlaybackControlView.VisibilityListener}.
+     * Set the {@link NHPlaybackControlView.VisibilityListener}.
      *
      * @param listener The listener to be notified about visibility changes.
      */
-    public void setControllerVisibilityListener(PlaybackControlView.VisibilityListener listener) {
+    public void setControllerVisibilityListener(NHPlaybackControlView.VisibilityListener listener) {
         Assertions.checkState(controller != null);
         controller.setVisibilityListener(listener);
     }
 
     /**
-     * Sets the {@link PlaybackControlView.SeekDispatcher}.
+     * Sets the {@link NHPlaybackControlView.SeekDispatcher}.
      *
-     * @param seekDispatcher The {@link PlaybackControlView.SeekDispatcher}, or null to use
-     *     {@link PlaybackControlView#DEFAULT_SEEK_DISPATCHER}.
+     * @param seekDispatcher The {@link NHPlaybackControlView.SeekDispatcher}, or null to use
+     *     {@link NHPlaybackControlView#DEFAULT_SEEK_DISPATCHER}.
      */
-    public void setSeekDispatcher(PlaybackControlView.SeekDispatcher seekDispatcher) {
+    public void setSeekDispatcher(NHPlaybackControlView.SeekDispatcher seekDispatcher) {
         Assertions.checkState(controller != null);
         controller.setSeekDispatcher(seekDispatcher);
     }

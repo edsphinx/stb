@@ -27,18 +27,21 @@ import android.view.View;
 
 import com.flynetwifi.netplay.Cards.LiveActionCard;
 import com.flynetwifi.netplay.Cards.LiveCanalCard;
+import com.flynetwifi.netplay.Cards.LiveFavoriteCanalCard;
 import com.flynetwifi.netplay.Cards.LiveProgramCard;
 import com.flynetwifi.netplay.Constants;
 import com.flynetwifi.netplay.MediaPlayers.LiveMediaPlayerGlue;
 import com.flynetwifi.netplay.MediaPlayers.NHLiveMediaPlayerGlue;
 import com.flynetwifi.netplay.Presenters.LiveActionPresenter;
 import com.flynetwifi.netplay.Presenters.LiveCanalPresenter;
+import com.flynetwifi.netplay.Presenters.LiveFavoriteCanalPresenter;
 import com.flynetwifi.netplay.Presenters.LiveProgramPresenter;
 import com.flynetwifi.netplay.R;
 import com.flynetwifi.netplay.Rows.LiveActionsListRow;
 import com.flynetwifi.netplay.Rows.LiveActionsRow;
 import com.flynetwifi.netplay.Rows.LiveProgramRow;
 import com.flynetwifi.netplay.Utils.DownloadData;
+import com.flynetwifi.netplay.Utils.DownloadEPG;
 import com.flynetwifi.netplay.Utils.Utils;
 import com.flynetwifi.netplay.media.MediaMetaData;
 import com.flynetwifi.netplay.media.MediaPlayerGlue;
@@ -70,7 +73,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
      * Data de Canales y Canales Favoritos
      */
     private Map<String, LiveCanalCard> data = null;
-    private Map<String, LiveCanalCard> dataFavorite = null;
+    private Map<String, LiveFavoriteCanalCard> dataFavorite = null;
 
     /**
      * Adaptador Principal
@@ -121,11 +124,11 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     /**
      * CONSTANTES
      */
-    private int LOAD_PROGRAMS_DELAY = 700;
+    private int LOAD_PROGRAMS_DELAY = 300;
 
     /** Monitoreo de Canales **/
     private final Handler monitoreoHandler = new Handler();
-    private int delay = 1000 * 40;//1000 * 30;
+    private int delay = 40000;//1000 * 30;
 
     /** Vainas de Channel UP/DOWN**/
     private OnFadeCompleteListener completeListener;
@@ -508,7 +511,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
             public void run() {
                 Gson gson = new Gson();
                 /** Adaptador de Canales Favoritos */
-                favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
+                favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveFavoriteCanalPresenter());
                 try {
                     DownloadData downloadData = new DownloadData();
                     /** Obtener JSON de Canales Favoritos **/
@@ -517,14 +520,14 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                     /**
                      * Map<String, LiveCanalCard>, el String es el numero del canal
                      */
-                    Type canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
+                    Type canalesCardType = new TypeToken<Map<String, LiveFavoriteCanalCard>>() {
                     }.getType();
                     /** Parseo del RESPONSE -> Map<String, LiveCanalCard> */
                     dataFavorite = gson.fromJson(response, canalesCardType);
                     int i = 0;
                     /** Recorriendo cada entrada */
-                    for (HashMap.Entry<String, LiveCanalCard> entry : dataFavorite.entrySet()) {
-                        LiveCanalCard card = entry.getValue();
+                    for (HashMap.Entry<String, LiveFavoriteCanalCard> entry : dataFavorite.entrySet()) {
+                        LiveFavoriteCanalCard card = entry.getValue();
                         /** Set la posicion de cada Canal en el ROW */
                         card.setmPosicion(i);
                         entry.setValue(card);
@@ -572,47 +575,51 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                               RowPresenter.ViewHolder rowViewHolder, Row row) {
 
-        /** Si el item es del tipo: LiveCanalCard */
-        if (item instanceof LiveCanalCard) {
-            /** Parsear el item */
-            final LiveCanalCard card = (LiveCanalCard) item;
-            /** SetUp MetaData */
-            currentMetaData = new MediaMetaData();
-            currentMetaData.setMediaTitle(card.getmTitle());
-            currentMetaData.setMediaArtistName(card.getmDescription());
-            currentMetaData.setMediaSourcePath(card.getmStream());
-            /** Preprar MetaData y Reproducir */
-            mGlue.prepareIfNeededAndPlay(currentMetaData);
-            /** Asignar nuevo canal Seleccionado */
-            selectedChannel = card;
-            currentChannel = selectedChannel;
-            /** Cargar Programas de Canal */
-            handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-            handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
-
-            /** Si el ID de la ROW es de Canales Favoritos */
-            if (row.getId() == ROW_CHANNELS) {
-                /** Guardar el numero del Canal Seleccionado en SharedPreferences */
-                SharedPreferences mPrefs = getActivity().getPreferences(0);
-                SharedPreferences.Editor editor = mPrefs.edit();
-                editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
-                editor.commit();
-            }
-        }
-        else if(item instanceof LiveActionCard){
-            final LiveActionCard card = (LiveActionCard) item;
-            /** Add Channel To Favorites */
-            if(card.getmId() == 0){
-                addFavoriteChannel();
-            }
-            /** Live Replay */
-            else if(card.getmId() == 1){
-                MediaMetaData currentMetaData = new MediaMetaData();
-                currentMetaData.setMediaTitle(currentChannel.getmTitle());
-                currentMetaData.setMediaSourcePath(currentChannel.getmRecord());
+        try{
+            /** Si el item es del tipo: LiveCanalCard */
+            if (item instanceof LiveCanalCard) {
+                /** Parsear el item */
+                final LiveCanalCard card = (LiveCanalCard) item;
+                /** SetUp MetaData */
+                currentMetaData = new MediaMetaData();
+                currentMetaData.setMediaTitle(card.getmTitle());
+                currentMetaData.setMediaArtistName(card.getmDescription());
+                currentMetaData.setMediaSourcePath(card.getmStream());
+                /** Preprar MetaData y Reproducir */
                 mGlue.prepareIfNeededAndPlay(currentMetaData);
-            }
+                /** Asignar nuevo canal Seleccionado */
+                selectedChannel = card;
+                currentChannel = selectedChannel;
+                /** Cargar Programas de Canal */
+                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
 
+                /** Si el ID de la ROW es de Canales Favoritos */
+                if (row.getId() == ROW_CHANNELS) {
+                    /** Guardar el numero del Canal Seleccionado en SharedPreferences */
+                    SharedPreferences mPrefs = getActivity().getPreferences(0);
+                    SharedPreferences.Editor editor = mPrefs.edit();
+                    editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
+                    editor.commit();
+                }
+            }
+            else if(item instanceof LiveActionCard){
+                final LiveActionCard card = (LiveActionCard) item;
+                /** Add Channel To Favorites */
+                if(card.getmId() == 0){
+                    addFavoriteChannel();
+                }
+                /** Live Replay */
+                else if(card.getmId() == 1){
+                    MediaMetaData currentMetaData = new MediaMetaData();
+                    currentMetaData.setMediaTitle(currentChannel.getmTitle());
+                    currentMetaData.setMediaSourcePath(currentChannel.getmRecord());
+                    mGlue.prepareIfNeededAndPlay(currentMetaData);
+                }
+
+            }
+        }catch(Exception e){
+            Log.e(TAG, e.toString());
         }
     }
 
@@ -627,47 +634,54 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     @Override
     public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
                                RowPresenter.ViewHolder rowViewHolder, Row row) {
-        /** Si el item es del tipo: LiveCanalCard */
-        if (item instanceof LiveCanalCard) {
-            /** Si el ROW Seleccionado es Canales */
-            if (row.getId() == ROW_CHANNELS) {
-                /** Asignar nuevo canal Seleccionado */
-                selectedChannel = (LiveCanalCard) item;
-                /** Cargar thumbnail de Canal */
-                ///selectedHandler.postDelayed(selectedRunnable, 500);
-                /** Cargar Programas de Canal **/
-                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+        try {
+            /** Si el item es del tipo: LiveCanalCard */
+            if (item instanceof LiveCanalCard) {
+                /** Si el ROW Seleccionado es Canales */
+                if (row.getId() == ROW_CHANNELS) {
+                    /** Asignar nuevo canal Seleccionado */
+                    selectedChannel = (LiveCanalCard) item;
+                    /** Cargar thumbnail de Canal */
+                    ///selectedHandler.postDelayed(selectedRunnable, 500);
+                    /** Cargar Programas de Canal **/
+                    handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                    handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
 
-                /** Reproduccion del Primer Canal */
-                if (playOnSelect == true) {
-                    /** Obtener ultimo canal reproducido */
-                    LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
-                    /** Verificar que el card no sea nulo */
-                    if (card != null) {
-                        currentChannel = card;
-                        /** Actualizar MetaData */
-                        currentMetaData = new MediaMetaData();
-                        currentMetaData.setMediaTitle(card.getmTitle());
-                        currentMetaData.setMediaArtistName(card.getmDescription());
-                        currentMetaData.setMediaSourcePath(card.getmStream());
-                        /** Preprar MetaData y Reproducir */
-                        mGlue.prepareIfNeededAndPlay(currentMetaData);
-                        /** Seleccionar el ultimo canal Reproducido */
-                        getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
-                        getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
-                                new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-                        /** Cargar Programas */
-                        handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-                        handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+                    /** Reproduccion del Primer Canal */
+                    if (playOnSelect == true) {
+                        /** Obtener ultimo canal reproducido */
+                        LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
+                        /** Verificar que el card no sea nulo */
+                        if (card != null) {
+                            currentChannel = card;
+                            /** Actualizar MetaData */
+                            currentMetaData = new MediaMetaData();
+                            currentMetaData.setMediaTitle(card.getmTitle());
+                            currentMetaData.setMediaArtistName(card.getmDescription());
+                            currentMetaData.setMediaSourcePath(card.getmStream());
+                            /** Preprar MetaData y Reproducir */
+                            mGlue.prepareIfNeededAndPlay(currentMetaData);
+                            /** Seleccionar el ultimo canal Reproducido */
+                            getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
+                            getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                                    new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
+                            /** Cargar Programas */
+                            handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                            handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+                        }
+                        /** Los proximos select no reproduciran */
+                        playOnSelect = false;
                     }
-                    /** Los proximos select no reproduciran */
-                    playOnSelect = false;
+
                 }
-
+            }else if (item instanceof LiveActionCard) {
+                //Para debug
+            }else if (item instanceof LiveProgramCard) {
+                //Para debug
             }
+        }catch(Exception e){
+            Log.e(TAG, e.toString());
         }
-
     }
 
     /**
@@ -707,26 +721,28 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                             new LiveProgramPresenter());
                     /** Se limpia la DATA de Programacion */
                     programationData = null;
-                    DownloadData downloadData = new DownloadData();
+                    DownloadEPG downloadData = new DownloadEPG();
                     /** Obtener JSON de Programas del Canal **/
-                    String response = downloadData.run(Constants.server + Constants.programation
-                            + String.valueOf(card.getmId()));
-                    /** Parse del RESPONE -> LiveProgramRow */
-                    programationData = new Gson().fromJson(response, LiveProgramRow.class);
-                    /**
-                     * Por cada Programa en ProgramationData, se agrega al Adaptador
-                     */
-                    if(programationData != null) {
-                        for (LiveProgramCard card : programationData.getProgramaCards()) {
-                            listRowAdapter.add(card);
+                    String response = downloadData.run(Constants.server_epg + Constants.programation_epg
+                            + String.valueOf(card.getmNumero()));//+ String.valueOf(card.getmId()));
+                    //response = "{ programacion: " + response + " }";
+                    if(!response.equalsIgnoreCase("{}") || !response.equalsIgnoreCase("[]")) {
+                        /** Parse del RESPONE -> LiveProgramRow */
+                        programationData = new Gson().fromJson(response, LiveProgramRow.class);
+                        /**
+                         * Por cada Programa en ProgramationData, se agrega al Adaptador
+                         */
+                        if (programationData != null) {
+                            for (LiveProgramCard card : programationData.getProgramaCards()) {
+                                listRowAdapter.add(card);
+                            }
+                            /** Creando el header para ROW de Programacion */
+                            HeaderItem header = new HeaderItem(ROW_PROGRAMATION,
+                                    getString(R.string.programation_title) + ": " + card.getmTitle());
+                            /** Agregando ROW de Programacion en su indice **/
+                            infoRowsAdapter.replace(ROW_PROGRAMATION, new ListRow(header, listRowAdapter));
                         }
-                        /** Creando el header para ROW de Programacion */
-                        HeaderItem header = new HeaderItem(ROW_PROGRAMATION,
-                                getString(R.string.programation_title) + ": " + card.getmTitle());
-                        /** Agregando ROW de Programacion en su indice **/
-                        infoRowsAdapter.replace(ROW_PROGRAMATION, new ListRow(header, listRowAdapter));
                     }
-
                 } catch (UnsupportedOperationException e1) {
                     e1.printStackTrace();
                 } catch (IllegalStateException e2) {
@@ -830,9 +846,9 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
      */
     public void keypress(KeyEvent e) {
 
-        if (TOTAL_DIGIT < 4) {
-            /** Si el KeyCode es un digito entre 0 y 9 */
-            if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
+        //if (TOTAL_DIGIT < 4) {
+        /** Si el KeyCode es un digito entre 0 y 9 */
+        if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16 && TOTAL_DIGIT < 4) {
                 /** Obtengo el digito **/
                 int numero = e.getKeyCode() - 7;
                 TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
@@ -842,25 +858,24 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 /** Cambiar el Canal */
                 cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
                 cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
-            }
             TOTAL_DIGIT++;
         }else{
-            //setTitle("TOTAL DIGITS: " + TOTAL_DIGIT + " NUMBER: " + TOTAL_PRESSED);
-            //TOTAL_DIGIT = 0;
-            TOTAL_PRESSED = TOTAL_PRESSED.substring(TOTAL_PRESSED.length() - 3);
+            //if(TOTAL_PRESSED.length() > 2) {
 
-            if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
-                // Obtengo el digito
-                int numero = e.getKeyCode() - 7;
-                TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
-                // Se concatena el numero al guardado
-                channelNumber = TOTAL_PRESSED;
-                setTitle(channelNumber);// + " " + currentChannel.getmPosicion());
-                // Cambiar el Canal
-                cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
-                cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
-            }
 
+                if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
+                    TOTAL_PRESSED = TOTAL_PRESSED.substring(TOTAL_PRESSED.length() - 3);
+                    // Obtengo el digito
+                    int numero = e.getKeyCode() - 7;
+                    TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
+                    // Se concatena el numero al guardado
+                    channelNumber = TOTAL_PRESSED;
+                    setTitle(channelNumber);// + " " + currentChannel.getmPosicion());
+                    // Cambiar el Canal
+                    cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
+                    cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
+                }
+           // }
         }
     }
 

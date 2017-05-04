@@ -5,6 +5,7 @@ public interface Constants {
 
     static String server = "http://10.115.0.3:8080";
     static String stream_server = "http://10.115.0.3:1935";
+    static String server_epg = "http://epg.panoramalife.com";
     //static String server = "http://190.92.91.218:8080";
 
 
@@ -19,6 +20,9 @@ public interface Constants {
     static String live = "/stb/live";
     static String live_favorites = Constants.live + "/favoritos/";
     static String programation = "/stb/live/programacion/";
+
+    //EPG Custom Programation
+    static String programation_epg = "/api/channel/";
 
     static String movies = "/stb/peliculas/";
     static String movies_details = "/stb/peliculas/detalles/";
