@@ -1,6 +1,6 @@
-package com.flynetwifi.nhstream.Rows;
+package com.nuevoshorizontes.nhstream.Rows;
 
-import com.flynetwifi.nhstream.Cards.AccountProfileCard;
+import com.nuevoshorizontes.nhstream.Cards.AccountProfileCard;
 import com.google.gson.annotations.SerializedName;
 
 public class AccountProfilesRow {

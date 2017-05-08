@@ -1,12 +1,12 @@
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.support.v17.leanback.widget.FocusHighlight;
 import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.PresenterSelector;
 
-import com.flynetwifi.nhstream.Rows.CanalListRow;
-import com.flynetwifi.nhstream.Rows.LiveCanalRow;
+import com.nuevoshorizontes.nhstream.Rows.CanalListRow;
+import com.nuevoshorizontes.nhstream.Rows.LiveCanalRow;
 
 /**
  * Created by fonseca on 3/28/17.

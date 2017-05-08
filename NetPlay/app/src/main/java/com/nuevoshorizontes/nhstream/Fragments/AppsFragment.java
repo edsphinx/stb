@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,8 +10,8 @@ import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.FocusHighlight;
 import android.support.v17.leanback.widget.VerticalGridPresenter;
 
-import com.flynetwifi.nhstream.Cards.AppCard;
-import com.flynetwifi.nhstream.Presenters.AppsPresenter;
+import com.nuevoshorizontes.nhstream.Cards.AppCard;
+import com.nuevoshorizontes.nhstream.Presenters.AppsPresenter;
 
 import java.util.ArrayList;
 import java.util.List;

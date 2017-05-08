@@ -1,10 +1,8 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v17.leanback.app.GuidedStepFragment;
-
-import com.flynetwifi.netplay.R;
 
 public class VODSelectionActivity extends Activity {
 

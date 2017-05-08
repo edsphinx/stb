@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Requests;
+package com.nuevoshorizontes.nhstream.Requests;
 
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Cards;
+package com.nuevoshorizontes.nhstream.Cards;
 
 public class MusicPlaylistCard {
     private String mId;

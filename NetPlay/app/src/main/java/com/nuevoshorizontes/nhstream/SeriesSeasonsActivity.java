@@ -1,12 +1,10 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.KeyEvent;
-
-import com.flynetwifi.netplay.R;
 
 public class SeriesSeasonsActivity extends Activity {
 

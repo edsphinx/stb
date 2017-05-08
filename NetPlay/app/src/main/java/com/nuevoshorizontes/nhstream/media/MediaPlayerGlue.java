@@ -13,7 +13,7 @@
  *
  */
 
-package com.flynetwifi.nhstream.media;
+package com.nuevoshorizontes.nhstream.media;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -35,7 +35,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.R;
 
 public abstract class MediaPlayerGlue extends PlaybackControlGlue implements
         OnItemViewSelectedListener {

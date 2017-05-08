@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -25,26 +25,26 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-import com.flynetwifi.nhstream.Cards.LiveActionCard;
-import com.flynetwifi.nhstream.Cards.LiveCanalCard;
-import com.flynetwifi.nhstream.Cards.LiveFavoriteCanalCard;
-import com.flynetwifi.nhstream.Cards.LiveProgramCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MediaPlayers.NHLiveMediaPlayerGlue;
-import com.flynetwifi.nhstream.Presenters.LiveActionPresenter;
-import com.flynetwifi.nhstream.Presenters.LiveCanalPresenter;
-import com.flynetwifi.nhstream.Presenters.LiveFavoriteCanalPresenter;
-import com.flynetwifi.nhstream.Presenters.LiveProgramPresenter;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Rows.LiveActionsListRow;
-import com.flynetwifi.nhstream.Rows.LiveActionsRow;
-import com.flynetwifi.nhstream.Rows.LiveProgramRow;
-import com.flynetwifi.nhstream.Utils.DownloadData;
-import com.flynetwifi.nhstream.Utils.DownloadEPG;
-import com.flynetwifi.nhstream.Utils.Utils;
-import com.flynetwifi.nhstream.media.MediaMetaData;
-import com.flynetwifi.nhstream.media.MediaPlayerGlue;
-import com.flynetwifi.nhstream.media.MediaUtils;
+import com.nuevoshorizontes.nhstream.Cards.LiveActionCard;
+import com.nuevoshorizontes.nhstream.Cards.LiveCanalCard;
+import com.nuevoshorizontes.nhstream.Cards.LiveFavoriteCanalCard;
+import com.nuevoshorizontes.nhstream.Cards.LiveProgramCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MediaPlayers.NHLiveMediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.Presenters.LiveActionPresenter;
+import com.nuevoshorizontes.nhstream.Presenters.LiveCanalPresenter;
+import com.nuevoshorizontes.nhstream.Presenters.LiveFavoriteCanalPresenter;
+import com.nuevoshorizontes.nhstream.Presenters.LiveProgramPresenter;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Rows.LiveActionsListRow;
+import com.nuevoshorizontes.nhstream.Rows.LiveActionsRow;
+import com.nuevoshorizontes.nhstream.Rows.LiveProgramRow;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.Utils.DownloadEPG;
+import com.nuevoshorizontes.nhstream.Utils.Utils;
+import com.nuevoshorizontes.nhstream.media.MediaMetaData;
+import com.nuevoshorizontes.nhstream.media.MediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.media.MediaUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
@@ -1054,8 +1054,6 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     }
 
 }
-//package com.flynetwifi.netplay.Fragments;
-//
 //import android.app.Fragment;
 //import android.content.SharedPreferences;
 //import android.os.Build;
@@ -1091,7 +1089,6 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 //import LiveCanalPresenter;
 //import LiveCanalPresenterSelector;
 //import LiveProgramPresenter;
-//import com.flynetwifi.netplay.R;
 //import LiveActionsListRow;
 //import LiveActionsRow;
 //import LiveProgramRow;

@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.R;
 
 public class VideoSurfaceFragment extends Fragment {
 

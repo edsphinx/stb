@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Tasks;
+package com.nuevoshorizontes.nhstream.Tasks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,10 +6,10 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.design.widget.TextInputEditText;
 
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MainActivity;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Requests.LoginRequest;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MainActivity;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Requests.LoginRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -7,8 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.KeyEvent;
 
-import com.flynetwifi.nhstream.Fragments.ProfileFragment;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Fragments.ProfileFragment;
 
 public class ProfileActivity extends Activity {
 

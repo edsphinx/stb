@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.content.Context;
 import android.support.v17.leanback.widget.Presenter;
@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.flynetwifi.nhstream.Cards.SeriesCard;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Utils.Utils;
+import com.nuevoshorizontes.nhstream.Cards.SeriesCard;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Utils.Utils;
 //import com.squareup.picasso.Picasso;
 //import com.squareup.picasso.Target;
 

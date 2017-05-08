@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,11 +7,11 @@ import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.FocusHighlight;
 import android.support.v17.leanback.widget.VerticalGridPresenter;
 
-import com.flynetwifi.nhstream.Cards.MessagesCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.Presenters.MessagesPresenter;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.Cards.MessagesCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.Presenters.MessagesPresenter;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

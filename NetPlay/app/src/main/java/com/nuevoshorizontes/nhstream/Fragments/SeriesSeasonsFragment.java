@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,17 +31,17 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.flynetwifi.nhstream.Cards.SeriesCard;
-import com.flynetwifi.nhstream.Cards.SeriesChapterCard;
-import com.flynetwifi.nhstream.Cards.SeriesSeasonCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.Presenters.SeriesDetailsPresenter;
-import com.flynetwifi.nhstream.Presenters.SeriesSeasonPresenter;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.SeriesPlayerActivity;
-import com.flynetwifi.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.Cards.SeriesCard;
+import com.nuevoshorizontes.nhstream.Cards.SeriesChapterCard;
+import com.nuevoshorizontes.nhstream.Cards.SeriesSeasonCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.Presenters.SeriesDetailsPresenter;
+import com.nuevoshorizontes.nhstream.Presenters.SeriesSeasonPresenter;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.SeriesPlayerActivity;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 //import PicassoBackgroundManagerTarget;
-import com.flynetwifi.nhstream.Utils.Utils;
+import com.nuevoshorizontes.nhstream.Utils.Utils;
 import com.google.gson.Gson;
 //import com.squareup.picasso.Picasso;
 

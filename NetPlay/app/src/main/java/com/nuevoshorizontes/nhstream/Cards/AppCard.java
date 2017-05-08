@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Cards;
+package com.nuevoshorizontes.nhstream.Cards;
 
 import android.graphics.drawable.Drawable;
 

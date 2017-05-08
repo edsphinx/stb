@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-import com.flynetwifi.nhstream.Fragments.LiveCategoriesFragment;
-import com.flynetwifi.nhstream.Fragments.LiveFragment;
-import com.flynetwifi.nhstream.Fragments.VideoSurfaceFragment;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Fragments.LiveCategoriesFragment;
+import com.nuevoshorizontes.nhstream.Fragments.LiveFragment;
+import com.nuevoshorizontes.nhstream.Fragments.VideoSurfaceFragment;
 
 public class LiveCategoriesActivity extends Activity {
 

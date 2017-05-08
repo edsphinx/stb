@@ -21,7 +21,8 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-    <com.flynetwifi.netplay.MediaPlayers.NHExoPlayerView android:id="@+id/nh_player_view"
+    <com.nuevoshorizontes.nhstream.MediaPlayers.NHExoPlayerView
+        android:id="@+id/nh_player_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:rewind_increment="30000"

@@ -13,7 +13,7 @@
  *
  */
 
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.content.Context;
 import android.support.v17.leanback.widget.Presenter;
@@ -24,8 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.flynetwifi.nhstream.Cards.LiveCanalCard;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Cards.LiveCanalCard;
+import com.nuevoshorizontes.nhstream.R;
 //import com.squareup.picasso.Picasso;
 //Picassoimport com.squareup.picasso.Target;
 

@@ -32,7 +32,7 @@
                 android:layout_below="@+id/thumbnail"
                 android:orientation="horizontal">
 
-                <com.flynetwifi.netplay.Utils.NHRegularTextView
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                     android:id="@+id/nombre"
                     style="@style/GridSquareTextStyle"
                     android:layout_width="match_parent"

@@ -1,6 +1,6 @@
-package com.flynetwifi.nhstream.Utils;
+package com.nuevoshorizontes.nhstream.Utils;
 
-import com.flynetwifi.nhstream.MainActivity;
+import com.nuevoshorizontes.nhstream.MainActivity;
 
 import java.io.IOException;
 

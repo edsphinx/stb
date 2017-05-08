@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.flynetwifi.netplay">
+    package="com.nuevoshorizontes.nhstream">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -21,7 +21,7 @@
         android:required="true" />
 
     <application
-        android:name=".NetplayAplication"
+        android:name="com.nuevoshorizontes.nhstream.NetplayAplication"
         android:allowBackup="true"
         android:banner="@string/app_name"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Launcher">
         <activity
-            android:name=".MainActivity"
+            android:name="com.nuevoshorizontes.nhstream.MainActivity"
             android:exported="true"
             android:icon="@drawable/logo"
             android:label="@string/app_name"
@@ -46,15 +46,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.nuevoshorizontes.nhstream.LoginActivity"
             android:label="Login"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".ProfileActivity"
+            android:name="com.nuevoshorizontes.nhstream.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/Theme.Browse" />
         <activity
-            android:name=".LiveActivity"
+            android:name="com.nuevoshorizontes.nhstream.LiveActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:exported="true"
             android:launchMode="singleTask"
@@ -62,7 +62,7 @@
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.Main" />
         <activity
-            android:name=".LiveCategoriesActivity"
+            android:name="com.nuevoshorizontes.nhstream.LiveCategoriesActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:exported="true"
             android:launchMode="singleTask"
@@ -73,19 +73,19 @@
         <!-- MOVIE Activities -->
 
         <activity
-            android:name=".MovieActivity"
+            android:name="com.nuevoshorizontes.nhstream.MovieActivity"
             android:label="@string/title_activity_peliculas"
             android:theme="@style/Theme.Browse" />
         <activity
-            android:name=".MovieDetailActivity"
+            android:name="com.nuevoshorizontes.nhstream.MovieDetailActivity"
             android:exported="true"
             android:theme="@style/Theme.Details" />
         <activity
-            android:name=".MovieSearchActivity"
+            android:name="com.nuevoshorizontes.nhstream.MovieSearchActivity"
             android:exported="true"
             android:theme="@style/Theme.Search" />
         <activity
-            android:name=".MoviePlayerActivity"
+            android:name="com.nuevoshorizontes.nhstream.MoviePlayerActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:exported="true"
             android:launchMode="singleTask"
@@ -100,7 +100,7 @@
             <!--android:resizeableActivity="true"-->
             <!--android:supportsPictureInPicture="true"-->
             <!--android:theme="@style/Theme.Main" />-->
-        <activity android:name=".MediaPlayers.MovieExoPlayer"
+        <activity android:name="com.nuevoshorizontes.nhstream.MediaPlayers.MovieExoPlayer"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:launchMode="singleTop"
             android:label="@string/app_name"
@@ -120,7 +120,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SeriesActivity"
+            android:name="com.nuevoshorizontes.nhstream.SeriesActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:exported="true"
             android:launchMode="singleTask"
@@ -128,15 +128,15 @@
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.Browse" />
         <activity
-            android:name=".SeriesSeasonsActivity"
+            android:name="com.nuevoshorizontes.nhstream.SeriesSeasonsActivity"
             android:exported="true"
             android:theme="@style/Theme.Browse" />
         <activity
-            android:name=".SeriesSearchActivity"
+            android:name="com.nuevoshorizontes.nhstream.SeriesSearchActivity"
             android:exported="true"
             android:theme="@style/Theme.Search" />
         <activity
-            android:name=".SeriesPlayerActivity"
+            android:name="com.nuevoshorizontes.nhstream.SeriesPlayerActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:exported="true"
             android:launchMode="singleTask"
@@ -144,19 +144,19 @@
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.Main" />
         <activity
-            android:name=".VODSelectionActivity"
+            android:name="com.nuevoshorizontes.nhstream.VODSelectionActivity"
             android:label="@string/title_activity_vodselection" />
         <activity
-            android:name=".MusicActivity"
+            android:name="com.nuevoshorizontes.nhstream.MusicActivity"
             android:exported="true"
             android:label="@string/title_activity_music"
             android:theme="@style/Theme.Browse" />
         <activity
-            android:name=".MusicSearchActivity"
+            android:name="com.nuevoshorizontes.nhstream.MusicSearchActivity"
             android:exported="true"
             android:theme="@style/Theme.Search" />
         <activity
-            android:name=".MusicPlayerActivity"
+            android:name="com.nuevoshorizontes.nhstream.MusicPlayerActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|layoutDirection"
             android:exported="true"
             android:launchMode="singleTask"
@@ -164,33 +164,33 @@
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.Main" />
         <activity
-            android:name=".MusicPlaylistActivity"
+            android:name="com.nuevoshorizontes.nhstream.MusicPlaylistActivity"
             android:exported="true"
             android:theme="@style/Theme.Settings" />
         <activity
-            android:name=".AccountActivity"
+            android:name="com.nuevoshorizontes.nhstream.AccountActivity"
             android:exported="true"
             android:label="@string/title_activity_account"
             android:theme="@style/Theme.Details" />
         <activity
-            android:name=".AppsActivity"
+            android:name="com.nuevoshorizontes.nhstream.AppsActivity"
             android:exported="true"
             android:label="@string/title_activity_apps"
             android:theme="@style/Theme.VerticalGrid" />
         <activity
-            android:name=".MessagesActivity"
+            android:name="com.nuevoshorizontes.nhstream.MessagesActivity"
             android:label="@string/title_activity_messages" />
         <activity
-            android:name=".AccountProfilePasswordActivity"
+            android:name="com.nuevoshorizontes.nhstream.AccountProfilePasswordActivity"
             android:exported="true"
             android:theme="@style/Theme.Settings" />
         <activity
-            android:name=".UpdateActivity"
+            android:name="com.nuevoshorizontes.nhstream.UpdateActivity"
             android:label="@string/title_activity_update" />
 
 
         <service
-            android:name=".UpdateService"
+            android:name="com.nuevoshorizontes.nhstream.UpdateService"
             android:enabled="true"
             android:exported="true"></service>
     </application>

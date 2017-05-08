@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

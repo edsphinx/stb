@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flynetwifi.nhstream.Cards.AppCard;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Cards.AppCard;
+import com.nuevoshorizontes.nhstream.R;
 
 public class AppsPresenter extends android.support.v17.leanback.widget.Presenter {
 

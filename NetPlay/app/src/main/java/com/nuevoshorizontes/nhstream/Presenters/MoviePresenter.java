@@ -13,7 +13,7 @@
  *
  */
 
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -29,9 +29,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.flynetwifi.nhstream.Cards.MovieCard;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Utils.Utils;
+import com.nuevoshorizontes.nhstream.Cards.MovieCard;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Utils.Utils;
 //import com.squareup.picasso.Picasso;
 //import com.squareup.picasso.Target;
 import com.bumptech.glide.request.target.Target;

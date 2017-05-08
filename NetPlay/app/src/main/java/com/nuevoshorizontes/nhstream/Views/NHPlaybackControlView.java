@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.flynetwifi.nhstream.R;
+import com.nuevoshorizontes.nhstream.R;
 import com.nuevoshorizontes.nhstream.Utils.NHRegularTextView;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;

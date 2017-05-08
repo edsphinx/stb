@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 /**
  * Created by fonseca on 4/12/17.
@@ -98,7 +98,7 @@ public class NHBaseFragment extends NHBrandedFragment {
     private Object mEntranceTransition;
     private final ProgressBarManager mProgressBarManager = new ProgressBarManager();
 
-    NHBaseFragment() {
+    public NHBaseFragment() {
         mEnterTransitionStates = new StateMachine();
         mEnterTransitionStates.addState(STATE_ALLOWED);
         mEnterTransitionStates.addState(STATE_PREPARE);

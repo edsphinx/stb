@@ -13,15 +13,15 @@
  *
  */
 
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.support.v17.leanback.widget.FocusHighlight;
 import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.PresenterSelector;
 
-import com.flynetwifi.nhstream.Rows.MoviesListRow;
-import com.flynetwifi.nhstream.Rows.MoviesRow;
+import com.nuevoshorizontes.nhstream.Rows.MoviesListRow;
+import com.nuevoshorizontes.nhstream.Rows.MoviesRow;
 
 
 public class MoviePresenterSelector extends PresenterSelector {

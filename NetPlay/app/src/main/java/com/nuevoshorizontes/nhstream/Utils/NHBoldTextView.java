@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Utils;
+package com.nuevoshorizontes.nhstream.Utils;
 
 /**
  * Created by fonseca on 3/28/17.

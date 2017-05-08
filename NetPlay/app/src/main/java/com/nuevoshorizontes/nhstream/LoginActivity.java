@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,8 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Tasks.LoginTask;
+import com.nuevoshorizontes.nhstream.Tasks.LoginTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

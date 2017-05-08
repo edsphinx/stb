@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 
 import android.content.Context;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.flynetwifi.nhstream.Cards.MessagesCard;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Cards.MessagesCard;
+import com.nuevoshorizontes.nhstream.R;
 
 public class MessagesPresenter extends Presenter {
 

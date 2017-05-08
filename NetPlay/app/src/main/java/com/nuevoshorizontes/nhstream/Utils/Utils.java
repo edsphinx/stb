@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Utils;
+package com.nuevoshorizontes.nhstream.Utils;
 
 import android.content.ContentResolver;
 import android.content.Context;

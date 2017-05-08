@@ -9,7 +9,6 @@ import android.view.KeyEvent;
 
 import com.nuevoshorizontes.nhstream.Fragments.LiveFragment;
 import com.nuevoshorizontes.nhstream.Fragments.VideoSurfaceFragment;
-import com.flynetwifi.nhstream.R;
 
 public class LiveActivity extends Activity {
 

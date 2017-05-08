@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,16 +24,16 @@ import android.util.DisplayMetrics;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.flynetwifi.nhstream.AccountProfilePasswordActivity;
-import com.flynetwifi.nhstream.Cards.AccountProfileCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MainActivity;
-import com.flynetwifi.nhstream.Presenters.AccountProfilesPresenter;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Rows.AccountProfilesRow;
-import com.flynetwifi.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.AccountProfilePasswordActivity;
+import com.nuevoshorizontes.nhstream.Cards.AccountProfileCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MainActivity;
+import com.nuevoshorizontes.nhstream.Presenters.AccountProfilesPresenter;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Rows.AccountProfilesRow;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 //import PicassoBackgroundManagerTarget;
-import com.flynetwifi.nhstream.Utils.GlideBackgroundManagerTarget;
+import com.nuevoshorizontes.nhstream.Utils.GlideBackgroundManagerTarget;
 import com.google.gson.Gson;
 //import com.squareup.picasso.Picasso;
 

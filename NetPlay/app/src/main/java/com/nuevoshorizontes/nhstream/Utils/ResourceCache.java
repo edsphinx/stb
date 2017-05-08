@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.flynetwifi.nhstream.Utils;
+package com.nuevoshorizontes.nhstream.Utils;
 
 import android.util.SparseArray;
 import android.view.View;

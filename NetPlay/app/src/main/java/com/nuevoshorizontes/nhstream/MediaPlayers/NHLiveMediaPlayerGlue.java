@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.MediaPlayers;
+package com.nuevoshorizontes.nhstream.MediaPlayers;
 
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
@@ -25,12 +25,12 @@ import android.view.SurfaceHolder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.flynetwifi.nhstream.Fragments.NHPlaybackOverlayFragment;
-import com.flynetwifi.nhstream.LiveActivity;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.media.MediaMetaData;
-import com.flynetwifi.nhstream.media.NHMediaPlayerGlue;
-import com.flynetwifi.nhstream.media.MediaUtils;
+import com.nuevoshorizontes.nhstream.Fragments.NHPlaybackOverlayFragment;
+import com.nuevoshorizontes.nhstream.LiveActivity;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.media.MediaMetaData;
+import com.nuevoshorizontes.nhstream.media.NHMediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.media.MediaUtils;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
-package com.flynetwifi.nhstream.Rows;
+package com.nuevoshorizontes.nhstream.Rows;
 
-import com.flynetwifi.nhstream.Cards.MusicSongCard;
+import com.nuevoshorizontes.nhstream.Cards.MusicSongCard;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

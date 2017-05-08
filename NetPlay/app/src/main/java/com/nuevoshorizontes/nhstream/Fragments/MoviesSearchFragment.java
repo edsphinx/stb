@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,14 +19,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import com.flynetwifi.nhstream.Cards.MovieCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MovieDetailActivity;
-import com.flynetwifi.nhstream.Presenters.MoviePresenter;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Rows.MoviesListRow;
-import com.flynetwifi.nhstream.Rows.MoviesRow;
-import com.flynetwifi.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.Cards.MovieCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MovieDetailActivity;
+import com.nuevoshorizontes.nhstream.Presenters.MoviePresenter;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Rows.MoviesListRow;
+import com.nuevoshorizontes.nhstream.Rows.MoviesRow;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;

@@ -1,4 +1,4 @@
-package com.flynetwifi.netplay;
+package com.nuevoshorizontes.nhstream;
 
 import org.junit.Test;
 

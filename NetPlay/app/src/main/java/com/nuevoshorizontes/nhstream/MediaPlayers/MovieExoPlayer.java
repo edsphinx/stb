@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.MediaPlayers;
+package com.nuevoshorizontes.nhstream.MediaPlayers;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,11 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flynetwifi.nhstream.MainActivity;
-import com.flynetwifi.nhstream.NetplayAplication;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Utils.NHRegularTextView;
-import com.flynetwifi.nhstream.Views.NHPlaybackControlView;
+import com.nuevoshorizontes.nhstream.MainActivity;
+import com.nuevoshorizontes.nhstream.NetplayAplication;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Utils.NHRegularTextView;
+import com.nuevoshorizontes.nhstream.Views.NHPlaybackControlView;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -63,8 +63,8 @@ import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.UUID;
 
-import com.flynetwifi.nhstream.Utils.EventLogger;
-import com.flynetwifi.nhstream.Utils.TrackSelectionHelper;
+import com.nuevoshorizontes.nhstream.Utils.EventLogger;
+import com.nuevoshorizontes.nhstream.Utils.TrackSelectionHelper;
 
 /**
  * Created by fonseca on 4/24/17.

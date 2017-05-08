@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.app.Fragment;
 import android.os.Build;
@@ -20,16 +20,16 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-import com.flynetwifi.nhstream.Cards.MusicSongCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MediaPlayers.MusicMediaPlayerGlue;
-import com.flynetwifi.nhstream.Presenters.MusicSongPresenter;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Rows.MusicSongsRow;
-import com.flynetwifi.nhstream.Utils.DownloadData;
-import com.flynetwifi.nhstream.media.MediaMetaData;
-import com.flynetwifi.nhstream.media.MediaPlayerGlue;
-import com.flynetwifi.nhstream.media.MediaUtils;
+import com.nuevoshorizontes.nhstream.Cards.MusicSongCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MediaPlayers.MusicMediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.Presenters.MusicSongPresenter;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Rows.MusicSongsRow;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.media.MediaMetaData;
+import com.nuevoshorizontes.nhstream.media.MediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.media.MediaUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 

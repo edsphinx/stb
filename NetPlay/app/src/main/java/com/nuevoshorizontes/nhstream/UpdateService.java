@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.app.Service;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.flynetwifi.nhstream.Tasks.DownloadAPK;
+import com.nuevoshorizontes.nhstream.Tasks.DownloadAPK;
 
 import java.util.Timer;
 import java.util.TimerTask;

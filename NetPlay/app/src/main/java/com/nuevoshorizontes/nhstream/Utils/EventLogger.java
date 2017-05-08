@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Utils;
+package com.nuevoshorizontes.nhstream.Utils;
 
 import android.os.SystemClock;
 import android.util.Log;

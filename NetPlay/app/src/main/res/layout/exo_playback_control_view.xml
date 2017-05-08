@@ -120,7 +120,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/movie_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -155,7 +155,8 @@
             android:orientation="horizontal"
             android:weightSum="100">
 
-                <com.flynetwifi.netplay.Utils.NHRegularTextView android:id="@id/exo_position"
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
+                    android:id="@id/exo_position"
                     android:layout_width="72dp"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
@@ -174,7 +175,7 @@
                     android:orientation="horizontal"
                     android:layout_weight="98" >
 
-                    <com.flynetwifi.netplay.Utils.NHRegularTextView
+                    <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         />
@@ -182,7 +183,8 @@
                 </LinearLayout>
 
 
-                <com.flynetwifi.netplay.Utils.NHRegularTextView android:id="@id/exo_duration"
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
+                    android:id="@id/exo_duration"
                     android:layout_width="72dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

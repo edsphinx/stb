@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 
 import android.content.Context;
@@ -33,17 +33,17 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.flynetwifi.nhstream.Cards.MovieDetailCard;
-import com.flynetwifi.nhstream.Cards.MovieRecommendedCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MediaPlayers.MovieExoPlayer;
-import com.flynetwifi.nhstream.Presenters.MovieDetailPresenter;
-import com.flynetwifi.nhstream.Presenters.MovieRecommendedPresenter;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.Cards.MovieDetailCard;
+import com.nuevoshorizontes.nhstream.Cards.MovieRecommendedCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MediaPlayers.MovieExoPlayer;
+import com.nuevoshorizontes.nhstream.Presenters.MovieDetailPresenter;
+import com.nuevoshorizontes.nhstream.Presenters.MovieRecommendedPresenter;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 //import PicassoBackgroundManagerTarget;
-import com.flynetwifi.nhstream.Utils.GlideBackgroundManagerTarget;
-import com.flynetwifi.nhstream.Utils.Utils;
+import com.nuevoshorizontes.nhstream.Utils.GlideBackgroundManagerTarget;
+import com.nuevoshorizontes.nhstream.Utils.Utils;
 import com.google.gson.Gson;
 //import com.squareup.picasso.Picasso;
 

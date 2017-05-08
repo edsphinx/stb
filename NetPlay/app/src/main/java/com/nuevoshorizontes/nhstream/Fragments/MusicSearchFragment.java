@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,14 +19,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import com.flynetwifi.nhstream.Cards.MusicSongCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MusicPlayerActivity;
-import com.flynetwifi.nhstream.Presenters.MusicSongPresenter;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Rows.MusicSongListRow;
-import com.flynetwifi.nhstream.Rows.MusicSongsRow;
-import com.flynetwifi.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.Cards.MusicSongCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MusicPlayerActivity;
+import com.nuevoshorizontes.nhstream.Presenters.MusicSongPresenter;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Rows.MusicSongListRow;
+import com.nuevoshorizontes.nhstream.Rows.MusicSongsRow;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nuevoshorizontes.nhstream.Cards.MusicSingersCard;
-import com.flynetwifi.nhstream.R;
+import com.nuevoshorizontes.nhstream.R;
 import com.nuevoshorizontes.nhstream.Utils.Utils;
 //import com.squareup.picasso.Picasso;
 //import com.squareup.picasso.Target;

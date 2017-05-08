@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Utils;
+package com.nuevoshorizontes.nhstream.Utils;
 
 import android.support.v7.widget.AppCompatTextView;
 import android.content.Context;

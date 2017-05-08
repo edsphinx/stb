@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.flynetwifi.nhstream.Utils;
+package com.nuevoshorizontes.nhstream.Utils;
 
 
 import android.graphics.Bitmap;

@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,6 @@ import android.support.v17.leanback.app.GuidedStepFragment;
 import android.support.v17.leanback.widget.GuidanceStylist;
 import android.support.v17.leanback.widget.GuidedAction;
 import android.support.v4.app.ActivityOptionsCompat;
-
-import com.flynetwifi.netplay.R;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class VODSelectionFrame extends GuidedStepFragment {
     @Override
     public GuidanceStylist.Guidance onCreateGuidance(Bundle savedInstanceState) {
         GuidanceStylist.Guidance guidance = new GuidanceStylist.Guidance("Video Online",
-                "Disfruta del Mejor Contenido Online",
+                "Disfruta del Mejor Contenido Online disponible en alta calidad",
                 "", null);
         return guidance;
     }
@@ -39,6 +37,7 @@ public class VODSelectionFrame extends GuidedStepFragment {
         action = new GuidedAction.Builder()
                 .id(ACTION_SERIES)
                 .title("Series").build();
+
         actions.add(action);
     }
 

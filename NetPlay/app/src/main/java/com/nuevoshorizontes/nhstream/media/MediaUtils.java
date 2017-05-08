@@ -12,7 +12,7 @@
  * the License.
  *
  */
-package com.flynetwifi.nhstream.media;
+package com.nuevoshorizontes.nhstream.media;
 
 
 public class MediaUtils {

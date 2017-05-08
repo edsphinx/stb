@@ -1,12 +1,11 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Requests.DownloadAPK;
+import com.nuevoshorizontes.nhstream.Requests.DownloadAPK;
 
 import java.util.Timer;
 import java.util.TimerTask;

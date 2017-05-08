@@ -1,7 +1,7 @@
-package com.flynetwifi.nhstream.Rows;
+package com.nuevoshorizontes.nhstream.Rows;
 
 
-import com.flynetwifi.nhstream.Cards.LiveProgramCard;
+import com.nuevoshorizontes.nhstream.Cards.LiveProgramCard;
 import com.google.gson.annotations.SerializedName;
 
 public class LiveProgramRow {

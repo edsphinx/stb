@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.os.Bundle;
 import android.support.v17.leanback.transition.TransitionHelper;

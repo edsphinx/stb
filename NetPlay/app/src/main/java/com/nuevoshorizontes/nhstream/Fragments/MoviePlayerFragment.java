@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.app.Fragment;
 import android.os.Build;
@@ -16,14 +16,14 @@ import android.support.v17.leanback.widget.RowPresenter;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MainActivity;
-import com.flynetwifi.nhstream.MediaPlayers.MovieMediaPlayerGlue;
-import com.flynetwifi.nhstream.MoviePlayerActivity;
-import com.flynetwifi.nhstream.Utils.DownloadData;
-import com.flynetwifi.nhstream.media.MediaMetaData;
-import com.flynetwifi.nhstream.media.MediaPlayerGlue;
-import com.flynetwifi.nhstream.media.MediaUtils;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MainActivity;
+import com.nuevoshorizontes.nhstream.MediaPlayers.MovieMediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.MoviePlayerActivity;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.media.MediaMetaData;
+import com.nuevoshorizontes.nhstream.media.MediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.media.MediaUtils;
 
 public class MoviePlayerFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, MediaPlayerGlue.OnMediaStateChangeListener {

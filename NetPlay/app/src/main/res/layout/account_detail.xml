@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.flynetwifi.netplay.Utils.NHRegularTextView
+        <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
             android:id="@+id/id_cuenta"
             style="@style/Widget.Leanback.DetailsDescriptionTitleStyle"
             android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
             android:src="@drawable/ic_account_box"
             android:tint="@color/md_white_1000" />
 
-        <com.flynetwifi.netplay.Utils.NHRegularTextView
+        <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
             android:id="@+id/nombre"
             style="@style/Widget.Leanback.DetailsDescriptionTitleStyle"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 android:src="@drawable/ic_email"
                 android:tint="@color/md_white_1000" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                 android:textColor="@color/md_white_1000"
                 android:textSize="24dp" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/cuenta_correo"
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                 android:src="@drawable/ic_phone"
                 android:tint="@color/md_white_1000" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 android:textColor="@color/md_white_1000"
                 android:textSize="24dp" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/cuenta_telefono"
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
                 android:src="@drawable/ic_person_pin"
                 android:tint="@color/md_white_1000" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 android:textColor="@color/md_white_1000"
                 android:textSize="24dp" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/cuenta_nacionalidad"
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
@@ -184,7 +184,7 @@
                 android:src="@drawable/ic_place"
                 android:tint="@color/md_white_1000" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                 android:textColor="@color/md_white_1000"
                 android:textSize="24dp" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/cuenta_direccion"
                 style="@style/Widget.Leanback.DetailsDescriptionBodyStyle"
                 android:layout_width="match_parent"
@@ -225,7 +225,7 @@
             android:src="@drawable/ic_home"
             android:tint="@color/md_white_1000" />
 
-        <com.flynetwifi.netplay.Utils.NHRegularTextView
+        <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
             style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
             android:textColor="@color/md_white_1000"
             android:textSize="24dp" />
 
-        <com.flynetwifi.netplay.Utils.NHRegularTextView
+        <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
             android:id="@+id/cuenta_fecha_instalacion"
             style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
             android:layout_width="wrap_content"
@@ -271,7 +271,7 @@
                 android:src="@drawable/ic_folder_shared"
                 android:tint="@color/md_white_1000" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -283,7 +283,7 @@
                 android:textColor="@color/md_white_1000"
                 android:textSize="24dp" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/cuenta_inicio_contrato"
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
@@ -307,7 +307,7 @@
                 android:src="@drawable/ic_timer"
                 android:tint="@color/md_white_1000" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -319,7 +319,7 @@
                 android:textColor="@color/md_white_1000"
                 android:textSize="24dp" />
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/cuenta_duracion"
                 style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
                 android:layout_width="wrap_content"

@@ -1,7 +1,7 @@
-package com.flynetwifi.nhstream.Rows;
+package com.nuevoshorizontes.nhstream.Rows;
 
 
-import com.flynetwifi.nhstream.Cards.MenuCard;
+import com.nuevoshorizontes.nhstream.Cards.MenuCard;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

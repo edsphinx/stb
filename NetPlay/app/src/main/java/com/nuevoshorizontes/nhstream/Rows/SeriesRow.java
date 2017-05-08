@@ -12,9 +12,9 @@
  *  the License.
  */
 
-package com.flynetwifi.nhstream.Rows;
+package com.nuevoshorizontes.nhstream.Rows;
 
-import com.flynetwifi.nhstream.Cards.SeriesCard;
+import com.nuevoshorizontes.nhstream.Cards.SeriesCard;
 
 import java.util.List;
 

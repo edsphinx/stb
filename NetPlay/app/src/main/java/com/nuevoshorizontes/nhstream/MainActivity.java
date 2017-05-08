@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream;
+package com.nuevoshorizontes.nhstream;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -12,10 +12,9 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v4.app.ActivityOptionsCompat;
 
-import com.flynetwifi.nhstream.Fragments.MenuFragment;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Requests.LoginRequest;
-import com.flynetwifi.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.Fragments.MenuFragment;
+import com.nuevoshorizontes.nhstream.Requests.LoginRequest;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Models;
+package com.nuevoshorizontes.nhstream.Models;
 
 /**
  * Created by fonseca on 3/18/17.
@@ -6,7 +6,7 @@ package com.flynetwifi.nhstream.Models;
 
 import android.support.v17.leanback.widget.HeaderItem;
 
-import com.flynetwifi.nhstream.Presenters.CustomHeaderPresenter;
+import com.nuevoshorizontes.nhstream.Presenters.CustomHeaderPresenter;
 
 /**
  * Subclass of {@link HeaderItem} to hold icon resource id

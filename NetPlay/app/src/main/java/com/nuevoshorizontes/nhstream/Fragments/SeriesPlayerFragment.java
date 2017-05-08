@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.app.Fragment;
 import android.os.Build;
@@ -20,16 +20,16 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.flynetwifi.nhstream.Cards.SeriesChapterCard;
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MainActivity;
-import com.flynetwifi.nhstream.MediaPlayers.SeriesMediaPlayerGlue;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.SeriesPlayerActivity;
-import com.flynetwifi.nhstream.Utils.DownloadData;
-import com.flynetwifi.nhstream.media.MediaMetaData;
-import com.flynetwifi.nhstream.media.MediaPlayerGlue;
-import com.flynetwifi.nhstream.media.MediaUtils;
+import com.nuevoshorizontes.nhstream.Cards.SeriesChapterCard;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MainActivity;
+import com.nuevoshorizontes.nhstream.MediaPlayers.SeriesMediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.SeriesPlayerActivity;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.media.MediaMetaData;
+import com.nuevoshorizontes.nhstream.media.MediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.media.MediaUtils;
 
 import java.util.HashMap;
 import java.util.List;

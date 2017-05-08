@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.flynetwifi.nhstream.Fragments;
+package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,10 +22,10 @@ import android.support.v17.leanback.widget.GuidanceStylist;
 import android.support.v17.leanback.widget.GuidedAction;
 import android.support.v4.app.ActivityOptionsCompat;
 
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.MainActivity;
-import com.flynetwifi.nhstream.MusicActivity;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MainActivity;
+import com.nuevoshorizontes.nhstream.MusicActivity;
+import com.nuevoshorizontes.nhstream.R;
 
 import java.io.IOException;
 import java.util.List;

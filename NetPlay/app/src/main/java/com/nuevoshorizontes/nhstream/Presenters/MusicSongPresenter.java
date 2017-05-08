@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flynetwifi.nhstream.Cards.MusicSongCard;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Cards.MusicSongCard;
+import com.nuevoshorizontes.nhstream.R;
 
 public class MusicSongPresenter extends Presenter {
 

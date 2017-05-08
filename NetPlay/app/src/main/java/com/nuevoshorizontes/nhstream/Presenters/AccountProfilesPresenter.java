@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flynetwifi.nhstream.Cards.AccountProfileCard;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Cards.AccountProfileCard;
+import com.nuevoshorizontes.nhstream.R;
 
 public class AccountProfilesPresenter extends Presenter {
 

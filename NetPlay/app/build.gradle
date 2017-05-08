@@ -5,7 +5,7 @@ android {
     buildToolsVersion '25.0.2'
 
     defaultConfig {
-        applicationId "com.flynetwifi.netplay"
+        applicationId "com.nuevoshorizontes.nhstream"
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1

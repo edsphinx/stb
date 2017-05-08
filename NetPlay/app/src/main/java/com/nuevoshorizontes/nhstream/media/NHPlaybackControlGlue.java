@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.media;
+package com.nuevoshorizontes.nhstream.media;
 
 /**
  * Created by fonseca on 4/12/17.
@@ -27,7 +27,7 @@ import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.flynetwifi.nhstream.Fragments.NHPlaybackOverlayFragment;
+import com.nuevoshorizontes.nhstream.Fragments.NHPlaybackOverlayFragment;
 
 /**
  * A helper class for managing a {@link android.support.v17.leanback.widget.PlaybackControlsRow} and

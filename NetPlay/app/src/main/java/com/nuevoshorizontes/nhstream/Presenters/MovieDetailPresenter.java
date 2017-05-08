@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.content.Context;
 import android.support.v17.leanback.widget.Presenter;
@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.flynetwifi.nhstream.Cards.MovieDetailCard;
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Utils.ResourceCache;
+import com.nuevoshorizontes.nhstream.Cards.MovieDetailCard;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Utils.ResourceCache;
 
 public class MovieDetailPresenter extends Presenter {
 

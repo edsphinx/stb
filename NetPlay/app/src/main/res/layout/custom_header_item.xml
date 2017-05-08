@@ -22,7 +22,7 @@
         <!--android:layout_width="24dp"-->
         <!--android:layout_height="24dp" />-->
 
-    <com.flynetwifi.netplay.Utils.NHRegularTextView
+    <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
         android:id="@+id/header_label"
         android:layout_marginTop="6dp"
         android:layout_width="140dp"

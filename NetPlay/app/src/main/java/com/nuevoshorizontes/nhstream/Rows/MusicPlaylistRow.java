@@ -1,6 +1,6 @@
-package com.flynetwifi.nhstream.Rows;
+package com.nuevoshorizontes.nhstream.Rows;
 
-import com.flynetwifi.nhstream.Cards.MusicPlaylistCard;
+import com.nuevoshorizontes.nhstream.Cards.MusicPlaylistCard;
 
 import java.util.List;
 

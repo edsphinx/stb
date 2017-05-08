@@ -13,7 +13,7 @@
  *
  */
 
-package com.flynetwifi.nhstream.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.support.v17.leanback.widget.Presenter;
 import android.view.LayoutInflater;
@@ -21,8 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.flynetwifi.nhstream.Cards.LiveProgramCard;
-import com.flynetwifi.netplay.R;
+import com.nuevoshorizontes.nhstream.Cards.LiveProgramCard;
+import com.nuevoshorizontes.nhstream.R;
 
 
 public class LiveProgramPresenter extends Presenter {

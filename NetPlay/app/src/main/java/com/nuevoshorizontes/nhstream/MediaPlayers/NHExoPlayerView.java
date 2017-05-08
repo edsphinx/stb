@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.MediaPlayers;
+package com.nuevoshorizontes.nhstream.MediaPlayers;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.Views.NHPlaybackControlView;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.Views.NHPlaybackControlView;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;

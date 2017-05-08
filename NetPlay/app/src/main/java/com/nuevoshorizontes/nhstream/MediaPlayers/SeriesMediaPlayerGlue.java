@@ -13,7 +13,7 @@
  *
  */
 
-package com.flynetwifi.nhstream.MediaPlayers;
+package com.nuevoshorizontes.nhstream.MediaPlayers;
 
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
@@ -35,11 +35,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 
-import com.flynetwifi.netplay.R;
-import com.flynetwifi.nhstream.SeriesPlayerActivity;
-import com.flynetwifi.nhstream.media.MediaMetaData;
-import com.flynetwifi.nhstream.media.MediaPlayerGlue;
-import com.flynetwifi.nhstream.media.MediaUtils;
+import com.nuevoshorizontes.nhstream.R;
+import com.nuevoshorizontes.nhstream.SeriesPlayerActivity;
+import com.nuevoshorizontes.nhstream.media.MediaMetaData;
+import com.nuevoshorizontes.nhstream.media.MediaPlayerGlue;
+import com.nuevoshorizontes.nhstream.media.MediaUtils;
 
 import java.io.IOException;
 

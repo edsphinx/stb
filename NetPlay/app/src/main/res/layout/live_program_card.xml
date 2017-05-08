@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <com.flynetwifi.netplay.Utils.NHRegularTextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/nombre"
                 style="@style/GridSquareTextStyle"
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:layout_below="@+id/idLayout"
                 android:orientation="horizontal">
 
-                <com.flynetwifi.netplay.Utils.NHRegularTextView
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                     android:id="@+id/fecha_inicio"
                     style="@style/GridSquareTextStyle"
                     android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                     android:padding="@dimen/padding_small"
                     android:textAlignment="gravity" />
 
-                <com.flynetwifi.netplay.Utils.NHRegularTextView
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                     android:id="@+id/fecha_fin"
                     style="@style/GridSquareTextStyle"
                     android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                 android:layout_below="@+id/horario_wrapper"
                 android:orientation="vertical">
 
-                <com.flynetwifi.netplay.Utils.NHRegularTextView
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                     android:id="@+id/descripcion"
                     style="@style/GridSquareTextStyle"
                     android:layout_width="match_parent"

@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/page_list_fragment"
-        android:name="com.flynetwifi.netplay.Fragments.SeriesSeasonsFragment"
+        android:name="com.nuevoshorizontes.nhstream.Fragments.SeriesSeasonsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

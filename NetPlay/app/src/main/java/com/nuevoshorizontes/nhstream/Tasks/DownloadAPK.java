@@ -1,4 +1,4 @@
-package com.flynetwifi.nhstream.Tasks;
+package com.nuevoshorizontes.nhstream.Tasks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 
-import com.flynetwifi.nhstream.Constants;
-import com.flynetwifi.nhstream.Utils.DownloadData;
+import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 
 import java.io.BufferedInputStream;
 import java.io.File;
