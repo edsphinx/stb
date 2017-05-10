@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="200dp"
-    android:layout_height="200dp"
+    android:layout_height="240dp"
     android:background="@null"
     android:layout_margin="0dp" >
 
@@ -20,37 +19,48 @@
 
         <RelativeLayout
             android:id="@+id/imagen_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:id="@+id/logo_wrapper"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null">
 
                 <ImageView
                     android:id="@+id/logo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:scaleType="centerInside" />
-            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/name"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/logo_wrapper"
+                android:layout_below="@+id/logo"
                 android:background="@null"
-                android:gravity="center_vertical|left"
-                android:lines="1"
-                android:paddingLeft="10px"
-                android:textAlignment="gravity"
-                android:textColor="@color/md_white_1000"
-                android:textSize="22dp"
-                android:visibility="visible" />
+                android:orientation="horizontal">
+
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:background="@null"
+                    android:gravity="center_vertical|left"
+                    android:lines="1"
+                    android:layout_height="40dp"
+                    android:paddingLeft="10px"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="22dp"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            </RelativeLayout>
+
         </RelativeLayout>
 
     <!--</android.support.v7.widget.CardView>-->
 
-</RelativeLayout>
+</LinearLayout>

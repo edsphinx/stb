@@ -30,7 +30,7 @@
         "id": 4,
         "type": "DEFAULT",
         "titulo": "Apps",
-        "localImageResource": "settings"
+        "localImageResource": "my_apps"
       },
       {
         "id": 5,

@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/transparent">
+            android:background="@color/transparent_background">
 
             <ImageView
                 android:id="@+id/thumbnail"
@@ -33,13 +33,13 @@
                 android:layout_below="@+id/thumbnail"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                     android:id="@+id/nombre"
                     style="@style/GridSquareTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@drawable/bg_default"
+                    android:background="@drawable/bg_card_solid_line"
                     android:gravity="center_vertical"
                     android:lines="2"
                     android:paddingBottom="@dimen/padding_small"

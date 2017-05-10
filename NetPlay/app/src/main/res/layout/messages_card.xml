@@ -22,7 +22,7 @@
                 android:layout_below="@+id/thumbnail"
                 android:background="@drawable/bg_default">
 
-                <TextView
+                <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                     android:id="@+id/nombre"
                     style="@style/GridSquareTextStyle"
                     android:layout_width="match_parent"

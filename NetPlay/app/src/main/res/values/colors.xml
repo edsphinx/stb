@@ -28,6 +28,10 @@
     <color name="program_background">#00000000</color>
     <color name="transparent_background">#66000000</color>
 
+    <color name="transparent_background_selected">#66000000</color>
+
+    <color name="search_button">#575756</color>
+    <color name="gray">#3C3C3B</color>
 
     <color name="md_white_1000">#ffffff</color>
     <color name="md_black_1000">#000</color>

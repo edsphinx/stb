@@ -34,7 +34,7 @@
                     android:textAlignment="center" />
             </LinearLayout>
 
-            <TextView
+            <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                 android:id="@+id/nombre"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

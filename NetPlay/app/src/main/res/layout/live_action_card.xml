@@ -35,7 +35,7 @@
                         android:textAlignment="gravity" />
 
 
-                    <TextView
+                    <com.nuevoshorizontes.nhstream.Utils.NHRegularTextView
                         android:id="@+id/nombre"
                         style="@style/GridSquareTextStyle"
                         android:layout_width="wrap_content"
