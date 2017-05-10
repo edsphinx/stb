@@ -10,7 +10,7 @@ import java.util.List;
  * Created by fonseca on 3/30/17.
  */
 
-public class LiveCanalRow {
+public class LiveCanalRow_Old {
     @SerializedName("titulo") private String mTitle;
     @SerializedName("cards") private List<LiveCanalCard> mCards;
 

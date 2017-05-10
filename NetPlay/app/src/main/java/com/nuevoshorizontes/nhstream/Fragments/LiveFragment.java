@@ -66,7 +66,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
         MediaPlayerGlue.OnMediaStateChangeListener {
 
-    public static String TAG = "LiveFragment";
+    public static String TAG = "LiveFragment_old";
 
     /**
      * Data de Canales y Canales Favoritos
@@ -1087,7 +1087,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 //import LiveMediaPlayerGlue;
 //import LiveActionPresenter;
 //import LiveCanalPresenter;
-//import LiveCanalPresenterSelector;
+//import LiveCanalPresenterSelector_Old;
 //import LiveProgramPresenter;
 //import LiveActionsListRow;
 //import LiveActionsRow;
@@ -1114,11 +1114,11 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 //import okhttp3.RequestBody;
 //import okhttp3.Response;
 //
-//public class LiveFragment extends PlaybackOverlayFragment implements
+//public class LiveFragment_old extends PlaybackOverlayFragment implements
 //        OnItemViewClickedListener, OnItemViewSelectedListener,
 //        MediaPlayerGlue.OnMediaStateChangeListener {
 //
-//    public static String TAG = "LiveFragment";
+//    public static String TAG = "LiveFragment_old";
 //
 //    /**
 //     * Data de Canales y Canales Favoritos
@@ -1439,8 +1439,8 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 //                }.getType();
 //                /** Se inicializa el Adaptador de los canales */
 //                channelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
-//                //channelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenterSelector());
-//                //channelsRowAdapter.setPresenterSelector(new LiveCanalPresenterSelector());
+//                //channelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenterSelector_Old());
+//                //channelsRowAdapter.setPresenterSelector(new LiveCanalPresenterSelector_Old());
 //                try {
 //                    /** Parseo del RESPONSE -> Map<String, LiveCanalCard> */
 //                    data = gson.fromJson(response, canalesCardType);

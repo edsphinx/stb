@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 
 import com.nuevoshorizontes.nhstream.Fragments.LiveCategoriesFragment;
-import com.nuevoshorizontes.nhstream.Fragments.LiveFragment;
+import com.nuevoshorizontes.nhstream.Fragments.LiveFragment_old;
 import com.nuevoshorizontes.nhstream.Fragments.VideoSurfaceFragment;
 
 public class LiveCategoriesActivity extends Activity {
@@ -28,7 +28,7 @@ public class LiveCategoriesActivity extends Activity {
         ft1.commit();
 
         FragmentTransaction ft2 = getFragmentManager().beginTransaction();
-        ft2.add(R.id.video_fragment, newInstance(access_token, user_profile, user_type), LiveFragment.TAG);
+        ft2.add(R.id.video_fragment, newInstance(access_token, user_profile, user_type), LiveFragment_old.TAG);
         ft2.commit();
     }
 

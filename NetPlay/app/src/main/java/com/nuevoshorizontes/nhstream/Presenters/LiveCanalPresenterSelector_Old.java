@@ -1,23 +1,23 @@
-package com.flynetwifi.netplay.Presenters;
+package com.nuevoshorizontes.nhstream.Presenters;
 
 import android.support.v17.leanback.widget.FocusHighlight;
 import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.PresenterSelector;
 
-import com.flynetwifi.netplay.Rows.CanalListRow;
-import com.flynetwifi.netplay.Rows.LiveCanalRow;
+import com.nuevoshorizontes.nhstream.Rows.CanalListRow;
+import com.nuevoshorizontes.nhstream.Rows.LiveCanalRow;
 
 /**
  * Created by fonseca on 3/28/17.
  */
 
-public class LiveCanalPresenterSelector extends PresenterSelector {
+public class LiveCanalPresenterSelector_Old extends PresenterSelector {
 
     private ListRowPresenter mShadowEnabledRowPresenter = new ListRowPresenter(FocusHighlight.ZOOM_FACTOR_SMALL);
     private ListRowPresenter mShadowDisabledRowPresenter = new ListRowPresenter(FocusHighlight.ZOOM_FACTOR_MEDIUM);
 
-    public LiveCanalPresenterSelector() {
+    public LiveCanalPresenterSelector_Old() {
         mShadowEnabledRowPresenter.setNumRows(1);
         mShadowDisabledRowPresenter.setShadowEnabled(false);
         mShadowDisabledRowPresenter.setSelectEffectEnabled(false);

@@ -33,7 +33,7 @@ public class NHRegularTextView extends AppCompatTextView {
 
     private void applyCustomFont(Context context) {
         Typeface customFont = FontCache.getTypeface("fonts/RobotoCondensed-Regular.ttf", context);
-        //Typeface customFont = FontCache.getTypeface("fonts/testfont.ttf", context);
+        //Typeface customFont = FontCache_old.getTypeface("fonts/testfont.ttf", context);
         //Typeface customFont = Typeface.createFromAsset(context.getApplicationContext().getAssets(), "testfont.ttf");
 
         setTypeface(customFont);

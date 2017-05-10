@@ -1,4 +1,4 @@
-package com.flynetwifi.netplay.Utils;
+package com.nuevoshorizontes.nhstream.Utils;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by fonseca on 3/28/17.
  */
 
-public class FontCache {
+public class FontCache_old {
 
     private static HashMap<String, Typeface> fontCache = new HashMap<>();
 

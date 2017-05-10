@@ -78,7 +78,7 @@ public class LiveActivity extends Activity {
         }/*
         else if (e.getAction() == KeyEvent.ACTION_DOWN ){
             if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
-                LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
+                LiveFragment_old fragment = (LiveFragment_old) getFragmentManager().findFragmentByTag(LiveFragment_old.TAG);
                 if (fragment != null) {
                     fragment.keypress(e);
                 }
@@ -91,7 +91,7 @@ public class LiveActivity extends Activity {
                 startActivity(intent, bundle);
                 this.finish();
             }else if (e.getKeyCode() == 19 || e.getKeyCode() ==  20 ) {
-                LiveFragment fragment = (LiveFragment) getFragmentManager().findFragmentByTag(LiveFragment.TAG);
+                LiveFragment_old fragment = (LiveFragment_old) getFragmentManager().findFragmentByTag(LiveFragment_old.TAG);
                 if (fragment != null) {
                     fragment.keypress(e);
                 }

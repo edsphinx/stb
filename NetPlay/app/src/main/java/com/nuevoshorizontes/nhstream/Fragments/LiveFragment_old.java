@@ -59,11 +59,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LiveFragment extends PlaybackOverlayFragment implements
+public class LiveFragment_old extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
         MediaPlayerGlue.OnMediaStateChangeListener {
 
-    public static String TAG = "LiveFragment";
+    public static String TAG = "LiveFragment_old";
 
     /**
      * Data de Canales y Canales Favoritos
