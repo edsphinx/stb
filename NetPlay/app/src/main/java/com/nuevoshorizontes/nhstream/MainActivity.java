@@ -207,7 +207,7 @@ public class MainActivity extends Activity {
                 LoginRequest request = new LoginRequest();
                 try {
 
-                    Response session = request.run(Constants.authorization, username,
+                    Response session = request.run(Constants.server + Constants.authorization, username,
                             password);
                     code = session.code();
                     //If the return is successfull and the sessionCode is 200
