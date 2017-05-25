@@ -130,6 +130,20 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void startLiveTV(){
+        Intent intent = new Intent(getBaseContext(),
+                LiveActivity.class);
+
+        if (intent != null) {
+            intent.putExtra("user_profile", MainActivity.user_profile);
+            intent.putExtra("user_type", "0");
+            intent.putExtra("access_token", MainActivity.access_token);
+            Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
+                    .toBundle();
+            startActivity(intent, bundle);
+        }
+    }
+
     private void launch() {
         Intent intent = null;
         if (access_token == "") {
@@ -150,6 +164,7 @@ public class MainActivity extends Activity {
             Fragment fragment = new MenuFragment();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
                     .commit();
+            //startLiveTV();
         }
 
     }

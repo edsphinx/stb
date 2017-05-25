@@ -46,7 +46,7 @@ public class DownloadAPK extends AsyncTask<Void, Void, Boolean> {
             DownloadData downloadData = new DownloadData();
 
             String response = downloadData.run(urlVersion);
-            if(!currentVersion.contentEquals(response)){
+            if(currentVersion!=response){
                 download = true;
             }
 

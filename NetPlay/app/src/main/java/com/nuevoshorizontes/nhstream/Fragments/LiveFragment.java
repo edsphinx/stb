@@ -2,9 +2,12 @@ package com.nuevoshorizontes.nhstream.Fragments;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
+import android.media.TimedText;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v17.leanback.app.PlaybackOverlayFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
@@ -30,6 +33,7 @@ import com.nuevoshorizontes.nhstream.Cards.LiveCanalCard;
 import com.nuevoshorizontes.nhstream.Cards.LiveFavoriteCanalCard;
 import com.nuevoshorizontes.nhstream.Cards.LiveProgramCard;
 import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MediaPlayers.LiveMediaPlayerGlue;
 import com.nuevoshorizontes.nhstream.MediaPlayers.NHLiveMediaPlayerGlue;
 import com.nuevoshorizontes.nhstream.Presenters.LiveActionPresenter;
 import com.nuevoshorizontes.nhstream.Presenters.LiveCanalPresenter;
@@ -92,6 +96,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
      * MediaPlayer
      * Presentador de MediaPlayer
      */
+    //private NHLiveMediaPlayerGlue mGlue;
     private NHLiveMediaPlayerGlue mGlue;
     private PlaybackControlsRowPresenter playbackControlsRowPresenter;
 
@@ -128,6 +133,8 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     /** Monitoreo de Canales **/
     private final Handler monitoreoHandler = new Handler();
     private int delay = 40000;//1000 * 30;
+
+    /** Autoupdate CHANNELROWS TIME LAPSE **/
     private int delay_channel = (1000 * 60) * 15;
 
     /** Vainas de Channel UP/DOWN**/
@@ -273,13 +280,23 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 
 
         /** Inicializando MediaPlayer */
+//        mGlue = new NHLiveMediaPlayerGlue(getActivity(), this) {
+//
+//            @Override
+//            protected void onRowChanged(PlaybackControlsRow row) {
+//                if (infoRowsAdapter == null) return;
+//                infoRowsAdapter.notifyArrayItemRangeChanged(0, 1);
+//            }
+//        };
         mGlue = new NHLiveMediaPlayerGlue(getActivity(), this) {
+
             @Override
             protected void onRowChanged(PlaybackControlsRow row) {
                 if (infoRowsAdapter == null) return;
                 infoRowsAdapter.notifyArrayItemRangeChanged(0, 1);
             }
         };
+
 
         /** Setup VideoSurfaceFragment */
         setupUI();
@@ -313,9 +330,11 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         //monitoreoHandler.postDelayed(monitoreoRunnable, delay);
 
         /** Actualizar lista de Canales **/
-        handlerUpdateChannelList.postDelayed(UpdateChannelList, delay_channel);
+        //handlerUpdateChannelList.postDelayed(UpdateChannelList, delay_channel);
 
     }
+
+
 
     /**
      * Setup VideoSurfaceFragment

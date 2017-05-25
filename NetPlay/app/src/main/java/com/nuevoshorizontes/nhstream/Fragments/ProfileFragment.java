@@ -27,6 +27,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.nuevoshorizontes.nhstream.AccountProfilePasswordActivity;
 import com.nuevoshorizontes.nhstream.Cards.AccountProfileCard;
 import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.LiveActivity;
 import com.nuevoshorizontes.nhstream.MainActivity;
 import com.nuevoshorizontes.nhstream.Presenters.AccountProfilesPresenter;
 import com.nuevoshorizontes.nhstream.R;
@@ -35,7 +36,6 @@ import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 //import PicassoBackgroundManagerTarget;
 import com.nuevoshorizontes.nhstream.Utils.GlideBackgroundManagerTarget;
 import com.google.gson.Gson;
-//import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends BrowseFragment {
 
@@ -48,7 +48,6 @@ public class ProfileFragment extends BrowseFragment {
     private Context mContext;
     private AccountProfilesRow data = null;
     private BackgroundManager backgroundManager;
-//    private PicassoBackgroundManagerTarget mBackgroundTarget;
     private GlideBackgroundManagerTarget mBackgroundTarget;
 
     @Override
@@ -93,9 +92,6 @@ public class ProfileFragment extends BrowseFragment {
                         backgroundManager.setBitmap(resource);
                     }
                 });
-//        mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-//        Picasso.with(getActivity()).load(R.drawable.blackwall).skipMemoryCache()
-//                .into(mBackgroundTarget);
     }
 
     private void setupRowAdapter() {
@@ -113,7 +109,8 @@ public class ProfileFragment extends BrowseFragment {
 
                 DownloadData downloadData = new DownloadData();
 
-                String response = downloadData.run(Constants.server + Constants.profiles + MainActivity.access_token);
+                String request = Constants.server + Constants.profiles + MainActivity.access_token;
+                String response = downloadData.run(request);
                 data = new Gson().fromJson(response, AccountProfilesRow.class);
 
             }
@@ -127,6 +124,7 @@ public class ProfileFragment extends BrowseFragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
 
         if (data.getProfileCards().length<=1){
             AccountProfileCard card = data.getProfileCards()[0];
@@ -148,6 +146,20 @@ public class ProfileFragment extends BrowseFragment {
                 startActivity(intent, bundle);
                 getActivity().finish();
             }
+        }else{
+            AccountProfileCard card = null;
+            for (int i = 0; i < data.getProfileCards().length; i++ ){
+                card = data.getProfileCards()[i];
+                if(card.getmParentalControl() == 2){
+                    SharedPreferences loginSettings = mContext.getSharedPreferences("loginSettings", 0);
+                    SharedPreferences.Editor editor = loginSettings.edit();
+                    editor.putString("user_profile", String.valueOf(card.getmId()));
+                    editor.putString("user_type", "0");
+                    editor.commit();
+                    MainActivity.user_profile = String.valueOf(card.getmId());
+                }
+            }
+
         }
 
     }
@@ -183,6 +195,7 @@ public class ProfileFragment extends BrowseFragment {
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
             AccountProfileCard card = (AccountProfileCard) item;
+            Intent intent = null;
             if (card.getmParentalControl() == 2) {
 
                 SharedPreferences loginSettings = mContext.getSharedPreferences("loginSettings", 0);
@@ -190,11 +203,22 @@ public class ProfileFragment extends BrowseFragment {
                 editor.putString("user_profile", String.valueOf(card.getmId()));
                 editor.putString("user_type", "0");
                 editor.commit();
-
                 MainActivity.user_profile = String.valueOf(card.getmId());
-                getActivity().finish();
+                if(card.getmInterface() == 0){
+                    intent = new Intent(getActivity().getBaseContext(),
+                            LiveActivity.class);
+                    intent.putExtra("user_profile", MainActivity.user_profile);
+                    intent.putExtra("user_type", "0");//MainActivity.user_type);
+                    intent.putExtra("access_token", MainActivity.access_token);
+                    Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                            .toBundle();
+                    startActivity(intent, bundle);
+
+                }else{
+                    getActivity().finish();
+                }
             } else {
-                Intent intent = new Intent(mContext,
+                intent = new Intent(mContext,
                         AccountProfilePasswordActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                         .toBundle();

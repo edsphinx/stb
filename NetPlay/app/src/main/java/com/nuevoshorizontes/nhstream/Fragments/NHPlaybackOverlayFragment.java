@@ -35,43 +35,6 @@ import android.view.animation.AccelerateInterpolator;
 
 import java.util.ArrayList;
 
-
-//import android.graphics.Color;
-//        import android.graphics.drawable.ColorDrawable;
-//        import android.animation.Animator;
-//        import android.animation.AnimatorInflater;
-//        import android.animation.TimeInterpolator;
-//        import android.animation.ValueAnimator;
-//        import android.support.v17.leanback.widget.Action;
-//        import android.support.v17.leanback.widget.PlaybackControlsRow;
-//        import android.view.InputEvent;
-//        import android.view.animation.AccelerateInterpolator;
-//        import android.animation.ValueAnimator.AnimatorUpdateListener;
-//        import android.content.Context;
-//        import android.os.Bundle;
-//        import android.os.Handler;
-//        import android.os.Message;
-//        import android.support.v7.widget.RecyclerView;
-//        import android.support.v17.leanback.R;
-//        import android.support.v17.leanback.animation.LogAccelerateInterpolator;
-//        import android.support.v17.leanback.animation.LogDecelerateInterpolator;
-//        import android.support.v17.leanback.widget.ItemBridgeAdapter;
-//        import android.support.v17.leanback.widget.ObjectAdapter;
-//        import android.support.v17.leanback.widget.ObjectAdapter.DataObserver;
-//        import android.support.v17.leanback.widget.PlaybackControlsRowPresenter;
-//        import android.support.v17.leanback.widget.Presenter;
-//        import android.support.v17.leanback.widget.PresenterSelector;
-//        import android.support.v17.leanback.widget.RowPresenter;
-//        import android.support.v17.leanback.widget.VerticalGridView;
-//        import android.util.Log;
-//        import android.view.KeyEvent;
-//        import android.view.LayoutInflater;
-//        import android.view.MotionEvent;
-//        import android.view.View;
-//        import android.view.ViewGroup;
-//
-//        import java.util.ArrayList;
-
 /**
  * A fragment for displaying playback controls and related content.
  * <p>
@@ -144,6 +107,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
     private int mBgDarkColor;
     private int mBgLightColor;
     private int mShowTimeMs;
+    private int mIddleTimeMs;
     private int mMajorFadeTranslateY, mMinorFadeTranslateY;
     private int mAnimationTranslateY;
     private OnFadeCompleteListener mFadeCompleteListener;
@@ -176,7 +140,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
                     if (DEBUG) Log.v(TAG, "onAnimationEnd " + mBgAlpha);
                     if (mBgAlpha > 0) {
                         enableVerticalGridAnimations(true);
-                        startFadeTimer();
+                        startFadeTimer(mPadPos);
                         if (mFadeCompleteListener != null) {
                             mFadeCompleteListener.onFadeInComplete();
                         }
@@ -259,7 +223,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
             if (mFadingEnabled) {
                 if (isResumed() && mFadingStatus == IDLE
                         && !mHandler.hasMessages(START_FADE_OUT)) {
-                    startFadeTimer();
+                    startFadeTimer(mPadPos);
                 }
             } else {
                 // Ensure fully opaque
@@ -320,7 +284,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
         }
         if (mHandler.hasMessages(START_FADE_OUT)) {
             // Restart the timer
-            startFadeTimer();
+            startFadeTimer(mPadPos);
         } else {
             fade(true);
         }
@@ -428,10 +392,14 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
         getVerticalGridView().setOnKeyInterceptListener(mOnKeyInterceptListener);
     }
 
-    private void startFadeTimer() {
+    private void startFadeTimer(int mPos) {
+        final boolean controlsHidden = areControlsHidden();
         if (mHandler != null) {
             mHandler.removeMessages(START_FADE_OUT);
-            mHandler.sendEmptyMessageDelayed(START_FADE_OUT, mShowTimeMs);
+            if(mPos < 2)
+                mHandler.sendEmptyMessageDelayed(START_FADE_OUT, mShowTimeMs);
+            else
+                mHandler.sendEmptyMessageDelayed(START_FADE_OUT, mIddleTimeMs);
         }
     }
 
@@ -630,7 +598,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
             mFadingStatus = IDLE;
             fadeIn = true;
             mBgAlpha = 255;
-            startFadeTimer();
+            startFadeTimer(mPadPos);
         }
 
         // If fading in while control row is focused, set initial translationY so
@@ -701,6 +669,8 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
                 getResources().getColor(android.support.v17.leanback.R.color.lb_playback_controls_background_light);
         mShowTimeMs =
                 getResources().getInteger(android.support.v17.leanback.R.integer.lb_playback_controls_show_time_ms);
+        mIddleTimeMs =
+                500;
         mMajorFadeTranslateY =
                 getResources().getDimensionPixelSize(android.support.v17.leanback.R.dimen.lb_playback_major_fade_translate_y);
         mMinorFadeTranslateY =

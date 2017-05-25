@@ -20,7 +20,7 @@ public class UpdateActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
         context = getBaseContext();
-        verificarVersion();
+        //verificarVersion();
     }
 
     public void verificarVersion() {
@@ -42,7 +42,7 @@ public class UpdateActivity extends Activity {
                 }
 
             }
-        }, 0, 900000);
+        }, 0, 43200000);
     }
 
 }
