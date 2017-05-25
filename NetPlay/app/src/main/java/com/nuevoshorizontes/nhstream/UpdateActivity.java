@@ -42,7 +42,7 @@ public class UpdateActivity extends Activity {
                 }
 
             }
-        }, 0, 900000);
+        }, 21600000, 43200000);
     }
 
 }
