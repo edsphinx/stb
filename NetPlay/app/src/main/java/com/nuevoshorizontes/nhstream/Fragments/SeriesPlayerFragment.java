@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
@@ -272,7 +273,7 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
                             + "1");
                     DownloadData downloadData = new DownloadData();
 
-                    String response = downloadData.run(Constants.server
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server
                             + "/stb/tracking/"
                             + id + "/"
                             + user_profile + "/"
@@ -303,7 +304,7 @@ public class SeriesPlayerFragment extends PlaybackOverlayFragment implements
                 try {
                     DownloadData downloadData = new DownloadData();
                     String user_profile = MainActivity.user_profile;
-                    String response = downloadData.run(Constants.server
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server
                             + "/stb/tracking/listado/"
                             + id + "/"
                             + user_profile + "/"

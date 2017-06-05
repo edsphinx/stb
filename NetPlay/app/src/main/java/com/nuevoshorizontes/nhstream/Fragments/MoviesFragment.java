@@ -172,7 +172,7 @@ public class MoviesFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.movies);
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.movies);
 
                     Gson gson = new Gson();
                     Type peliculasCardType;

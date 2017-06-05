@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
@@ -169,26 +170,27 @@ public class MusicPlayerFragment extends PlaybackOverlayFragment implements
 
     private void playlistsRow() {
         Thread thread = new Thread(new Runnable() {
+            @SuppressLint("NewApi")
             @Override
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
                     String response = "";
                     if (tipo.contentEquals("0")) {
-                        response = downloadData.run(Constants.server  + Constants.songs_playlist + id);
+                        response = downloadData.run(getActivity().getBaseContext(), Constants.server  + Constants.songs_playlist + id);
                         MusicSongsRow rows = new Gson().fromJson(response, MusicSongsRow.class);
                         mRowsAdapter.add(1, createCardRowCantantes(rows));
                     } else if (tipo.contentEquals("1")) {
-                        response = downloadData.run(Constants.server + Constants.songs_genders + id);
+                        response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.songs_genders + id);
                         MusicSongsRow rows = new Gson().fromJson(response, MusicSongsRow.class);
                         mRowsAdapter.add(1, createCardRowCantantes(rows));
                     } else if (tipo.contentEquals("2")) {
-                        response = downloadData.run(Constants.server + Constants.songs_singers + id);
+                        response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.songs_singers + id);
                         MusicSongsRow rows = new Gson().fromJson(response, MusicSongsRow.class);
                         mRowsAdapter.add(1, createCardRowCantantes(rows));
                     }
                     else if (tipo.contentEquals("3")) {
-                        response = downloadData.run(Constants.server + Constants.songs_songs + id);
+                        response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.songs_songs + id);
                         MusicSongsRow rows = new Gson().fromJson(response, MusicSongsRow.class);
                         mRowsAdapter.add(1, createCardRowCantantes(rows));
                     }

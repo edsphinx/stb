@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -109,8 +110,10 @@ public class ProfileFragment extends BrowseFragment {
 
                 DownloadData downloadData = new DownloadData();
 
-                String request = Constants.server + Constants.profiles + MainActivity.access_token;
-                String response = downloadData.run(request);
+                String temp_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImNkZjJlYzZjNWQzNDg5YWNiMTViZGIxM2I0ZDM1ZWYyYWU0M2NiYzFkNzE3YzNjY2RmMTIzZmJkZDFjNTllNWMwYTA3MDUxMWVhZGYzOTUzIn0.eyJhdWQiOiIyIiwianRpIjoiY2RmMmVjNmM1ZDM0ODlhY2IxNWJkYjEzYjRkMzVlZjJhZTQzY2JjMWQ3MTdjM2NjZGYxMjNmYmRkMWM1OWU1YzBhMDcwNTExZWFkZjM5NTMiLCJpYXQiOjE0OTY2OTkxMjQsIm5iZiI6MTQ5NjY5OTEyNCwiZXhwIjoxNDk2NzQyMzI0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.G-EwL401lcUVG3Lt-g4GhncsTY-kmd0_-ksA2plAiAT5rTFlIbC68l9RV2XIl9BecuKAD_cZcnyiO4KBqGUmgKISveiAOJi4pk-hn1t2AdGrgXvW4LTGuW4j0adifzBbp7CuCaSuM5noGeFNmtvaPXz-iaY587xwtOUOKT50P1pi6tWhRQq6yg1lYvHtSIw_mD1iBYhCNrRHnvsNMDoarcXiE9coYS_hB4OUpWglRJ7JdmgtlI6H4egx_wkGtz2Uu1jCA_DFAtjLco5Ff6UuTGwO4fbqbhcBarBDvBu8_Ahq9lTQd9mjTAvhrzQgVi4H5si47i4mVNwYnHOKFPJNQCiL8MhzogLLT3AVL8LMHL5h922I2VYseCpU9HhI0TZ4ZkDegacFB7r8wufrhpiRwSYl4v_CVLsTifftp4yMvpeERgZmdtGwe_68MVPEhSRgbgXbkaulWWVC33gukrO3A7zEVa5XxcOSnRQV_Cbe_klIZygORy1SMd8J1HUt6OFdqHuYSRcDsxQOyEQXw3t4bBc8TBBjnmH2klYNStT7xmaWvux8jVzjbugQGByyl5UhJqweSUAsvLFoNC-zxqReqf00Q-1BobAoeUPCJY8OBo7_b8mX_V07G7jhTv3n3Kgipikk-WojATctsjwD34RYDwZ-A_cBtERdtrrRmw3A6is";
+
+                String request = Constants.server + Constants.profiles + temp_token;//MainActivity.access_token;
+                String response = downloadData.run(getActivity().getBaseContext(), request);
                 data = new Gson().fromJson(response, AccountProfilesRow.class);
 
             }

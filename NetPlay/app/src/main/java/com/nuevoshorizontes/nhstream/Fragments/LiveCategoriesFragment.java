@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
@@ -260,7 +261,7 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(Constants.server + "/stb/live/categorias" + "/"
+                String response = downloadData.run(getActivity().getBaseContext(), Constants.server + "/stb/live/categorias" + "/"
                         + access_token + "/" + user_type);
                 Gson gson = new Gson();
 
@@ -356,7 +357,7 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
                 favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.live_favorites
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.live_favorites
                             + user_profile);
 
 
@@ -489,7 +490,7 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
                             new LiveProgramPresenter());
                     programationData = null;
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.programation
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.programation
                             + String.valueOf(card.getmId()));
 
                     programationData = new Gson().fromJson(response, LiveProgramRow.class);

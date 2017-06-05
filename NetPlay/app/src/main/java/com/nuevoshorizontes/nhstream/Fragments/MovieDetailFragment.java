@@ -1,6 +1,7 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -194,10 +195,11 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
         response = null;
 
         Thread thread = new Thread(new Runnable() {
+            @SuppressLint("NewApi")
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                response = downloadData.run(Constants.server + Constants.movies_details
+                response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.movies_details
                         + idMovie);
 
             }

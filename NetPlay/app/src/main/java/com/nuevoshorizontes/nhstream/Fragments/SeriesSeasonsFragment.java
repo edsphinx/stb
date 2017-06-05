@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -136,7 +137,7 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
             public void run() {
 
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.details + SeriesFragment.id);
+                    @SuppressLint("NewApi") String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.details + SeriesFragment.id);
                     data = new Gson().fromJson(response, SeriesCard.class);
 
 

@@ -35,6 +35,16 @@ public class LoginTask extends AsyncTask<Void, Void, Boolean> {
         mSettings = settings;
     }
 
+    public LoginTask(Context context, String usernameInput,
+                     String passwordInput, SharedPreferences settings) {
+        mUsername = usernameInput;
+        mPassword = passwordInput;
+        mContext = context;
+        //mUsernermaInput = usernameInput;
+        //mPasswordInput = passwordInput;
+        mSettings = settings;
+    }
+
     @Override
     protected Boolean doInBackground(Void... voids) {
         LoginRequest request = new LoginRequest();

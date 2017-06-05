@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -65,6 +66,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static com.nuevoshorizontes.nhstream.R.drawable.settings;
 
 public class LiveFragment extends NHPlaybackOverlayFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
@@ -434,8 +437,9 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
+
                 /** Obtener JSON de Canales En Vivo **/
-                String response = downloadData.run(Constants.server + Constants.live + "/"
+                String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.live + "/"
                         + access_token + "/" + user_type);
                 Gson gson = new Gson();
                 /**
@@ -492,7 +496,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
             public void run() {
                 DownloadData downloadData = new DownloadData();
                 /** Obtener JSON de Canales En Vivo **/
-                String response = downloadData.run(Constants.server + Constants.live + "/"
+                String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.live + "/"
                         + access_token + "/" + user_type);
                 Gson gson = new Gson();
                 /**
@@ -637,7 +641,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 try {
                     DownloadData downloadData = new DownloadData();
                     /** Obtener JSON de Canales Favoritos **/
-                    String response = downloadData.run(Constants.server + Constants.live_favorites
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.live_favorites
                             + user_profile);
                     /**
                      * Map<String, LiveCanalCard>, el String es el numero del canal
@@ -739,6 +743,22 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                     mGlue.prepareIfNeededAndPlay(currentMetaData);
                 }
 
+            }else if(item instanceof LiveFavoriteCanalCard){
+                final LiveFavoriteCanalCard card = (LiveFavoriteCanalCard) item;
+                final LiveCanalCard cardLive = new LiveCanalCard(card);
+                /** SetUp MetaData */
+                currentMetaData = new MediaMetaData();
+                currentMetaData.setMediaTitle(cardLive.getmTitle());
+                currentMetaData.setMediaArtistName(cardLive.getmDescription());
+                currentMetaData.setMediaSourcePath(cardLive.getmStream());
+                /** Preprar MetaData y Reproducir */
+                mGlue.prepareIfNeededAndPlay(currentMetaData);
+                /** Asignar nuevo canal Seleccionado */
+                selectedChannel = cardLive;
+                currentChannel = selectedChannel;
+                /** Cargar Programas de Canal */
+                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
             }
         }catch(Exception e){
             Log.e(TAG, e.toString());

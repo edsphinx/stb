@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -169,7 +170,7 @@ public class SeriesFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.series);
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.series);
 
                     Gson gson = new Gson();
                     Type seriesCardType;

@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
@@ -107,7 +108,7 @@ public class MoviesSearchFragment extends android.support.v17.leanback.app.Searc
                 try {
                     mRowsAdapter.clear();
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.movies + query);
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.movies + query);
 
                     Gson gson = new Gson();
                     Type peliculasCardType;

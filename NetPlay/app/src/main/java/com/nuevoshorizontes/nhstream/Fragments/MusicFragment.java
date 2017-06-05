@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -172,7 +173,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.music_playlist + MainActivity.user_profile);
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.music_playlist + MainActivity.user_profile);
 
                     Gson gson = new Gson();
                     Type musicaCardType;
@@ -259,7 +260,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.music_singers);
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.music_singers);
 
                     Gson gson = new Gson();
                     Type musicaCardType;
@@ -340,7 +341,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.music_genders);
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.music_genders);
 
                     Gson gson = new Gson();
                     Type musicaCardType;

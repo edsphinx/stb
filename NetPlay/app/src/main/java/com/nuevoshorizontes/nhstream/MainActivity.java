@@ -34,6 +34,8 @@ public class MainActivity extends Activity {
     public static String user_profile = "";
     public static String user_type = "";
     public static String mac = "";
+    public static String userName = "";
+    public static String passWord = "";
     private int code = 401;
 
     private boolean mReboot = false;
@@ -52,7 +54,7 @@ public class MainActivity extends Activity {
                 @Override
                 public void run() {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + "/stb/perfiles/stb/" + mac);
+                    String response = downloadData.run(getBaseContext(), Constants.server + "/stb/perfiles/stb/" + mac);
 
                 }
             });
@@ -192,6 +194,8 @@ public class MainActivity extends Activity {
                     code = session.code();
                     if (session.isSuccessful() && session.code() == 200) {
                         JSONObject object = new JSONObject(session.body().string());
+                        userName = username;
+                        passWord = password;
                         access_token = object.getString("access_token");
                         refresh_token = object.getString("refresh_token");
 

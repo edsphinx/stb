@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.VerticalGridFragment;
@@ -62,7 +63,7 @@ public class MessagesFragment extends VerticalGridFragment
             @Override
             public void run() {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.messages);
+                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.messages);
 
                     Gson gson = new Gson();
                     Type mensajesCardType;
