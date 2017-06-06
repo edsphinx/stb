@@ -37,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
+
 
 public class MusicSearchFragment extends android.support.v17.leanback.app.SearchFragment
         implements android.support.v17.leanback.app.SearchFragment.SearchResultProvider,
@@ -107,7 +109,7 @@ public class MusicSearchFragment extends android.support.v17.leanback.app.Search
                 try {
                     mRowsAdapter.clear();
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.music_song_query + query);
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.music_song_query + query);
 
                     Gson gson = new Gson();
                     Type songCardType;

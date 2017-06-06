@@ -49,6 +49,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
+
 public class MoviesFragment extends BrowseFragment {
     public static final String TAG = "MoviesFragment";
     private ArrayObjectAdapter mRowsAdapter;
@@ -172,7 +174,7 @@ public class MoviesFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.movies);
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.movies);
 
                     Gson gson = new Gson();
                     Type peliculasCardType;

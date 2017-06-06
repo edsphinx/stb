@@ -51,6 +51,8 @@ import com.google.gson.Gson;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
+
 public class MovieDetailFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
 
@@ -199,7 +201,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.movies_details
+                response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.movies_details
                         + idMovie);
 
             }

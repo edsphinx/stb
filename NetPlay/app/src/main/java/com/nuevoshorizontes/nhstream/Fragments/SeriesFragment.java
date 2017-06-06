@@ -47,6 +47,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
+
 public class SeriesFragment extends BrowseFragment {
 
     public static final String TAG = "SeriesFragment";
@@ -170,7 +172,7 @@ public class SeriesFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.series);
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.series);
 
                     Gson gson = new Gson();
                     Type seriesCardType;

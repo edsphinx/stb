@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
+
 public class MessagesFragment extends VerticalGridFragment
 {
 
@@ -63,7 +65,7 @@ public class MessagesFragment extends VerticalGridFragment
             @Override
             public void run() {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.messages);
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.messages);
 
                     Gson gson = new Gson();
                     Type mensajesCardType;

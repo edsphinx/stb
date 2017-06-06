@@ -51,6 +51,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
+
 public class SeriesSeasonsFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
 
@@ -137,7 +139,7 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
             public void run() {
 
                     DownloadData downloadData = new DownloadData();
-                    @SuppressLint("NewApi") String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.details + SeriesFragment.id);
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.details + SeriesFragment.id);
                     data = new Gson().fromJson(response, SeriesCard.class);
 
 

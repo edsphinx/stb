@@ -17,6 +17,8 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
+
 public class DownloadAPK extends AsyncTask<Void, Void, Boolean> {
 
     private Context context;
@@ -45,7 +47,7 @@ public class DownloadAPK extends AsyncTask<Void, Void, Boolean> {
         try {
             DownloadData downloadData = new DownloadData();
 
-            String response = downloadData.run(this.context,urlVersion);
+            String response = downloadData.run(this.context, access_token, false, urlVersion);
             if(!currentVersion.equalsIgnoreCase(response)){
                 download = true;
             }

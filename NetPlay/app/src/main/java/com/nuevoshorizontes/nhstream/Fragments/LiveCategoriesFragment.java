@@ -29,6 +29,7 @@ import android.view.View;
 import com.nuevoshorizontes.nhstream.Cards.LiveCanalCard;
 import com.nuevoshorizontes.nhstream.Cards.LiveProgramCard;
 import com.nuevoshorizontes.nhstream.Constants;
+import com.nuevoshorizontes.nhstream.MainActivity;
 import com.nuevoshorizontes.nhstream.MediaPlayers.LiveMediaPlayerGlue;
 import com.nuevoshorizontes.nhstream.Presenters.LiveCanalPresenter;
 import com.nuevoshorizontes.nhstream.Presenters.LiveProgramPresenter;
@@ -261,7 +262,7 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(getActivity().getBaseContext(), Constants.server + "/stb/live/categorias" + "/"
+                String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + "/stb/live/categorias" + "/"
                         + access_token + "/" + user_type);
                 Gson gson = new Gson();
 
@@ -357,7 +358,7 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
                 favoriteChannelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.live_favorites
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.live_favorites
                             + user_profile);
 
 
@@ -490,7 +491,7 @@ public class LiveCategoriesFragment extends PlaybackOverlayFragment implements
                             new LiveProgramPresenter());
                     programationData = null;
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.programation
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.programation
                             + String.valueOf(card.getmId()));
 
                     programationData = new Gson().fromJson(response, LiveProgramRow.class);

@@ -136,7 +136,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.account + MainActivity.access_token);
+                String response = downloadData.run(getActivity().getBaseContext(), MainActivity.access_token, true, Constants.server + Constants.account);
                 data = new Gson().fromJson(response, AccountCard.class);
 
             }
@@ -198,8 +198,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
 
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + "/stb/cuenta/facturas/"
-                            + MainActivity.access_token);
+                    String response = downloadData.run(getActivity().getBaseContext(), MainActivity.access_token, true, Constants.server + "/stb/cuenta/facturas/");
 
 
                     dataBills = gson.fromJson(response, BillsCard[].class);
@@ -242,7 +241,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
                 try {
                     DownloadData downloadData = new DownloadData();
 
-                    String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.profiles + MainActivity.access_token);
+                    String response = downloadData.run(getActivity().getBaseContext(), MainActivity.access_token, true, Constants.server + Constants.profiles);
                     dataProfiles = new Gson().fromJson(response, AccountProfilesRow.class);
 
                     int i = 0;
@@ -276,7 +275,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(getActivity().getBaseContext(), Constants.server + Constants.messages);
+                String response = downloadData.run(getActivity().getBaseContext(), MainActivity.access_token, false, Constants.server + Constants.messages);
 
                 Gson gson = new Gson();
                 Type mensajesCardType;

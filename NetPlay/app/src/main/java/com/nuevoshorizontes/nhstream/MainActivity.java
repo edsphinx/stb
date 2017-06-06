@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
                 @Override
                 public void run() {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getBaseContext(), Constants.server + "/stb/perfiles/stb/" + mac);
+                    String response = downloadData.run(getBaseContext(), access_token, false, Constants.server + "/stb/perfiles/stb/" + mac);
 
                 }
             });
@@ -103,7 +103,7 @@ public class MainActivity extends Activity {
 
         }
 
-        mHandler.postDelayed(mRunnable, 10000);
+        //mHandler.postDelayed(mRunnable, 10000);
 
 
     }

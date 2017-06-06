@@ -20,30 +20,62 @@ public class DownloadData {
 
     private LoginTask mAuthTask = null;
 
-    public String run(Context mContext, String url){
+    public String run(Context mContext, String bearer, boolean concat, String url){
         //settings = getSharedPreferences("settings", 0);
         String result = "";
+        url = concat ? url+bearer : url;
         Request request = new Request.Builder()
                 .url(url)
                 .addHeader("Accept", "application/json; q=0.5")
-                .addHeader("Authorization", "Bearer " + MainActivity.access_token)
+                .addHeader("Authorization", "Bearer " + bearer)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             result =  response.body().string();
-            //result.split(":");
-            //if(result == "{\"error\":\"Unauthenticated.\"}" ){
-            //if(result=="error"?true:false)
             if(result.contains("Unauthenticated.")){
                 mAuthTask = new LoginTask(mContext,
-                         MainActivity.userName, MainActivity.passWord, settings);
+                        MainActivity.userName, MainActivity.passWord, settings);
                 mAuthTask.execute((Void) null);
                 mAuthTask = null;
+                url = concat ? url+MainActivity.access_token : url;
+                Request request2 = new Request.Builder()
+                        .url(url)
+                        .addHeader("Accept", "application/json; q=0.5")
+                        .addHeader("Authorization", "Bearer " + MainActivity.access_token)
+                        .build();
+                try (Response response2 = client.newCall(request2).execute()) {
+                    result = response2.body().string();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
     }
+
+//    public String run(Context mContext, String url){
+//        //settings = getSharedPreferences("settings", 0);
+//        String result = "";
+//        Request request = new Request.Builder()
+//                .url(url)
+//                .addHeader("Accept", "application/json; q=0.5")
+//                .addHeader("Authorization", "Bearer " + MainActivity.access_token)
+//                .build();
+//        try (Response response = client.newCall(request).execute()) {
+//            result =  response.body().string();
+//            //result.split(":");
+//            //if(result == "{\"error\":\"Unauthenticated.\"}" ){
+//            //if(result=="error"?true:false)
+//            if(result.contains("Unauthenticated.")){
+//                mAuthTask = new LoginTask(mContext,
+//                         MainActivity.userName, MainActivity.passWord, settings);
+//                mAuthTask.execute((Void) null);
+//                mAuthTask = null;
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return result;
+//    }
 
 //    public String run(String url){
 //        //settings = getSharedPreferences("settings", 0);
