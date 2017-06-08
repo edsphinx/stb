@@ -21,6 +21,7 @@ import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -114,8 +115,11 @@ public class ProfileFragment extends BrowseFragment {
 
                 String request = Constants.server + Constants.profiles;
                 String response = downloadData.run(getActivity().getBaseContext(),  MainActivity.access_token, true, request);
-                data = new Gson().fromJson(response, AccountProfilesRow.class);
-
+                try {
+                    data = new Gson().fromJson(response, AccountProfilesRow.class);
+                }catch (Exception egson){
+                    Log.e(TAG, egson.toString());
+                }
             }
         });
 

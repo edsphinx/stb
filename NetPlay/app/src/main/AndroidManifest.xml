@@ -193,6 +193,9 @@
             android:name="com.nuevoshorizontes.nhstream.UpdateService"
             android:enabled="true"
             android:exported="true"></service>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="34bc73420231ac98bd1b6e2f58819a16ac0f3f73" />
     </application>
 
 </manifest>

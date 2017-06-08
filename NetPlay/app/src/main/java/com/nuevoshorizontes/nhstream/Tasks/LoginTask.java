@@ -21,6 +21,7 @@ import okhttp3.Response;
 public class LoginTask extends AsyncTask<Void, Void, Boolean> {
 
     private final String mUsername, mPassword;
+    private String mToken;
     private final Context mContext;
     private TextInputEditText mUsernermaInput, mPasswordInput;
     private SharedPreferences mSettings;
@@ -53,7 +54,8 @@ public class LoginTask extends AsyncTask<Void, Void, Boolean> {
             Response session = request.run(Constants.server + Constants.authorization, mUsername, mPassword);
             if (session.isSuccessful() && session.code() == 200) {
                 JSONObject object = new JSONObject(session.body().string());
-                MainActivity.access_token = object.getString("access_token");
+                mToken = object.getString("access_token");
+                MainActivity.access_token = mToken;
                 MainActivity.refresh_token = object.getString("refresh_token");
 
                 result = true;
@@ -75,6 +77,7 @@ public class LoginTask extends AsyncTask<Void, Void, Boolean> {
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putString("username", mUsernermaInput.getText().toString());
             editor.putString("password", mPasswordInput.getText().toString());
+            editor.putString("token", mToken);
             editor.commit();
             Intent intent = new Intent(mContext, MainActivity.class);
             mContext.startActivity(intent);

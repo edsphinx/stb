@@ -138,7 +138,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     private int delay = 40000;//1000 * 30;
 
     /** Autoupdate CHANNELROWS TIME LAPSE **/
-    private int delay_channel = (1000 * 60) * 15;
+    private int delay_channel = 3600000;//(1000 * 60) * 15;
 
     /** Vainas de Channel UP/DOWN**/
     private OnFadeCompleteListener completeListener;
@@ -714,8 +714,12 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 /** Preprar MetaData y Reproducir */
                 mGlue.prepareIfNeededAndPlay(currentMetaData);
                 /** Asignar nuevo canal Seleccionado */
+                card.setmEstado(1);
                 selectedChannel = card;
                 currentChannel = selectedChannel;
+                /** Mover el Foco al Canal Seleccionado */
+                getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                        new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
                 /** Cargar Programas de Canal */
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                 handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
@@ -745,7 +749,8 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 
             }else if(item instanceof LiveFavoriteCanalCard){
                 final LiveFavoriteCanalCard card = (LiveFavoriteCanalCard) item;
-                final LiveCanalCard cardLive = new LiveCanalCard(card);
+                String ChannelNumberSelected = card.getmNumero().toString();
+                final LiveCanalCard cardLive = data.get(ChannelNumberSelected);
                 /** SetUp MetaData */
                 currentMetaData = new MediaMetaData();
                 currentMetaData.setMediaTitle(cardLive.getmTitle());
@@ -754,11 +759,25 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 /** Preprar MetaData y Reproducir */
                 mGlue.prepareIfNeededAndPlay(currentMetaData);
                 /** Asignar nuevo canal Seleccionado */
+                cardLive.setmEstado(1);
                 selectedChannel = cardLive;
                 currentChannel = selectedChannel;
+
+                /** Mover el Foco al Canal Seleccionado */
+                getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                        new ListRowPresenter.SelectItemViewHolderTask(cardLive.getmPosicion()));
+
                 /** Cargar Programas de Canal */
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                 handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+
+                //if (row.getId() == ROW_CHANNELS) {
+                    /** Guardar el numero del Canal Seleccionado en SharedPreferences */
+                    SharedPreferences mPrefs = getActivity().getPreferences(0);
+                    SharedPreferences.Editor editor = mPrefs.edit();
+                    editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
+                    editor.commit();
+                //}
             }
         }catch(Exception e){
             Log.e(TAG, e.toString());
@@ -958,6 +977,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 
             /** Actualizar Canal Seleccionado **/
             selectedChannel = card;
+            currentChannel = selectedChannel;
             /** Actualizar MetaData en el Player y Reproducir */
             mGlue.prepareIfNeededAndPlay(currentMetaData);
 
