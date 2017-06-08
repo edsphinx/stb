@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,6 +49,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
 
 public class MusicFragment extends BrowseFragment {
     public static final String TAG = "MusicFragment";
@@ -172,7 +175,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.music_playlist + MainActivity.user_profile);
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.music_playlist + MainActivity.user_profile);
 
                     Gson gson = new Gson();
                     Type musicaCardType;
@@ -259,7 +262,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.music_singers);
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.music_singers);
 
                     Gson gson = new Gson();
                     Type musicaCardType;
@@ -340,7 +343,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(Constants.server + Constants.music_genders);
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.music_genders);
 
                     Gson gson = new Gson();
                     Type musicaCardType;

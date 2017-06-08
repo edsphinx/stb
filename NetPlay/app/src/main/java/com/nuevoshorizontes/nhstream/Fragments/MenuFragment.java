@@ -213,7 +213,6 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
 
     }
 
-
     private final class ItemViewClickedListener implements OnItemViewClickedListener {
 
         @Override

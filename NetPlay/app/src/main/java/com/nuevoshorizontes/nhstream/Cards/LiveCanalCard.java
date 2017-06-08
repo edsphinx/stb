@@ -16,6 +16,19 @@ public class LiveCanalCard {
     @SerializedName("posicion") private int mPosicion = 0;
     private int mEstado = 0;
 
+    public LiveCanalCard(LiveFavoriteCanalCard item){
+        this.mId = item.getmId();
+        this.mNumero = item.getmNumero();
+        this.mTitle = item.getmTitle();
+        this.mDescription = item.getmDescription();
+        this.mLogo = item.getmLogo();
+        this.mThumbnail = item.getmThumbnail();
+        this.mStream = item.getmStream();
+        this.mRecord = item.getmRecord();
+        this.mRow = item.getmRow();
+        this.mPosicion = item.getmPosicion();
+    }
+
     public Integer getmId() {
         return mId;
     }

@@ -25,6 +25,8 @@ import com.nuevoshorizontes.nhstream.media.MediaMetaData;
 import com.nuevoshorizontes.nhstream.media.MediaPlayerGlue;
 import com.nuevoshorizontes.nhstream.media.MediaUtils;
 
+import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
+
 public class MoviePlayerFragment extends PlaybackOverlayFragment implements
         OnItemViewClickedListener, MediaPlayerGlue.OnMediaStateChangeListener {
 
@@ -197,7 +199,7 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
                 try {
                     DownloadData downloadData = new DownloadData();
                     String user_profile = MainActivity.user_profile;
-                    String response = downloadData.run(Constants.server
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server
                             + "/stb/tracking/"
                             + MoviePlayerActivity.id + "/"
                             + user_profile + "/"
@@ -227,7 +229,7 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
                 try {
                     DownloadData downloadData = new DownloadData();
                     String user_profile = MainActivity.user_profile;
-                    String response = downloadData.run(Constants.server
+                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server
                             + "/stb/tracking/listado/"
                             + MoviePlayerActivity.id + "/"
                             + user_profile + "/"

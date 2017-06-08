@@ -26,6 +26,8 @@ import android.view.SurfaceHolder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.nuevoshorizontes.nhstream.LiveActivity;
 import com.nuevoshorizontes.nhstream.R;
 import com.nuevoshorizontes.nhstream.media.MediaMetaData;
@@ -40,6 +42,7 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
     private final PlaybackControlsRow.ClosedCaptioningAction mClosedCaptioningAction;
     private final PlaybackControlsRow.PictureInPictureAction mPipAction;
     private MediaPlayer mPlayer;
+    private SimpleExoPlayer xPlayer;
     private MediaSession mVideoSession;
     private AudioManager mAudioManager;
     private int mAudioFocus = AudioManager.AUDIOFOCUS_LOSS;
@@ -208,10 +211,12 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
         surfaceHolder.setFixedSize(Math.round(dpWidth), Math.round(dpHeight));*/
 
         mPlayer.setDisplay(surfaceHolder);
+        //xPlayer.setVideoSurfaceHolder(surfaceHolder);
     }
 
     @Override public boolean isMediaPlaying() {
         return mPlayer.isPlaying();
+        //return xPlayer.
     }
 
     @Override public int getMediaDuration() {
@@ -336,16 +341,16 @@ public abstract class LiveMediaPlayerGlue extends MediaPlayerGlue implements
                 }
             }
         });
-        mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mediaPlayer, int what, int extra) {
-                Log.e(TAG, "MediaPlayer had error " + what  + " extra " + extra);
-                mPlayer.pause();
-                mPlayer.start();
-
-                return true;
-            }
-        });
+//        mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+//            @Override
+//            public boolean onError(MediaPlayer mediaPlayer, int what, int extra) {
+//                Log.e(TAG, "MediaPlayer had error " + what  + " extra " + extra);
+//                mPlayer.pause();
+//                mPlayer.start();
+//
+//                return true;
+//            }
+//        });
 
         mPlayer.prepareAsync();
         updateVideoSessionPlayState(PlaybackState.STATE_BUFFERING);

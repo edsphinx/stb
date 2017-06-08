@@ -38,7 +38,7 @@ public class UpdateService extends Service {
                 }
 
             }
-        }, 21600000, 43200000);//900000);
+        }, 43200000, 43200000);//900000);
     }
 
     @Override
