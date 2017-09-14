@@ -201,7 +201,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.movies_details
+                response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.movies_details
                         + idMovie);
 
             }
@@ -316,7 +316,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
                 if (action.getId() == 1) {
 
 //                Intent intent = null;
-//                intent = new Intent(getActivity().getBaseContext(),
+//                intent = new Intent(getActivity(),
 //                        MoviePlayerActivity.class);
 //                intent.putExtra("id", data.getmId());
 //                intent.putExtra("nombre", data.getmTitle());

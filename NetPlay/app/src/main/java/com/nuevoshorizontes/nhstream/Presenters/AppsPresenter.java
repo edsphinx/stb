@@ -50,16 +50,16 @@ public class AppsPresenter extends android.support.v17.leanback.widget.Presenter
 
 
 
-        if(appsCard.getmTitulo().equalsIgnoreCase("netflix")) {
-            ((ViewHolder) viewHolder).nombre.setText("");
-            ((ViewHolder) viewHolder).logo.getLayoutParams().width = 190;
-            ((ViewHolder) viewHolder).logo.getLayoutParams().height = 100;
-            ((ViewHolder) viewHolder).logo.setImageResource(R.drawable.netflix);
-            //((ViewHolder) viewHolder).imagen.setBackgroundResource(R.drawable.live_tv);
-        }else{
+//        if(appsCard.getmTitulo().equalsIgnoreCase("netflix")) {
+//            ((ViewHolder) viewHolder).nombre.setText("");
+//            ((ViewHolder) viewHolder).logo.getLayoutParams().width = 190;
+//            ((ViewHolder) viewHolder).logo.getLayoutParams().height = 100;
+//            ((ViewHolder) viewHolder).logo.setImageResource(R.drawable.netflix);
+//            //((ViewHolder) viewHolder).imagen.setBackgroundResource(R.drawable.live_tv);
+//        }else{
             ((ViewHolder) viewHolder).nombre.setText(appsCard.getmTitulo());
             ((ViewHolder) viewHolder).logo.setImageDrawable(appsCard.getmImagen());
-        }
+//        }
 
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -298,6 +298,14 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
         fade(false);
     }
 
+    public void fadeShitOut(){
+        mPadPos = 2;
+        mHandler.removeMessages(START_FADE_OUT);
+        mFadingStatus = IDLE;
+        mBgAlpha = 0;
+        fade(false);
+    }
+
     private boolean areControlsHidden() {
         return mFadingStatus == IDLE && mBgAlpha == 0;
     }
@@ -361,6 +369,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
                           tickle();
                       }
                 }
+
 //                if (controlsHidden) {
 //                    consumeEvent = true;
 //                    tickle();

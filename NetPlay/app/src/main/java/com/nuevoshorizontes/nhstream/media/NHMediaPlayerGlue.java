@@ -45,11 +45,11 @@ public abstract class NHMediaPlayerGlue extends NHPlaybackControlGlue implements
     private static final int FAST_FORWARD_REWIND_REPEAT_DELAY = 200; // in milliseconds
     private static final String TAG = "MusicMediaPlayerGlue";
     private final Context mContext;
-    private final PlaybackControlsRow.ThumbsDownAction mThumbsDownAction;
-    private final PlaybackControlsRow.ThumbsUpAction mThumbsUpAction;
-    private final PlaybackControlsRow.RepeatAction mRepeatAction;
-    private final PlaybackControlsRow.ShuffleAction mShuffleAction;
-    private final PlaybackControlsRow.SkipNextAction mSkipNextAction;
+//    private final PlaybackControlsRow.ThumbsDownAction mThumbsDownAction;
+//    private final PlaybackControlsRow.ThumbsUpAction mThumbsUpAction;
+//    private final PlaybackControlsRow.RepeatAction mRepeatAction;
+//    private final PlaybackControlsRow.ShuffleAction mShuffleAction;
+//    private final PlaybackControlsRow.SkipNextAction mSkipNextAction;
     protected PlaybackControlsRow mControlsRow;
     private static final int REFRESH_PROGRESS = 1;
     private final Handler mHandler = new Handler() {
@@ -74,14 +74,14 @@ public abstract class NHMediaPlayerGlue extends NHPlaybackControlGlue implements
         super(context, fragment, new int[]{1});
         mContext = context;
         // Instantiate secondary actions
-        mShuffleAction = new PlaybackControlsRow.ShuffleAction(mContext);
-        mRepeatAction = new PlaybackControlsRow.RepeatAction(mContext);
-        mThumbsDownAction = new PlaybackControlsRow.ThumbsDownAction(mContext);
-        mThumbsUpAction = new PlaybackControlsRow.ThumbsUpAction(mContext);
-        mThumbsDownAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
-        mThumbsUpAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
-
-        mSkipNextAction = new PlaybackControlsRow.SkipNextAction(mContext);
+//        mShuffleAction = new PlaybackControlsRow.ShuffleAction(mContext);
+//        mRepeatAction = new PlaybackControlsRow.RepeatAction(mContext);
+//        mThumbsDownAction = new PlaybackControlsRow.ThumbsDownAction(mContext);
+//        mThumbsUpAction = new PlaybackControlsRow.ThumbsUpAction(mContext);
+//        mThumbsDownAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
+//        mThumbsUpAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
+//
+//        mSkipNextAction = new PlaybackControlsRow.SkipNextAction(mContext);
 
 
         // Register selected listener such that we know what action the user currently has focused.
@@ -101,11 +101,11 @@ public abstract class NHMediaPlayerGlue extends NHPlaybackControlGlue implements
      * @param secondaryActionsAdapter The adapter you need to add the {@link Action}s to.
      */
     protected void addSecondaryActions(ArrayObjectAdapter secondaryActionsAdapter) {
-        secondaryActionsAdapter.add(mShuffleAction);
-        secondaryActionsAdapter.add(mRepeatAction);
-        secondaryActionsAdapter.add(mThumbsDownAction);
-        secondaryActionsAdapter.add(mThumbsUpAction);
-        secondaryActionsAdapter.add(mSkipNextAction);
+//        secondaryActionsAdapter.add(mShuffleAction);
+//        secondaryActionsAdapter.add(mRepeatAction);
+//        secondaryActionsAdapter.add(mThumbsDownAction);
+//        secondaryActionsAdapter.add(mThumbsUpAction);
+//        secondaryActionsAdapter.add(mSkipNextAction);
     }
 
 
@@ -122,10 +122,10 @@ public abstract class NHMediaPlayerGlue extends NHPlaybackControlGlue implements
         mControlsRow = getControlsRow();
 
         // Add secondary actions and change the control row color.
-        ArrayObjectAdapter secondaryActions = new ArrayObjectAdapter(
-                new ControlButtonPresenterSelector());
-        mControlsRow.setSecondaryActionsAdapter(secondaryActions);
-        addSecondaryActions(secondaryActions);
+//        ArrayObjectAdapter secondaryActions = new ArrayObjectAdapter(
+//                new ControlButtonPresenterSelector());
+//        mControlsRow.setSecondaryActionsAdapter(secondaryActions);
+//        addSecondaryActions(secondaryActions);
         setupControlsRowPresenter(presenter);
 
         return presenter;
@@ -150,25 +150,25 @@ public abstract class NHMediaPlayerGlue extends NHPlaybackControlGlue implements
         // If either 'Shuffle' or 'Repeat' has been clicked we need to make sure the acitons index
         // is incremented and the UI updated such that we can display the new state.
         super.onActionClicked(action);
-        if (action instanceof PlaybackControlsRow.ShuffleAction) {
-            mShuffleAction.nextIndex();
-        } else if (action instanceof PlaybackControlsRow.RepeatAction) {
-            mRepeatAction.nextIndex();
-        } else if (action instanceof PlaybackControlsRow.ThumbsUpAction) {
-            if (mThumbsUpAction.getIndex() == PlaybackControlsRow.ThumbsAction.SOLID) {
-                mThumbsUpAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
-            } else {
-                mThumbsUpAction.setIndex(PlaybackControlsRow.ThumbsAction.SOLID);
-                mThumbsDownAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
-            }
-        } else if (action instanceof PlaybackControlsRow.ThumbsDownAction) {
-            if (mThumbsDownAction.getIndex() == PlaybackControlsRow.ThumbsAction.SOLID) {
-                mThumbsDownAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
-            } else {
-                mThumbsDownAction.setIndex(PlaybackControlsRow.ThumbsAction.SOLID);
-                mThumbsUpAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
-            }
-        }
+//        if (action instanceof PlaybackControlsRow.ShuffleAction) {
+//            mShuffleAction.nextIndex();
+//        } else if (action instanceof PlaybackControlsRow.RepeatAction) {
+//            mRepeatAction.nextIndex();
+//        } else if (action instanceof PlaybackControlsRow.ThumbsUpAction) {
+//            if (mThumbsUpAction.getIndex() == PlaybackControlsRow.ThumbsAction.SOLID) {
+//                mThumbsUpAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
+//            } else {
+//                mThumbsUpAction.setIndex(PlaybackControlsRow.ThumbsAction.SOLID);
+//                mThumbsDownAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
+//            }
+//        } else if (action instanceof PlaybackControlsRow.ThumbsDownAction) {
+//            if (mThumbsDownAction.getIndex() == PlaybackControlsRow.ThumbsAction.SOLID) {
+//                mThumbsDownAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
+//            } else {
+//                mThumbsDownAction.setIndex(PlaybackControlsRow.ThumbsAction.SOLID);
+//                mThumbsUpAction.setIndex(PlaybackControlsRow.ThumbsAction.OUTLINE);
+//            }
+//        }
         onMetadataChanged();
     }
 
@@ -257,23 +257,23 @@ public abstract class NHMediaPlayerGlue extends NHPlaybackControlGlue implements
     /**
      * @return Returns <code>true</code> iff 'Shuffle' is <code>ON</code>.
      */
-    public boolean useShuffle() {
-        return mShuffleAction.getIndex() == PlaybackControlsRow.ShuffleAction.ON;
-    }
+//    public boolean useShuffle() {
+//        return mShuffleAction.getIndex() == PlaybackControlsRow.ShuffleAction.ON;
+//    }
 
     /**
      * @return Returns <code>true</code> iff 'Repeat-One' is <code>ON</code>.
      */
-    public boolean repeatOne() {
-        return mRepeatAction.getIndex() == PlaybackControlsRow.RepeatAction.ONE;
-    }
+//    public boolean repeatOne() {
+//        return mRepeatAction.getIndex() == PlaybackControlsRow.RepeatAction.ONE;
+//    }
 
     /**
      * @return Returns <code>true</code> iff 'Repeat-All' is <code>ON</code>.
      */
-    public boolean repeatAll() {
-        return mRepeatAction.getIndex() == PlaybackControlsRow.RepeatAction.ALL;
-    }
+//    public boolean repeatAll() {
+//        return mRepeatAction.getIndex() == PlaybackControlsRow.RepeatAction.ALL;
+//    }
 
     public MediaMetaData getMediaMetaData() {
         return mMediaMetaData;

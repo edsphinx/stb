@@ -59,7 +59,7 @@ public class LiveActivity extends Activity {
                 }
             } else if (e.getKeyCode() == 82) {
                 Intent intent = new Intent();
-                intent = new Intent(this.getBaseContext(),
+                intent = new Intent(LiveActivity.this,
                         MainActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
                         .toBundle();
@@ -84,7 +84,7 @@ public class LiveActivity extends Activity {
                 }
             } else if (e.getKeyCode() == 82) {
                 Intent intent = new Intent();
-                intent = new Intent(this.getBaseContext(),
+                intent = new Intent(LiveActivity.this,
                         MainActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
                         .toBundle();

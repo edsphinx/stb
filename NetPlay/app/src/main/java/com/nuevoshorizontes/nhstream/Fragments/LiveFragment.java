@@ -1,14 +1,14 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
-import android.annotation.SuppressLint;
+//import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.media.TimedText;
+//import android.media.MediaPlayer;
+//import android.media.TimedText;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v17.leanback.app.PlaybackOverlayFragment;
+//import android.support.v17.leanback.app.PlaybackOverlayFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.ClassPresenterSelector;
@@ -34,7 +34,7 @@ import com.nuevoshorizontes.nhstream.Cards.LiveCanalCard;
 import com.nuevoshorizontes.nhstream.Cards.LiveFavoriteCanalCard;
 import com.nuevoshorizontes.nhstream.Cards.LiveProgramCard;
 import com.nuevoshorizontes.nhstream.Constants;
-import com.nuevoshorizontes.nhstream.MediaPlayers.LiveMediaPlayerGlue;
+//import com.nuevoshorizontes.nhstream.MediaPlayers.LiveMediaPlayerGlue;
 import com.nuevoshorizontes.nhstream.MediaPlayers.NHLiveMediaPlayerGlue;
 import com.nuevoshorizontes.nhstream.Presenters.LiveActionPresenter;
 import com.nuevoshorizontes.nhstream.Presenters.LiveCanalPresenter;
@@ -48,12 +48,13 @@ import com.nuevoshorizontes.nhstream.Utils.DownloadData;
 import com.nuevoshorizontes.nhstream.Utils.DownloadEPG;
 import com.nuevoshorizontes.nhstream.Utils.Utils;
 import com.nuevoshorizontes.nhstream.media.MediaMetaData;
-import com.nuevoshorizontes.nhstream.media.MediaPlayerGlue;
+//import com.nuevoshorizontes.nhstream.media.MediaPlayerGlue;
 import com.nuevoshorizontes.nhstream.media.MediaUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ import static com.nuevoshorizontes.nhstream.R.drawable.settings;
 
 public class LiveFragment extends NHPlaybackOverlayFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
-        MediaPlayerGlue.OnMediaStateChangeListener {
+        NHLiveMediaPlayerGlue.OnMediaStateChangeListener {
 
     public static String TAG = "LiveFragment";
 
@@ -136,6 +137,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     /** Monitoreo de Canales **/
     private final Handler monitoreoHandler = new Handler();
     private int delay = 40000;//1000 * 30;
+    private int delayMediaRelease = 7200000;
 
     /** Autoupdate CHANNELROWS TIME LAPSE **/
     private int delay_channel = 3600000;//(1000 * 60) * 15;
@@ -171,20 +173,30 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     private int TOTAL_DIGIT = 0;
     private String TOTAL_PRESSED = "";
 
+
+    private final Handler handlerRelease = new Handler();
     private final Handler handlerLoadPrograms = new Handler();
     private final Handler handlerLoadFavoriteChannels = new Handler();
     private final Handler cambiarCanalHandler = new Handler();
     private Handler selectedHandler = new Handler();
-    private final Handler handlerUpdateChannelList = new Handler();
+//    private final Handler handlerUpdateChannelList = new Handler();
 
-    private final Runnable UpdateChannelList = new Runnable() {
+//    private final Runnable UpdateChannelList = new Runnable() {
+//        @Override
+//        public void run() {
+//            updateChannelsRow();
+//            monitoreoHandler.postDelayed(this, delay_channel);
+//        }
+//    };
+
+    private final Runnable runnableRelease = new Runnable() {
         @Override
         public void run() {
-            updateChannelsRow();
-            monitoreoHandler.postDelayed(this, delay_channel);
+            restartPlayer();
+            handlerRelease.removeCallbacks(this);
+            handlerRelease.postDelayed(this, delayMediaRelease);
         }
     };
-
 
     private final Runnable runnableLoadPrograms = new Runnable() {
         @Override
@@ -220,36 +232,36 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         }
     };
 
-    private final Runnable monitoreoRunnable = new Runnable() {
-        @Override
-        public void run() {
-            int position=0;
-            if (currentChannel!=null){
-                position = currentChannel.getmPosicion();
-                if(position<channelsRowAdapter.size()) {
-                    position++;
-                    LiveCanalCard card = (LiveCanalCard) channelsRowAdapter.get(position);
-                    if (card != null) {
-                        currentChannel = card;
-                        setTitle("Canal:" + String.valueOf(card.getmNumero()) + " - Posicion:" + String.valueOf(card.getmPosicion()));
-                        channelNumber = String.valueOf(card.getmNumero());
-                        Log.i("MONITOREO", channelNumber);
-                        cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
-                        cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 100);
-                        monitoreoHandler.postDelayed(this, delay);
-                    } else {
-                        channelNumber = "112";
-                    }
-                }else{
-                    position=0;
-                    currentChannel.setmPosicion(0);
-                }
-            }else{
-                position=0;
-                currentChannel.setmPosicion(0);
-            }
-        }
-    };
+//    private final Runnable monitoreoRunnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            int position=0;
+//            if (currentChannel!=null){
+//                position = currentChannel.getmPosicion();
+//                if(position<channelsRowAdapter.size()) {
+//                    position++;
+//                    LiveCanalCard card = (LiveCanalCard) channelsRowAdapter.get(position);
+//                    if (card != null) {
+//                        currentChannel = card;
+//                        setTitle("Canal:" + String.valueOf(card.getmNumero()) + " - Posicion:" + String.valueOf(card.getmPosicion()));
+//                        channelNumber = String.valueOf(card.getmNumero());
+//                        Log.i("MONITOREO", channelNumber);
+//                        cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
+//                        cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 100);
+//                        monitoreoHandler.postDelayed(this, delay);
+//                    } else {
+//                        channelNumber = "112";
+//                    }
+//                }else{
+//                    position=0;
+//                    currentChannel.setmPosicion(0);
+//                }
+//            }else{
+//                position=0;
+//                currentChannel.setmPosicion(0);
+//            }
+//        }
+//    };
 
     public boolean getIsChannelRowActive(){
         return isChannelRowActive;
@@ -333,8 +345,21 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         //monitoreoHandler.postDelayed(monitoreoRunnable, delay);
 
         /** Actualizar lista de Canales **/
-        handlerUpdateChannelList.postDelayed(UpdateChannelList, delay_channel);
+        //handlerUpdateChannelList.postDelayed(UpdateChannelList, delay_channel);
 
+        /**Reset cada minuto **/
+        handlerRelease.postDelayed(runnableRelease, delayMediaRelease);
+
+    }
+
+
+    private void restartPlayer(){
+        fadeShitOut();
+        //mGlue.prepareIfNeededAndPlay(currentMetaData);
+        mGlue.resetPlayer();
+        mGlue.releaseMediaSession();
+        mGlue.prepareIfNeededAndPlay(currentMetaData);
+        fadeShitOut();
     }
 
 
@@ -385,7 +410,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         /** Inicializando PlayBackControlPresenter */
         playbackControlsRowPresenter = mGlue.createControlsRowAndPresenter();
         playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.program_background));
-        playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.program_background));
+        //playbackControlsRowPresenter.setBackgroundColor(getActivity().getResources().getColor(R.color.program_background));
         playbackControlsRowPresenter.setSecondaryActionsHidden(false);
         /**
          * Evento Click de Acciones Secundarias
@@ -439,7 +464,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 DownloadData downloadData = new DownloadData();
 
                 /** Obtener JSON de Canales En Vivo **/
-                String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.live + "/"
+                String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.live + "/"
                         + access_token + "/" + user_type);
                 Gson gson = new Gson();
                 /**
@@ -490,93 +515,93 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     /**
      * Description: Actualizar Fila de Canales
      */
-    private void updateChannelsRow() {
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                DownloadData downloadData = new DownloadData();
-                /** Obtener JSON de Canales En Vivo **/
-                String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.live + "/"
-                        + access_token + "/" + user_type);
-                Gson gson = new Gson();
-                /**
-                 * Map<String, LiveCanalCard>, el String es el numero del canal
-                 * Se utiliza para buscar el numero del Canal con el PAD del Control
-                 */
-                Type canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
-                }.getType();
-                /** Se inicializa el Adaptador de los canales */
-                channelsRowAdapter = null;
-                channelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
-                try {
-                    /** Parseo del RESPONSE -> Map<String, LiveCanalCard> */
-                    data = gson.fromJson(response, canalesCardType);
-                    int i = 0;
-                    /** Recorriendo cada entrada */
-                    for (HashMap.Entry<String, LiveCanalCard> entry : data.entrySet()) {
-                        LiveCanalCard card = entry.getValue();
-                        /** Set la posicion de cada Canal en el ROW */
-                        card.setmPosicion(i);
-                        entry.setValue(card);
-                        /** Se agrega la Card al Adaptador de Canales */
-                        channelsRowAdapter.add(entry.getValue());
-                        i++;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        /** Creando el header para ROW de Canales */
-        HeaderItem header = new HeaderItem(ROW_CHANNELS, getString(R.string.chanels));
-        /** Agregando ROW de Canales en su indice **/
-        //infoRowsAdapter.remove(ROW_CHANNELS);
-        infoRowsAdapter.replace(ROW_CHANNELS, new ListRow(header, channelsRowAdapter));
-
-        /** Obtener ultimo canal reproducido */
-        LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
-        /** Verificar que el card no sea nulo */
-        if (card != null) {
-            currentChannel = card;
-            /** Actualizar MetaData */
-            currentMetaData = new MediaMetaData();
-            currentMetaData.setMediaTitle(card.getmTitle());
-            currentMetaData.setMediaArtistName(card.getmDescription());
-            currentMetaData.setMediaSourcePath(card.getmStream());
-            /** Preprar MetaData y Reproducir */
-            mGlue.prepareIfNeededAndPlay(currentMetaData);
-            /** Seleccionar el ultimo canal Reproducido */
-            getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
-            getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
-                    new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-            /** Cargar Programas */
-            handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
-            handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
-        }
-        /** Los proximos select no reproduciran */
-        playOnSelect = false;
-
-        //LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
-
-        //channelNumber = selectedChannel;
-//        /** Mover el Foco al Canal Seleccionado */
-//        LiveCanalCard card = data.get(loadPreferences());
-//        card.setmEstado(1);
-//        getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
-//                new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
-
-    }
+//    private void updateChannelsRow() {
+//        thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                DownloadData downloadData = new DownloadData();
+//                /** Obtener JSON de Canales En Vivo **/
+//                String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.live + "/"
+//                        + access_token + "/" + user_type);
+//                Gson gson = new Gson();
+//                /**
+//                 * Map<String, LiveCanalCard>, el String es el numero del canal
+//                 * Se utiliza para buscar el numero del Canal con el PAD del Control
+//                 */
+//                Type canalesCardType = new TypeToken<Map<String, LiveCanalCard>>() {
+//                }.getType();
+//                /** Se inicializa el Adaptador de los canales */
+//                channelsRowAdapter = null;
+//                channelsRowAdapter = new ArrayObjectAdapter(new LiveCanalPresenter());
+//                try {
+//                    /** Parseo del RESPONSE -> Map<String, LiveCanalCard> */
+//                    data = gson.fromJson(response, canalesCardType);
+//                    int i = 0;
+//                    /** Recorriendo cada entrada */
+//                    for (HashMap.Entry<String, LiveCanalCard> entry : data.entrySet()) {
+//                        LiveCanalCard card = entry.getValue();
+//                        /** Set la posicion de cada Canal en el ROW */
+//                        card.setmPosicion(i);
+//                        entry.setValue(card);
+//                        /** Se agrega la Card al Adaptador de Canales */
+//                        channelsRowAdapter.add(entry.getValue());
+//                        i++;
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//            }
+//        });
+//        thread.start();
+//
+//        try {
+//            thread.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        /** Creando el header para ROW de Canales */
+//        HeaderItem header = new HeaderItem(ROW_CHANNELS, getString(R.string.chanels));
+//        /** Agregando ROW de Canales en su indice **/
+//        //infoRowsAdapter.remove(ROW_CHANNELS);
+//        infoRowsAdapter.replace(ROW_CHANNELS, new ListRow(header, channelsRowAdapter));
+//
+//        /** Obtener ultimo canal reproducido */
+//        LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
+//        /** Verificar que el card no sea nulo */
+//        if (card != null) {
+//            currentChannel = card;
+//            /** Actualizar MetaData */
+//            currentMetaData = new MediaMetaData();
+//            currentMetaData.setMediaTitle(card.getmTitle());
+//            currentMetaData.setMediaArtistName(card.getmDescription());
+//            currentMetaData.setMediaSourcePath(card.getmStream());
+//            /** Preprar MetaData y Reproducir */
+//            mGlue.prepareIfNeededAndPlay(currentMetaData);
+//            /** Seleccionar el ultimo canal Reproducido */
+//            getRowsFragment().setSelectedPosition(ROW_PROGRAMATION);
+//            getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+//                    new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
+//            /** Cargar Programas */
+//            handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+//            handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+//        }
+//        /** Los proximos select no reproduciran */
+//        playOnSelect = false;
+//
+//        //LiveCanalCard card = (LiveCanalCard) data.get(loadPreferences());
+//
+//        //channelNumber = selectedChannel;
+////        /** Mover el Foco al Canal Seleccionado */
+////        LiveCanalCard card = data.get(loadPreferences());
+////        card.setmEstado(1);
+////        getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+////                new ListRowPresenter.SelectItemViewHolderTask(card.getmPosicion()));
+//
+//    }
 
     /**
      * Descripcion: Agregar Fila de Acciones
@@ -641,7 +666,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 try {
                     DownloadData downloadData = new DownloadData();
                     /** Obtener JSON de Canales Favoritos **/
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.live_favorites
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.live_favorites
                             + user_profile);
                     /**
                      * Map<String, LiveCanalCard>, el String es el numero del canal
@@ -723,6 +748,9 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 /** Cargar Programas de Canal */
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                 handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+                /**Reset cada minuto **/
+//                handlerRelease.removeCallbacks(runnableRelease);
+//                handlerRelease.postDelayed(runnableRelease, delayMediaRelease);
 
                 /** Si el ID de la ROW es de Canales Favoritos */
                 if (row.getId() == ROW_CHANNELS) {
@@ -770,6 +798,9 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 /** Cargar Programas de Canal */
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                 handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+                /**Reset cada minuto **/
+//                handlerRelease.removeCallbacks(runnableRelease);
+//                handlerRelease.postDelayed(runnableRelease, delayMediaRelease);
 
                 //if (row.getId() == ROW_CHANNELS) {
                     /** Guardar el numero del Canal Seleccionado en SharedPreferences */
@@ -808,6 +839,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                     handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                     handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
 
+
                     /** Reproduccion del Primer Canal */
                     if (playOnSelect == true) {
                         /** Obtener ultimo canal reproducido */
@@ -829,6 +861,9 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                             /** Cargar Programas */
                             handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                             handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+                            /**Reset cada minuto **/
+//                            handlerRelease.removeCallbacks(runnableRelease);
+//                            handlerRelease.postDelayed(runnableRelease, delayMediaRelease);
                         }
                         /** Los proximos select no reproduciran */
                         playOnSelect = false;
@@ -984,6 +1019,10 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
             /** Cargar Programas de Canal **/
             handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
             handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+
+            /**Reset cada minuto **/
+//            handlerRelease.removeCallbacks(runnableRelease);
+//            handlerRelease.postDelayed(runnableRelease, delayMediaRelease);
 
             /** Guardar el numero del Canal Seleccionado en SharedPreferences */
             SharedPreferences mPrefs = getActivity().getPreferences(0);
@@ -1207,10 +1246,61 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         mGlue.releaseMediaPlayer();
     }
 
+    public void OnErrorListener(){
+        mGlue.resetPlayer();
+        mGlue.releaseMediaSession();
+        mGlue.prepareIfNeededAndPlay(currentMetaData);
+    }
+
     @Override
     public void onMediaStateChanged(MediaMetaData currentMediaMetaData, int currentMediaState) {
         if (currentMediaState == MediaUtils.MEDIA_STATE_COMPLETED) {
             mGlue.startPlayback();
+        }
+    }
+
+    private static String createKillCommandForSystemBin(final String _user, final String _fileName) {
+        return "kill $(ps|grep ^" + _user + ".*[/]system[/]bin[/]" + _fileName + "$|tr -s ' '|cut -d ' ' -f2);";
+    }
+
+    private static void runKillShellCommand() throws Throwable {
+        final Process p = Runtime.getRuntime().exec("su");
+        DataOutputStream os = null;
+        try {
+            os = new DataOutputStream(p.getOutputStream());
+            //Creating the command for killing the relevant camera processes
+            final String command =
+                    //Command to kill the process using the file "/system/bin/mediaserver" under the "media" user name
+                    createKillCommandForSystemBin("media", "mediaserver");
+            os.writeBytes(command + "\n");
+        } finally {
+            if (os != null) {
+                try {
+                    os.writeBytes("exit\n");
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
+                try {
+                    os.flush();
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
+                try {
+                    os.close();
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
+                try {
+                    p.waitFor();
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
+                try {
+                    p.destroy();
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
+            }
         }
     }
 

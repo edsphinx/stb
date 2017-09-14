@@ -26,7 +26,7 @@ public class MusicPlaylistActivity extends Activity {
         if (GuidedStepFragment.getCurrentGuidedStepFragment(getFragmentManager())
                 instanceof MusicPlaylistWizardFragment) {
             Intent intent = null;
-            intent = new Intent(this.getBaseContext(),
+            intent = new Intent(MusicPlaylistActivity.this,
                     MusicActivity.class);
             intent.putExtra("user_profile", MainActivity.user_profile );
             intent.putExtra("user_type", MainActivity.user_type );
@@ -42,7 +42,7 @@ public class MusicPlaylistActivity extends Activity {
     public boolean dispatchKeyEvent(KeyEvent e) {
         if (e.getAction() == KeyEvent.ACTION_UP) {
             if (e.getKeyCode() == 82) {
-                Intent intent = new Intent(this.getBaseContext(),
+                Intent intent = new Intent(MusicPlaylistActivity.this,
                         MainActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
                         .toBundle();

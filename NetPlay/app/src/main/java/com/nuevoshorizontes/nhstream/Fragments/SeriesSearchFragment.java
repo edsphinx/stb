@@ -106,7 +106,7 @@ public class SeriesSearchFragment extends android.support.v17.leanback.app.Searc
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.series + query);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.series + query);
 
                     Gson gson = new Gson();
                     Type seriesCardType;
@@ -153,7 +153,7 @@ public class SeriesSearchFragment extends android.support.v17.leanback.app.Searc
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                               RowPresenter.ViewHolder rowViewHolder, Row row) {
         SeriesCard model = (SeriesCard) item;
-        Intent intent  = new Intent(getActivity().getBaseContext(),
+        Intent intent  = new Intent(getActivity(),
                 SeriesSeasonsActivity.class);
         SeriesFragment.id = String.valueOf(model.getmId());
         Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())

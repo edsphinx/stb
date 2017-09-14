@@ -61,7 +61,7 @@ public class SeriesPlayerActivity extends Activity {
     public boolean dispatchKeyEvent(KeyEvent e) {
         if (e.getAction() == KeyEvent.ACTION_UP) {
             if (e.getKeyCode() == 82) {
-                Intent intent = new Intent(this.getBaseContext(),
+                Intent intent = new Intent(SeriesPlayerActivity.this,
                         MainActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
                         .toBundle();

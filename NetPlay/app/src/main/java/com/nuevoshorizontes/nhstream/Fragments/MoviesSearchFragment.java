@@ -110,7 +110,7 @@ public class MoviesSearchFragment extends android.support.v17.leanback.app.Searc
                 try {
                     mRowsAdapter.clear();
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.movies + query);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.movies + query);
 
                     Gson gson = new Gson();
                     Type peliculasCardType;
@@ -177,7 +177,7 @@ public class MoviesSearchFragment extends android.support.v17.leanback.app.Searc
     @Override
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
         MovieCard model = (MovieCard) item;
-        Intent intent = new Intent(getActivity().getBaseContext(),
+        Intent intent = new Intent(getActivity(),
                 MovieDetailActivity.class);
         MoviesFragment.id = String.valueOf(model.getmId());
         Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())

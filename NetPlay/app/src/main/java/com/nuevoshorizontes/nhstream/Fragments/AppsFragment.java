@@ -53,7 +53,7 @@ public class AppsFragment extends VerticalGridFragment {
 
         List<AppCard> list = new ArrayList<>();
 
-        final PackageManager pm = getActivity().getBaseContext().getPackageManager();
+        final PackageManager pm = getActivity().getPackageManager();
         Intent i = new Intent(Intent.ACTION_MAIN, null);
         i.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> packages = pm.queryIntentActivities(i, 0);

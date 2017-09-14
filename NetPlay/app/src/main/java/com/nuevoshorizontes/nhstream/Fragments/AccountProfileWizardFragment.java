@@ -110,7 +110,7 @@ public class AccountProfileWizardFragment extends GuidedStepFragment {
                         try {
                             JSONObject jsonObject = new JSONObject(result);
                             if (jsonObject.getString("estado").contentEquals("1")) {
-                                SharedPreferences loginSettings = getActivity().getBaseContext()
+                                SharedPreferences loginSettings = getActivity()
                                         .getSharedPreferences("loginSettings", 0);
                                 SharedPreferences.Editor editor = loginSettings.edit();
                                 editor.putString("user_profile", String.valueOf(1));

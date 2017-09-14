@@ -86,7 +86,7 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
     }
 
     private void startLiveTV(){
-        Intent intent = new Intent(getActivity().getBaseContext(),
+        Intent intent = new Intent(getActivity(),
                 LiveActivity.class);
 
         if (intent != null) {
@@ -219,7 +219,7 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
             if (MainActivity.user_profile == "") {
-                Intent intent = new Intent(getActivity().getBaseContext(),
+                Intent intent = new Intent(getActivity(),
                         ProfileActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                         .toBundle();
@@ -230,54 +230,54 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
                 int id = card.getmId();
                 switch (id) {
                     case 0: {
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 LiveActivity.class);
                         break;
                     }
                     case 11: {
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 LiveActivity.class);
                         break;
                     }
                     case 12: {
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 LiveCategoriesActivity.class);
                         break;
                     }
                     case 1:
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 VODSelectionActivity.class);
                         break;
 
                     case 2: {
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 MusicActivity.class);
                         break;
                     }
                     case 3: {
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 AccountActivity.class);
                         break;
                     }
                     case 4: {
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 AppsActivity.class);
                         break;
                     }
                     case 5: {
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 MessagesActivity.class);
                         break;
                     }
 
                     case 21:{
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 MovieActivity.class);
                         break;
                     }
 
                     case 22: {
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 SeriesActivity.class);
                         break;
                     }

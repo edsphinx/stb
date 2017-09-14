@@ -78,19 +78,19 @@ public class DownloadData {
 //        return result;
 //    }
 
-//    public String run(String url){
-//        //settings = getSharedPreferences("settings", 0);
-//        String result = "";
-//        Request request = new Request.Builder()
-//                .url(url)
-//                .addHeader("Accept", "application/json; q=0.5")
-//                .addHeader("Authorization", "Bearer " + MainActivity.access_token)
-//                .build();
-//        try (Response response = client.newCall(request).execute()) {
-//            result =  response.body().string();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
+    public String run(String url){
+        //settings = getSharedPreferences("settings", 0);
+        String result = "";
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Accept", "application/json; q=0.5")
+                .addHeader("Authorization", "Bearer " + MainActivity.access_token)
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            result =  response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

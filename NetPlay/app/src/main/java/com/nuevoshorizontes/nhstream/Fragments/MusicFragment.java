@@ -90,7 +90,7 @@ public class MusicFragment extends BrowseFragment {
             @Override
             public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
                 Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
+                intent = new Intent(getActivity(),
                         MusicPlayerActivity.class);
                 if(item instanceof MusicSingersCard){
                     MusicSingersCard model = (MusicSingersCard) item;
@@ -100,7 +100,7 @@ public class MusicFragment extends BrowseFragment {
                 if(item instanceof MusicPlaylistCard){
                     MusicPlaylistCard model = (MusicPlaylistCard) item;
                     if(model.getmId().contentEquals("0")){
-                        intent = new Intent(getActivity().getBaseContext(),
+                        intent = new Intent(getActivity(),
                                 MusicPlaylistActivity.class);
                         getActivity().finish();
                     }else {
@@ -130,7 +130,7 @@ public class MusicFragment extends BrowseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
+                intent = new Intent(getActivity(),
                         MusicSearchActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                         .toBundle();
@@ -175,7 +175,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.music_playlist + MainActivity.user_profile);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.music_playlist + MainActivity.user_profile);
 
                     Gson gson = new Gson();
                     Type musicaCardType;
@@ -262,7 +262,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.music_singers);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.music_singers);
 
                     Gson gson = new Gson();
                     Type musicaCardType;
@@ -343,7 +343,7 @@ public class MusicFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.music_genders);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.music_genders);
 
                     Gson gson = new Gson();
                     Type musicaCardType;

@@ -118,7 +118,7 @@ public class MusicPlaylistWizardFragment extends GuidedStepFragment {
                 thread.join();
 
                 Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
+                intent = new Intent(getActivity(),
                         MusicActivity.class);
                 intent.putExtra("user_profile", MainActivity.user_profile );
                 intent.putExtra("user_type", MainActivity.user_type );

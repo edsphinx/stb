@@ -54,7 +54,8 @@ public class MainActivity extends Activity {
                 @Override
                 public void run() {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getBaseContext(), access_token, false, Constants.server + "/stb/perfiles/stb/" + mac);
+//                    String response = downloadData.run(MainActivity.this, access_token, false, Constants.server + "/stb/perfiles/stb/" + mac);
+                    String response = downloadData.run(Constants.server + "/stb/perfiles/stb/" + mac);
 
                 }
             });
@@ -76,7 +77,7 @@ public class MainActivity extends Activity {
         public void run() {
             mHandler.removeCallbacks(this);
             if (!login()) {
-                Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(i);
             } else {
                 launch();
@@ -103,7 +104,7 @@ public class MainActivity extends Activity {
 
         }
 
-        //mHandler.postDelayed(mRunnable, 10000);
+        mHandler.postDelayed(mRunnable, 10000);
 
 
     }
@@ -133,7 +134,7 @@ public class MainActivity extends Activity {
     }
 
     private void startLiveTV(){
-        Intent intent = new Intent(getBaseContext(),
+        Intent intent = new Intent(MainActivity.this,
                 LiveActivity.class);
 
         if (intent != null) {
@@ -166,7 +167,6 @@ public class MainActivity extends Activity {
             Fragment fragment = new MenuFragment();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
                     .commit();
-            //startLiveTV();
         }
 
     }
@@ -215,13 +215,18 @@ public class MainActivity extends Activity {
         });
         thread.start();
         try {
-            thread.join();
-            if (code == 200) {
-                startService(new Intent(MainActivity.this, UpdateService.class));
-                return true;
-            }
-
-        } catch (InterruptedException e) {
+                thread.join();
+                if (code == 200) {
+                    return true;
+                }
+//        try {
+//            thread.join();
+//            if (code == 200) {
+//                startService(new Intent(MainActivity.this, UpdateService.class));
+//                return true;
+//            }
+//
+            } catch (InterruptedException e) {
         }
         return false;
     }

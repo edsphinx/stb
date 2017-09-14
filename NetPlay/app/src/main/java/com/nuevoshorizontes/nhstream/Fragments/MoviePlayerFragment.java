@@ -199,7 +199,7 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
                 try {
                     DownloadData downloadData = new DownloadData();
                     String user_profile = MainActivity.user_profile;
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server
                             + "/stb/tracking/"
                             + MoviePlayerActivity.id + "/"
                             + user_profile + "/"
@@ -229,7 +229,7 @@ public class MoviePlayerFragment extends PlaybackOverlayFragment implements
                 try {
                     DownloadData downloadData = new DownloadData();
                     String user_profile = MainActivity.user_profile;
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server
                             + "/stb/tracking/listado/"
                             + MoviePlayerActivity.id + "/"
                             + user_profile + "/"

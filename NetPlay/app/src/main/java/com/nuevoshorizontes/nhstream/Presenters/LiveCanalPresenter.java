@@ -87,14 +87,12 @@ public class LiveCanalPresenter extends Presenter {
         itemView.setFocusable(true);
         itemView.setFocusableInTouchMode(true);
 
-
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object item) {
         final LiveCanalCard card = (LiveCanalCard) item;
-
 
         ((ViewHolder) viewHolder).name.setText(card.getmTitle());
         ((ViewHolder) viewHolder).number.setText(String.valueOf(card.getmNumero()));

@@ -45,10 +45,10 @@ public class VODSelectionFrame extends GuidedStepFragment {
     public void onGuidedActionClicked(GuidedAction action) {
         Intent intent = null;
         if (ACTION_PELICULAS == action.getId()) {
-            intent = new Intent(getActivity().getBaseContext(),
+            intent = new Intent(getActivity(),
                     MovieActivity.class);
         } else if (ACTION_SERIES == action.getId()) {
-            intent = new Intent(getActivity().getBaseContext(),
+            intent = new Intent(getActivity(),
                     SeriesActivity.class);
         }
         Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())

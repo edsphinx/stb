@@ -101,7 +101,7 @@ public class SeriesFragment extends BrowseFragment {
             public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
                 SeriesCard model = (SeriesCard) item;
                 Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
+                intent = new Intent(getActivity(),
                         SeriesSeasonsActivity.class);
                 id = String.valueOf(model.getmId());
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
@@ -139,7 +139,7 @@ public class SeriesFragment extends BrowseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
+                intent = new Intent(getActivity(),
                         SeriesSearchActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                         .toBundle();
@@ -172,7 +172,7 @@ public class SeriesFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.series);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.series);
 
                     Gson gson = new Gson();
                     Type seriesCardType;

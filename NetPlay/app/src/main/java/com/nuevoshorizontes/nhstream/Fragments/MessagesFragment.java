@@ -65,7 +65,7 @@ public class MessagesFragment extends VerticalGridFragment
             @Override
             public void run() {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.messages);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.messages);
 
                     Gson gson = new Gson();
                     Type mensajesCardType;

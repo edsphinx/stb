@@ -109,7 +109,7 @@ public class MusicSearchFragment extends android.support.v17.leanback.app.Search
                 try {
                     mRowsAdapter.clear();
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.music_song_query + query);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.music_song_query + query);
 
                     Gson gson = new Gson();
                     Type songCardType;
@@ -177,7 +177,7 @@ public class MusicSearchFragment extends android.support.v17.leanback.app.Search
     public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
 
         Intent intent = null;
-        intent = new Intent(getActivity().getBaseContext(),
+        intent = new Intent(getActivity(),
                 MusicPlayerActivity.class);
         if(item instanceof MusicSongCard){
             MusicSongCard model = (MusicSongCard) item;

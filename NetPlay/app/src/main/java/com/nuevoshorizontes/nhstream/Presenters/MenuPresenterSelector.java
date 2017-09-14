@@ -41,7 +41,7 @@ public class MenuPresenterSelector extends PresenterSelector {
         MenuListRow listRow = (MenuListRow) item;
         MenuRow row = listRow.getCardRow();
 
-        //if (row.useShadow()) return mShadowEnabledRowPresenter;
+//        if (row.useShadow()) return mShadowEnabledRowPresenter;
         return mShadowDisabledRowPresenter;
     }
 

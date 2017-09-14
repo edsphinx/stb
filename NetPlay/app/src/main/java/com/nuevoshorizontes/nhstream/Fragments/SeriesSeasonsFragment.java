@@ -139,7 +139,7 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
             public void run() {
 
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.details + SeriesFragment.id);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.details + SeriesFragment.id);
                     data = new Gson().fromJson(response, SeriesCard.class);
 
 
@@ -280,7 +280,7 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
             if(action.getId() == 1){
 
                 Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
+                intent = new Intent(getActivity(),
                         SeriesPlayerActivity.class);
 
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
@@ -298,7 +298,7 @@ public class SeriesSeasonsFragment extends DetailsFragment implements OnItemView
             rowAdapter = row;
 
             Intent intent = null;
-            intent = new Intent(getActivity().getBaseContext(),
+            intent = new Intent(getActivity(),
                     SeriesPlayerActivity.class);
             intent.putExtra("id", capitulo.getmId());
             intent.putExtra("url", capitulo.getmStream());

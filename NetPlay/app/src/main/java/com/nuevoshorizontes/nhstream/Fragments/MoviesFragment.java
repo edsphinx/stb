@@ -102,7 +102,7 @@ public class MoviesFragment extends BrowseFragment {
             public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
                 MovieCard model = (MovieCard) item;
                 Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
+                intent = new Intent(getActivity(),
                         MovieDetailActivity.class);
                 id = String.valueOf(model.getmId());
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
@@ -141,7 +141,7 @@ public class MoviesFragment extends BrowseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = null;
-                intent = new Intent(getActivity().getBaseContext(),
+                intent = new Intent(getActivity(),
                         MovieSearchActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
                         .toBundle();
@@ -174,7 +174,7 @@ public class MoviesFragment extends BrowseFragment {
             public void run() {
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), access_token, false, Constants.server + Constants.movies);
+                    String response = downloadData.run(getActivity(), access_token, false, Constants.server + Constants.movies);
 
                     Gson gson = new Gson();
                     Type peliculasCardType;

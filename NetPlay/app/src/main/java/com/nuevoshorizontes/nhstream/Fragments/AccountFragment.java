@@ -136,7 +136,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(getActivity().getBaseContext(), MainActivity.access_token, true, Constants.server + Constants.account);
+                String response = downloadData.run(getActivity(), MainActivity.access_token, true, Constants.server + Constants.account);
                 data = new Gson().fromJson(response, AccountCard.class);
 
             }
@@ -153,7 +153,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
         final DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
         Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(),
                 R.drawable.ic_account_box);
-        detailsOverview.setImageBitmap(getActivity().getBaseContext(), icon);
+        detailsOverview.setImageBitmap(getActivity(), icon);
 
         //backgroundManager = BackgroundManager.getInstance(getActivity());
         //backgroundManager.attach(getActivity().getWindow());
@@ -198,7 +198,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
 
                 try {
                     DownloadData downloadData = new DownloadData();
-                    String response = downloadData.run(getActivity().getBaseContext(), MainActivity.access_token, true, Constants.server + "/stb/cuenta/facturas/");
+                    String response = downloadData.run(getActivity(), MainActivity.access_token, true, Constants.server + "/stb/cuenta/facturas/");
 
 
                     dataBills = gson.fromJson(response, BillsCard[].class);
@@ -241,7 +241,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
                 try {
                     DownloadData downloadData = new DownloadData();
 
-                    String response = downloadData.run(getActivity().getBaseContext(), MainActivity.access_token, true, Constants.server + Constants.profiles);
+                    String response = downloadData.run(getActivity(), MainActivity.access_token, true, Constants.server + Constants.profiles);
                     dataProfiles = new Gson().fromJson(response, AccountProfilesRow.class);
 
                     int i = 0;
@@ -275,7 +275,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
             @Override
             public void run() {
                 DownloadData downloadData = new DownloadData();
-                String response = downloadData.run(getActivity().getBaseContext(), MainActivity.access_token, false, Constants.server + Constants.messages);
+                String response = downloadData.run(getActivity(), MainActivity.access_token, false, Constants.server + Constants.messages);
 
                 Gson gson = new Gson();
                 Type mensajesCardType;
