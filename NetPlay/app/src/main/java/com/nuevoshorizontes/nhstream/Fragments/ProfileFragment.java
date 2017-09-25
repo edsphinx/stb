@@ -133,42 +133,42 @@ public class ProfileFragment extends BrowseFragment {
         }
 
 
-        if (data.getProfileCards().length<=1){
-            AccountProfileCard card = data.getProfileCards()[0];
-            if (card.getmParentalControl() == 2) {
+        if(data!=null) {
+            if (data.getProfileCards().length <= 1) {
+                AccountProfileCard card = data.getProfileCards()[0];
+                if (card.getmParentalControl() == 2) {
 
-                SharedPreferences loginSettings = mContext.getSharedPreferences("loginSettings", 0);
-                SharedPreferences.Editor editor = loginSettings.edit();
-                editor.putString("user_profile", String.valueOf(card.getmId()));
-                editor.putString("user_type", "0");
-                editor.commit();
-
-                MainActivity.user_profile = String.valueOf(card.getmId());
-                getActivity().finish();
-            } else {
-                Intent intent = new Intent(mContext,
-                        AccountProfilePasswordActivity.class);
-                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
-                        .toBundle();
-                startActivity(intent, bundle);
-                getActivity().finish();
-            }
-        }else{
-            AccountProfileCard card = null;
-            for (int i = 0; i < data.getProfileCards().length; i++ ){
-                card = data.getProfileCards()[i];
-                if(card.getmParentalControl() == 2){
                     SharedPreferences loginSettings = mContext.getSharedPreferences("loginSettings", 0);
                     SharedPreferences.Editor editor = loginSettings.edit();
                     editor.putString("user_profile", String.valueOf(card.getmId()));
                     editor.putString("user_type", "0");
                     editor.commit();
+
                     MainActivity.user_profile = String.valueOf(card.getmId());
+                    getActivity().finish();
+                } else {
+                    Intent intent = new Intent(mContext,
+                            AccountProfilePasswordActivity.class);
+                    Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                            .toBundle();
+                    startActivity(intent, bundle);
+                    getActivity().finish();
+                }
+            } else {
+                AccountProfileCard card = null;
+                for (int i = 0; i < data.getProfileCards().length; i++) {
+                    card = data.getProfileCards()[i];
+                    if (card.getmParentalControl() == 2) {
+                        SharedPreferences loginSettings = mContext.getSharedPreferences("loginSettings", 0);
+                        SharedPreferences.Editor editor = loginSettings.edit();
+                        editor.putString("user_profile", String.valueOf(card.getmId()));
+                        editor.putString("user_type", "0");
+                        editor.commit();
+                        MainActivity.user_profile = String.valueOf(card.getmId());
+                    }
                 }
             }
-
         }
-
     }
 
     private static ListRow createCardRow(AccountProfilesRow cardRow) {
