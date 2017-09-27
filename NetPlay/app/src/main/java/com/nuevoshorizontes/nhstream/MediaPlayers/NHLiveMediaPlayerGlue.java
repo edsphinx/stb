@@ -14,6 +14,7 @@ import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.PlaybackControlsRow;
@@ -42,6 +43,7 @@ public abstract class NHLiveMediaPlayerGlue extends NHMediaPlayerGlue implements
     private MediaPlayer mPlayer;
     private MediaSession mVideoSession;
     private AudioManager mAudioManager;
+    private int timeInMills = 300;
     private int mAudioFocus = AudioManager.AUDIOFOCUS_LOSS;
     private static final String TAG = "VideoMediaPlayerGlue";
 
@@ -340,9 +342,18 @@ public abstract class NHLiveMediaPlayerGlue extends NHMediaPlayerGlue implements
             @Override
             public boolean onError(MediaPlayer mediaPlayer, int what, int extra) {
                 Log.e(TAG, "MediaPlayer had error " + what  + " extra " + extra);
-                mPlayer.pause();
-                mPlayer.start();
 
+                if(mediaPlayer.isPlaying()) {
+                    mPlayer.pause();
+                }
+                SystemClock.sleep(timeInMills);
+                mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mp.start();
+                    }
+                });
+//                mPlayer.start();
                 return true;
             }
         });
@@ -388,8 +399,10 @@ public abstract class NHLiveMediaPlayerGlue extends NHMediaPlayerGlue implements
                 mVideoSession.setCallback(new VideoSessionCallback());
                 mVideoSession.setActive(true);
                 updateVideoSessionPlayState(PlaybackState.STATE_NONE);
-                getFragment().getActivity().setMediaController(
-                        new MediaController(getContext(), mVideoSession.getSessionToken()));
+                if(this.getContext()!=null) {
+                    getFragment().getActivity().setMediaController(
+                            new MediaController(this.getContext(), mVideoSession.getSessionToken()));
+                }
             }
 
         }

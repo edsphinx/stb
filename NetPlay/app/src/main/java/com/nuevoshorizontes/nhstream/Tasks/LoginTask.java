@@ -74,16 +74,20 @@ public class LoginTask extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected void onPostExecute(final Boolean success) {
         if (success) {
-            SharedPreferences.Editor editor = mSettings.edit();
-            editor.putString("username", mUsernermaInput.getText().toString());
-            editor.putString("password", mPasswordInput.getText().toString());
-            editor.putString("token", mToken);
-            editor.commit();
-            Intent intent = new Intent(mContext, MainActivity.class);
-            mContext.startActivity(intent);
+            if(mSettings!=null && mContext!=null) {
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("username", mUsernermaInput.getText().toString());
+                editor.putString("password", mPasswordInput.getText().toString());
+                editor.putString("token", mToken);
+                editor.commit();
+                Intent intent = new Intent(mContext, MainActivity.class);
+                mContext.startActivity(intent);
+            }
         } else {
-            mPasswordInput.setError(mContext.getString(R.string.password_error));
-            mPasswordInput.requestFocus();
+            if(mContext != null) {
+                mPasswordInput.setError(mContext.getString(R.string.password_error));
+                mPasswordInput.requestFocus();
+            }
         }
     }
 
