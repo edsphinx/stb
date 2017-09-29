@@ -676,8 +676,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
                 getResources().getColor(android.support.v17.leanback.R.color.lb_playback_controls_background_dark);
         mBgLightColor =
                 getResources().getColor(android.support.v17.leanback.R.color.lb_playback_controls_background_light);
-        mShowTimeMs =
-                getResources().getInteger(android.support.v17.leanback.R.integer.lb_playback_controls_show_time_ms);
+        mShowTimeMs = 6000;//getResources().getInteger(android.support.v17.leanback.R.integer.lb_playback_controls_show_time_ms);
         mIddleTimeMs =
                 500;
         mMajorFadeTranslateY =

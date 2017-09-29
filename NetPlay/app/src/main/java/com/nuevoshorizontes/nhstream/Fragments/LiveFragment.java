@@ -284,6 +284,11 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
             public void onFadeOutComplete() {
                 super.onFadeOutComplete();
                 isChannelRowActive = false;
+                selectedChannel = currentChannel;
+                handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
+                handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
+                getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                        new ListRowPresenter.SelectItemViewHolderTask(selectedChannel.getmPosicion()));
             }
         });
 
@@ -1046,7 +1051,6 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
      * @param e
      */
     public void keypress(KeyEvent e) {
-
         //if (TOTAL_DIGIT < 4) {
         /** Si el KeyCode es un digito entre 0 y 9 */
         if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16 && TOTAL_DIGIT < 4) {
