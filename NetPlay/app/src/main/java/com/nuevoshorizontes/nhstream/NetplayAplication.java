@@ -9,6 +9,8 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.leakcanary.LeakCanary;
+
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -21,6 +23,12 @@ public class NetplayAplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
         Fabric.with(this, new Crashlytics());
         userAgent = Util.getUserAgent(this, "ExoPlayerDemo");
     }

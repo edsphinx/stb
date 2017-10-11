@@ -79,6 +79,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
     private final int FACTURAS_ROW = 1;
     private final int PROFILES_ROW = 2;
     private final int MESSAGEs_ROW = 3;
+    private final int VERSION_ROW = 4;
 
     @Override
     public void onCreate(Bundle savedInstaceState) {
@@ -183,6 +184,7 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
         actionAdapter.add(new Action(FACTURAS_ROW, getString(R.string.account_bills)));
         actionAdapter.add(new Action(PROFILES_ROW, getString(R.string.accounts)));
         actionAdapter.add(new Action(MESSAGEs_ROW, "Mensajes"));
+        actionAdapter.add(new Action(VERSION_ROW, "Version"));
         detailsOverview.setActionsAdapter(actionAdapter);
         mRowsAdapter.add(DATA_ROW, detailsOverview);
 
@@ -297,6 +299,8 @@ public class AccountFragment extends DetailsFragment implements OnItemViewSelect
 
 
         thread.start();
+
+
 
         try {
             thread.join();

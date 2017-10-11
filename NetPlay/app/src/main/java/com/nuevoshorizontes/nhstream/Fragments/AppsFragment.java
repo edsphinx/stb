@@ -1,5 +1,6 @@
 package com.nuevoshorizontes.nhstream.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -53,17 +54,20 @@ public class AppsFragment extends VerticalGridFragment {
 
         List<AppCard> list = new ArrayList<>();
 
-        final PackageManager pm = getActivity().getPackageManager();
-        Intent i = new Intent(Intent.ACTION_MAIN, null);
-        i.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> packages = pm.queryIntentActivities(i, 0);
-        for (ResolveInfo ri : packages) {
-            AppCard card = new AppCard();
-            card.setmTitulo(String.valueOf(ri.loadLabel(pm)));
-            card.setmImagen(ri.activityInfo.loadIcon(pm));
-            card.setmPaquete(ri.activityInfo.packageName);
-            list.add(card);
+        Context mContext = getActivity();
+        if(mContext!=null) {
+            final PackageManager pm = mContext.getPackageManager();
+            Intent i = new Intent(Intent.ACTION_MAIN, null);
+            i.addCategory(Intent.CATEGORY_LAUNCHER);
+            List<ResolveInfo> packages = pm.queryIntentActivities(i, 0);
+            for (ResolveInfo ri : packages) {
+                AppCard card = new AppCard();
+                card.setmTitulo(String.valueOf(ri.loadLabel(pm)));
+                card.setmImagen(ri.activityInfo.loadIcon(pm));
+                card.setmPaquete(ri.activityInfo.packageName);
+                list.add(card);
+            }
+            mAdapter.addAll(0, list);
         }
-        mAdapter.addAll(0, list);
     }
 }

@@ -137,7 +137,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     /** Monitoreo de Canales **/
     private final Handler monitoreoHandler = new Handler();
     private int delay = 40000;//1000 * 30;
-    private int delayMediaRelease = 7200000;
+    private int delayMediaRelease = 10800000; //7200000;
 
     /** Autoupdate CHANNELROWS TIME LAPSE **/
     private int delay_channel = 3600000;//(1000 * 60) * 15;
@@ -193,6 +193,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         @Override
         public void run() {
             restartPlayer();
+            garbageCollector();
             handlerRelease.removeCallbacks(this);
             handlerRelease.postDelayed(this, delayMediaRelease);
         }
@@ -359,14 +360,22 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 
 
     private void restartPlayer(){
+        Log.d(TAG, "Restarting Player");
         fadeShitOut();
         //mGlue.prepareIfNeededAndPlay(currentMetaData);
         mGlue.resetPlayer();
         mGlue.releaseMediaSession();
         mGlue.prepareIfNeededAndPlay(currentMetaData);
         fadeShitOut();
+        Log.d(TAG, "Player Restarted");
     }
 
+    private void garbageCollector(){
+        Log.d(TAG, "Running Garbage Collector");
+        System.gc ();
+        System.runFinalization ();
+        Log.d(TAG, "Ending Garbage Collector");
+    }
 
 
     /**

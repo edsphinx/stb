@@ -400,7 +400,7 @@ public abstract class NHLiveMediaPlayerGlue extends NHMediaPlayerGlue implements
                 mVideoSession.setActive(true);
                 updateVideoSessionPlayState(PlaybackState.STATE_NONE);
                 if(this.getContext()!=null) {
-                    if(getFragment() != null) {
+                    if(getFragment().getActivity() != null) {
                         getFragment().getActivity().setMediaController(
                                 new MediaController(this.getContext(), mVideoSession.getSessionToken()));
                     }

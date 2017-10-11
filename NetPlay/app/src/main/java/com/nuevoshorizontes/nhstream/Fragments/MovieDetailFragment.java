@@ -119,10 +119,11 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
         // Setup recommended row.
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
-        for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
-        HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
-        mRowsAdapter.add(new ListRow(header, listRowAdapter));
-
+        if(data != null) {
+            for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
+            HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
+            mRowsAdapter.add(new ListRow(header, listRowAdapter));
+        }
 
         setAdapter(mRowsAdapter);
 
@@ -426,10 +427,12 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
         // Setup recommended row.
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
-        for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
-        HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
-        mRowsAdapter.replace(1, new ListRow(header, listRowAdapter));
 
+        if(data != null) {
+            for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
+            HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
+            mRowsAdapter.replace(1, new ListRow(header, listRowAdapter));
+        }
 
         //mRowsAdapter.notifyArrayItemRangeChanged(0, 2);
 
