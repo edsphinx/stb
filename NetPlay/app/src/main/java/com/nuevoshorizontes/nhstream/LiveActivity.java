@@ -7,16 +7,24 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.KeyEvent;
 
+import com.newrelic.agent.android.NewRelic;
 import com.nuevoshorizontes.nhstream.Fragments.LiveFragment;
 import com.nuevoshorizontes.nhstream.Fragments.VideoSurfaceFragment;
 
-public class LiveActivity extends Activity {
+public class LiveActivity extends Activity implements NetplayAplication.IMemoryInfo {
 
     public static final String TAG = "LiveActivity";
+
+    protected LiveActivity child;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        NewRelic.withApplicationToken(
+                "AAf8803f5f81f23361659615b315f068ef437b32a5"
+        ).start(this.getApplication());
+
         setContentView(R.layout.activity_live);
 
         String access_token = getIntent().getStringExtra("access_token");
@@ -100,5 +108,19 @@ public class LiveActivity extends Activity {
         return super.dispatchKeyEvent(e);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        try {
+            if (child != null)
+                NetplayAplication.unregisterMemoryListener(child);
+        } catch (Exception e) {
 
+        }
+    }
+
+    @Override
+    public void goodTimeToReleaseMemory() {
+        //despues
+    }
 }

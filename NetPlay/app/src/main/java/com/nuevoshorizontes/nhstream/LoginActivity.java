@@ -10,9 +10,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.google.gson.JsonSyntaxException;
 import com.nuevoshorizontes.nhstream.Tasks.LoginTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -178,17 +181,20 @@ public class LoginActivity extends Activity {
                         Gson gson = new Gson();
                         Type listType = new TypeToken<HashMap<String, String>>() {
                         }.getType();
-                        HashMap<String, String> posts = (HashMap<String, String>) gson.fromJson(result, listType);
-                        for (HashMap.Entry<String, String> entry : posts.entrySet()) {
-                            //Set Username/password
-                            if (entry.getKey().contentEquals("username")) {
-                                usuario = entry.getValue();
-                            } else if (entry.getKey().contentEquals("password")) {
-                                clave = entry.getValue();
+                        try {
+                            HashMap<String, String> posts = (HashMap<String, String>) gson.fromJson(result, listType);
+                            for (HashMap.Entry<String, String> entry : posts.entrySet()) {
+                                //Set Username/password
+                                if (entry.getKey().contentEquals("username")) {
+                                    usuario = entry.getValue();
+                                } else if (entry.getKey().contentEquals("password")) {
+                                    clave = entry.getValue();
+                                }
                             }
+                        }catch (JsonSyntaxException ex1) {
+                            ex1.printStackTrace();
                         }
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

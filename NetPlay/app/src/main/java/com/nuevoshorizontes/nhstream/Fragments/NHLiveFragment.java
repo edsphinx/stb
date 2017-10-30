@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 //import android.support.v17.leanback.app.PlaybackOverlayFragment;
-import android.support.v17.leanback.app.PlaybackOverlayFragment;
 import android.support.v17.leanback.app.PlaybackOverlaySupportFragment;
 import android.support.v17.leanback.widget.Action;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
@@ -72,7 +71,7 @@ import okhttp3.Response;
 
 import static com.nuevoshorizontes.nhstream.R.drawable.settings;
 
-public class LiveFragment extends NHPlaybackOverlayFragment implements
+public class NHLiveFragment extends NHPlaybackOverlayFragment implements
         OnItemViewClickedListener, OnItemViewSelectedListener,
         NHLiveMediaPlayerGlue.OnMediaStateChangeListener {
 
@@ -139,7 +138,7 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
     /** Monitoreo de Canales **/
     private final Handler monitoreoHandler = new Handler();
     private int delay = 40000;//1000 * 30;
-    private int delayMediaRelease = 10800000; //7200000;
+    private int delayMediaRelease = 7200000;
 
     /** Autoupdate CHANNELROWS TIME LAPSE **/
     private int delay_channel = 3600000;//(1000 * 60) * 15;
@@ -195,7 +194,6 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         @Override
         public void run() {
             restartPlayer();
-            garbageCollector();
             handlerRelease.removeCallbacks(this);
             handlerRelease.postDelayed(this, delayMediaRelease);
         }
@@ -360,23 +358,16 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 
     }
 
+
     private void restartPlayer(){
-        Log.d(TAG, "Restarting Player");
         fadeShitOut();
         //mGlue.prepareIfNeededAndPlay(currentMetaData);
         mGlue.resetPlayer();
         mGlue.releaseMediaSession();
         mGlue.prepareIfNeededAndPlay(currentMetaData);
         fadeShitOut();
-        Log.d(TAG, "Player Restarted");
     }
 
-    private void garbageCollector(){
-        Log.d(TAG, "Running Garbage Collector");
-        System.gc ();
-        System.runFinalization ();
-        Log.d(TAG, "Ending Garbage Collector");
-    }
 
 
     /**
@@ -818,11 +809,11 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
 //                handlerRelease.postDelayed(runnableRelease, delayMediaRelease);
 
                 //if (row.getId() == ROW_CHANNELS) {
-                    /** Guardar el numero del Canal Seleccionado en SharedPreferences */
-                    SharedPreferences mPrefs = getActivity().getPreferences(0);
-                    SharedPreferences.Editor editor = mPrefs.edit();
-                    editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
-                    editor.commit();
+                /** Guardar el numero del Canal Seleccionado en SharedPreferences */
+                SharedPreferences mPrefs = getActivity().getPreferences(0);
+                SharedPreferences.Editor editor = mPrefs.edit();
+                editor.putString("selectedChannel", String.valueOf(selectedChannel.getmNumero()));
+                editor.commit();
                 //}
             }
         }catch(Exception e){
@@ -1064,33 +1055,33 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
         //if (TOTAL_DIGIT < 4) {
         /** Si el KeyCode es un digito entre 0 y 9 */
         if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16 && TOTAL_DIGIT < 4) {
-                /** Obtengo el digito **/
-                int numero = e.getKeyCode() - 7;
-                TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
-                /** Se concatena el numero al guardado */
-                channelNumber = TOTAL_PRESSED;
-                setTitle(channelNumber);// + " " + currentChannel.getmPosicion());
-                /** Cambiar el Canal */
-                cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
-                cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
+            /** Obtengo el digito **/
+            int numero = e.getKeyCode() - 7;
+            TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
+            /** Se concatena el numero al guardado */
+            channelNumber = TOTAL_PRESSED;
+            setTitle(channelNumber);// + " " + currentChannel.getmPosicion());
+            /** Cambiar el Canal */
+            cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
+            cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
             TOTAL_DIGIT++;
         }else{
             //if(TOTAL_PRESSED.length() > 2) {
 
 
-                if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
-                    TOTAL_PRESSED = TOTAL_PRESSED.substring(TOTAL_PRESSED.length() - 3);
-                    // Obtengo el digito
-                    int numero = e.getKeyCode() - 7;
-                    TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
-                    // Se concatena el numero al guardado
-                    channelNumber = TOTAL_PRESSED;
-                    setTitle(channelNumber);// + " " + currentChannel.getmPosicion());
-                    // Cambiar el Canal
-                    cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
-                    cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
-                }
-           // }
+            if (e.getKeyCode() >= 7 && e.getKeyCode() <= 16) {
+                TOTAL_PRESSED = TOTAL_PRESSED.substring(TOTAL_PRESSED.length() - 3);
+                // Obtengo el digito
+                int numero = e.getKeyCode() - 7;
+                TOTAL_PRESSED = TOTAL_PRESSED + String.valueOf(numero);
+                // Se concatena el numero al guardado
+                channelNumber = TOTAL_PRESSED;
+                setTitle(channelNumber);// + " " + currentChannel.getmPosicion());
+                // Cambiar el Canal
+                cambiarCanalHandler.removeCallbacks(cambiarCanalRunnable);
+                cambiarCanalHandler.postDelayed(cambiarCanalRunnable, 1500);
+            }
+            // }
         }
     }
 

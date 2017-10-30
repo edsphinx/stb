@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v17.leanback.animation.LogAccelerateInterpolator;
 import android.support.v17.leanback.animation.LogDecelerateInterpolator;
+import android.support.v17.leanback.app.DetailsFragment;
 import android.support.v17.leanback.widget.ItemBridgeAdapter;
 import android.support.v17.leanback.widget.ObjectAdapter;
 import android.support.v17.leanback.widget.PlaybackControlsRowPresenter;
@@ -43,6 +44,7 @@ import java.util.ArrayList;
  * of {@link RowPresenter}.
  * </p>
  * <p>
+ *     Este es un link {@link android.support.v17.leanback.app.PlaybackOverlaySupportFragment}
  * An instance of {@link android.support.v17.leanback.widget.PlaybackControlsRow} is expected to be
  * at position 0 in the adapter.
  * </p>

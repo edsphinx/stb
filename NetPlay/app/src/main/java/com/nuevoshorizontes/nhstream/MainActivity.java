@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.util.Log;
 
+import com.newrelic.agent.android.NewRelic;
 import com.nuevoshorizontes.nhstream.Fragments.MenuFragment;
 import com.nuevoshorizontes.nhstream.Requests.LoginRequest;
 import com.nuevoshorizontes.nhstream.Utils.DownloadData;
@@ -90,6 +92,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        NewRelic.withApplicationToken(
+                "AAf8803f5f81f23361659615b315f068ef437b32a5"
+        ).start(this.getApplication());
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
@@ -265,6 +270,5 @@ public class MainActivity extends Activity {
         reader.close();
         return fileData.toString();
     }
-
 
 }
