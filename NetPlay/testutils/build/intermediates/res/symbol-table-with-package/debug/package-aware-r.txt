@@ -1,0 +1,4 @@
+com.google.android.exoplayer2.testutil
+int id root 0x7f0c0001
+int id surface_view 0x7f0c0002
+int layout host_activity 0x7f0f0001

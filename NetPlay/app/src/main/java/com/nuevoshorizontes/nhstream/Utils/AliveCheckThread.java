@@ -3,7 +3,7 @@ package com.nuevoshorizontes.nhstream.Utils;
 import android.util.Log;
 
 /**
- * Created by fonseca on 11/8/17.
+ * Created by FLYNET on 10/11/2017.
  */
 
 public class AliveCheckThread extends Thread {

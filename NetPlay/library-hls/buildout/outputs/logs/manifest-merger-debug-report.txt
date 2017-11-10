@@ -1,0 +1,23 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml:17:1-63
+INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml:17:1-63
+INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml:17:1-63
+	package
+		ADDED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml:17:11-61
+		INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+uses-sdk
+INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+		ADDED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+		ADDED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\FLYNET\Desktop\NH\ExoPlayer\library\hls\src\main\AndroidManifest.xml

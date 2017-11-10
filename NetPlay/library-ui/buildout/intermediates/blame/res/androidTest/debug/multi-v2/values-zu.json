@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\ExoPlayer\\library\\ui\\buildout\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-zu\\values-zu.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\ExoPlayer\\library\\ui\\buildout\\intermediates\\bundles\\debug\\res\\values-zu\\values-zu.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,145,225,303,369,458,537,620,701,779",
+                        "endColumns": "89,79,77,65,88,78,82,80,77,64",
+                        "endOffsets": "140,220,298,364,453,532,615,696,774,839"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.PlaybackParameters;
 import com.nuevoshorizontes.nhstream.R;
 import com.nuevoshorizontes.nhstream.Utils.NHRegularTextView;
 import com.google.android.exoplayer2.C;
@@ -795,9 +796,19 @@ public class NHPlaybackControlView extends FrameLayout {
         }
 
         @Override
+        public void onRepeatModeChanged(int repeatMode) {
+
+        }
+
+        @Override
         public void onPositionDiscontinuity() {
             updateNavigation();
             updateProgress();
+        }
+
+        @Override
+        public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+
         }
 
         @Override

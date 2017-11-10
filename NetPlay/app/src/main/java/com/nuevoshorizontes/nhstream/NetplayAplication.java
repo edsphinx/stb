@@ -7,13 +7,13 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
-import com.nuevoshorizontes.nhstream.Utils.NHShutdownThread;
 import com.nuevoshorizontes.nhstream.Utils.OnErrorListener;
 
 import java.io.File;
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
+
+//import com.nuevoshorizontes.nhstream.Utils.NHShutdownThread;
 
 /**
  * Created by fonseca on 4/4/17.
@@ -58,6 +60,8 @@ public class NetplayAplication extends Application {
         };
     }
 
+
+
     public static abstract interface IMemoryInfo {
         public void goodTimeToReleaseMemory();
     }
@@ -70,6 +74,7 @@ public class NetplayAplication extends Application {
         clearData();
         memoryHandler_ = new Handler();
         checkAppMemory();
+        Fresco.initialize(this);
     }
 
     public DataSource.Factory buildDataSourceFactory(DefaultBandwidthMeter bandwidthMeter) {
@@ -77,18 +82,22 @@ public class NetplayAplication extends Application {
                 buildHttpDataSourceFactory(bandwidthMeter));
     }
 
-    public HttpDataSource.Factory buildHttpDataSourceFactory(DefaultBandwidthMeter bandwidthMeter) {
-        return new DefaultHttpDataSourceFactory(userAgent, bandwidthMeter);
-    }
-
-    private void clearData(){
+    private void clearData() {
         try {
             Process proc = Runtime.getRuntime()
-                    .exec(new String[]{ "su", "-c", "clear com.nuevoshorizontes.nhstream" });
+                    .exec(new String[]{"su", "-c", "clear com.nuevoshorizontes.nhstream"});
             proc.waitFor();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    //    public static void shutdown() {
+    //        new NHShutdownThread(errorListener).start();
+    //    }
+
+    public HttpDataSource.Factory buildHttpDataSourceFactory(DefaultBandwidthMeter bandwidthMeter) {
+        return new DefaultHttpDataSourceFactory(userAgent, bandwidthMeter);
     }
 
     public boolean useExtensionRenderers() {
@@ -112,9 +121,6 @@ public class NetplayAplication extends Application {
         }}, (int)(CHECK_MEMORY_FREQ_SECONDS * 1000) );
     }
 
-//    public static void shutdown() {
-//        new NHShutdownThread(errorListener).start();
-//    }
 
     @Override
     public void onLowMemory() {

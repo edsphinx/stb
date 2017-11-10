@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\ExoPlayer\\library\\all\\buildout\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-th\\values-th.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\ExoPlayer\\library\\ui\\buildout\\intermediates\\bundles\\debug\\res\\values-th\\values-th.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,207,281,346,424,505,582,667,737",
+                        "endColumns": "80,70,73,64,77,80,76,84,69,64",
+                        "endOffsets": "131,202,276,341,419,500,577,662,732,797"
+                    }
+                }
+            ]
+        }
+    ]
+}

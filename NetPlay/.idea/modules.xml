@@ -4,6 +4,15 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NetPlay.iml" filepath="$PROJECT_DIR$/NetPlay.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library-hls/hls.iml" filepath="$PROJECT_DIR$/library/library-hls/hls.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-all/library-all.iml" filepath="$PROJECT_DIR$/library-all/library-all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-core/library-core.iml" filepath="$PROJECT_DIR$/library-core/library-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-dash/library-dash.iml" filepath="$PROJECT_DIR$/library-dash/library-dash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-hls/library-hls.iml" filepath="$PROJECT_DIR$/library-hls/library-hls.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-smoothstreaming/library-smoothstreaming.iml" filepath="$PROJECT_DIR$/library-smoothstreaming/library-smoothstreaming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library-ui/library-ui.iml" filepath="$PROJECT_DIR$/library-ui/library-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testutils/testutils.iml" filepath="$PROJECT_DIR$/testutils/testutils.iml" />
     </modules>
   </component>
 </project>

@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.google.android.exoplayer2.PlaybackParameters;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.nuevoshorizontes.nhstream.R;
 import com.nuevoshorizontes.nhstream.Views.NHPlaybackControlView;
 import com.google.android.exoplayer2.C;
@@ -58,40 +60,6 @@ import java.util.List;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//package com.google.android.exoplayer2.ui;
-//
-//        import android.annotation.TargetApi;
-//        import android.content.Context;
-//        import android.content.res.TypedArray;
-//        import android.graphics.Bitmap;
-//        import android.graphics.BitmapFactory;
-//        import android.util.AttributeSet;
-//        import android.view.KeyEvent;
-//        import android.view.LayoutInflater;
-//        import android.view.MotionEvent;
-//        import android.view.SurfaceView;
-//        import android.view.TextureView;
-//        import android.view.View;
-//        import android.view.ViewGroup;
-//        import android.widget.FrameLayout;
-//        import android.widget.ImageView;
-//        import com.google.android.exoplayer2.C;
-//        import com.google.android.exoplayer2.ExoPlaybackException;
-//        import com.google.android.exoplayer2.ExoPlayer;
-//        import com.google.android.exoplayer2.R;
-//        import com.google.android.exoplayer2.NHExoPlayerView;
-//        import com.google.android.exoplayer2.Timeline;
-//        import com.google.android.exoplayer2.metadata.Metadata;
-//        import com.google.android.exoplayer2.metadata.id3.ApicFrame;
-//        import com.google.android.exoplayer2.source.TrackGroupArray;
-//        import com.google.android.exoplayer2.text.Cue;
-//        import com.google.android.exoplayer2.text.TextRenderer;
-//        import com.google.android.exoplayer2.trackselection.TrackSelection;
-//        import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
-//        import com.google.android.exoplayer2.ui.AspectRatioFrameLayout.ResizeMode;
-//        import com.google.android.exoplayer2.ui.PlaybackControlView.SeekDispatcher;
-//        import com.google.android.exoplayer2.util.Assertions;
-//        import java.util.List;
 
 /**
  * A high level view for {@link SimpleExoPlayer} media playbacks. It displays video, subtitles and
@@ -254,17 +222,17 @@ public final class NHExoPlayerView extends FrameLayout {
         int controllerShowTimeoutMs = NHPlaybackControlView.DEFAULT_SHOW_TIMEOUT_MS;
         if (attrs != null) {
             TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
-                    com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView, 0, 0);
+                    com.google.android.exoplayer2.ui.R.styleable.SimpleExoPlayerView, 0, 0);
             try {
-                playerLayoutId = a.getResourceId(com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView_player_layout_id,
+                playerLayoutId = a.getResourceId(com.google.android.exoplayer2.ui.R.styleable.SimpleExoPlayerView_player_layout_id,
                         playerLayoutId);
-                useArtwork = a.getBoolean(com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView_use_artwork, useArtwork);
-                defaultArtworkId = a.getResourceId(com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView_default_artwork,
+                useArtwork = a.getBoolean(com.google.android.exoplayer2.ui.R.styleable.SimpleExoPlayerView_use_artwork, useArtwork);
+                defaultArtworkId = a.getResourceId(com.google.android.exoplayer2.ui.R.styleable.SimpleExoPlayerView_default_artwork,
                         defaultArtworkId);
-                useController = a.getBoolean(com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView_use_controller, useController);
-                surfaceType = a.getInt(com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView_surface_type, surfaceType);
-                resizeMode = a.getInt(com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView_resize_mode, resizeMode);
-                controllerShowTimeoutMs = a.getInt(com.google.android.exoplayer2.R.styleable.SimpleExoPlayerView_show_timeout,
+                useController = a.getBoolean(com.google.android.exoplayer2.ui.R.styleable.SimpleExoPlayerView_use_controller, useController);
+                surfaceType = a.getInt(com.google.android.exoplayer2.ui.R.styleable.SimpleExoPlayerView_surface_type, surfaceType);
+                resizeMode = a.getInt(com.google.android.exoplayer2.ui.R.styleable.SimpleExoPlayerView_resize_mode, resizeMode);
+                controllerShowTimeoutMs = a.getInt(com.google.android.exoplayer2.ui.R.styleable.SimpleExoPlayerView_show_timeout,
                         controllerShowTimeoutMs);
             } finally {
                 a.recycle();
@@ -282,7 +250,7 @@ public final class NHExoPlayerView extends FrameLayout {
         }
 
         // Shutter view.
-        shutterView = findViewById(com.google.android.exoplayer2.R.id.exo_shutter);
+        shutterView = findViewById(com.google.android.exoplayer2.ui.R.id.exo_shutter);
 
         // Create a surface view and insert it into the content frame, if there is one.
         if (contentFrame != null && surfaceType != SURFACE_TYPE_NONE) {
@@ -745,6 +713,11 @@ public final class NHExoPlayerView extends FrameLayout {
         }
 
         @Override
+        public void onRepeatModeChanged(int repeatMode) {
+
+        }
+
+        @Override
         public void onPlayerError(ExoPlaybackException e) {
             // Do nothing.
         }
@@ -752,6 +725,11 @@ public final class NHExoPlayerView extends FrameLayout {
         @Override
         public void onPositionDiscontinuity() {
             // Do nothing.
+        }
+
+        @Override
+        public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+
         }
 
         @Override

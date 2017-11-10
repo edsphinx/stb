@@ -670,7 +670,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPaddingTop =
+        /*mPaddingTop =
                 getResources().getDimensionPixelSize(android.support.v17.leanback.R.dimen.lb_playback_controls_padding_top);
         mPaddingBottom =
                 getResources().getDimensionPixelSize(android.support.v17.leanback.R.dimen.lb_playback_controls_padding_bottom);
@@ -690,6 +690,7 @@ public class NHPlaybackOverlayFragment extends NHDetailsFragment {
         loadControlRowAnimator();
         loadOtherRowAnimator();
         loadDescriptionAnimator();
+        */
     }
 
     /**

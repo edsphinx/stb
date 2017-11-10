@@ -4,9 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.nuevoshorizontes.nhstream.NetplayAplication;
 
 /**
  * Created by fonseca on 11/8/17.
@@ -33,7 +30,7 @@ public class NHHdmiListener extends BroadcastReceiver implements OnErrorListener
                 //Toast.makeText(ctxt, "HDMI DisConnected>>", Toast.LENGTH_LONG).show();
                 try {
                     Process proc = Runtime.getRuntime()
-                            .exec(new String[]{ "su", "-c", "reboot -p" });
+                            .exec(new String[]{"su", "-c", "reboot -p"});
                     proc.waitFor();
                 } catch (Exception ex) {
                     ex.printStackTrace();

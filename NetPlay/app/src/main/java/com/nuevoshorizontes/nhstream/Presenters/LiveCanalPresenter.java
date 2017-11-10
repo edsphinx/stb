@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.nuevoshorizontes.nhstream.Cards.LiveCanalCard;
 import com.nuevoshorizontes.nhstream.R;
 //import com.squareup.picasso.Picasso;
@@ -41,7 +43,7 @@ public class LiveCanalPresenter extends Presenter {
 
         public final TextView name;
         public final TextView number;
-        public final ImageView logo;
+        public final SimpleDraweeView logo;
 
         //public final PicassoImageCardViewTarget mImageCardViewTarget;
 
@@ -49,11 +51,11 @@ public class LiveCanalPresenter extends Presenter {
             super(view);
             name = (TextView) view.findViewById(R.id.nombre);
             number = (TextView) view.findViewById(R.id.numero);
-            logo = (ImageView) view.findViewById(R.id.thumbnail);
+            logo = (SimpleDraweeView) view.findViewById(R.id.thumbnail);
             //mImageCardViewTarget = new PicassoImageCardViewTarget(logo);
         }
 
-        public ImageView getLogo() {
+        public SimpleDraweeView getLogo() {
             return logo;
         }
 
@@ -69,11 +71,14 @@ public class LiveCanalPresenter extends Presenter {
 //                    .load(resourceId)
 //                    .into(mImageCardViewTarget);
 
-            Glide.with(mContext)
+            /*Glide.with(mContext)
                     .load(uri)
                     .placeholder(R.drawable.placeholder)
                     .skipMemoryCache(true)
-                    .into(logo);
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(logo);*/
+            logo.setImageURI(uri);
+            //logo.setDrawingCacheEnabled(false);
         }
 
     }

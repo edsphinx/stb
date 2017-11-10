@@ -1,0 +1,1251 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-nb_values-nb.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-nb\\values-nb.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,138,209,284,353,430,508,591,667,744",
+                        "endColumns": "82,70,74,68,76,77,82,75,76,65",
+                        "endOffsets": "133,204,279,348,425,503,586,662,739,805"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-eu-rES_values-eu-rES.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-eu-rES\\values-eu-rES.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,207,276,350,428,513,593,674,745",
+                        "endColumns": "76,74,68,73,77,84,79,80,70,67",
+                        "endOffsets": "127,202,271,345,423,508,588,669,740,808"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,10,16,17,18,23,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,62,66,70,74,78,82",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,172,227,375,579,632,681,854,2412,2467,2521,2562,2609,2653,2709,2751,2789,2827,2868,2907,2945,2987,3025,3067,3114,3151,3192,3235,3313,3382,3447,3510,3587,3662,3738,3813,3880,3943,4189,4413,4616,4822,5025,5240",
+                        "endLines": "2,3,4,9,15,16,17,22,23,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,61,65,69,73,77,81,85",
+                        "endColumns": "58,57,54,9,9,52,48,9,66,54,53,40,46,43,55,41,37,37,40,38,37,41,37,41,46,36,40,42,77,68,64,62,76,74,75,74,66,62,10,10,10,10,10,10,10",
+                        "endOffsets": "109,167,222,370,574,627,676,849,916,2462,2516,2557,2604,2648,2704,2746,2784,2822,2863,2902,2940,2982,3020,3062,3109,3146,3187,3230,3308,3377,3442,3505,3582,3657,3733,3808,3875,3938,4184,4408,4611,4817,5020,5235,5444"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-fr-rCA_values-fr-rCA.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,213,280,348,431,517,601,686,756",
+                        "endColumns": "80,76,66,67,82,85,83,84,69,67",
+                        "endOffsets": "131,208,275,343,426,512,596,681,751,819"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ja_values-ja.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ja\\values-ja.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,126,193,259,322,393,467,540,614,681",
+                        "endColumns": "70,66,65,62,70,73,72,73,66,62",
+                        "endOffsets": "121,188,254,317,388,462,535,609,676,739"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-fi_values-fi.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-fi\\values-fi.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,134,209,276,343,423,503,586,664,739",
+                        "endColumns": "78,74,66,66,79,79,82,77,74,64",
+                        "endOffsets": "129,204,271,338,418,498,581,659,734,799"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-en-rGB_values-en-rGB.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-en-rGB\\values-en-rGB.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,135,206,273,338,417,494,572,649,718",
+                        "endColumns": "79,70,66,64,78,76,77,76,68,64",
+                        "endOffsets": "130,201,268,333,412,489,567,644,713,778"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-fr_values-fr.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-fr\\values-fr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,211,284,349,430,516,605,697,774",
+                        "endColumns": "80,74,72,64,80,85,88,91,76,67",
+                        "endOffsets": "131,206,279,344,425,511,600,692,769,837"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-si-rLK_values-si-rLK.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-si-rLK\\values-si-rLK.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,141,210,278,350,423,500,579,659,732",
+                        "endColumns": "85,68,67,71,72,76,78,79,72,69",
+                        "endOffsets": "136,205,273,345,418,495,574,654,727,797"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-th_values-th.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-th\\values-th.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,207,281,346,424,505,582,667,737",
+                        "endColumns": "80,70,73,64,77,80,76,84,69,64",
+                        "endOffsets": "131,202,276,341,419,500,577,662,732,797"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-iw_values-iw.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-iw\\values-iw.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,204,270,335,413,491,574,657,729",
+                        "endColumns": "76,71,65,64,77,77,82,82,71,64",
+                        "endOffsets": "127,199,265,330,408,486,569,652,724,789"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-pt-rPT_values-pt-rPT.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-pt-rPT\\values-pt-rPT.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,130,205,278,349,428,507,585,662,734",
+                        "endColumns": "74,74,72,70,78,78,77,76,71,65",
+                        "endOffsets": "125,200,273,344,423,502,580,657,729,795"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sl_values-sl.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-sl\\values-sl.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,214,284,354,435,512,588,665,740",
+                        "endColumns": "80,77,69,69,80,76,75,76,74,66",
+                        "endOffsets": "131,209,279,349,430,507,583,660,735,802"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-et-rEE_values-et-rEE.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-et-rEE\\values-et-rEE.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,133,207,274,340,417,495,578,655,729",
+                        "endColumns": "77,73,66,65,76,77,82,76,73,65",
+                        "endOffsets": "128,202,269,335,412,490,573,650,724,790"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-zh-rCN_values-zh-rCN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-zh-rCN\\values-zh-rCN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,189,253,316,384,457,529,604,669",
+                        "endColumns": "69,63,63,62,67,72,71,74,64,62",
+                        "endOffsets": "120,184,248,311,379,452,524,599,664,727"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-pt_values-pt.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-pt\\values-pt.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,130,204,272,343,422,501,579,657,730",
+                        "endColumns": "74,73,67,70,78,78,77,77,72,65",
+                        "endOffsets": "125,199,267,338,417,496,574,652,725,791"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-hu_values-hu.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-hu\\values-hu.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,135,210,278,348,423,506,587,667,743",
+                        "endColumns": "79,74,67,69,74,82,80,79,75,69",
+                        "endOffsets": "130,205,273,343,418,501,582,662,738,808"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-az-rAZ_values-az-rAZ.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-az-rAZ\\values-az-rAZ.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,209,276,341,417,501,582,659,733",
+                        "endColumns": "80,72,66,64,75,83,80,76,73,68",
+                        "endOffsets": "131,204,271,336,412,496,577,654,728,797"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-mn-rMN_values-mn-rMN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-mn-rMN\\values-mn-rMN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,141,216,289,359,434,515,602,682,758",
+                        "endColumns": "85,74,72,69,74,80,86,79,75,67",
+                        "endOffsets": "136,211,284,354,429,510,597,677,753,821"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-in_values-in.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-in\\values-in.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,133,209,275,341,421,500,580,658,732",
+                        "endColumns": "77,75,65,65,79,78,79,77,73,68",
+                        "endOffsets": "128,204,270,336,416,495,575,653,727,796"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sw_values-sw.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-sw\\values-sw.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,144,220,289,355,438,515,597,674,750",
+                        "endColumns": "88,75,68,65,82,76,81,76,75,69",
+                        "endOffsets": "139,215,284,350,433,510,592,669,745,815"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-lv_values-lv.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-lv\\values-lv.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,133,211,282,351,438,518,603,684,760",
+                        "endColumns": "77,77,70,68,86,79,84,80,75,67",
+                        "endOffsets": "128,206,277,346,433,513,598,679,755,823"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-is-rIS_values-is-rIS.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-is-rIS\\values-is-rIS.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,134,204,269,335,409,490,573,654,731",
+                        "endColumns": "78,69,64,65,73,80,82,80,76,66",
+                        "endOffsets": "129,199,264,330,404,485,568,649,726,793"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-lt_values-lt.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-lt\\values-lt.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,135,209,282,349,432,512,594,674,748",
+                        "endColumns": "79,73,72,66,82,79,81,79,73,68",
+                        "endOffsets": "130,204,277,344,427,507,589,669,743,812"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-cs_values-cs.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-cs\\values-cs.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,137,211,283,351,433,512,589,678,754",
+                        "endColumns": "81,73,71,67,81,78,76,88,75,68",
+                        "endOffsets": "132,206,278,346,428,507,584,673,749,818"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-be-rBY_values-be-rBY.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-be-rBY\\values-be-rBY.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,213,284,354,433,513,592,674,752",
+                        "endColumns": "83,73,70,69,78,79,78,81,77,67",
+                        "endOffsets": "134,208,279,349,428,508,587,669,747,815"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-kn-rIN_values-kn-rIN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-kn-rIN\\values-kn-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,215,288,358,438,527,619,706,781",
+                        "endColumns": "83,75,72,69,79,88,91,86,74,68",
+                        "endOffsets": "134,210,283,353,433,522,614,701,776,845"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-am_values-am.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-am\\values-am.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,133,201,271,336,408,483,559,634,707",
+                        "endColumns": "77,67,69,64,71,74,75,74,72,63",
+                        "endOffsets": "128,196,266,331,403,478,554,629,702,766"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-gl-rES_values-gl-rES.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-gl-rES\\values-gl-rES.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,211,279,350,429,508,586,663,735",
+                        "endColumns": "80,74,67,70,78,78,77,76,71,65",
+                        "endOffsets": "131,206,274,345,424,503,581,658,730,796"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-bs-rBA_values-bs-rBA.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-bs-rBA\\values-bs-rBA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,129,205,275,348,429,508,588,669,740",
+                        "endColumns": "73,75,69,72,80,78,79,80,70,68",
+                        "endOffsets": "124,200,270,343,424,503,583,664,735,804"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-en-rAU_values-en-rAU.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-en-rAU\\values-en-rAU.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,135,206,273,338,417,494,572,649,718",
+                        "endColumns": "79,70,66,64,78,76,77,76,68,64",
+                        "endOffsets": "130,201,268,333,412,489,567,644,713,778"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-bn-rBD_values-bn-rBD.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-bn-rBD\\values-bn-rBD.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,215,286,356,439,530,624,713,787",
+                        "endColumns": "83,75,70,69,82,90,93,88,73,65",
+                        "endOffsets": "134,210,281,351,434,525,619,708,782,848"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-tl_values-tl.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-tl\\values-tl.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,137,214,283,350,430,509,590,671,742",
+                        "endColumns": "81,76,68,66,79,78,80,80,70,66",
+                        "endOffsets": "132,209,278,345,425,504,585,666,737,804"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ru_values-ru.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ru\\values-ru.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,215,290,364,444,524,603,692,771",
+                        "endColumns": "84,74,74,73,79,79,78,88,78,70",
+                        "endOffsets": "135,210,285,359,439,519,598,687,766,837"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-af_values-af.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-af\\values-af.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,138,212,277,343,419,499,578,656,730",
+                        "endColumns": "82,73,64,65,75,79,78,77,73,64",
+                        "endOffsets": "133,207,272,338,414,494,573,651,725,790"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-mr-rIN_values-mr-rIN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-mr-rIN\\values-mr-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,212,284,353,429,516,609,694,768",
+                        "endColumns": "84,71,71,68,75,86,92,84,73,65",
+                        "endOffsets": "135,207,279,348,424,511,604,689,763,829"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-pt-rBR_values-pt-rBR.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-pt-rBR\\values-pt-rBR.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,130,204,272,343,422,501,579,656,729",
+                        "endColumns": "74,73,67,70,78,78,77,76,72,65",
+                        "endOffsets": "125,199,267,338,417,496,574,651,724,790"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ko_values-ko.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ko\\values-ko.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,128,194,260,323,393,465,537,611,677",
+                        "endColumns": "72,65,65,62,69,71,71,73,65,62",
+                        "endOffsets": "123,189,255,318,388,460,532,606,672,735"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-es_values-es.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-es\\values-es.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,214,282,353,434,513,590,668,740",
+                        "endColumns": "80,77,67,70,80,78,76,77,71,67",
+                        "endOffsets": "131,209,277,348,429,508,585,663,735,803"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-my-rMM_values-my-rMM.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-my-rMM\\values-my-rMM.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,213,283,352,429,520,604,696,769",
+                        "endColumns": "83,73,69,68,76,90,83,91,72,66",
+                        "endOffsets": "134,208,278,347,424,515,599,691,764,831"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-uz-rUZ_values-uz-rUZ.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,215,293,365,444,532,613,700,779",
+                        "endColumns": "84,74,77,71,78,87,80,86,78,70",
+                        "endOffsets": "135,210,288,360,439,527,608,695,774,845"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sq-rAL_values-sq-rAL.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-sq-rAL\\values-sq-rAL.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,143,216,283,348,430,515,598,679,752",
+                        "endColumns": "87,72,66,64,81,84,82,80,72,65",
+                        "endOffsets": "138,211,278,343,425,510,593,674,747,813"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-pa-rIN_values-pa-rIN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-pa-rIN\\values-pa-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,202,268,336,411,491,576,653,727",
+                        "endColumns": "76,69,65,67,74,79,84,76,73,64",
+                        "endOffsets": "127,197,263,331,406,486,571,648,722,787"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ms-rMY_values-ms-rMY.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ms-rMY\\values-ms-rMY.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,208,274,339,419,497,577,651,727",
+                        "endColumns": "76,75,65,64,79,77,79,73,75,68",
+                        "endOffsets": "127,203,269,334,414,492,572,646,722,791"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-bg_values-bg.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-bg\\values-bg.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,214,281,349,428,514,594,686,765",
+                        "endColumns": "84,73,66,67,78,85,79,91,78,67",
+                        "endOffsets": "135,209,276,344,423,509,589,681,760,828"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-nl_values-nl.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-nl\\values-nl.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,137,212,285,354,431,512,592,671,746",
+                        "endColumns": "81,74,72,68,76,80,79,78,74,67",
+                        "endOffsets": "132,207,280,349,426,507,587,666,741,809"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-km-rKH_values-km-rKH.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-km-rKH\\values-km-rKH.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,207,274,339,410,498,581,665,738",
+                        "endColumns": "80,70,66,64,70,87,82,83,72,66",
+                        "endOffsets": "131,202,269,334,405,493,576,660,733,800"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ar_values-ar.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ar\\values-ar.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,133,214,286,352,437,514,592,674,742",
+                        "endColumns": "77,80,71,65,84,76,77,81,67,65",
+                        "endOffsets": "128,209,281,347,432,509,587,669,737,803"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-lo-rLA_values-lo-rLA.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-lo-rLA\\values-lo-rLA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,208,280,346,424,508,588,664,738",
+                        "endColumns": "80,71,71,65,77,83,79,75,73,63",
+                        "endOffsets": "131,203,275,341,419,503,583,659,733,797"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sk_values-sk.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-sk\\values-sk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,212,284,352,437,519,596,685,761",
+                        "endColumns": "83,72,71,67,84,81,76,88,75,68",
+                        "endOffsets": "134,207,279,347,432,514,591,680,756,825"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ky-rKG_values-ky-rKG.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ky-rKG\\values-ky-rKG.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,135,208,278,346,423,505,591,674,748",
+                        "endColumns": "79,72,69,67,76,81,85,82,73,68",
+                        "endOffsets": "130,203,273,341,418,500,586,669,743,812"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-en-rIN_values-en-rIN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-en-rIN\\values-en-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,135,206,273,338,417,494,572,649,718",
+                        "endColumns": "79,70,66,64,78,76,77,76,68,64",
+                        "endOffsets": "130,201,268,333,412,489,567,644,713,778"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-da_values-da.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-da\\values-da.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,205,272,339,418,496,575,651,726",
+                        "endColumns": "76,72,66,66,78,77,78,75,74,64",
+                        "endOffsets": "127,200,267,334,413,491,570,646,721,786"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-el_values-el.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-el\\values-el.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,215,282,354,438,519,601,692,764",
+                        "endColumns": "83,75,66,71,83,80,81,90,71,67",
+                        "endOffsets": "134,210,277,349,433,514,596,687,759,827"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ta-rIN_values-ta-rIN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ta-rIN\\values-ta-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,138,212,285,352,431,525,617,713,791",
+                        "endColumns": "82,73,72,66,78,93,91,95,77,68",
+                        "endOffsets": "133,207,280,347,426,520,612,708,786,855"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-v11_values-v11.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-v11\\values-v11.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "10",
+                        "endOffsets": "329"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-de_values-de.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-de\\values-de.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,207,278,349,430,513,604,694,769",
+                        "endColumns": "76,74,70,70,80,82,90,89,74,67",
+                        "endOffsets": "127,202,273,344,425,508,599,689,764,832"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-it_values-it.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-it\\values-it.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,215,291,361,444,523,610,687,759",
+                        "endColumns": "80,78,75,69,82,78,86,76,71,70",
+                        "endOffsets": "131,210,286,356,439,518,605,682,754,825"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ka-rGE_values-ka-rGE.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ka-rGE\\values-ka-rGE.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,213,280,347,425,507,591,672,749",
+                        "endColumns": "80,76,66,66,77,81,83,80,76,68",
+                        "endOffsets": "131,208,275,342,420,502,586,667,744,813"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ml-rIN_values-ml-rIN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ml-rIN\\values-ml-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,142,218,303,376,459,545,633,718,795",
+                        "endColumns": "86,75,84,72,82,85,87,84,76,70",
+                        "endOffsets": "137,213,298,371,454,540,628,713,790,861"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sv_values-sv.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-sv\\values-sv.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,211,278,348,428,507,586,663,740",
+                        "endColumns": "84,70,66,69,79,78,78,76,76,66",
+                        "endOffsets": "135,206,273,343,423,502,581,658,735,802"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-mk-rMK_values-mk-rMK.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-mk-rMK\\values-mk-rMK.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,143,216,283,349,429,511,601,680,757",
+                        "endColumns": "87,72,66,65,79,81,89,78,76,65",
+                        "endOffsets": "138,211,278,344,424,506,596,675,752,818"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-es-rUS_values-es-rUS.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-es-rUS\\values-es-rUS.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,130,206,274,345,424,503,580,658,731",
+                        "endColumns": "74,75,67,70,78,78,76,77,72,67",
+                        "endOffsets": "125,201,269,340,419,498,575,653,726,794"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-hy-rAM_values-hy-rAM.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-hy-rAM\\values-hy-rAM.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,207,279,349,421,504,578,656,730",
+                        "endColumns": "83,67,71,69,71,82,73,77,73,70",
+                        "endOffsets": "134,202,274,344,416,499,573,651,725,796"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-hi_values-hi.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-hi\\values-hi.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,138,209,276,342,418,499,582,659,734",
+                        "endColumns": "82,70,66,65,75,80,82,76,74,68",
+                        "endOffsets": "133,204,271,337,413,494,577,654,729,798"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-zu_values-zu.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-zu\\values-zu.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,145,225,303,369,458,537,620,701,779",
+                        "endColumns": "89,79,77,65,88,78,82,80,77,64",
+                        "endOffsets": "140,220,298,364,453,532,615,696,774,839"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-pl_values-pl.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-pl\\values-pl.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,215,286,354,434,518,598,678,756",
+                        "endColumns": "84,74,70,67,79,83,79,79,77,69",
+                        "endOffsets": "135,210,281,349,429,513,593,673,751,821"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-zh-rTW_values-zh-rTW.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,191,255,318,388,465,537,614,679",
+                        "endColumns": "69,65,63,62,69,76,71,76,64,62",
+                        "endOffsets": "120,186,250,313,383,460,532,609,674,737"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ca_values-ca.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ca\\values-ca.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,213,288,359,437,519,606,687,758",
+                        "endColumns": "84,72,74,70,77,81,86,80,70,65",
+                        "endOffsets": "135,208,283,354,432,514,601,682,753,819"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-b+sr+Latn_values-b+sr+Latn.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,213,280,346,426,503,590,669,747",
+                        "endColumns": "83,73,66,65,79,76,86,78,77,68",
+                        "endOffsets": "134,208,275,341,421,498,585,664,742,811"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ur-rPK_values-ur-rPK.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ur-rPK\\values-ur-rPK.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,142,212,284,351,426,508,592,673,749",
+                        "endColumns": "86,69,71,66,74,81,83,80,75,65",
+                        "endOffsets": "137,207,279,346,421,503,587,668,744,810"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-hr_values-hr.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-hr\\values-hr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,137,213,283,356,437,514,596,675,745",
+                        "endColumns": "81,75,69,72,80,76,81,78,69,68",
+                        "endOffsets": "132,208,278,351,432,509,591,670,740,809"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-kk-rKZ_values-kk-rKZ.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,144,216,285,352,429,513,601,684,761",
+                        "endColumns": "88,71,68,66,76,83,87,82,76,67",
+                        "endOffsets": "139,211,280,347,424,508,596,679,756,824"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-sr_values-sr.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-sr\\values-sr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,213,280,346,426,503,592,671,749",
+                        "endColumns": "83,73,66,65,79,76,88,78,77,68",
+                        "endOffsets": "134,208,275,341,421,498,587,666,744,813"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-vi_values-vi.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-vi\\values-vi.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,129,208,278,343,422,503,583,665,735",
+                        "endColumns": "73,78,69,64,78,80,79,81,69,65",
+                        "endOffsets": "124,203,273,338,417,498,578,660,730,796"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-fa_values-fa.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-fa\\values-fa.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,136,206,271,335,409,485,566,645,716",
+                        "endColumns": "80,69,64,63,73,75,80,78,70,64",
+                        "endOffsets": "131,201,266,330,404,480,561,640,711,776"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ro_values-ro.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ro\\values-ro.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,145,223,290,357,440,521,604,684,755",
+                        "endColumns": "89,77,66,66,82,80,82,79,70,66",
+                        "endOffsets": "140,218,285,352,435,516,599,679,750,817"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-ne-rNP_values-ne-rNP.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-ne-rNP\\values-ne-rNP.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,137,210,282,353,432,518,610,697,775",
+                        "endColumns": "81,72,71,70,78,85,91,86,77,70",
+                        "endOffsets": "132,205,277,348,427,513,605,692,770,841"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-uk_values-uk.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-uk\\values-uk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,220,287,358,443,523,604,693,772",
+                        "endColumns": "84,79,66,70,84,79,80,88,78,68",
+                        "endOffsets": "135,215,282,353,438,518,599,688,767,836"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-zh-rHK_values-zh-rHK.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-zh-rHK\\values-zh-rHK.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,127,193,257,320,390,467,545,622,687",
+                        "endColumns": "71,65,63,62,69,76,77,76,64,62",
+                        "endOffsets": "122,188,252,315,385,462,540,617,682,745"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-te-rIN_values-te-rIN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-te-rIN\\values-te-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,145,219,290,360,439,526,615,705,780",
+                        "endColumns": "89,73,70,69,78,86,88,89,74,67",
+                        "endOffsets": "140,214,285,355,434,521,610,700,775,843"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-tr_values-tr.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-tr\\values-tr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,206,276,340,417,499,586,668,739",
+                        "endColumns": "76,73,69,63,76,81,86,81,70,66",
+                        "endOffsets": "127,201,271,335,412,494,581,663,734,801"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-gu-rIN_values-gu-rIN.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values-gu-rIN\\values-gu-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,139,210,276,342,420,505,590,674,749",
+                        "endColumns": "83,70,65,65,77,84,84,83,74,64",
+                        "endOffsets": "134,205,271,337,415,500,585,669,744,809"
+                    }
+                }
+            ]
+        }
+    ]
+}

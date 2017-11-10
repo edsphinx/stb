@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':library-core', 'library:hls', ':library-hls', ':library-ui', ':library-all', ':library-dash', ':library-smoothstreaming', ':testutils'

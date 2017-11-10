@@ -10,6 +10,15 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/library-all" />
+            <option value="$PROJECT_DIR$/library-core" />
+            <option value="$PROJECT_DIR$/library-dash" />
+            <option value="$PROJECT_DIR$/library-hls" />
+            <option value="$PROJECT_DIR$/library-smoothstreaming" />
+            <option value="$PROJECT_DIR$/library-ui" />
+            <option value="$PROJECT_DIR$/library/hls" />
+            <option value="$PROJECT_DIR$/testutils" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

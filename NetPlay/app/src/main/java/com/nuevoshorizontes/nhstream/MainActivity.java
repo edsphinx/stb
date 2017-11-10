@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.util.Log;
 
 import com.newrelic.agent.android.NewRelic;
 import com.nuevoshorizontes.nhstream.Fragments.MenuFragment;
@@ -26,6 +25,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import okhttp3.Response;
+
+//import com.newrelic.agent.android.NewRelic;
 
 public class MainActivity extends Activity {
 
@@ -95,6 +96,7 @@ public class MainActivity extends Activity {
         NewRelic.withApplicationToken(
                 "AAf8803f5f81f23361659615b315f068ef437b32a5"
         ).start(this.getApplication());
+
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
@@ -106,11 +108,9 @@ public class MainActivity extends Activity {
             editor.putString("user_type", "");
             editor.commit();
 
-
         }
 
         mHandler.postDelayed(mRunnable, 10000);
-
 
     }
 
@@ -133,6 +133,7 @@ public class MainActivity extends Activity {
             while (!isNetworkAvailable()) {
 
             }
+            mHandler.removeCallbacks(mRunnableLogin);
             mHandlerLogin.post(mRunnableLogin);
 
         }

@@ -34,6 +34,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.gson.Gson;
 import com.nuevoshorizontes.nhstream.Cards.MovieDetailCard;
 import com.nuevoshorizontes.nhstream.Cards.MovieRecommendedCard;
 import com.nuevoshorizontes.nhstream.Constants;
@@ -42,32 +43,29 @@ import com.nuevoshorizontes.nhstream.Presenters.MovieDetailPresenter;
 import com.nuevoshorizontes.nhstream.Presenters.MovieRecommendedPresenter;
 import com.nuevoshorizontes.nhstream.R;
 import com.nuevoshorizontes.nhstream.Utils.DownloadData;
-//import PicassoBackgroundManagerTarget;
 import com.nuevoshorizontes.nhstream.Utils.GlideBackgroundManagerTarget;
 import com.nuevoshorizontes.nhstream.Utils.Utils;
-import com.google.gson.Gson;
-//import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import static com.nuevoshorizontes.nhstream.MainActivity.access_token;
 
+//import PicassoBackgroundManagerTarget;
+//import com.squareup.picasso.Picasso;
+
 public class MovieDetailFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
 
     public static final String TAG = "MovieDetailFragment";
     private static final String TRANSITION_NAME = "t_for_transition";
-
-    private DisplayMetrics mMetrics;
-    private Drawable mDefaultBackground;
-
     private static int CARD_WIDTH = 140;
     private static int CARD_HEIGHT = 220;
-
     public String response = null;
     public MovieDetailCard data = null;
     public ArrayObjectAdapter mRowsAdapter;
+    private DisplayMetrics mMetrics;
+    private Drawable mDefaultBackground;
     private BackgroundManager backgroundManager;
     //private PicassoBackgroundManagerTarget mBackgroundTarget;
     private GlideBackgroundManagerTarget mBackgroundTarget;
@@ -119,7 +117,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
         // Setup recommended row.
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
-        if(data != null && data.getmRecommended() != null) {
+        if(data != null) {
             for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
             HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
             mRowsAdapter.add(new ListRow(header, listRowAdapter));
@@ -316,15 +314,15 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
                 Action action = (Action) item;
                 if (action.getId() == 1) {
 
-//                Intent intent = null;
-//                intent = new Intent(getActivity(),
-//                        MoviePlayerActivity.class);
-//                intent.putExtra("id", data.getmId());
-//                intent.putExtra("nombre", data.getmTitle());
-//                intent.putExtra("url", data.getmStream());
-//                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
-//                        .toBundle();
-//                startActivity(intent, bundle);
+               /* Intent intent = null;
+                intent = new Intent(getActivity(),
+                        MoviePlayerActivity.class);
+                intent.putExtra("id", data.getmId());
+                intent.putExtra("nombre", data.getmTitle());
+                intent.putExtra("url", data.getmStream());
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity())
+                        .toBundle();
+                startActivity(intent, bundle);*/
 
                     if (data != null) {
                         UriExoMedia sample = new UriExoMedia(data.getmTitle(), null, null, null,
@@ -340,6 +338,48 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
         }catch (Exception e){
             Log.d(TAG, e.toString());
         }
+    }
+
+    private void onExoMediaSelected(ExoMedia sample) {
+            startActivity(sample.buildIntent(getActivity()));
+    }
+
+    @Override
+    public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
+                               RowPresenter.ViewHolder rowViewHolder, Row row){
+    }
+
+    private void reloadMovie(String id) {
+        //mRowsAdapter.clear();
+
+        data = setupData(id);
+
+        // Setup action and detail row.
+        final DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
+
+
+        if (data != null) {
+            setupLogo(detailsOverview);
+            setBackground();
+        }
+
+        ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
+        actionAdapter.add(new Action(1, getString(R.string.play)));
+        detailsOverview.setActionsAdapter(actionAdapter);
+        mRowsAdapter.replace(0, detailsOverview);
+
+
+        // Setup recommended row.
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
+
+        if(data != null && data.getmRecommended() != null) {
+            for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
+            HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
+            mRowsAdapter.replace(1, new ListRow(header, listRowAdapter));
+        }
+
+        //mRowsAdapter.notifyArrayItemRangeChanged(0, 2);
+
     }
 
     private abstract static class ExoMedia {
@@ -393,48 +433,6 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
                     .putExtra(MovieExoPlayer.EXTENSION_EXTRA, extension)
                     .setAction(MovieExoPlayer.ACTION_VIEW);
         }
-
-    }
-
-    private void onExoMediaSelected(ExoMedia sample) {
-            startActivity(sample.buildIntent(getActivity()));
-    }
-
-    @Override
-    public void onItemSelected(Presenter.ViewHolder itemViewHolder, Object item,
-                               RowPresenter.ViewHolder rowViewHolder, Row row){
-    }
-
-    private void reloadMovie(String id) {
-        //mRowsAdapter.clear();
-
-        data = setupData(id);
-
-        // Setup action and detail row.
-        final DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
-
-
-        if (data != null) {
-            setupLogo(detailsOverview);
-            setBackground();
-        }
-
-        ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
-        actionAdapter.add(new Action(1, getString(R.string.play)));
-        detailsOverview.setActionsAdapter(actionAdapter);
-        mRowsAdapter.replace(0, detailsOverview);
-
-
-        // Setup recommended row.
-        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
-
-        if(data != null) {
-            for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
-            HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
-            mRowsAdapter.replace(1, new ListRow(header, listRowAdapter));
-        }
-
-        //mRowsAdapter.notifyArrayItemRangeChanged(0, 2);
 
     }
 

@@ -100,8 +100,14 @@ public class MenuFragment extends BrowseFragment implements OnItemViewSelectedLi
     }
 
     private void prepareBackgroundManager() {
-        backgroundManager = BackgroundManager.getInstance(getActivity());
-        backgroundManager.attach(getActivity().getWindow());
+
+        if(backgroundManager == null) {
+            backgroundManager = BackgroundManager.getInstance(getActivity());
+        }
+        //Si no esta Attached se registra
+        if(!backgroundManager.isAttached()){
+            backgroundManager.attach(getActivity().getWindow());
+        }
         mDefaultBackground =
                 new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.background));
         backgroundManager.setColor(ContextCompat.getColor(getActivity(), R.color.background));

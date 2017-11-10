@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.exoplayer2.DefaultRenderersFactory;
+import com.google.android.exoplayer2.PlaybackParameters;
 import com.nuevoshorizontes.nhstream.MainActivity;
 import com.nuevoshorizontes.nhstream.NetplayAplication;
 import com.nuevoshorizontes.nhstream.R;
@@ -61,6 +63,7 @@ import com.google.android.exoplayer2.util.Util;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.security.cert.Extension;
 import java.util.UUID;
 
 import com.nuevoshorizontes.nhstream.Utils.EventLogger;
@@ -284,17 +287,18 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
                 }
             }
 
-            @SimpleExoPlayer.ExtensionRendererMode int extensionRendererMode =
+            int extensionRendererMode =
                     ((NetplayAplication) getApplication()).useExtensionRenderers()
-                            ? (preferExtensionDecoders ? SimpleExoPlayer.EXTENSION_RENDERER_MODE_PREFER
-                            : SimpleExoPlayer.EXTENSION_RENDERER_MODE_ON)
-                            : SimpleExoPlayer.EXTENSION_RENDERER_MODE_OFF;
+                            ? (preferExtensionDecoders ? DefaultRenderersFactory.EXTENSION_RENDERER_MODE_PREFER
+                            : DefaultRenderersFactory.EXTENSION_RENDERER_MODE_ON)
+                            : DefaultRenderersFactory.EXTENSION_RENDERER_MODE_OFF;
             TrackSelection.Factory videoTrackSelectionFactory =
                     new AdaptiveTrackSelection.Factory(BANDWIDTH_METER);
             trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
             trackSelectionHelper = new TrackSelectionHelper(trackSelector, videoTrackSelectionFactory);
             player = ExoPlayerFactory.newSimpleInstance(this, trackSelector, new DefaultLoadControl(),
                     drmSessionManager, extensionRendererMode);
+
             player.addListener(this);
 
             eventLogger = new EventLogger(trackSelector);
@@ -452,6 +456,11 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
     }
 
     @Override
+    public void onRepeatModeChanged(int repeatMode) {
+
+    }
+
+    @Override
     public void onPositionDiscontinuity() {
         if (needRetrySource) {
             // This will only occur if the user has performed a seek whilst in the error state. Update the
@@ -459,6 +468,11 @@ public class MovieExoPlayer extends Activity implements View.OnClickListener, Ex
             // which they seeked.
             updateResumePosition();
         }
+    }
+
+    @Override
+    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+
     }
 
     @Override

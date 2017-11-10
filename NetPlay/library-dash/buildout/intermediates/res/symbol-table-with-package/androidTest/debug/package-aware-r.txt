@@ -1,0 +1,4 @@
+com.google.android.exoplayer2.source.dash.test
+int id root 0x7f010000
+int id surface_view 0x7f010001
+int layout host_activity 0x7f020000

@@ -48,7 +48,7 @@ public class NHBaseFragment extends NHBrandedFragment {
      * Condition: {@link TransitionHelper#systemSupportsEntranceTransitions()} is true
      * Action: none
      */
-    private final StateMachine.State STATE_ALLOWED = new StateMachine.State() {
+   /* private final StateMachine.State STATE_ALLOWED = new StateMachine.State() {
         @Override
         public boolean canRun() {
             return TransitionHelper.systemSupportsEntranceTransitions();
@@ -58,13 +58,13 @@ public class NHBaseFragment extends NHBrandedFragment {
         public void run() {
             mProgressBarManager.show();
         }
-    };
+    };*/
 
     /**
      * Condition: {@link #isReadyForPrepareEntranceTransition()} is true
      * Action: {@link #onEntranceTransitionPrepare()} }
      */
-    private final StateMachine.State STATE_PREPARE = new StateMachine.State() {
+   /* private final StateMachine.State STATE_PREPARE = new StateMachine.State() {
         @Override
         public boolean canRun() {
             return isReadyForPrepareEntranceTransition();
@@ -74,13 +74,13 @@ public class NHBaseFragment extends NHBrandedFragment {
         public void run() {
             onEntranceTransitionPrepare();
         }
-    };
+    };*/
 
     /**
      * Condition: {@link #isReadyForStartEntranceTransition()} is true
      * Action: {@link #onExecuteEntranceTransition()} }
      */
-    private final StateMachine.State STATE_START = new StateMachine.State() {
+    /*private final StateMachine.State STATE_START = new StateMachine.State() {
         @Override
         public boolean canRun() {
             return isReadyForStartEntranceTransition();
@@ -93,27 +93,27 @@ public class NHBaseFragment extends NHBrandedFragment {
         }
     };
 
-    final StateMachine mEnterTransitionStates;
+    final StateMachine mEnterTransitionStates;*/
 
     private Object mEntranceTransition;
     private final ProgressBarManager mProgressBarManager = new ProgressBarManager();
 
     public NHBaseFragment() {
-        mEnterTransitionStates = new StateMachine();
-        mEnterTransitionStates.addState(STATE_ALLOWED);
-        mEnterTransitionStates.addState(STATE_PREPARE);
-        mEnterTransitionStates.addState(STATE_START);
+       // mEnterTransitionStates = new StateMachine();
+       // mEnterTransitionStates.addState(STATE_ALLOWED);
+       // mEnterTransitionStates.addState(STATE_PREPARE);
+       // mEnterTransitionStates.addState(STATE_START);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        performPendingStates();
+        //performPendingStates();
     }
 
-    final void performPendingStates() {
+   /* final void performPendingStates() {
         mEnterTransitionStates.runPendingStates();
-    }
+    } */
 
     /**
      * Enables entrance transition.<p>
@@ -142,8 +142,8 @@ public class NHBaseFragment extends NHBrandedFragment {
      * override the default transition that browse and details provides.
      */
     public void prepareEntranceTransition() {
-        mEnterTransitionStates.runState(STATE_ALLOWED);
-        mEnterTransitionStates.runState(STATE_PREPARE);
+       // mEnterTransitionStates.runState(STATE_ALLOWED);
+       // mEnterTransitionStates.runState(STATE_PREPARE);
     }
 
     /**
@@ -153,7 +153,8 @@ public class NHBaseFragment extends NHBrandedFragment {
      */
     boolean isEntranceTransitionEnabled() {
         // Enabled when passed STATE_ALLOWED in prepareEntranceTransition call.
-        return STATE_ALLOWED.getStatus() == STATUS_EXECUTED;
+       // return STATE_ALLOWED.getStatus() == STATUS_EXECUTED;
+        return true;
     }
 
     /**
@@ -225,7 +226,8 @@ public class NHBaseFragment extends NHBrandedFragment {
      * and executed when view is created.
      */
     public void startEntranceTransition() {
-        mEnterTransitionStates.runState(STATE_START);
+
+        //mEnterTransitionStates.runState(STATE_START);
     }
 
     void onExecuteEntranceTransition() {
@@ -252,14 +254,14 @@ public class NHBaseFragment extends NHBrandedFragment {
         if (mEntranceTransition == null) {
             return;
         }
-        TransitionHelper.addTransitionListener(mEntranceTransition, new TransitionListener() {
+        /*TransitionHelper.addTransitionListener(mEntranceTransition, new TransitionListener() {
             @Override
             public void onTransitionEnd(Object transition) {
                 mEntranceTransition = null;
                 onEntranceTransitionEnd();
                 mEnterTransitionStates.resetStatus();
             }
-        });
+        });*/
     }
 
     /**

@@ -1,9 +1,9 @@
 package com.nuevoshorizontes.nhstream.Utils;
 
+import android.util.Log;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
-
-import android.util.Log;
 
 /**
  * Created by fonseca on 11/8/17.

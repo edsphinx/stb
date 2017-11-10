@@ -3,14 +3,12 @@ package com.nuevoshorizontes.nhstream.Utils;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
-
-import java.io.IOException;
-import java.io.InputStream;
+import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import android.util.Log;
 
 public class Utils {
     public static int convertDpToPixel(Context ctx, int dp) {
