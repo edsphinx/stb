@@ -290,8 +290,10 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                 selectedChannel = currentChannel;
                 handlerLoadPrograms.removeCallbacks(runnableLoadPrograms);
                 handlerLoadPrograms.postDelayed(runnableLoadPrograms, LOAD_PROGRAMS_DELAY);
-                getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
-                        new ListRowPresenter.SelectItemViewHolderTask(selectedChannel.getmPosicion()));
+                if(selectedChannel != null) {
+                    getRowsFragment().setSelectedPosition(ROW_CHANNELS, false,
+                            new ListRowPresenter.SelectItemViewHolderTask(selectedChannel.getmPosicion()));
+                }
             }
         });
 
@@ -692,14 +694,16 @@ public class LiveFragment extends NHPlaybackOverlayFragment implements
                     dataFavorite = gson.fromJson(response, canalesCardType);
                     int i = 0;
                     /** Recorriendo cada entrada */
-                    for (HashMap.Entry<String, LiveFavoriteCanalCard> entry : dataFavorite.entrySet()) {
-                        LiveFavoriteCanalCard card = entry.getValue();
-                        /** Set la posicion de cada Canal en el ROW */
-                        card.setmPosicion(i);
-                        entry.setValue(card);
-                        /** Se agrega la Card al Adaptador de Canales Favoritos */
-                        favoriteChannelsRowAdapter.add(entry.getValue());
-                        i++;
+                    if(dataFavorite != null) {
+                        for (HashMap.Entry<String, LiveFavoriteCanalCard> entry : dataFavorite.entrySet()) {
+                            LiveFavoriteCanalCard card = entry.getValue();
+                            /** Set la posicion de cada Canal en el ROW */
+                            card.setmPosicion(i);
+                            entry.setValue(card);
+                            /** Se agrega la Card al Adaptador de Canales Favoritos */
+                            favoriteChannelsRowAdapter.add(entry.getValue());
+                            i++;
+                        }
                     }
                 } catch (JsonParseException e) {
                     e.printStackTrace();

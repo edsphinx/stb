@@ -27,7 +27,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
-        versionName "3.9.7"
+        versionName "3.9.7.2"
     }
     buildTypes {
         release {
@@ -95,7 +95,10 @@ dependencies {
 //    compile 'com.longtailvideo.jwplayer:jwplayer-common:+'
 
     compile 'com.google.android.exoplayer:exoplayer:r2.3.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+//    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+//        transitive = true;
+//    }
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true;
     }
 

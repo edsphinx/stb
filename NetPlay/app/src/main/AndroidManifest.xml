@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.SHUTDOWN" />
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
 
     <uses-feature
         android:name="android.hardware.touchscreen"
@@ -197,6 +199,12 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="34bc73420231ac98bd1b6e2f58819a16ac0f3f73" />
+
+        <receiver android:name="com.nuevoshorizontes.nhstream.Utils.NHHdmiListener" >
+            <intent-filter>
+                <action android:name="android.intent.action.HDMI_PLUGGED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

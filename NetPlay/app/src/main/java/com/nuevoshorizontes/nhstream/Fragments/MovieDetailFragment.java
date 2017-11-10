@@ -119,7 +119,7 @@ public class MovieDetailFragment extends DetailsFragment implements OnItemViewCl
 
         // Setup recommended row.
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new MovieRecommendedPresenter());
-        if(data != null) {
+        if(data != null && data.getmRecommended() != null) {
             for (MovieRecommendedCard card : data.getmRecommended()) listRowAdapter.add(card);
             HeaderItem header = new HeaderItem(0, getString(R.string.header_recommended));
             mRowsAdapter.add(new ListRow(header, listRowAdapter));

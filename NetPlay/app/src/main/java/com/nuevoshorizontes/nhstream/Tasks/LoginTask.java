@@ -84,7 +84,7 @@ public class LoginTask extends AsyncTask<Void, Void, Boolean> {
                 mContext.startActivity(intent);
             }
         } else {
-            if(mContext != null) {
+            if(mContext != null && mPasswordInput != null) {
                 mPasswordInput.setError(mContext.getString(R.string.password_error));
                 mPasswordInput.requestFocus();
             }

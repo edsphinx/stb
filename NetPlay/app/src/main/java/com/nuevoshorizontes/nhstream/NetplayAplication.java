@@ -13,6 +13,8 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
+import com.nuevoshorizontes.nhstream.Utils.NHShutdownThread;
+import com.nuevoshorizontes.nhstream.Utils.OnErrorListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,6 +37,27 @@ public class NetplayAplication extends Application {
 
     private static List<IMemoryInfo> memInfoList = new ArrayList<IMemoryInfo>();
 
+    private static OnErrorListener errorListener;
+
+    public NetplayAplication() {
+        errorListener = new OnErrorListener() {
+            @Override
+            public void onError(String msg) {
+
+            }
+
+            @Override
+            public void onError(Exception exc) {
+
+            }
+
+            @Override
+            public void onNotRoot() {
+
+            }
+        };
+    }
+
     public static abstract interface IMemoryInfo {
         public void goodTimeToReleaseMemory();
     }
@@ -44,6 +67,7 @@ public class NetplayAplication extends Application {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         userAgent = Util.getUserAgent(this, "ExoPlayerDemo");
+        clearData();
         memoryHandler_ = new Handler();
         checkAppMemory();
     }
@@ -55,6 +79,16 @@ public class NetplayAplication extends Application {
 
     public HttpDataSource.Factory buildHttpDataSourceFactory(DefaultBandwidthMeter bandwidthMeter) {
         return new DefaultHttpDataSourceFactory(userAgent, bandwidthMeter);
+    }
+
+    private void clearData(){
+        try {
+            Process proc = Runtime.getRuntime()
+                    .exec(new String[]{ "su", "-c", "clear com.nuevoshorizontes.nhstream" });
+            proc.waitFor();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public boolean useExtensionRenderers() {
@@ -78,6 +112,9 @@ public class NetplayAplication extends Application {
         }}, (int)(CHECK_MEMORY_FREQ_SECONDS * 1000) );
     }
 
+//    public static void shutdown() {
+//        new NHShutdownThread(errorListener).start();
+//    }
 
     @Override
     public void onLowMemory() {
