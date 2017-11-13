@@ -1,23 +1,23 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml:17:1-57
-INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml:17:1-57
-INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml:17:1-57
+ADDED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml:17:1-57
+INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml:17:1-57
+INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml:17:1-57
 	package
-		ADDED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml:17:11-55
-		INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
+		ADDED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml:17:11-55
+		INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
+		INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
 uses-sdk
-INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
-INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
-INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
-INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
+INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
+INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
+INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
+INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
-		ADDED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
+		INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
+		ADDED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
+		INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
-		ADDED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-core\src\main\AndroidManifest.xml
+		INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
+		ADDED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml
+		INJECTED from /Users/fonseca/Documents/Panorama/stb/NetPlay/library-core/src/main/AndroidManifest.xml

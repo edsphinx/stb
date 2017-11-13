@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+            "outputFile": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,10,16,17,18,23,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,62,66,70,74,78,82",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

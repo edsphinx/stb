@@ -30,7 +30,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "3.9.8.4"
+        versionName "3.9.9"
     }
     buildTypes {
         release {
@@ -60,7 +60,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
 
 
-    compile 'com.github.bumptech.glide:glide:3.8.0'
+    //compile 'com.github.bumptech.glide:glide:3.8.0'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
     //compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {

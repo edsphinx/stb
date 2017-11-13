@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-smoothstreaming\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\FLYNET\Desktop\NH\3.9\NetPlay\library-smoothstreaming\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/fonseca/Documents/Panorama/stb/NetPlay/library-smoothstreaming/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/fonseca/Documents/Panorama/stb/NetPlay/library-smoothstreaming/src/debug/shaders"/></dataSet></merger>

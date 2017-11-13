@@ -1,230 +1,230 @@
 [
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_fastforward.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_fastforward.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_repeat_off.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_fastforward.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_fastforward.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_repeat_all.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_play.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_play.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_previous.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_previous.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_play.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_play.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_play.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_play.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_pause.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_pause.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_repeat_all.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_play.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_play.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_fastforward.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_repeat_off.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_repeat_off.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_play.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_play.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_next.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_next.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_next.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_next.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_pause.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_pause.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_rewind.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_rewind.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_rewind.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_repeat_off.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_repeat_one.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_repeat_one.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_repeat_all.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_repeat_all.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_repeat_all.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_previous.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_previous.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_previous.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_previous.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_previous.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_previous.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_rewind.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_rewind.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_play.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_play.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_exo_edit_mode_logo.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable\\exo_edit_mode_logo.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/layout_exo_simple_player_view.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/layout/exo_simple_player_view.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_pause.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_pause.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_pause.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_pause.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_exo_simple_player_view.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\layout\\exo_simple_player_view.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/layout_exo_playback_control_view.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/layout/exo_playback_control_view.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_rewind.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_rewind.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_pause.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_pause.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_next.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_next.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_repeat_all.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_repeat_off.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_repeat_off.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_repeat_one.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_repeat_one.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_repeat_all.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_repeat_all.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_rewind.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_rewind.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_pause.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_pause.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_repeat_one.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_repeat_off.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_repeat_off.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_play.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_play.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_repeat_one.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_repeat_one.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_fastforward.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_fastforward.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_fastforward.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_rewind.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_next.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_next.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_pause.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_pause.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_repeat_one.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_repeat_one.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_fastforward.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_previous.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_previous.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_next.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_next.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_play.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_play.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_pause.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_pause.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_previous.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_previous.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_rewind.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_fastforward.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_fastforward.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_pause.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_pause.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_play.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_play.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_next.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_next.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_repeat_one.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_repeat_one.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_play.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_play.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_next.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_next.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_repeat_one.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_next.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_next.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_repeat_off.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_repeat_off.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_next.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_next.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_previous.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_previous.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_repeat_off.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_repeat_off.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_next.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_next.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_fastforward.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_fastforward.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_repeat_one.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_pause.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_pause.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_fastforward.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_fastforward.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_rewind.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_rewind.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_next.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_next.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_repeat_one.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_repeat_one.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_repeat_all.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_previous.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_previous.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_fastforward.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_repeat_all.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\exo_controls_repeat_all.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable_exo_edit_mode_logo.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable/exo_edit_mode_logo.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_repeat_all.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_repeat_all.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_pause.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_pause.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_rewind.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_rewind.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_repeat_one.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_fastforward.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_fastforward.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_rewind.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_previous.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\exo_controls_previous.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_previous.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_previous.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_repeat_one.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_repeat_one.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_previous.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_previous.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_play.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_play.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_repeat_one.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_exo_playback_control_view.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\layout\\exo_playback_control_view.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/exo_controls_repeat_off.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_repeat_off.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_repeat_off.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_repeat_all.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_repeat_all.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_pause.xml.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-anydpi-v21\\exo_controls_pause.xml"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4_exo_controls_next.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-mdpi-v4/exo_controls_next.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_previous.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_previous.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-anydpi-v21_exo_controls_play.xml.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-anydpi-v21/exo_controls_play.xml"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_repeat_all.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_repeat_all.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_repeat_off.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_repeat_off.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\exo_controls_repeat_off.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/exo_controls_fastforward.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_repeat_all.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\exo_controls_repeat_all.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-ldpi-v4_exo_controls_rewind.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-ldpi-v4/exo_controls_rewind.png"
     },
     {
-        "merged": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-all\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_rewind.png.flat",
-        "source": "C:\\Users\\FLYNET\\Desktop\\NH\\3.9\\NetPlay\\library-ui\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\exo_controls_rewind.png"
+        "merged": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-all/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/Users/fonseca/Documents/Panorama/stb/NetPlay/library-ui/build/intermediates/bundles/debug/res/drawable-hdpi-v4/exo_controls_repeat_off.png"
     }
 ]
